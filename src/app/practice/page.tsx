@@ -53,10 +53,22 @@ function PracticeClient() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bankParam]);
 
+  // Initialize order from last saved preference once questions are loaded
+  useEffect(() => {
+    if (!allQuestions.length) return;
+    const last = loadLastMode();
+    if (last && last !== order) {
+      applyOrder(last);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allQuestions]);
+
   // After loading questions, check if there is a saved progress to optionally resume (only for sequential)
   useEffect(() => {
     if (!allQuestions.length) return;
     if (order !== "sequential") return;
+    const lastMode = loadLastMode();
+    if (lastMode === "random") return; // if user last used random, do not prompt
     const saved = loadSavedState(bankParam);
     if (!saved) return;
     // Validate saved state
@@ -94,6 +106,7 @@ function PracticeClient() {
     }
     setIndex(0);
     setAnswers({});
+    saveLastMode(nextOrder);
     // When switching to sequential, if there is a saved record, prompt to resume
     if (nextOrder === "sequential") {
       const saved = loadSavedState(bankParam);
@@ -287,6 +300,31 @@ function clearSavedState(bank: string | null) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.removeItem(storageKey(bank));
+  } catch {
+    // ignore
+  }
+}
+
+// ---------- User preference: last mode ----------
+function lastModeKey(): string {
+  return "practice:lastMode";
+}
+
+function loadLastMode(): "sequential" | "random" | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const v = window.localStorage.getItem(lastModeKey());
+    if (v === "sequential" || v === "random") return v;
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function saveLastMode(mode: "sequential" | "random") {
+  if (typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(lastModeKey(), mode);
   } catch {
     // ignore
   }
