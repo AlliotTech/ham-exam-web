@@ -1,32 +1,44 @@
 "use client";
 
 import * as React from "react";
-import { useEffect, useMemo, useState } from "react";
-import { loadQuestions, shuffle } from "@/lib/load-questions";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const DEFAULT_EXAM_SIZE = 50;
 
-export default function ExamPage() {
+function ExamClient() {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<UserAnswer>({});
   const [finished, setFinished] = useState(false);
 
+  const search = useSearchParams();
+  const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
+
   useEffect(() => {
     (async () => {
-      const qs = await loadQuestions();
-      const picked = shuffle(qs).slice(0, DEFAULT_EXAM_SIZE);
-      setQuestions(picked);
-      setLoading(false);
+      try {
+        setLoading(true);
+        const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
+        const picked = shuffle(qs).slice(0, DEFAULT_EXAM_SIZE);
+        setQuestions(picked);
+        setIndex(0);
+        setAnswers({});
+      } catch (err) {
+        alert(`题库 ${bankParam} 暂不可用`);
+      } finally {
+        setLoading(false);
+      }
     })();
-  }, []);
+  }, [bankParam]);
 
   const current = questions[index];
   const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
@@ -61,14 +73,12 @@ export default function ExamPage() {
   }, [answers, questions]);
 
   if (loading) return <div className="p-6">加载题库中...</div>;
-  if (!questions.length) return <div className="p-6">暂无题目</div>;
+  if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4">
       <div className="flex items-center justify-between">
-        <Button asChild variant="outline">
-          <Link href="/">返回首页</Link>
-        </Button>
+        <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
       </div>
       <div className="flex items-center gap-4">
         <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
@@ -125,6 +135,14 @@ function arraysEqual<T>(a: T[], b: T[]): boolean {
   if (a.length !== b.length) return false;
   for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
   return true;
+}
+
+export default function ExamPage() {
+  return (
+    <Suspense fallback={<div className="p-6">加载中...</div>}>
+      <ExamClient />
+    </Suspense>
+  );
 }
 
 

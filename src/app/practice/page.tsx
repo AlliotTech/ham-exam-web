@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { useEffect, useState } from "react";
-import { loadQuestions, shuffle } from "@/lib/load-questions";
+import { Suspense, useEffect, useState } from "react";
+import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
@@ -11,8 +11,9 @@ import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useSearchParams } from "next/navigation";
 
-export default function PracticePage() {
+function PracticeClient() {
   const [loading, setLoading] = useState(true);
   const [allQuestions, setAllQuestions] = useState<QuestionItem[]>([]);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
@@ -21,14 +22,25 @@ export default function PracticePage() {
   const [order, setOrder] = useState<"sequential" | "random">("random");
   const [showAnswer, setShowAnswer] = useState<boolean>(true);
 
+  const search = useSearchParams();
+  const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
+
   useEffect(() => {
     (async () => {
-      const qs = await loadQuestions();
-      setAllQuestions(qs);
-      setQuestions(shuffle(qs));
-      setLoading(false);
+      try {
+        setLoading(true);
+        const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
+        setAllQuestions(qs);
+        setQuestions(order === "random" ? shuffle(qs) : qs);
+        setIndex(0);
+        setAnswers({});
+      } catch (err) {
+        alert(`题库 ${bankParam} 暂不可用`);
+      } finally {
+        setLoading(false);
+      }
     })();
-  }, []);
+  }, [bankParam, order]);
 
   const current = questions[index];
   const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
@@ -59,14 +71,12 @@ export default function PracticePage() {
   }
 
   if (loading) return <div className="p-6">加载题库中...</div>;
-  if (!questions.length) return <div className="p-6">暂无题目</div>;
+  if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4">
       <div className="flex items-center justify-between">
-        <Button asChild variant="outline">
-          <Link href="/">返回首页</Link>
-        </Button>
+        <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">顺序/随机</span>
@@ -117,6 +127,14 @@ export default function PracticePage() {
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function PracticePage() {
+  return (
+    <Suspense fallback={<div className="p-6">加载中...</div>}>
+      <PracticeClient />
+    </Suspense>
   );
 }
 

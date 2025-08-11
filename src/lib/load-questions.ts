@@ -1,9 +1,39 @@
 import type { QuestionItem } from "@/types/question";
 
-export async function loadQuestions(): Promise<QuestionItem[]> {
-  const res = await fetch("/questions.json", { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to load questions.json");
+export type QuestionBank = "A" | "B" | "C";
+
+export function resolveQuestionsUrl(bank?: QuestionBank): string {
+  if (!bank) return "/questions.json";
+  return `/questions-${bank}.json`;
+}
+
+export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
+  const url = resolveQuestionsUrl(bank);
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) return false;
+  try {
+    const data = (await res.json()) as unknown;
+    return Array.isArray(data) && data.length > 0;
+  } catch {
+    return false;
+  }
+}
+
+export async function loadQuestions(bank?: QuestionBank, opts?: { strict?: boolean }): Promise<QuestionItem[]> {
+  const strict = opts?.strict ?? false;
+  const url = resolveQuestionsUrl(bank);
+  let res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    if (strict || bank) {
+      throw new Error(`Questions for bank ${bank ?? "default"} not available`);
+    }
+    res = await fetch("/questions.json", { cache: "no-store" });
+  }
+  if (!res.ok) throw new Error("Failed to load questions JSON");
   const data = (await res.json()) as QuestionItem[];
+  if (strict && (!Array.isArray(data) || data.length === 0)) {
+    throw new Error(`Questions for bank ${bank ?? "default"} empty`);
+  }
   return data;
 }
 
