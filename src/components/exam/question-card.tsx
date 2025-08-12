@@ -41,10 +41,19 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
           {question.pages?.start ? (
             <Badge variant="outline">P.{question.pages.start}{question.pages?.end && question.pages.end !== question.pages.start ? `-${question.pages.end}` : ""}</Badge>
           ) : null}
+          {question.codes?.J ? (
+            <Badge variant="outline" title="题号">{question.codes.J}</Badge>
+          ) : null}
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="whitespace-pre-line">{question.question}</div>
+        {question.imageUrl ? (
+          <div className="mt-2">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={question.imageUrl} alt="题目附图" className="max-h-64 w-auto rounded border" />
+          </div>
+        ) : null}
         <div className="space-y-2">
           {isMultiple ? (
             <div className="grid gap-2">

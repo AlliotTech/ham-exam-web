@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "prebuild": "node --experimental-fetch ./scripts/build-dataset.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

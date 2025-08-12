@@ -11,6 +11,7 @@ export type QuestionItem = {
   answer_keys: string[];
   type: "single" | "multiple" | "true_false";
   pages?: { start: number | null; end: number | null };
+  imageUrl?: string | null;
 };
 
 export type ExamSettings = {

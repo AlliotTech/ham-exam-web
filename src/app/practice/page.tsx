@@ -6,12 +6,14 @@ import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions"
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
 import Link from "next/link";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams } from "next/navigation";
+import { Search } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -28,9 +30,13 @@ function PracticeClient() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<UserAnswer>({});
   const [order, setOrder] = useState<"sequential" | "random">("sequential");
+  const [jumpInput, setJumpInput] = useState("");
   const [showAnswer, setShowAnswer] = useState<boolean>(true);
+  const [jumpMatches, setJumpMatches] = useState<{ pos: number; j: string; text: string }[]>([]);
+  const [jumpLoading, setJumpLoading] = useState(false);
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -117,6 +123,37 @@ function PracticeClient() {
     }
   }
 
+  function handleJump() {
+    if (order !== "sequential") return;
+    const raw = normalizeJ(jumpInput);
+    if (!raw) return;
+    // 1) exact/partial J match
+    let pos = questions.findIndex((q) => {
+      const j = (q.codes?.J || "").toUpperCase();
+      if (!j) return false;
+      if (j === raw) return true; // exact
+      if (j.includes(",")) return j.split(",").map((s) => s.trim()).includes(raw);
+      return false;
+    });
+    // 2) fallback: partial J contains, e.g., input "LK05" should navigate to first match
+    if (pos < 0) {
+      pos = questions.findIndex((q) => {
+        const j = (q.codes?.J || "").toUpperCase();
+        return j.includes(raw);
+      });
+    }
+    // 3) fallback: keyword in question text
+    if (pos < 0) {
+      const keyword = jumpInput.trim().toUpperCase();
+      pos = questions.findIndex((q) => q.question.toUpperCase().includes(keyword));
+    }
+    if (pos >= 0) {
+      setIndex(pos);
+    } else {
+      alert(`未找到题号：${raw}`);
+    }
+  }
+
   // Persist progress (only in sequential mode)
   useEffect(() => {
     if (!questions.length) return;
@@ -141,6 +178,43 @@ function PracticeClient() {
     };
     saveState(payload);
   }, [allQuestions, questions, index, answers, order, showAnswer, bankParam]);
+
+  // live suggestions based on J code or question text (sequential mode only)
+  useEffect(() => {
+    if (order !== "sequential") {
+      setJumpMatches([]);
+      return;
+    }
+    const q = jumpInput.trim();
+    if (!q) {
+      setJumpMatches([]);
+      return;
+    }
+    let cancel = false;
+    setJumpLoading(true);
+    const timer = setTimeout(() => {
+      if (cancel) return;
+      const queryUpper = q.toUpperCase();
+      const results: { pos: number; j: string; text: string }[] = [];
+      for (let i = 0; i < questions.length; i++) {
+        const item = questions[i];
+        const jraw = (item.codes?.J || "").toUpperCase();
+        const jParts = jraw ? jraw.split(",").map((s) => s.trim()) : [];
+        const byJ = jParts.some((p) => p.includes(queryUpper));
+        const byText = item.question.toUpperCase().includes(queryUpper);
+        if (byJ || byText) {
+          results.push({ pos: i, j: jParts[0] || "-", text: item.question });
+        }
+        if (results.length > 50) break;
+      }
+      if (!cancel) setJumpMatches(results);
+      setJumpLoading(false);
+    }, 150);
+    return () => {
+      cancel = true;
+      clearTimeout(timer);
+    };
+  }, [jumpInput, order, questions]);
 
   function handleResume() {
     if (!pendingResume) return;
@@ -194,9 +268,9 @@ function PracticeClient() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4 flex-wrap">
         <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 flex-wrap">
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">顺序/随机</span>
             <RadioGroup
@@ -218,8 +292,61 @@ function PracticeClient() {
             <Checkbox id="show-ans" checked={showAnswer} onCheckedChange={(v) => setShowAnswer(!!v)} />
             <Label htmlFor="show-ans">显示正确答案</Label>
           </div>
+          {order === "sequential" ? (
+            <Button size="icon" variant="outline" aria-label="搜索" title="搜索" onClick={() => setSearchOpen(true)}>
+              <Search className="h-4 w-4" />
+            </Button>
+          ) : null}
         </div>
       </div>
+      {/* Search Dialog */}
+      <Dialog open={order === "sequential" && searchOpen} onOpenChange={setSearchOpen}>
+        <DialogContent className="sm:max-w-[640px]">
+          <DialogHeader>
+            <DialogTitle>搜索题目</DialogTitle>
+            <DialogDescription>输入题号或关键词（如 LK0501 / 天线），回车或点击跳转</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            <Input
+              id="jump"
+              className="h-9"
+              placeholder="题号或关键词，如 LK0501 / 天线"
+              value={jumpInput}
+              onChange={(e) => setJumpInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleJump();
+                  setSearchOpen(false);
+                }
+              }}
+            />
+            {jumpInput.trim() ? (
+              <div className="text-xs text-muted-foreground">{jumpLoading ? "搜索中..." : `匹配 ${jumpMatches.length} 条`}</div>
+            ) : null}
+            <div className="rounded-md border">
+              {jumpMatches.length ? (
+                <ul className="max-h-72 overflow-auto divide-y">
+                  {jumpMatches.slice(0, 10).map((m) => (
+                    <li key={`${m.j}-${m.pos}`} className="p-2 hover:bg-gray-50 cursor-pointer" onClick={() => { setIndex(m.pos); setSearchOpen(false); }}>
+                      <div className="flex items-center gap-2 text-sm">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded border text-xs bg-gray-50">{m.j}</span>
+                        <span className="truncate">{m.text}</span>
+                        <span className="ml-auto text-xs text-muted-foreground">第 {m.pos + 1} 题</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="p-3 text-sm text-muted-foreground">{jumpInput.trim() ? "未找到匹配" : "输入以开始搜索"}</div>
+              )}
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setJumpInput("")}>清除</Button>
+            <Button onClick={() => { handleJump(); setSearchOpen(false); }}>跳转</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
       <div className="flex items-center gap-4">
         <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
         <Progress value={percent} className="h-2" />
@@ -329,5 +456,13 @@ function saveLastMode(mode: "sequential" | "random") {
     // ignore
   }
 }
+
+// ---------- Jump by J code (sequential only) ----------
+function normalizeJ(input: string): string {
+  return (input || "").trim().toUpperCase();
+}
+
+// Place this inside component scope above return
+
 
 

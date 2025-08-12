@@ -32,7 +32,7 @@ function ExamClient() {
         setQuestions(picked);
         setIndex(0);
         setAnswers({});
-      } catch (err) {
+      } catch {
         alert(`题库 ${bankParam} 暂不可用`);
       } finally {
         setLoading(false);

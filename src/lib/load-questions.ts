@@ -3,8 +3,9 @@ import type { QuestionItem } from "@/types/question";
 export type QuestionBank = "A" | "B" | "C";
 
 export function resolveQuestionsUrl(bank?: QuestionBank): string {
-  if (!bank) return "/questions.json";
-  return `/questions-${bank}.json`;
+  // Prefer static JSON under /questions/ generated at build time.
+  const b = bank ? bank : "A";
+  return b === "A" || b === "B" || b === "C" ? `/questions/${b}.json` : `/questions/full.json`;
 }
 
 export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
@@ -23,11 +24,10 @@ export async function loadQuestions(bank?: QuestionBank, opts?: { strict?: boole
   const strict = opts?.strict ?? false;
   const url = resolveQuestionsUrl(bank);
   let res = await fetch(url, { cache: "no-store" });
+  // Fallback to API if static not available (useful in dev/local)
   if (!res.ok) {
-    if (strict || bank) {
-      throw new Error(`Questions for bank ${bank ?? "default"} not available`);
-    }
-    res = await fetch("/questions.json", { cache: "no-store" });
+    const apiUrl = bank ? `/api/questions?bank=${bank}` : "/api/questions?bank=A";
+    res = await fetch(apiUrl, { cache: "no-store" });
   }
   if (!res.ok) throw new Error("Failed to load questions JSON");
   const data = (await res.json()) as QuestionItem[];
