@@ -152,7 +152,7 @@ export async function loadQuestionsFromBank(bank: "A" | "B" | "C" | "full" = "A"
     // Handle multi-J codes: some questions may have two J codes separated by comma
     const primaryJ = j.includes(",") ? j.split(",")[0].trim() : j;
     const imagePath = primaryJ ? imageMap.get(primaryJ) ?? null : null;
-    const imageUrl = imagePath ? `/api/qimage?j=${encodeURIComponent(primaryJ)}` : null;
+    const imageUrl = imagePath ? `/api/images?j=${encodeURIComponent(primaryJ)}` : null;
     questions.push({
       id: j || null,
       codes: { J: j || null, P: p || null },
