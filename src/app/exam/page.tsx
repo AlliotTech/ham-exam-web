@@ -6,9 +6,10 @@ import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions"
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
-import { HelpCircle } from "lucide-react";
+import { Settings } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -20,7 +21,7 @@ function ExamClient() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<UserAnswer>({});
   const [finished, setFinished] = useState(false);
-  const [helpOpen, setHelpOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const autoHelpShownRef = useRef(false);
 
   const search = useSearchParams();
@@ -86,7 +87,7 @@ function ExamClient() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [current, next, prev, setCurrentAnswer]);
 
-  // One-time shortcuts help auto prompt
+  // One-time settings auto prompt
   useEffect(() => {
     if (autoHelpShownRef.current) return;
     if (typeof window === 'undefined') return;
@@ -95,7 +96,7 @@ function ExamClient() {
     if (questions.length) {
       autoHelpShownRef.current = true;
       const timer = setTimeout(() => {
-        setHelpOpen(true);
+        setSettingsOpen(true);
         try { window.localStorage.setItem('ui:shortcutsHelpSeen:exam', '1'); } catch {}
       }, 300);
       return () => clearTimeout(timer);
@@ -120,8 +121,8 @@ function ExamClient() {
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4">
       <div className="flex items-center justify-between">
         <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
-        <Button size="icon" variant="outline" aria-label="快捷键说明" title="快捷键说明" onClick={() => setHelpOpen(true)}>
-          <HelpCircle className="h-4 w-4" />
+        <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+          <Settings className="h-4 w-4" />
         </Button>
       </div>
       <div className="flex items-center gap-4">
@@ -169,22 +170,27 @@ function ExamClient() {
         </DialogContent>
       </Dialog>
 
-      {/* Shortcuts Help Dialog */}
-      <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+      {/* Settings Dialog */}
+      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
         <DialogContent className="sm:max-w-[520px]">
           <DialogHeader>
-            <DialogTitle>快捷键</DialogTitle>
-            <DialogDescription>使用键盘更快地操作考试</DialogDescription>
+            <DialogTitle>设置</DialogTitle>
+            <DialogDescription>快捷键与考试说明</DialogDescription>
           </DialogHeader>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center justify-between">
-              <span>上一题 / 下一题</span>
-              <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+          <div className="space-y-5">
+            <div className="space-y-2 text-sm">
+              <div className="text-muted-foreground">快捷键</div>
+              <div className="flex items-center justify-between">
+                <span>上一题 / 下一题</span>
+                <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>选择选项（单选）</span>
+                <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+              </div>
             </div>
-            <div className="flex items-center justify-between">
-              <span>选择选项（单选）</span>
-              <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
-            </div>
+            <Separator />
+            <div className="text-xs text-muted-foreground">考试期间不提供搜索功能</div>
           </div>
         </DialogContent>
       </Dialog>

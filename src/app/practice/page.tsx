@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams } from "next/navigation";
-import { HelpCircle, Search } from "lucide-react";
+import { Search, Settings } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -22,6 +22,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
 
 function PracticeClient() {
   const [loading, setLoading] = useState(true);
@@ -37,7 +38,7 @@ function PracticeClient() {
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [helpOpen, setHelpOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [noPromptThisBank, setNoPromptThisBank] = useState(false);
   const autoHelpShownRef = useRef(false);
 
@@ -294,7 +295,7 @@ function PracticeClient() {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [current, order, next, prev, setCurrentAnswer]);
 
-  // One-time shortcuts help auto prompt (do not interfere with resume dialog)
+  // One-time settings auto prompt (do not interfere with resume dialog)
   useEffect(() => {
     if (autoHelpShownRef.current) return;
     if (typeof window === "undefined") return;
@@ -306,7 +307,7 @@ function PracticeClient() {
     if (!resumeOpen && allQuestions.length) {
       autoHelpShownRef.current = true;
       const timer = setTimeout(() => {
-        setHelpOpen(true);
+        setSettingsOpen(true);
         try { window.localStorage.setItem("ui:shortcutsHelpSeen:practice", "1"); } catch { /* noop */ }
       }, 300);
       return () => clearTimeout(timer);
@@ -340,57 +341,61 @@ function PracticeClient() {
       </Dialog>
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
-        <div className="flex items-center gap-6 flex-wrap">
-          <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground">顺序/随机</span>
-            <RadioGroup
-              className="flex items-center gap-4"
-              value={order}
-              onValueChange={(v) => applyOrder((v as "sequential" | "random"))}
-            >
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="sequential" id="order-seq" />
-                <Label htmlFor="order-seq">顺序</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="random" id="order-rand" />
-                <Label htmlFor="order-rand">随机</Label>
-              </div>
-            </RadioGroup>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox id="show-ans" checked={showAnswer} onCheckedChange={(v) => setShowAnswer(!!v)} />
-            <Label htmlFor="show-ans">显示正确答案</Label>
-          </div>
+        <div className="flex items-center gap-3">
           {order === "sequential" ? (
             <Button size="icon" variant="outline" aria-label="搜索" title="搜索" onClick={() => setSearchOpen(true)}>
               <Search className="h-4 w-4" />
             </Button>
           ) : null}
-          <Button size="icon" variant="outline" aria-label="快捷键说明" title="快捷键说明" onClick={() => setHelpOpen(true)}>
-            <HelpCircle className="h-4 w-4" />
+          <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+            <Settings className="h-4 w-4" />
           </Button>
         </div>
       </div>
-      {/* Shortcuts Help Dialog */}
-      <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+      {/* Settings Dialog */}
+      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
         <DialogContent className="sm:max-w-[520px]">
           <DialogHeader>
-            <DialogTitle>快捷键</DialogTitle>
-            <DialogDescription>使用键盘更快地操作练习</DialogDescription>
+            <DialogTitle>设置</DialogTitle>
+            <DialogDescription>题序、显示答案与快捷键说明</DialogDescription>
           </DialogHeader>
-          <div className="space-y-2 text-sm">
-            <div className="flex items-center justify-between">
-              <span>上一题 / 下一题</span>
-              <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+          <div className="space-y-5">
+            <div className="space-y-2">
+              <div className="text-sm text-muted-foreground">顺序/随机</div>
+              <RadioGroup
+                className="flex items-center gap-4"
+                value={order}
+                onValueChange={(v) => applyOrder((v as "sequential" | "random"))}
+              >
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="sequential" id="order-seq" />
+                  <Label htmlFor="order-seq">顺序</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="random" id="order-rand" />
+                  <Label htmlFor="order-rand">随机</Label>
+                </div>
+              </RadioGroup>
             </div>
-            <div className="flex items-center justify-between">
-              <span>选择选项（单选）</span>
-              <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+            <div className="flex items-center gap-2">
+              <Checkbox id="show-ans" checked={showAnswer} onCheckedChange={(v) => setShowAnswer(!!v)} />
+              <Label htmlFor="show-ans">显示正确答案</Label>
             </div>
-            <div className="flex items-center justify-between">
-              <span>打开搜索（仅顺序模式）</span>
-              <code className="px-2 py-0.5 rounded border bg-muted">Enter</code>
+            <Separator />
+            <div className="space-y-2 text-sm">
+              <div className="text-muted-foreground">快捷键</div>
+              <div className="flex items-center justify-between">
+                <span>上一题 / 下一题</span>
+                <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>选择选项（单选）</span>
+                <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+              </div>
+              <div className="flex items-center justify-between">
+                <span>打开搜索（仅顺序模式）</span>
+                <code className="px-2 py-0.5 rounded border bg-muted">Enter</code>
+              </div>
             </div>
           </div>
         </DialogContent>
