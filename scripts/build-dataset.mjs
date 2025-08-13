@@ -21,6 +21,12 @@ async function exists(p) {
   try { await fs.access(p); return true; } catch { return false; }
 }
 
+function sanitizeOptionText(s) {
+  if (!s) return s;
+  // Remove trailing image footnote like "[F]LK0500.jpg" or "[F]LK0942.jpg179"
+  return s.replace(/\s*\[F\][^\s,]+\.jpg\d*/gi, '').trim();
+}
+
 function parseCsv(text) {
   const rows = [];
   let i = 0, field = '', inQuotes = false, current = [];
@@ -105,10 +111,10 @@ async function build() {
       const p = (r[idx['P']] || '').trim();
       const q = (r[idx['Q']] || '').trim();
       const t = (r[idx['T']] || '').trim();
-      const A = (r[idx['A']] || '').trim();
-      const B = (r[idx['B']] || '').trim();
-      const C = (r[idx['C']] || '').trim();
-      const D = (r[idx['D']] || '').trim();
+      const A = sanitizeOptionText((r[idx['A']] || '').trim());
+      const B = sanitizeOptionText((r[idx['B']] || '').trim());
+      const C = sanitizeOptionText((r[idx['C']] || '').trim());
+      const D = sanitizeOptionText((r[idx['D']] || '').trim());
       if (!q) continue;
       const options = [];
       if (A) options.push({ key: 'A', text: A });

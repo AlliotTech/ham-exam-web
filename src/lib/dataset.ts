@@ -81,6 +81,12 @@ export function parseCsv(text: string): string[][] {
 
 type HeaderIndex = { [key: string]: number };
 
+function sanitizeOptionText(s: string): string {
+  if (!s) return s;
+  // Remove trailing image footnote like "[F]LK0500.jpg" or "[F]LK0942.jpg179"
+  return s.replace(/\s*\[F\][^\s,]+\.jpg\d*/gi, "").trim();
+}
+
 function indexHeader(header: string[]): HeaderIndex {
   const map: HeaderIndex = {};
   header.forEach((name, idx) => {
@@ -143,10 +149,10 @@ export async function loadQuestionsFromBank(bank: "A" | "B" | "C" | "full" = "A"
     const p = (r[idx["P"]] ?? "").trim();
     const q = (r[idx["Q"]] ?? "").trim();
     const t = (r[idx["T"]] ?? "").trim();
-    const a = (r[idx["A"]] ?? "").trim();
-    const b = (r[idx["B"]] ?? "").trim();
-    const c = (r[idx["C"]] ?? "").trim();
-    const d = (r[idx["D"]] ?? "").trim();
+    const a = sanitizeOptionText((r[idx["A"]] ?? "").trim());
+    const b = sanitizeOptionText((r[idx["B"]] ?? "").trim());
+    const c = sanitizeOptionText((r[idx["C"]] ?? "").trim());
+    const d = sanitizeOptionText((r[idx["D"]] ?? "").trim());
     if (!q) continue;
     const options = [
       a ? { key: "A", text: a } : null,
