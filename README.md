@@ -1,3 +1,7 @@
+业余无线电执照考试最新题库2025 在线模拟  
+
+基于 [这个题库源](https://github.com/TimXiedada/crac-amateur-radio-exam-questions-2025-csv)  
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
