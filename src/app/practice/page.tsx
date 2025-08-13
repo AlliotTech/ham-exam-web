@@ -417,12 +417,12 @@ function PracticeClient() {
             ) : null}
             <div className="rounded-md border">
               {computedMatches.length ? (
-                <ul className="max-h-72 overflow-auto divide-y">
+                <ul className="divide-y">
                   {computedMatches.slice(0, 10).map((m) => (
                     <li key={`${m.j}-${m.pos}`} className="p-2 hover:bg-gray-50 cursor-pointer" onClick={() => { setIndex(m.pos); setSearchOpen(false); }}>
                       <div className="flex items-center gap-2 text-sm">
                         <span className="inline-flex items-center px-2 py-0.5 rounded border text-xs bg-gray-50">{m.j}</span>
-                        <span className="truncate">{m.text}</span>
+                        <MatchSnippet text={m.text} query={jumpQueryUpper} />
                         <span className="ml-auto text-xs text-muted-foreground">第 {m.pos + 1} 题</span>
                       </div>
                     </li>
@@ -477,6 +477,30 @@ export default function PracticePage() {
 }
 
 // ---------- Local persistence helpers ----------
+function MatchSnippet({ text, query }: { text: string; query: string }) {
+  const maxLen = 120;
+  if (!query) return <span className="truncate">{text.slice(0, maxLen)}{text.length > maxLen ? '…' : ''}</span>;
+  const up = text.toUpperCase();
+  const idx = up.indexOf(query);
+  if (idx < 0) return <span className="truncate">{text.slice(0, maxLen)}{text.length > maxLen ? '…' : ''}</span>;
+  const context = 40;
+  const start = Math.max(0, idx - context);
+  const end = Math.min(text.length, idx + query.length + context);
+  const prefixEllipsis = start > 0 ? '…' : '';
+  const suffixEllipsis = end < text.length ? '…' : '';
+  const before = text.slice(start, idx);
+  const match = text.slice(idx, idx + query.length);
+  const after = text.slice(idx + query.length, end);
+  return (
+    <span className="inline-flex items-center gap-1 max-w-[46ch]">
+      <span className="truncate">
+        {prefixEllipsis}{before}
+        <mark className="bg-yellow-200 text-yellow-900 px-0.5 rounded-sm">{match}</mark>
+        {after}{suffixEllipsis}
+      </span>
+    </span>
+  );
+}
 type SavedState = {
   version: 1;
   bank: QuestionBank;
