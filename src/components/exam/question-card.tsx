@@ -51,7 +51,13 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
         {question.imageUrl ? (
           <div className="mt-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={question.imageUrl} alt="题目附图" className="max-h-64 w-auto rounded border" />
+            <img
+              src={question.imageUrl}
+              alt={question.codes?.J ? `题号 ${question.codes.J} 附图` : "题目附图"}
+              loading="lazy"
+              decoding="async"
+              className="max-h-64 w-auto rounded border"
+            />
           </div>
         ) : null}
         <div className="space-y-2">

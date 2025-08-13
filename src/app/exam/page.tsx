@@ -1,13 +1,14 @@
 "use client";
 
 import * as React from "react";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
+import { HelpCircle } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -19,6 +20,8 @@ function ExamClient() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<UserAnswer>({});
   const [finished, setFinished] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
+  const autoHelpShownRef = useRef(false);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -44,22 +47,60 @@ function ExamClient() {
   const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
 
-  function setCurrentAnswer(keys: string[]) {
+  const setCurrentAnswer = useCallback((keys: string[]) => {
     if (!current) return;
     const key = current.id ?? String(index);
     setAnswers((prev) => ({ ...prev, [key]: keys }));
-  }
+  }, [current, index]);
 
-  function next() {
+  const next = useCallback(() => {
     setIndex((i) => Math.min(i + 1, questions.length - 1));
-  }
-  function prev() {
+  }, [questions.length]);
+  const prev = useCallback(() => {
     setIndex((i) => Math.max(i - 1, 0));
-  }
+  }, []);
 
   function submit() {
     setFinished(true);
   }
+
+  // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option
+  React.useEffect(() => {
+    function isTypingTarget(el: EventTarget | null): boolean {
+      const node = el as HTMLElement | null;
+      if (!node) return false;
+      const tag = node.tagName?.toLowerCase();
+      return tag === 'input' || tag === 'textarea' || (node as HTMLElement).isContentEditable === true;
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (isTypingTarget(e.target)) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      else if (/^[1-9]$/.test(e.key)) {
+        const n = Number(e.key);
+        const opt = current?.options?.[n - 1];
+        if (opt) setCurrentAnswer([opt.key]);
+      }
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [current, next, prev, setCurrentAnswer]);
+
+  // One-time shortcuts help auto prompt
+  useEffect(() => {
+    if (autoHelpShownRef.current) return;
+    if (typeof window === 'undefined') return;
+    const seen = window.localStorage.getItem('ui:shortcutsHelpSeen:exam') === '1';
+    if (seen) { autoHelpShownRef.current = true; return; }
+    if (questions.length) {
+      autoHelpShownRef.current = true;
+      const timer = setTimeout(() => {
+        setHelpOpen(true);
+        try { window.localStorage.setItem('ui:shortcutsHelpSeen:exam', '1'); } catch {}
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [questions.length]);
 
   const score = useMemo(() => {
     let correct = 0;
@@ -79,6 +120,9 @@ function ExamClient() {
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4">
       <div className="flex items-center justify-between">
         <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
+        <Button size="icon" variant="outline" aria-label="快捷键说明" title="快捷键说明" onClick={() => setHelpOpen(true)}>
+          <HelpCircle className="h-4 w-4" />
+        </Button>
       </div>
       <div className="flex items-center gap-4">
         <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
@@ -121,6 +165,26 @@ function ExamClient() {
             </div>
             <div className="text-sm text-muted-foreground">正确率：{Math.round((score.correct / score.total) * 100)}%</div>
             <div className="text-xs text-muted-foreground">交卷后可继续浏览题目查看答案。</div>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Shortcuts Help Dialog */}
+      <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+        <DialogContent className="sm:max-w-[520px]">
+          <DialogHeader>
+            <DialogTitle>快捷键</DialogTitle>
+            <DialogDescription>使用键盘更快地操作考试</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center justify-between">
+              <span>上一题 / 下一题</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>选择选项（单选）</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

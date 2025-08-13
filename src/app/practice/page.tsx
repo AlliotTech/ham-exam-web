@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, useCallback, useRef } from "react";
 import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams } from "next/navigation";
-import { Search } from "lucide-react";
+import { HelpCircle, Search } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -37,7 +37,9 @@ function PracticeClient() {
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [helpOpen, setHelpOpen] = useState(false);
   const [noPromptThisBank, setNoPromptThisBank] = useState(false);
+  const autoHelpShownRef = useRef(false);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -98,18 +100,18 @@ function PracticeClient() {
   const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
 
-  function setCurrentAnswer(keys: string[]) {
+  const setCurrentAnswer = useCallback((keys: string[]) => {
     if (!current) return;
     const key = current.id ?? String(index);
     setAnswers((prev) => ({ ...prev, [key]: keys }));
-  }
+  }, [current, index]);
 
-  function next() {
+  const next = useCallback(() => {
     setIndex((i) => Math.min(i + 1, questions.length - 1));
-  }
-  function prev() {
+  }, [questions.length]);
+  const prev = useCallback(() => {
     setIndex((i) => Math.max(i - 1, 0));
-  }
+  }, []);
 
   function applyOrder(nextOrder: "sequential" | "random") {
     setOrder(nextOrder);
@@ -269,6 +271,48 @@ function PracticeClient() {
     setPendingResume(null);
   }
 
+  // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option (single-choice); Enter to open search in sequential
+  useEffect(() => {
+    function isTypingTarget(el: EventTarget | null): boolean {
+      const node = el as HTMLElement | null;
+      if (!node) return false;
+      const tag = node.tagName?.toLowerCase();
+      return tag === 'input' || tag === 'textarea' || (node as HTMLElement).isContentEditable === true;
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (isTypingTarget(e.target)) return;
+      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
+      else if (e.key === 'Enter' && order === 'sequential') { setSearchOpen(true); }
+      else if (/^[1-9]$/.test(e.key) && current && current.type !== 'multiple') {
+        const n = Number(e.key);
+        const opt = current.options?.[n - 1];
+        if (opt) setCurrentAnswer([opt.key]);
+      }
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [current, order, next, prev, setCurrentAnswer]);
+
+  // One-time shortcuts help auto prompt (do not interfere with resume dialog)
+  useEffect(() => {
+    if (autoHelpShownRef.current) return;
+    if (typeof window === "undefined") return;
+    const seen = window.localStorage.getItem("ui:shortcutsHelpSeen:practice") === "1";
+    if (seen) {
+      autoHelpShownRef.current = true;
+      return;
+    }
+    if (!resumeOpen && allQuestions.length) {
+      autoHelpShownRef.current = true;
+      const timer = setTimeout(() => {
+        setHelpOpen(true);
+        try { window.localStorage.setItem("ui:shortcutsHelpSeen:practice", "1"); } catch { /* noop */ }
+      }, 300);
+      return () => clearTimeout(timer);
+    }
+  }, [allQuestions.length, resumeOpen]);
+
   if (loading) return <div className="p-6">加载题库中...</div>;
   if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
 
@@ -323,8 +367,34 @@ function PracticeClient() {
               <Search className="h-4 w-4" />
             </Button>
           ) : null}
+          <Button size="icon" variant="outline" aria-label="快捷键说明" title="快捷键说明" onClick={() => setHelpOpen(true)}>
+            <HelpCircle className="h-4 w-4" />
+          </Button>
         </div>
       </div>
+      {/* Shortcuts Help Dialog */}
+      <Dialog open={helpOpen} onOpenChange={setHelpOpen}>
+        <DialogContent className="sm:max-w-[520px]">
+          <DialogHeader>
+            <DialogTitle>快捷键</DialogTitle>
+            <DialogDescription>使用键盘更快地操作练习</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-2 text-sm">
+            <div className="flex items-center justify-between">
+              <span>上一题 / 下一题</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>选择选项（单选）</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>打开搜索（仅顺序模式）</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">Enter</code>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
       {/* Search Dialog */}
       <Dialog open={order === "sequential" && searchOpen} onOpenChange={setSearchOpen}>
         <DialogContent className="sm:max-w-[640px]">
