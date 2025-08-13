@@ -37,9 +37,15 @@ function PracticeClient() {
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [noPromptThisBank, setNoPromptThisBank] = useState(false);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
+
+  // Initialize 'no prompt for this bank' checkbox from storage
+  useEffect(() => {
+    setNoPromptThisBank(!!loadNoResume(bankParam));
+  }, [bankParam]);
 
   useEffect(() => {
     (async () => {
@@ -75,13 +81,16 @@ function PracticeClient() {
     if (order !== "sequential") return;
     const lastMode = loadLastMode();
     if (lastMode === "random") return; // if user last used random, do not prompt
+    if (loadNoResume(bankParam)) return; // user opted out for this bank
     const saved = loadSavedState(bankParam);
     if (!saved) return;
     // Validate saved state
     if (saved.total !== allQuestions.length) return;
     if (saved.order !== "sequential") return;
-    setPendingResume(saved);
-    setResumeOpen(true);
+    if (shouldResume(saved)) {
+      setPendingResume(saved);
+      setResumeOpen(true);
+    }
     // do not auto-apply; wait for user choice
   }, [bankParam, allQuestions, order]);
 
@@ -116,7 +125,13 @@ function PracticeClient() {
     // When switching to sequential, if there is a saved record, prompt to resume
     if (nextOrder === "sequential") {
       const saved = loadSavedState(bankParam);
-      if (saved && saved.order === "sequential" && saved.total === allQuestions.length) {
+      if (
+        saved &&
+        saved.order === "sequential" &&
+        saved.total === allQuestions.length &&
+        !loadNoResume(bankParam) &&
+        shouldResume(saved)
+      ) {
         setPendingResume(saved);
         setResumeOpen(true);
       }
@@ -165,6 +180,9 @@ function PracticeClient() {
       const key = q?.id ?? String(pos);
       return answers[key] ? [...answers[key]] : null;
     });
+    const answeredCount = answersByPosition.filter(Boolean).length;
+    // Avoid saving empty progress (initial load)
+    if (index === 0 && answeredCount === 0) return;
     const payload: SavedState = {
       version: 1,
       bank: bankParam as QuestionBank,
@@ -234,6 +252,7 @@ function PracticeClient() {
     setAnswers(restored);
     setIndex(Math.min(Math.max(savedIndex, 0), reconstructed.length - 1));
     setShowAnswer(pendingResume.showAnswer);
+    if (noPromptThisBank) saveNoResume(bankParam, true);
     setResumeOpen(false);
     setPendingResume(null);
   }
@@ -245,6 +264,7 @@ function PracticeClient() {
     else setQuestions(allQuestions);
     setIndex(0);
     setAnswers({});
+    if (noPromptThisBank) saveNoResume(bankParam, true);
     setResumeOpen(false);
     setPendingResume(null);
   }
@@ -262,6 +282,12 @@ function PracticeClient() {
               是否加载到上次练习的位置，还是重新开始？
             </DialogDescription>
           </DialogHeader>
+          <div className="py-2">
+            <div className="flex items-center gap-2">
+              <Checkbox id="no-prompt-this-bank" checked={noPromptThisBank} onCheckedChange={(v) => setNoPromptThisBank(!!v)} />
+              <Label htmlFor="no-prompt-this-bank">本题库不再提示</Label>
+            </div>
+          </div>
           <DialogFooter>
             <Button variant="outline" onClick={handleRestart}>重新开始</Button>
             <Button onClick={handleResume}>继续上次</Button>
@@ -452,6 +478,46 @@ function saveLastMode(mode: "sequential" | "random") {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(lastModeKey(), mode);
+  } catch {
+    // ignore
+  }
+}
+
+// ---------- Resume prompt gating ----------
+const RESUME_MIN_ANSWERED = 3;
+const RESUME_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+function shouldResume(saved: SavedState): boolean {
+  // order already validated by caller
+  const now = Date.now();
+  if (now - saved.timestamp > RESUME_EXPIRY_MS) return false;
+  const answeredCount = (saved.answersByPosition || []).filter(Boolean).length;
+  if (answeredCount < RESUME_MIN_ANSWERED) return false;
+  // avoid prompting if at very start or very end
+  if (saved.index <= 0) return false;
+  if (saved.index >= (saved.total || 0) - 1) return false;
+  return true;
+}
+
+// ---------- Per-bank 'no resume prompt' preference ----------
+function noResumeKey(bank: string | null): string {
+  return `practice:noResumePrompt:${bank ?? "default"}`;
+}
+
+function loadNoResume(bank: string | null): boolean {
+  if (typeof window === "undefined") return false;
+  try {
+    return window.localStorage.getItem(noResumeKey(bank)) === "1";
+  } catch {
+    return false;
+  }
+}
+
+function saveNoResume(bank: string | null, value: boolean) {
+  if (typeof window === "undefined") return;
+  try {
+    if (value) window.localStorage.setItem(noResumeKey(bank), "1");
+    else window.localStorage.removeItem(noResumeKey(bank));
   } catch {
     // ignore
   }
