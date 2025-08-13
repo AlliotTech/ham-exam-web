@@ -4,7 +4,14 @@ import type { QuestionItem } from "@/types/question";
 
 // Prefer env var for portability; fallback to known absolute path in this workspace
 export function datasetDir(): string {
-  return process.env.DATASET_DIR || "/Users/alliot/Downloads/tmp/crac-amateur-radio-exam-questions-2025-csv";
+  const dirFromEnv = process.env.DATASET_DIR;
+  if (!dirFromEnv) {
+    throw new Error(
+      "DATASET_DIR is not set. Please set an absolute or project-relative path to the dataset directory (contains CSV and images.csv)."
+    );
+  }
+  const resolved = path.isAbsolute(dirFromEnv) ? dirFromEnv : path.join(process.cwd(), dirFromEnv);
+  return resolved;
 }
 
 // Minimal RFC4180 CSV parser supporting quotes and commas inside quotes

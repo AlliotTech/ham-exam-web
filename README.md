@@ -4,6 +4,20 @@
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Dataset configuration
+
+Set `DATASET_DIR` to the directory that contains `class_a.csv`, `class_b.csv`, `class_c.csv`, `full.csv`, and `images.csv`.
+
+Example macOS path:
+
+```bash
+export DATASET_DIR="/Users/<you>/Downloads/tmp/crac-amateur-radio-exam-questions-2025-csv"
+```
+
+Alternatively, set `DATASET_REMOTE` to use the GitHub raw files in the build script fallback.
+
+Node.js 20+ is required (see `package.json#engines`).
+
 ## Getting Started
 
 First, run the development server:

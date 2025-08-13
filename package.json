@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "node --experimental-fetch ./scripts/build-dataset.mjs",
+    "prebuild": "node ./scripts/build-dataset.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -37,5 +37,8 @@
     "tailwindcss": "^4",
     "tw-animate-css": "^1.3.6",
     "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
