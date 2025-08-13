@@ -10,7 +10,7 @@ export function resolveQuestionsUrl(bank?: QuestionBank): string {
 
 export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
   const url = resolveQuestionsUrl(bank);
-  const res = await fetch(url, { cache: "no-store" });
+  const res = await fetch(url, { cache: "force-cache" });
   if (!res.ok) return false;
   try {
     const data = (await res.json()) as unknown;
@@ -23,7 +23,7 @@ export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
 export async function loadQuestions(bank?: QuestionBank, opts?: { strict?: boolean }): Promise<QuestionItem[]> {
   const strict = opts?.strict ?? false;
   const url = resolveQuestionsUrl(bank);
-  let res = await fetch(url, { cache: "no-store" });
+  let res = await fetch(url, { cache: "force-cache" });
   // Fallback to API if static not available (useful in dev/local)
   if (!res.ok) {
     const apiUrl = bank ? `/api/questions?bank=${bank}` : "/api/questions?bank=A";
