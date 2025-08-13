@@ -401,7 +401,7 @@ function PracticeClient() {
           <div className="space-y-3">
             <Input
               id="jump"
-              className="h-9"
+              className="h-11 text-base md:h-9 md:text-sm"
               placeholder="题号或关键词，如 LK0501 / 天线"
               value={jumpInput}
               onChange={(e) => setJumpInput(e.target.value)}
