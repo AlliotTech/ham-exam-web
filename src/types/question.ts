@@ -9,7 +9,7 @@ export type QuestionItem = {
   question: string;
   options: QuestionOption[];
   answer_keys: string[];
-  type: "single" | "multiple" | "true_false";
+  type: "single" | "multiple";
   pages?: { start: number | null; end: number | null };
   imageUrl?: string | null;
 };

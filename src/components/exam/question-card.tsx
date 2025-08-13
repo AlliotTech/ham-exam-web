@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
+import { arraysEqual, sorted } from "@/lib/utils";
 
 type Props = {
   index: number;
@@ -105,16 +106,4 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
     </Card>
   );
 }
-
-function sorted<T>(arr: T[]): T[] {
-  return [...arr].sort();
-}
-
-function arraysEqual<T>(a: T[], b: T[]): boolean {
-  if (a.length !== b.length) return false;
-  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
-  return true;
-}
-
-
 

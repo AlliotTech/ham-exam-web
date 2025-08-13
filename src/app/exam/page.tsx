@@ -10,6 +10,7 @@ import { Settings } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { arraysEqual, sorted } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
@@ -198,14 +199,7 @@ function ExamClient() {
   );
 }
 
-function sorted<T>(arr: T[]): T[] {
-  return [...arr].sort();
-}
-function arraysEqual<T>(a: T[], b: T[]): boolean {
-  if (a.length !== b.length) return false;
-  for (let i = 0; i < a.length; i++) if (a[i] !== b[i]) return false;
-  return true;
-}
+ 
 
 export default function ExamPage() {
   return (

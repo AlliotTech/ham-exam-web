@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Suspense, useEffect, useState, useCallback, useRef } from "react";
+import { Suspense, useEffect, useState, useCallback, useRef, useDeferredValue, useMemo } from "react";
 import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
@@ -33,8 +33,7 @@ function PracticeClient() {
   const [order, setOrder] = useState<"sequential" | "random">("sequential");
   const [jumpInput, setJumpInput] = useState("");
   const [showAnswer, setShowAnswer] = useState<boolean>(true);
-  const [jumpMatches, setJumpMatches] = useState<{ pos: number; j: string; text: string }[]>([]);
-  const [jumpLoading, setJumpLoading] = useState(false);
+  // Debounced search state derived via useDeferredValue/useMemo
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -201,41 +200,33 @@ function PracticeClient() {
   }, [allQuestions, questions, index, answers, order, showAnswer, bankParam]);
 
   // live suggestions based on J code or question text (sequential mode only)
-  useEffect(() => {
-    if (order !== "sequential") {
-      setJumpMatches([]);
-      return;
-    }
-    const q = jumpInput.trim();
-    if (!q) {
-      setJumpMatches([]);
-      return;
-    }
-    let cancel = false;
-    setJumpLoading(true);
-    const timer = setTimeout(() => {
-      if (cancel) return;
-      const queryUpper = q.toUpperCase();
-      const results: { pos: number; j: string; text: string }[] = [];
-      for (let i = 0; i < questions.length; i++) {
-        const item = questions[i];
-        const jraw = (item.codes?.J || "").toUpperCase();
-        const jParts = jraw ? jraw.split(",").map((s) => s.trim()) : [];
-        const byJ = jParts.some((p) => p.includes(queryUpper));
-        const byText = item.question.toUpperCase().includes(queryUpper);
-        if (byJ || byText) {
-          results.push({ pos: i, j: jParts[0] || "-", text: item.question });
-        }
-        if (results.length > 50) break;
+  const deferredJump = useDeferredValue(jumpInput);
+  const jumpQueryUpper = useMemo(() => {
+    if (order !== "sequential") return "";
+    return deferredJump.trim().toUpperCase();
+  }, [order, deferredJump]);
+  const computedMatches = useMemo(() => {
+    if (!jumpQueryUpper) return [] as { pos: number; j: string; text: string }[];
+    const results: { pos: number; j: string; text: string }[] = [];
+    for (let i = 0; i < questions.length; i++) {
+      const item = questions[i];
+      const jraw = (item.codes?.J || "").toUpperCase();
+      const jParts = jraw ? jraw.split(",").map((s) => s.trim()) : [];
+      const byJ = jParts.some((p) => p.includes(jumpQueryUpper));
+      const byText = item.question.toUpperCase().includes(jumpQueryUpper);
+      if (byJ || byText) {
+        results.push({ pos: i, j: jParts[0] || "-", text: item.question });
       }
-      if (!cancel) setJumpMatches(results);
-      setJumpLoading(false);
-    }, 150);
-    return () => {
-      cancel = true;
-      clearTimeout(timer);
-    };
-  }, [jumpInput, order, questions]);
+      if (results.length > 50) break;
+    }
+    return results;
+  }, [jumpQueryUpper, questions]);
+  const jumpLoading = useMemo(() => {
+    if (order !== "sequential") return false;
+    const raw = jumpInput.trim();
+    if (!raw) return false;
+    return deferredJump.trim() !== raw;
+  }, [order, jumpInput, deferredJump]);
 
   function handleResume() {
     if (!pendingResume) return;
@@ -422,12 +413,12 @@ function PracticeClient() {
               }}
             />
             {jumpInput.trim() ? (
-              <div className="text-xs text-muted-foreground">{jumpLoading ? "搜索中..." : `匹配 ${jumpMatches.length} 条`}</div>
+              <div className="text-xs text-muted-foreground">{jumpLoading ? "搜索中..." : `匹配 ${computedMatches.length} 条`}</div>
             ) : null}
             <div className="rounded-md border">
-              {jumpMatches.length ? (
+              {computedMatches.length ? (
                 <ul className="max-h-72 overflow-auto divide-y">
-                  {jumpMatches.slice(0, 10).map((m) => (
+                  {computedMatches.slice(0, 10).map((m) => (
                     <li key={`${m.j}-${m.pos}`} className="p-2 hover:bg-gray-50 cursor-pointer" onClick={() => { setIndex(m.pos); setSearchOpen(false); }}>
                       <div className="flex items-center gap-2 text-sm">
                         <span className="inline-flex items-center px-2 py-0.5 rounded border text-xs bg-gray-50">{m.j}</span>
