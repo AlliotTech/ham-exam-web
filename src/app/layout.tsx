@@ -32,7 +32,7 @@ export default function RootLayout({
           <div className="max-w-screen-lg mx-auto px-4">
             <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
               <div className="text-xs sm:text-sm text-muted-foreground">
-                业余无线电A类考试模拟 · 2025
+                业余无线电执照考试模拟 · 2025
               </div>
               <nav className="text-xs sm:text-sm">
                 <ul className="inline-flex flex-wrap items-center gap-2 sm:gap-3 text-muted-foreground">
