@@ -16,12 +16,14 @@ type Props = {
   selected: string[];
   onChange: (keys: string[]) => void;
   showImmediateAnswer?: boolean;
+  readOnly?: boolean;
 };
 
-export function QuestionCard({ index, total, question, selected, onChange, showImmediateAnswer }: Props) {
+export function QuestionCard({ index, total, question, selected, onChange, showImmediateAnswer, readOnly }: Props) {
   const isMultiple = question.type === "multiple";
 
   function toggleMulti(key: string) {
+    if (readOnly) return;
     const set = new Set(selected);
     if (set.has(key)) set.delete(key);
     else set.add(key);
@@ -68,6 +70,7 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
                 <label key={opt.key} className="flex items-start gap-2">
                   <Checkbox
                     checked={selected.includes(opt.key)}
+                    disabled={!!readOnly}
                     onCheckedChange={() => toggleMulti(opt.key)}
                   />
                   <span className="whitespace-pre-line">
@@ -78,11 +81,11 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
               ))}
             </div>
           ) : (
-            <RadioGroup value={selected[0] ?? ""} onValueChange={(v) => onChange(v ? [v] : [])}>
+            <RadioGroup value={selected[0] ?? ""} onValueChange={(v) => { if (!readOnly) onChange(v ? [v] : []); }}>
               {question.options.map((opt) => (
                 <div key={opt.key} className="flex items-start gap-2">
-                  <RadioGroupItem value={opt.key} id={`${question.id}-${opt.key}`} />
-                  <Label htmlFor={`${question.id}-${opt.key}`} className="whitespace-pre-line cursor-pointer">
+                  <RadioGroupItem value={opt.key} id={`${question.id}-${opt.key}`} disabled={!!readOnly} />
+                  <Label htmlFor={`${question.id}-${opt.key}`} className={`whitespace-pre-line ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
                     <strong className="mr-2">{opt.key}.</strong>
                     {opt.text}
                   </Label>

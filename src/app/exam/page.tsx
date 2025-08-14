@@ -8,11 +8,14 @@ import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { arraysEqual, sorted } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
+import { Badge } from "@/components/ui/badge";
+import { Separator as UiSeparator } from "@/components/ui/separator";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -31,10 +34,26 @@ function ExamClient() {
   const autoHelpShownRef = useRef(false);
   const [endAtMs, setEndAtMs] = useState<number | null>(null);
   const [remainingMs, setRemainingMs] = useState<number>(0);
+  const [resultOpen, setResultOpen] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [answerCardOpen, setAnswerCardOpen] = useState(false);
+  const [flags, setFlags] = useState<Record<string, boolean>>({});
+  const [filter, setFilter] = useState<"all" | "unanswered" | "flagged">("all");
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
   const rule = RULES[bankParam] ?? RULES.A;
+
+  // Load persisted filter preference per bank
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const key = `exam:answerCardFilter:${bankParam}`;
+      const v = window.localStorage.getItem(key) as typeof filter | null;
+      if (v === "all" || v === "unanswered" || v === "flagged") setFilter(v);
+      else setFilter("all");
+    } catch {}
+  }, [bankParam]);
 
   useEffect(() => {
     (async () => {
@@ -60,6 +79,7 @@ function ExamClient() {
         setQuestions(picked);
         setIndex(0);
         setAnswers({});
+        setFlags({});
         // Setup timer
         const duration = rule.minutes * 60 * 1000;
         const end = Date.now() + duration;
@@ -74,12 +94,12 @@ function ExamClient() {
   }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total]);
 
   const current = questions[index];
-  const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
+  const selected = current ? answers[String(index)] ?? [] : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
 
   const setCurrentAnswer = useCallback((keys: string[]) => {
     if (!current) return;
-    const key = current.id ?? String(index);
+    const key = String(index);
     setAnswers((prev) => ({ ...prev, [key]: keys }));
   }, [current, index]);
 
@@ -92,6 +112,7 @@ function ExamClient() {
 
   function submit() {
     setFinished(true);
+    setResultOpen(true);
   }
 
   // Countdown timer
@@ -104,6 +125,7 @@ function ExamClient() {
       if (left <= 0) {
         window.clearInterval(id);
         setFinished(true);
+        setResultOpen(true);
       }
     }, 1000);
     return () => window.clearInterval(id);
@@ -160,13 +182,49 @@ function ExamClient() {
     let correct = 0;
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
-      const key = q.id ?? String(i);
+      const key = String(i);
       const s = answers[key] ?? [];
       if (arraysEqual(sorted(s), sorted(q.answer_keys))) correct += 1;
     }
     return { correct, total: questions.length };
   }, [answers, questions]);
   const passed = score.correct >= rule.pass;
+
+  // Derived helpers
+  const answeredCount = useMemo(() => {
+    let c = 0;
+    for (let i = 0; i < questions.length; i++) {
+      const key = String(i);
+      if ((answers[key] ?? []).length > 0) c += 1;
+    }
+    return c;
+  }, [answers, questions]);
+
+  function keyOf(pos: number): string {
+    return String(pos);
+  }
+
+  function toggleFlagCurrent() {
+    const q = current;
+    if (!q) return;
+    const key = keyOf(index);
+    setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
+  }
+
+  function firstUnansweredIndex(): number {
+    for (let i = 0; i < questions.length; i++) {
+      const key = String(i);
+      if (!(answers[key] && answers[key].length)) return i;
+    }
+    return -1;
+  }
+
+  function setFilterAndPersist(v: typeof filter) {
+    setFilter(v);
+    if (typeof window !== "undefined") {
+      try { window.localStorage.setItem(`exam:answerCardFilter:${bankParam}`, v); } catch {}
+    }
+  }
 
   if (loading) return <div className="p-6">加载题库中...</div>;
   if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
@@ -195,6 +253,8 @@ function ExamClient() {
         question={current}
         selected={selected}
         onChange={setCurrentAnswer}
+        showImmediateAnswer={finished}
+        readOnly={finished}
       />
 
       <div className="flex justify-between">
@@ -202,19 +262,21 @@ function ExamClient() {
           上一题
         </Button>
         <div className="text-sm text-muted-foreground">
-          已作答 {Object.keys(answers).length} / {questions.length}
+          已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}
         </div>
         <div className="flex gap-2">
+          <Button variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
+          <Button variant="outline" onClick={() => setAnswerCardOpen(true)}>答题卡</Button>
           <Button onClick={next} disabled={index === questions.length - 1}>
             下一题
           </Button>
-          <Button onClick={submit} variant="outline">
+          <Button onClick={() => setConfirmOpen(true)} variant="outline" disabled={finished}>
             交卷
           </Button>
         </div>
       </div>
 
-      <Dialog open={finished} onOpenChange={setFinished}>
+      <Dialog open={resultOpen} onOpenChange={setResultOpen}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>成绩</DialogTitle>
@@ -229,6 +291,74 @@ function ExamClient() {
             </div>
             <div className="text-xs text-muted-foreground">交卷后可继续浏览题目查看答案。</div>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Answer Card Sheet */}
+      <Sheet open={answerCardOpen} onOpenChange={setAnswerCardOpen}>
+        <SheetContent side="right">
+          <SheetHeader>
+            <SheetTitle>答题卡</SheetTitle>
+          </SheetHeader>
+          <div className="px-4 space-y-3">
+            <div className="flex items-center justify-between gap-3 text-sm">
+              <div className="text-muted-foreground">已答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}</div>
+              <div className="flex items-center gap-2">
+                <Button size="sm" variant={filter === "all" ? "default" : "outline"} onClick={() => setFilterAndPersist("all")}>全部</Button>
+                <Button size="sm" variant={filter === "unanswered" ? "default" : "outline"} onClick={() => setFilterAndPersist("unanswered")}>未答</Button>
+                <Button size="sm" variant={filter === "flagged" ? "default" : "outline"} onClick={() => setFilterAndPersist("flagged")}>标记</Button>
+              </div>
+            </div>
+            <UiSeparator />
+            <div className="flex items-center justify-between">
+              <div className="text-sm text-muted-foreground">点击题号跳转</div>
+              <Button size="sm" variant="outline" onClick={() => { const i = firstUnansweredIndex(); if (i >= 0) { setIndex(i); setAnswerCardOpen(false); } }}>跳到首个未答</Button>
+            </div>
+            <div className="grid grid-cols-6 gap-2 sm:grid-cols-8">
+              {questions.map((q, i) => {
+                const key = String(i);
+                const isAnswered = (answers[key] ?? []).length > 0;
+                const isFlagged = !!flags[key];
+                const selectedForFilter =
+                  filter === "all" || (filter === "unanswered" && !isAnswered) || (filter === "flagged" && isFlagged);
+                if (!selectedForFilter) return null;
+                const userSel = answers[key] ?? [];
+                const correct = arraysEqual(sorted(userSel), sorted(q.answer_keys));
+                return (
+                  <button
+                    key={`q-${i}`}
+                    className={
+                      "relative h-9 rounded-md border text-sm font-medium transition-colors " +
+                      (isAnswered ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")
+                    }
+                    onClick={() => { setIndex(i); setAnswerCardOpen(false); }}
+                  >
+                    <span>{i + 1}</span>
+                    {isFlagged ? <span className="absolute -top-1 -right-1 inline-block size-3 rounded-full bg-yellow-400" /> : null}
+                    {finished ? (
+                      <Badge variant="secondary" className={"absolute -bottom-1 -right-1 px-1 py-0 text-[10px] " + (correct ? "bg-green-600 text-white" : "bg-red-600 text-white")}>
+                        {correct ? "✓" : "✗"}
+                      </Badge>
+                    ) : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </SheetContent>
+      </Sheet>
+
+      {/* Submit Confirm Dialog */}
+      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>确认交卷？</DialogTitle>
+            <DialogDescription>交卷后将停止计时，答案将不可修改，但可以浏览查看正确答案与成绩。</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setConfirmOpen(false)}>取消</Button>
+            <Button variant="destructive" onClick={() => { setConfirmOpen(false); submit(); }}>确认交卷</Button>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
 
