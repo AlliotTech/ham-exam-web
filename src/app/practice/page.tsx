@@ -23,8 +23,16 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { BottomBar } from "@/components/exam/bottom-bar";
 
 function PracticeClient() {
+  useEffect(() => {
+    if (typeof document !== "undefined") {
+      document.body.classList.add("no-site-footer");
+      return () => { document.body.classList.remove("no-site-footer"); };
+    }
+    return;
+  }, []);
   const [loading, setLoading] = useState(true);
   const [allQuestions, setAllQuestions] = useState<QuestionItem[]>([]);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
@@ -309,7 +317,7 @@ function PracticeClient() {
   if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4">
+    <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4 pb-24 sm:pb-20">
       <Dialog open={resumeOpen} onOpenChange={setResumeOpen}>
         <DialogContent>
           <DialogHeader>
@@ -453,17 +461,18 @@ function PracticeClient() {
         showImmediateAnswer={showAnswer}
       />
 
-      <div className="flex justify-between">
-        <Button onClick={prev} disabled={index === 0} variant="secondary">
-          上一题
-        </Button>
-        <div className="text-sm text-muted-foreground">
-          已作答 {Object.keys(answers).length} / {questions.length}
-        </div>
-        <Button onClick={next} disabled={index === questions.length - 1}>
-          下一题
-        </Button>
-      </div>
+      <BottomBar
+        answeredCount={Object.keys(answers).length}
+        total={questions.length}
+        left={<Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">上一题</Button>}
+        right={<Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">下一题</Button>}
+        mobileTop={(
+          <div className="grid grid-cols-2 gap-2">
+            <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
+            <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
+          </div>
+        )}
+      />
     </div>
   );
 }

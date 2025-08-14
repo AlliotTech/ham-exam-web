@@ -119,4 +119,5 @@
   body {
     @apply bg-background text-foreground;
   }
+  body.no-site-footer footer { display: none !important; }
 }

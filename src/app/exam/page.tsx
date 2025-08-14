@@ -16,6 +16,7 @@ import { useSearchParams } from "next/navigation";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Separator as UiSeparator } from "@/components/ui/separator";
+import { BottomBar } from "@/components/exam/bottom-bar";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -54,6 +55,14 @@ function ExamClient() {
       else setFilter("all");
     } catch {}
   }, [bankParam]);
+
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      document.body.classList.add('no-site-footer');
+      return () => { document.body.classList.remove('no-site-footer'); };
+    }
+    return;
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -264,45 +273,31 @@ function ExamClient() {
         readOnly={finished}
       />
 
-      {/* Fixed bottom action bar */}
-      <div
-        className="fixed left-0 right-0 bottom-0 z-40 border-t bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/60"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
-      >
-        <div className="container mx-auto max-w-4xl px-4 py-2 space-y-2">
-          <div className="text-sm text-muted-foreground text-center">
-            已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}
+      <BottomBar
+        statsNode={<>已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}</>}
+        left={<Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">上一题</Button>}
+        right={(
+          <>
+            <Button variant="outline" onClick={toggleFlagCurrent} className="active:scale-[0.98] transition-transform">{flags[String(index)] ? "取消标记" : "标记"}</Button>
+            <Button variant="outline" onClick={() => { setAnswerCardOpen(true); }} className="active:scale-[0.98] transition-transform">答题卡</Button>
+            <Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">下一题</Button>
+            <Button onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished} className="active:scale-[0.98] transition-transform">交卷</Button>
+          </>
+        )}
+        mobileTop={(
+          <div className="grid grid-cols-2 gap-2">
+            <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
+            <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
           </div>
-          {/* Desktop controls */}
-          <div className="hidden sm:flex items-center justify-between gap-2">
-            <Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">
-              上一题
-            </Button>
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={toggleFlagCurrent} className="active:scale-[0.98] transition-transform">{flags[String(index)] ? "取消标记" : "标记"}</Button>
-              <Button variant="outline" onClick={() => { setAnswerCardOpen(true); }} className="active:scale-[0.98] transition-transform">答题卡</Button>
-              <Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">
-                下一题
-              </Button>
-              <Button onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished} className="active:scale-[0.98] transition-transform">
-                交卷
-              </Button>
-            </div>
+        )}
+        mobileBottom={(
+          <div className="grid grid-cols-3 gap-2 mt-2">
+            <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
+            <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={() => { setAnswerCardOpen(true); }}>答题卡</Button>
+            <Button className="w-full active:scale-[0.98] transition-transform" onClick={() => { setConfirmOpen(true); }} variant="destructive" disabled={finished}>交卷</Button>
           </div>
-          {/* Mobile controls */}
-          <div className="sm:hidden">
-            <div className="grid grid-cols-2 gap-2">
-              <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
-              <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
-            </div>
-            <div className="grid grid-cols-3 gap-2 mt-2">
-              <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-              <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={() => { setAnswerCardOpen(true); }}>答题卡</Button>
-              <Button className="w-full active:scale-[0.98] transition-transform" onClick={() => { setConfirmOpen(true); }} variant="destructive" disabled={finished}>交卷</Button>
-            </div>
-          </div>
-        </div>
-      </div>
+        )}
+      />
 
       <Dialog open={resultOpen} onOpenChange={setResultOpen}>
         <DialogContent>
