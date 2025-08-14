@@ -23,12 +23,7 @@ export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
 export async function loadQuestions(bank?: QuestionBank, opts?: { strict?: boolean }): Promise<QuestionItem[]> {
   const strict = opts?.strict ?? false;
   const url = resolveQuestionsUrl(bank);
-  let res = await fetch(url, { cache: "force-cache" });
-  // Fallback to API if static not available (useful in dev/local)
-  if (!res.ok) {
-    const apiUrl = bank ? `/api/questions?bank=${bank}` : "/api/questions?bank=A";
-    res = await fetch(apiUrl, { cache: "no-store" });
-  }
+  const res = await fetch(url, { cache: "force-cache" });
   if (!res.ok) throw new Error("Failed to load questions JSON");
   const data = (await res.json()) as QuestionItem[];
   if (strict && (!Array.isArray(data) || data.length === 0)) {
