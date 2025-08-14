@@ -26,6 +26,7 @@ import { Separator } from "@/components/ui/separator";
 import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
 import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
+import { QuestionProgressHeader } from "@/components/common/question-progress-header";
 
 function PracticeClient() {
   useNoSiteFooter();
@@ -325,19 +326,21 @@ function PracticeClient() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <div className="flex items-center justify-between gap-4 flex-wrap">
-        <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
-        <div className="flex items-center gap-3">
-          {order === "sequential" ? (
-            <Button size="icon" variant="outline" aria-label="搜索" title="搜索" onClick={() => setSearchOpen(true)}>
-              <Search className="h-4 w-4" />
+      <QuestionProgressHeader
+        percent={percent}
+        right={(
+          <>
+            {order === "sequential" ? (
+              <Button size="icon" variant="outline" aria-label="搜索" title="搜索" onClick={() => setSearchOpen(true)}>
+                <Search className="h-4 w-4" />
+              </Button>
+            ) : null}
+            <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+              <Settings className="h-4 w-4" />
             </Button>
-          ) : null}
-          <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
-            <Settings className="h-4 w-4" />
-          </Button>
-        </div>
-      </div>
+          </>
+        )}
+      />
       {/* Settings Dialog */}
       <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
         <DialogContent className="sm:max-w-[520px]">
@@ -445,10 +448,7 @@ function PracticeClient() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
-      <div className="flex items-center gap-4">
-        <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
-        <Progress value={percent} className="h-2" />
-      </div>
+      
 
       <QuestionCard
         index={index}

@@ -7,16 +7,18 @@ import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
-import { Progress } from "@/components/ui/progress";
+ 
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { arraysEqual, sorted } from "@/lib/utils";
-import Link from "next/link";
+ 
 import { useSearchParams } from "next/navigation";
 import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
 import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { AnswerCardSheet } from "@/components/exam/answer-card-sheet";
+import { QuestionProgressHeader } from "@/components/common/question-progress-header";
+import { useCountdown } from "@/hooks/useCountdown";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -122,21 +124,11 @@ function ExamClient() {
     setResultOpen(true);
   }
 
-  // Countdown timer
-  useEffect(() => {
-    if (!endAtMs) return;
-    if (finished) return;
-    const id = window.setInterval(() => {
-      const left = Math.max(0, endAtMs - Date.now());
-      setRemainingMs(left);
-      if (left <= 0) {
-        window.clearInterval(id);
-        setFinished(true);
-        setResultOpen(true);
-      }
-    }, 1000);
-    return () => window.clearInterval(id);
-  }, [endAtMs, finished]);
+  const remaining = useCountdown(endAtMs, () => {
+    setFinished(true);
+    setResultOpen(true);
+  });
+  useEffect(() => { setRemainingMs(remaining); }, [remaining]);
 
   function formatMs(ms: number): string {
     const totalSec = Math.max(0, Math.floor(ms / 1000));
@@ -220,21 +212,17 @@ function ExamClient() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4 pb-28 sm:pb-20">
-      <div className="flex items-center justify-between">
-        <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
-        <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
-          <Settings className="h-4 w-4" />
-        </Button>
-      </div>
-      <div className="flex items-center gap-4 justify-between flex-wrap">
-        <div className="flex items-center gap-4 w-full sm:w-auto">
-          <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
-          <Progress value={percent} className="h-2 flex-1 sm:flex-none" />
-        </div>
-        <div className="hidden sm:block text-sm text-muted-foreground">
-          考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span>
-        </div>
-      </div>
+      <QuestionProgressHeader
+        percent={percent}
+        right={(
+          <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+            <Settings className="h-4 w-4" />
+          </Button>
+        )}
+        meta={(
+          <>考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span></>
+        )}
+      />
       {/* Mobile info grid */}
       <div className="sm:hidden grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-muted-foreground">
         <div>考试类别：{bankParam} 类</div>
