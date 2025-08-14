@@ -8,8 +8,7 @@ import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
  
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
+import { Dialog } from "@/components/ui/dialog";
 import { arraysEqual, sorted } from "@/lib/utils";
  
 import { useSearchParams } from "next/navigation";
@@ -20,6 +19,9 @@ import { AnswerCardSheet } from "@/components/exam/answer-card-sheet";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
 import { useCountdown } from "@/hooks/useCountdown";
 import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
+import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
+import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
+import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -192,8 +194,6 @@ function ExamClient() {
     setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
   }
 
-  
-
   function setFilterAndPersist(v: typeof filter) {
     setFilter(v);
     if (typeof window !== "undefined") {
@@ -262,22 +262,9 @@ function ExamClient() {
       />
 
       <Dialog open={resultOpen} onOpenChange={setResultOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>成绩</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-2">
-            <div>
-              得分：{score.correct} / {score.total}
-            </div>
-            <div className="text-sm text-muted-foreground">正确率：{Math.round((score.correct / score.total) * 100)}%</div>
-            <div className={`text-sm ${passed ? "text-green-600" : "text-red-600"}`}>
-              {passed ? "合格" : "不合格"}（合格线：{rule.pass} 题）
-            </div>
-            <div className="text-xs text-muted-foreground">交卷后可继续浏览题目查看答案。</div>
-          </div>
-        </DialogContent>
+        {/* Replaced by ExamResultDialog below */}
       </Dialog>
+      <ExamResultDialog open={resultOpen} onOpenChange={setResultOpen} correct={score.correct} total={score.total} passed={passed} passLine={rule.pass} />
 
       {/* Answer Card Sheet */}
       <AnswerCardSheet
@@ -293,45 +280,10 @@ function ExamClient() {
       />
 
       {/* Submit Confirm Dialog */}
-      <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>确认交卷？</DialogTitle>
-            <DialogDescription>交卷后将停止计时，答案将不可修改，但可以浏览查看正确答案与成绩。</DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setConfirmOpen(false)}>取消</Button>
-            <Button variant="destructive" onClick={() => { setConfirmOpen(false); submit(); }}>确认交卷</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <ExamSubmitConfirmDialog open={confirmOpen} onOpenChange={setConfirmOpen} onConfirm={() => { setConfirmOpen(false); submit(); }} />
 
       {/* Settings Dialog */}
-      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-        <DialogContent className="sm:max-w-[520px]">
-          <DialogHeader>
-            <DialogTitle>设置</DialogTitle>
-            <DialogDescription>快捷键与考试说明</DialogDescription>
-          </DialogHeader>
-          <div className="space-y-5">
-            <div className="space-y-2 text-sm">
-              <div className="text-muted-foreground">快捷键</div>
-              <div className="flex items-center justify-between">
-                <span>上一题 / 下一题</span>
-                <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>选择选项（单选）</span>
-                <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
-              </div>
-            </div>
-            <Separator />
-            <div className="text-xs text-muted-foreground">
-              考试规则：A 类 40 题（单选 32，多选 8），40 分钟，30 题合格；B 类 60 题（单选 45，多选 15），60 分钟，45 题合格；C 类 90 题（单选 70，多选 20），90 分钟，70 题合格。多选题需与标准答案完全一致，否则不得分。
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
+      <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </div>
   );
 }

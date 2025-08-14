@@ -6,27 +6,28 @@ import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions"
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
- 
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
+import { Search, Settings } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { Search, Settings, X } from "lucide-react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
 import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
 import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
 import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
+import { PracticeResumeDialog } from "@/components/practice/PracticeResumeDialog";
+import { PracticeSettingsDialog } from "@/components/practice/PracticeSettingsDialog";
+import { PracticeSearchDialog } from "@/components/practice/PracticeSearchDialog";
+import {
+  clearSavedState,
+  loadLastMode,
+  loadNoResume,
+  loadSavedState,
+  normalizeJ,
+  saveLastMode,
+  saveNoResume,
+  saveState,
+  shouldResume,
+  type SavedState,
+} from "@/lib/practice-storage";
 
 function PracticeClient() {
   useNoSiteFooter();
@@ -113,8 +114,6 @@ function PracticeClient() {
   const current = questions[index];
   const selected = current ? selectedFromHook : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
-
-  
 
   function applyOrder(nextOrder: "sequential" | "random") {
     setOrder(nextOrder);
@@ -304,26 +303,14 @@ function PracticeClient() {
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4 pb-24 sm:pb-20">
-      <Dialog open={resumeOpen} onOpenChange={setResumeOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>发现上次练习记录</DialogTitle>
-            <DialogDescription>
-              是否加载到上次练习的位置，还是重新开始？
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-2">
-            <div className="flex items-center gap-2">
-              <Checkbox id="no-prompt-this-bank" checked={noPromptThisBank} onCheckedChange={(v) => setNoPromptThisBank(!!v)} />
-              <Label htmlFor="no-prompt-this-bank">本题库不再提示</Label>
-            </div>
-          </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={handleRestart}>重新开始</Button>
-            <Button onClick={handleResume}>继续上次</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+      <PracticeResumeDialog
+        open={resumeOpen}
+        onOpenChange={setResumeOpen}
+        noPromptThisBank={noPromptThisBank}
+        setNoPromptThisBank={(v) => setNoPromptThisBank(v)}
+        onRestart={handleRestart}
+        onResume={handleResume}
+      />
       <QuestionProgressHeader
         percent={percent}
         right={(
@@ -339,114 +326,24 @@ function PracticeClient() {
           </>
         )}
       />
-      {/* Settings Dialog */}
-      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
-        <DialogContent className="sm:max-w-[520px]">
-          <DialogHeader>
-            <DialogTitle>设置</DialogTitle>
-            <DialogDescription>题序、显示答案与快捷键说明</DialogDescription>
-          </DialogHeader>
-          <div className="space-y-5">
-            <div className="space-y-2">
-              <div className="text-sm text-muted-foreground">顺序/随机</div>
-              <RadioGroup
-                className="flex items-center gap-4"
-                value={order}
-                onValueChange={(v) => applyOrder((v as "sequential" | "random"))}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="sequential" id="order-seq" />
-                  <Label htmlFor="order-seq">顺序</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="random" id="order-rand" />
-                  <Label htmlFor="order-rand">随机</Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <div className="flex items-center gap-2">
-              <Checkbox id="show-ans" checked={showAnswer} onCheckedChange={(v) => setShowAnswer(!!v)} />
-              <Label htmlFor="show-ans">显示正确答案</Label>
-            </div>
-            <Separator />
-            <div className="space-y-2 text-sm">
-              <div className="text-muted-foreground">快捷键</div>
-              <div className="flex items-center justify-between">
-                <span>上一题 / 下一题</span>
-                <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>选择选项（单选）</span>
-                <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
-              </div>
-              <div className="flex items-center justify-between">
-                <span>打开搜索（仅顺序模式）</span>
-                <code className="px-2 py-0.5 rounded border bg-muted">Enter</code>
-              </div>
-            </div>
-          </div>
-        </DialogContent>
-      </Dialog>
-      {/* Search Dialog */}
-      <Dialog open={order === "sequential" && searchOpen} onOpenChange={setSearchOpen}>
-        <DialogContent className="sm:max-w-[640px]">
-          <DialogHeader>
-            <DialogTitle>搜索题目</DialogTitle>
-            <DialogDescription>输入题号或关键词（如 LK0501 / 天线），回车或点击跳转</DialogDescription>
-          </DialogHeader>
-          <div className="space-y-3 overflow-auto pr-1 min-h-0">
-            <div className="relative">
-              <Input
-                id="jump"
-                className="h-11 text-base md:h-9 md:text-sm pr-10"
-                placeholder="题号或关键词，如 LK0501 / 天线"
-                value={jumpInput}
-                onChange={(e) => setJumpInput(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleJump();
-                    setSearchOpen(false);
-                  }
-                }}
-              />
-              {jumpInput.trim() ? (
-                <button
-                  type="button"
-                  aria-label="清除"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  onClick={() => setJumpInput("")}
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              ) : null}
-            </div>
-            {jumpInput.trim() ? (
-              <div className="text-xs text-muted-foreground">{jumpLoading ? "搜索中..." : `匹配 ${computedMatches.length} 条`}</div>
-            ) : null}
-            <div className="rounded-md border">
-              {computedMatches.length ? (
-                <ul className="divide-y max-h-[40svh] overflow-auto">
-                  {computedMatches.slice(0, 10).map((m) => (
-                    <li key={`${m.j}-${m.pos}`} className="p-2 hover:bg-gray-50 cursor-pointer" onClick={() => { setIndex(m.pos); setSearchOpen(false); }}>
-                      <div className="flex items-center gap-2 text-sm">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded border text-xs bg-gray-50">{m.j}</span>
-                        <MatchSnippet text={m.text} query={jumpQueryUpper} />
-                        <span className="ml-auto text-xs text-muted-foreground">第 {m.pos + 1} 题</span>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <div className="p-3 text-sm text-muted-foreground">{jumpInput.trim() ? "未找到匹配" : "输入以开始搜索"}</div>
-              )}
-            </div>
-          </div>
-          <DialogFooter>
-            <Button onClick={() => { handleJump(); setSearchOpen(false); }}>跳转</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-      
+      <PracticeSettingsDialog
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        order={order}
+        onChangeOrder={(v) => applyOrder(v)}
+        showAnswer={showAnswer}
+        onChangeShowAnswer={(v) => setShowAnswer(v)}
+      />
+      <PracticeSearchDialog
+        open={order === "sequential" && searchOpen}
+        onOpenChange={setSearchOpen}
+        jumpInput={jumpInput}
+        setJumpInput={setJumpInput}
+        computedMatches={computedMatches}
+        jumpLoading={jumpLoading}
+        onPick={(pos) => setIndex(pos)}
+        onJump={() => handleJump()}
+      />
 
       <QuestionCard
         index={index}
@@ -480,150 +377,6 @@ export default function PracticePage() {
     </Suspense>
   );
 }
-
-// ---------- Local persistence helpers ----------
-function MatchSnippet({ text, query }: { text: string; query: string }) {
-  const maxLen = 120;
-  if (!query) return <span className="truncate">{text.slice(0, maxLen)}{text.length > maxLen ? '…' : ''}</span>;
-  const up = text.toUpperCase();
-  const idx = up.indexOf(query);
-  if (idx < 0) return <span className="truncate">{text.slice(0, maxLen)}{text.length > maxLen ? '…' : ''}</span>;
-  const context = 40;
-  const start = Math.max(0, idx - context);
-  const end = Math.min(text.length, idx + query.length + context);
-  const prefixEllipsis = start > 0 ? '…' : '';
-  const suffixEllipsis = end < text.length ? '…' : '';
-  const before = text.slice(start, idx);
-  const match = text.slice(idx, idx + query.length);
-  const after = text.slice(idx + query.length, end);
-  return (
-    <span className="inline-flex items-center gap-1 max-w-[46ch]">
-      <span className="truncate">
-        {prefixEllipsis}{before}
-        <mark className="bg-yellow-200 text-yellow-900 px-0.5 rounded-sm">{match}</mark>
-        {after}{suffixEllipsis}
-      </span>
-    </span>
-  );
-}
-type SavedState = {
-  version: 1;
-  bank: QuestionBank;
-  timestamp: number;
-  index: number;
-  order: "sequential" | "random";
-  showAnswer: boolean;
-  orderIndices: number[];
-  answersByPosition: (string[] | null)[];
-  total: number;
-};
-
-function storageKey(bank: string | null): string {
-  return `practice:${bank ?? "default"}`;
-}
-
-function loadSavedState(bank: string | null): SavedState | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const raw = window.localStorage.getItem(storageKey(bank));
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as SavedState;
-    if (parsed && parsed.version === 1) return parsed;
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-function saveState(state: SavedState) {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(storageKey(state.bank), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-function clearSavedState(bank: string | null) {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.removeItem(storageKey(bank));
-  } catch {
-    // ignore
-  }
-}
-
-// ---------- User preference: last mode ----------
-function lastModeKey(): string {
-  return "practice:lastMode";
-}
-
-function loadLastMode(): "sequential" | "random" | null {
-  if (typeof window === "undefined") return null;
-  try {
-    const v = window.localStorage.getItem(lastModeKey());
-    if (v === "sequential" || v === "random") return v;
-    return null;
-  } catch {
-    return null;
-  }
-}
-
-function saveLastMode(mode: "sequential" | "random") {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(lastModeKey(), mode);
-  } catch {
-    // ignore
-  }
-}
-
-// ---------- Resume prompt gating ----------
-const RESUME_MIN_ANSWERED = 3;
-const RESUME_EXPIRY_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
-
-function shouldResume(saved: SavedState): boolean {
-  // order already validated by caller
-  const now = Date.now();
-  if (now - saved.timestamp > RESUME_EXPIRY_MS) return false;
-  const answeredCount = (saved.answersByPosition || []).filter(Boolean).length;
-  if (answeredCount < RESUME_MIN_ANSWERED) return false;
-  // avoid prompting if at very start or very end
-  if (saved.index <= 0) return false;
-  if (saved.index >= (saved.total || 0) - 1) return false;
-  return true;
-}
-
-// ---------- Per-bank 'no resume prompt' preference ----------
-function noResumeKey(bank: string | null): string {
-  return `practice:noResumePrompt:${bank ?? "default"}`;
-}
-
-function loadNoResume(bank: string | null): boolean {
-  if (typeof window === "undefined") return false;
-  try {
-    return window.localStorage.getItem(noResumeKey(bank)) === "1";
-  } catch {
-    return false;
-  }
-}
-
-function saveNoResume(bank: string | null, value: boolean) {
-  if (typeof window === "undefined") return;
-  try {
-    if (value) window.localStorage.setItem(noResumeKey(bank), "1");
-    else window.localStorage.removeItem(noResumeKey(bank));
-  } catch {
-    // ignore
-  }
-}
-
-// ---------- Jump by J code (sequential only) ----------
-function normalizeJ(input: string): string {
-  return (input || "").trim().toUpperCase();
-}
-
-// Place this inside component scope above return
 
 
 
