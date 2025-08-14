@@ -13,7 +13,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useSearchParams } from "next/navigation";
-import { Search, Settings } from "lucide-react";
+import { Search, Settings, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -406,26 +406,38 @@ function PracticeClient() {
             <DialogTitle>搜索题目</DialogTitle>
             <DialogDescription>输入题号或关键词（如 LK0501 / 天线），回车或点击跳转</DialogDescription>
           </DialogHeader>
-          <div className="space-y-3">
-            <Input
-              id="jump"
-              className="h-11 text-base md:h-9 md:text-sm"
-              placeholder="题号或关键词，如 LK0501 / 天线"
-              value={jumpInput}
-              onChange={(e) => setJumpInput(e.target.value)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleJump();
-                  setSearchOpen(false);
-                }
-              }}
-            />
+          <div className="space-y-3 overflow-auto pr-1 min-h-0">
+            <div className="relative">
+              <Input
+                id="jump"
+                className="h-11 text-base md:h-9 md:text-sm pr-10"
+                placeholder="题号或关键词，如 LK0501 / 天线"
+                value={jumpInput}
+                onChange={(e) => setJumpInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleJump();
+                    setSearchOpen(false);
+                  }
+                }}
+              />
+              {jumpInput.trim() ? (
+                <button
+                  type="button"
+                  aria-label="清除"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  onClick={() => setJumpInput("")}
+                >
+                  <X className="h-4 w-4" />
+                </button>
+              ) : null}
+            </div>
             {jumpInput.trim() ? (
               <div className="text-xs text-muted-foreground">{jumpLoading ? "搜索中..." : `匹配 ${computedMatches.length} 条`}</div>
             ) : null}
             <div className="rounded-md border">
               {computedMatches.length ? (
-                <ul className="divide-y">
+                <ul className="divide-y max-h-[40svh] overflow-auto">
                   {computedMatches.slice(0, 10).map((m) => (
                     <li key={`${m.j}-${m.pos}`} className="p-2 hover:bg-gray-50 cursor-pointer" onClick={() => { setIndex(m.pos); setSearchOpen(false); }}>
                       <div className="flex items-center gap-2 text-sm">
@@ -442,7 +454,6 @@ function PracticeClient() {
             </div>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setJumpInput("")}>清除</Button>
             <Button onClick={() => { handleJump(); setSearchOpen(false); }}>跳转</Button>
           </DialogFooter>
         </DialogContent>
