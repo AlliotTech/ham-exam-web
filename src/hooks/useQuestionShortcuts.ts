@@ -2,7 +2,10 @@ import { useEffect } from "react";
 export type QuestionShortcutsOptions = {
   onPrev: () => void;
   onNext: () => void;
-  onSelectDigit?: (n: number) => void;
+  onSelectDigit?: (
+    n: number,
+    detail?: { shiftKey: boolean; metaKey: boolean },
+  ) => void;
   enableEnterSearch?: boolean;
   onEnterSearch?: () => void;
   isTypingTarget?: (el: EventTarget | null) => boolean;
@@ -40,7 +43,7 @@ export function useQuestionShortcuts(opts: QuestionShortcutsOptions): void {
       }
       if (/^[1-9]$/.test(e.key)) {
         const n = Number(e.key);
-        onSelectDigit?.(n);
+        onSelectDigit?.(n, { shiftKey: e.shiftKey === true, metaKey: e.metaKey === true });
         return;
       }
     }

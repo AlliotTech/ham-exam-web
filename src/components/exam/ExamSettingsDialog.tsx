@@ -31,8 +31,12 @@ export function ExamSettingsDialog({ open, onOpenChange }: Props) {
               <code className="px-2 py-0.5 rounded border bg-muted">← / →</code>
             </div>
             <div className="flex items-center justify-between">
-              <span>选择选项（单选）</span>
+              <span>选择 / 切换选项（单选/多选）</span>
               <code className="px-2 py-0.5 rounded border bg-muted">1-9</code>
+            </div>
+            <div className="flex items-center justify-between">
+              <span>严格选择（多选，仅该项）</span>
+              <code className="px-2 py-0.5 rounded border bg-muted">Shift 或 Cmd（macOS） + 1-9</code>
             </div>
           </div>
           <Separator />

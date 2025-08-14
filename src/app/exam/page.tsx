@@ -153,9 +153,22 @@ function ExamClient() {
   useQuestionShortcuts({
     onPrev: prev,
     onNext: next,
-    onSelectDigit: (n) => {
+    onSelectDigit: (n, detail) => {
       const opt = current?.options?.[n - 1];
-      if (opt) setCurrentAnswer([opt.key]);
+      if (!opt) return;
+      if (current?.type === "multiple") {
+        const isStrict = detail?.shiftKey === true || detail?.metaKey === true;
+        if (isStrict) {
+          setCurrentAnswer([opt.key]);
+        } else {
+          const set = new Set(selected);
+          if (set.has(opt.key)) set.delete(opt.key);
+          else set.add(opt.key);
+          setCurrentAnswer(Array.from(set));
+        }
+      } else {
+        setCurrentAnswer([opt.key]);
+      }
     },
   });
 
