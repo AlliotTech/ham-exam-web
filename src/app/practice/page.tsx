@@ -24,15 +24,11 @@ import {
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { BottomBar } from "@/components/exam/bottom-bar";
+import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
+import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 
 function PracticeClient() {
-  useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.body.classList.add("no-site-footer");
-      return () => { document.body.classList.remove("no-site-footer"); };
-    }
-    return;
-  }, []);
+  useNoSiteFooter();
   const [loading, setLoading] = useState(true);
   const [allQuestions, setAllQuestions] = useState<QuestionItem[]>([]);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
@@ -272,27 +268,18 @@ function PracticeClient() {
   }
 
   // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option (single-choice); Enter to open search in sequential
-  useEffect(() => {
-    function isTypingTarget(el: EventTarget | null): boolean {
-      const node = el as HTMLElement | null;
-      if (!node) return false;
-      const tag = node.tagName?.toLowerCase();
-      return tag === 'input' || tag === 'textarea' || (node as HTMLElement).isContentEditable === true;
-    }
-    function onKeyDown(e: KeyboardEvent) {
-      if (isTypingTarget(e.target)) return;
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
-      else if (e.key === 'Enter' && order === 'sequential') { setSearchOpen(true); }
-      else if (/^[1-9]$/.test(e.key) && current && current.type !== 'multiple') {
-        const n = Number(e.key);
+  useQuestionShortcuts({
+    onPrev: prev,
+    onNext: next,
+    onSelectDigit: (n) => {
+      if (current && current.type !== 'multiple') {
         const opt = current.options?.[n - 1];
         if (opt) setCurrentAnswer([opt.key]);
       }
-    }
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current, order, next, prev, setCurrentAnswer]);
+    },
+    enableEnterSearch: order === 'sequential',
+    onEnterSearch: () => setSearchOpen(true),
+  });
 
   // One-time settings auto prompt (do not interfere with resume dialog)
   useEffect(() => {

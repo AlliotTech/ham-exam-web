@@ -13,10 +13,10 @@ import { Separator } from "@/components/ui/separator";
 import { arraysEqual, sorted } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { Badge } from "@/components/ui/badge";
-import { Separator as UiSeparator } from "@/components/ui/separator";
 import { BottomBar } from "@/components/exam/bottom-bar";
+import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
+import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
+import { AnswerCardSheet } from "@/components/exam/answer-card-sheet";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -57,12 +57,10 @@ function ExamClient() {
   }, [bankParam]);
 
   useEffect(() => {
-    if (typeof document !== 'undefined') {
-      document.body.classList.add('no-site-footer');
-      return () => { document.body.classList.remove('no-site-footer'); };
-    }
+    // no-op retained to preserve hook ordering if needed
     return;
   }, []);
+  useNoSiteFooter();
 
   useEffect(() => {
     (async () => {
@@ -150,26 +148,14 @@ function ExamClient() {
   }
 
   // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option
-  React.useEffect(() => {
-    function isTypingTarget(el: EventTarget | null): boolean {
-      const node = el as HTMLElement | null;
-      if (!node) return false;
-      const tag = node.tagName?.toLowerCase();
-      return tag === 'input' || tag === 'textarea' || (node as HTMLElement).isContentEditable === true;
-    }
-    function onKeyDown(e: KeyboardEvent) {
-      if (isTypingTarget(e.target)) return;
-      if (e.key === 'ArrowLeft') { e.preventDefault(); prev(); }
-      else if (e.key === 'ArrowRight') { e.preventDefault(); next(); }
-      else if (/^[1-9]$/.test(e.key)) {
-        const n = Number(e.key);
-        const opt = current?.options?.[n - 1];
-        if (opt) setCurrentAnswer([opt.key]);
-      }
-    }
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [current, next, prev, setCurrentAnswer]);
+  useQuestionShortcuts({
+    onPrev: prev,
+    onNext: next,
+    onSelectDigit: (n) => {
+      const opt = current?.options?.[n - 1];
+      if (opt) setCurrentAnswer([opt.key]);
+    },
+  });
 
   // One-time settings auto prompt
   useEffect(() => {
@@ -220,13 +206,7 @@ function ExamClient() {
     setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
   }
 
-  function firstUnansweredIndex(): number {
-    for (let i = 0; i < questions.length; i++) {
-      const key = String(i);
-      if (!(answers[key] && answers[key].length)) return i;
-    }
-    return -1;
-  }
+  
 
   function setFilterAndPersist(v: typeof filter) {
     setFilter(v);
@@ -318,58 +298,17 @@ function ExamClient() {
       </Dialog>
 
       {/* Answer Card Sheet */}
-      <Sheet open={answerCardOpen} onOpenChange={setAnswerCardOpen}>
-        <SheetContent side="right">
-          <SheetHeader>
-            <SheetTitle>答题卡</SheetTitle>
-          </SheetHeader>
-          <div className="px-4 space-y-3">
-            <div className="flex items-center justify-between gap-3 text-sm">
-              <div className="text-muted-foreground">已答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}</div>
-              <div className="flex items-center gap-2">
-                <Button size="sm" variant={filter === "all" ? "default" : "outline"} onClick={() => setFilterAndPersist("all")}>全部</Button>
-                <Button size="sm" variant={filter === "unanswered" ? "default" : "outline"} onClick={() => setFilterAndPersist("unanswered")}>未答</Button>
-                <Button size="sm" variant={filter === "flagged" ? "default" : "outline"} onClick={() => setFilterAndPersist("flagged")}>标记</Button>
-              </div>
-            </div>
-            <UiSeparator />
-            <div className="flex items-center justify-between">
-              <div className="text-sm text-muted-foreground">点击题号跳转</div>
-              <Button size="sm" variant="outline" onClick={() => { const i = firstUnansweredIndex(); if (i >= 0) { setIndex(i); setAnswerCardOpen(false); } }}>跳到首个未答</Button>
-            </div>
-            <div className="grid grid-cols-6 gap-2 sm:grid-cols-8">
-              {questions.map((q, i) => {
-                const key = String(i);
-                const isAnswered = (answers[key] ?? []).length > 0;
-                const isFlagged = !!flags[key];
-                const selectedForFilter =
-                  filter === "all" || (filter === "unanswered" && !isAnswered) || (filter === "flagged" && isFlagged);
-                if (!selectedForFilter) return null;
-                const userSel = answers[key] ?? [];
-                const correct = arraysEqual(sorted(userSel), sorted(q.answer_keys));
-                return (
-                  <button
-                    key={`q-${i}`}
-                    className={
-                      "relative h-9 rounded-md border text-sm font-medium transition-colors " +
-                      (isAnswered ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")
-                    }
-                    onClick={() => { setIndex(i); setAnswerCardOpen(false); }}
-                  >
-                    <span>{i + 1}</span>
-                    {isFlagged ? <span className="absolute -top-1 -right-1 inline-block size-3 rounded-full bg-yellow-400" /> : null}
-                    {finished ? (
-                      <Badge variant="secondary" className={"absolute -bottom-1 -right-1 px-1 py-0 text-[10px] " + (correct ? "bg-green-600 text-white" : "bg-red-600 text-white")}>
-                        {correct ? "✓" : "✗"}
-                      </Badge>
-                    ) : null}
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-        </SheetContent>
-      </Sheet>
+      <AnswerCardSheet
+        open={answerCardOpen}
+        onOpenChange={setAnswerCardOpen}
+        questions={questions}
+        answers={answers}
+        flags={flags}
+        finished={finished}
+        filter={filter}
+        onChangeFilter={setFilterAndPersist}
+        onJumpTo={(i) => setIndex(i)}
+      />
 
       {/* Submit Confirm Dialog */}
       <Dialog open={confirmOpen} onOpenChange={setConfirmOpen}>
