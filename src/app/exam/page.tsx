@@ -16,7 +16,6 @@ import { useSearchParams } from "next/navigation";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Separator as UiSeparator } from "@/components/ui/separator";
-import { haptics } from "@/lib/haptics";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -105,18 +104,10 @@ function ExamClient() {
   }, [current, index]);
 
   const next = useCallback(() => {
-    setIndex((i) => {
-      const ni = Math.min(i + 1, questions.length - 1);
-      if (ni !== i) haptics.light();
-      return ni;
-    });
+    setIndex((i) => Math.min(i + 1, questions.length - 1));
   }, [questions.length]);
   const prev = useCallback(() => {
-    setIndex((i) => {
-      const ni = Math.max(i - 1, 0);
-      if (ni !== i) haptics.light();
-      return ni;
-    });
+    setIndex((i) => Math.max(i - 1, 0));
   }, []);
 
   function submit() {
@@ -218,7 +209,6 @@ function ExamClient() {
     if (!q) return;
     const key = keyOf(index);
     setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
-    haptics.selection();
   }
 
   function firstUnansweredIndex(): number {
@@ -285,16 +275,16 @@ function ExamClient() {
           </div>
           {/* Desktop controls */}
           <div className="hidden sm:flex items-center justify-between gap-2">
-            <Button onClick={prev} disabled={index === 0} variant="secondary">
+            <Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">
               上一题
             </Button>
             <div className="flex gap-2">
-          <Button variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-          <Button variant="outline" onClick={() => { setAnswerCardOpen(true); haptics.selection(); }}>答题卡</Button>
-              <Button onClick={next} disabled={index === questions.length - 1}>
+              <Button variant="outline" onClick={toggleFlagCurrent} className="active:scale-[0.98] transition-transform">{flags[String(index)] ? "取消标记" : "标记"}</Button>
+              <Button variant="outline" onClick={() => { setAnswerCardOpen(true); }} className="active:scale-[0.98] transition-transform">答题卡</Button>
+              <Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">
                 下一题
               </Button>
-              <Button onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished}>
+              <Button onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished} className="active:scale-[0.98] transition-transform">
                 交卷
               </Button>
             </div>
@@ -302,13 +292,13 @@ function ExamClient() {
           {/* Mobile controls */}
           <div className="sm:hidden">
             <div className="grid grid-cols-2 gap-2">
-              <Button className="w-full" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
-              <Button className="w-full" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
+              <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
+              <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
             </div>
             <div className="grid grid-cols-3 gap-2 mt-2">
-              <Button className="w-full" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-              <Button className="w-full" variant="outline" onClick={() => { setAnswerCardOpen(true); haptics.selection(); }}>答题卡</Button>
-              <Button className="w-full" onClick={() => { setConfirmOpen(true); haptics.medium(); }} variant="destructive" disabled={finished}>交卷</Button>
+              <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
+              <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={() => { setAnswerCardOpen(true); }}>答题卡</Button>
+              <Button className="w-full active:scale-[0.98] transition-transform" onClick={() => { setConfirmOpen(true); }} variant="destructive" disabled={finished}>交卷</Button>
             </div>
           </div>
         </div>
