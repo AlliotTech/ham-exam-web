@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { arraysEqual, sorted } from "@/lib/utils";
+import { PreviewableImage } from "@/components/common/PreviewableImage";
 
 export type AnswerCardFilter = "all" | "unanswered" | "flagged";
 
@@ -35,6 +36,7 @@ export function AnswerCardSheet({
   onJumpTo,
   currentIndex = 0,
 }: AnswerCardSheetProps) {
+  // image preview handled by PreviewableImage
   const answeredCount = React.useMemo(() => {
     let c = 0;
     for (let i = 0; i < questions.length; i++) {
@@ -163,33 +165,62 @@ export function AnswerCardSheet({
               const userSel = answers[key] ?? [];
               const correct = arraysEqual(sorted(userSel), sorted(q.answer_keys));
               return (
-                <button
-                  key={`q-${i}`}
-                  className={
-                    "relative h-9 rounded-md border text-sm font-medium transition-colors " +
-                    (isAnswered ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")
-                  }
-                  onClick={() => {
-                    onJumpTo(i);
-                    onOpenChange(false);
-                  }}
-                >
-                   <span>{i + 1}</span>
-                  {isFlagged ? (
-                    <span className="absolute -top-1 -right-1 inline-block size-3 rounded-full bg-yellow-400" />
+                <div key={`q-${i}`} className="relative">
+                  <button
+                    className={
+                      "relative h-9 w-full rounded-md border text-sm font-medium transition-colors " +
+                      (isAnswered ? "bg-primary text-primary-foreground" : "bg-muted text-foreground")
+                    }
+                    onClick={() => {
+                      onJumpTo(i);
+                      onOpenChange(false);
+                    }}
+                  >
+                    <span>{i + 1}</span>
+                    {isFlagged ? (
+                      <span className="absolute -top-1 -right-1 inline-block size-3 rounded-full bg-yellow-400" />
+                    ) : null}
+                    {finished ? (
+                      <Badge
+                        variant="secondary"
+                        className={
+                          "absolute -bottom-1 -right-1 px-1 py-0 text-[10px] " +
+                          (correct ? "bg-green-600 text-white" : "bg-red-600 text-white")
+                        }
+                      >
+                        {correct ? "✓" : "✗"}
+                      </Badge>
+                    ) : null}
+                  </button>
+                  {q.imageUrl ? (
+                    <PreviewableImage
+                      src={q.imageUrl}
+                      alt={q.codes?.J ? `题号 ${q.codes.J} 题图` : "题目附图"}
+                      title={q.codes?.J ? `题号 ${q.codes.J} 题图` : "题目附图"}
+                      renderTrigger={(open) => (
+                        <span
+                          role="button"
+                          tabIndex={0}
+                          aria-label="预览题图"
+                          className="absolute -top-1 -left-1 inline-flex items-center justify-center h-4 min-w-4 px-1 rounded bg-background/90 border text-[10px] leading-none cursor-pointer"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            open();
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" || e.key === " ") {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              open();
+                            }
+                          }}
+                        >
+                          图
+                        </span>
+                      )}
+                    />
                   ) : null}
-                   {finished ? (
-                    <Badge
-                      variant="secondary"
-                      className={
-                        "absolute -bottom-1 -right-1 px-1 py-0 text-[10px] " +
-                        (correct ? "bg-green-600 text-white" : "bg-red-600 text-white")
-                      }
-                    >
-                      {correct ? "✓" : "✗"}
-                    </Badge>
-                   ) : null}
-                </button>
+                </div>
               );
             })}
           </div>

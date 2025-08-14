@@ -9,6 +9,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
 import { arraysEqual, sorted } from "@/lib/utils";
+import { PreviewableImage } from "@/components/common/PreviewableImage";
 
 type Props = {
   index: number;
@@ -73,13 +74,10 @@ export function QuestionCard({
         <div className="whitespace-pre-line">{question.question}</div>
         {question.imageUrl ? (
           <div className="mt-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <PreviewableImage
               src={question.imageUrl}
               alt={question.codes?.J ? `题号 ${question.codes.J} 附图` : "题目附图"}
-              loading="lazy"
-              decoding="async"
-              className="max-h-64 w-auto rounded border"
+              title={question.codes?.J ? `题号 ${question.codes.J} 题图` : "题目附图"}
             />
           </div>
         ) : null}
