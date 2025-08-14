@@ -26,6 +26,28 @@ export const metadata: Metadata = {
     statusBarStyle: "default",
     title: "无线电考试",
   },
+  openGraph: {
+    title: "业余无线电执照考试模拟练习",
+    description: "业余无线电执照考试模拟练习｜支持 A/B/C 类题库、真实规则抽题与计时交卷",
+    url: "/",
+    siteName: "业余无线电执照考试模拟练习",
+    locale: "zh_CN",
+    type: "website",
+    images: [
+      {
+        url: "/pwa-icon-512.png",
+        width: 512,
+        height: 512,
+        alt: "业余无线电执照考试模拟练习",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "业余无线电执照考试模拟练习",
+    description: "业余无线电执照考试模拟练习｜支持 A/B/C 类题库、真实规则抽题与计时交卷",
+    images: ["/pwa-icon-512.png"],
+  },
 };
 
 export const viewport = {
@@ -41,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
