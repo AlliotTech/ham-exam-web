@@ -1,14 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Suspense, useEffect, useState, useCallback, useRef, useDeferredValue, useMemo } from "react";
+import { Suspense, useEffect, useState, useRef, useDeferredValue, useMemo } from "react";
 import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
 import type { QuestionItem, UserAnswer } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Progress } from "@/components/ui/progress";
-import Link from "next/link";
+ 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -27,14 +26,13 @@ import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
 import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
+import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 
 function PracticeClient() {
   useNoSiteFooter();
   const [loading, setLoading] = useState(true);
   const [allQuestions, setAllQuestions] = useState<QuestionItem[]>([]);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<UserAnswer>({});
   const [order, setOrder] = useState<"sequential" | "random">("sequential");
   const [jumpInput, setJumpInput] = useState("");
   const [showAnswer, setShowAnswer] = useState<boolean>(true);
@@ -101,22 +99,22 @@ function PracticeClient() {
     // do not auto-apply; wait for user choice
   }, [bankParam, allQuestions, order]);
 
+  const {
+    index,
+    setIndex,
+    selected: selectedFromHook,
+    setCurrentAnswer,
+    answers,
+    setAnswers,
+    answeredCount,
+    next,
+    prev,
+  } = useQuestionNavigator({ questions, keyStrategy: "id-prefer" });
   const current = questions[index];
-  const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
+  const selected = current ? selectedFromHook : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
 
-  const setCurrentAnswer = useCallback((keys: string[]) => {
-    if (!current) return;
-    const key = current.id ?? String(index);
-    setAnswers((prev) => ({ ...prev, [key]: keys }));
-  }, [current, index]);
-
-  const next = useCallback(() => {
-    setIndex((i) => Math.min(i + 1, questions.length - 1));
-  }, [questions.length]);
-  const prev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
-  }, []);
+  
 
   function applyOrder(nextOrder: "sequential" | "random") {
     setOrder(nextOrder);
@@ -460,7 +458,7 @@ function PracticeClient() {
       />
 
       <BottomBar
-        answeredCount={Object.keys(answers).length}
+        answeredCount={answeredCount}
         total={questions.length}
         left={<Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">上一题</Button>}
         right={<Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">下一题</Button>}

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 export type QuestionShortcutsOptions = {
   onPrev: () => void;
   onNext: () => void;
@@ -15,12 +16,10 @@ function defaultIsTypingTarget(el: EventTarget | null): boolean {
 }
 
 export function useQuestionShortcuts(opts: QuestionShortcutsOptions): void {
-  if (typeof window === "undefined") return;
-  const React = require("react") as typeof import("react");
   const { onPrev, onNext, onSelectDigit, enableEnterSearch, onEnterSearch, isTypingTarget } = opts;
 
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  React.useEffect(() => {
+  useEffect(() => {
+    if (typeof window === "undefined") return;
     function onKeyDown(e: KeyboardEvent) {
       const typingTarget = (isTypingTarget ?? defaultIsTypingTarget)(e.target);
       if (typingTarget) return;

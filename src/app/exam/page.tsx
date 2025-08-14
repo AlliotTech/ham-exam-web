@@ -1,9 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { Suspense, useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { Suspense, useEffect, useMemo, useState, useRef } from "react";
 import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
-import type { QuestionItem, UserAnswer } from "@/types/question";
+import type { QuestionItem } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
@@ -19,6 +19,7 @@ import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { AnswerCardSheet } from "@/components/exam/answer-card-sheet";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
 import { useCountdown } from "@/hooks/useCountdown";
+import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -30,8 +31,7 @@ const RULES: Record<QuestionBank, ExamRule> = {
 function ExamClient() {
   const [loading, setLoading] = useState(true);
   const [questions, setQuestions] = useState<QuestionItem[]>([]);
-  const [index, setIndex] = useState(0);
-  const [answers, setAnswers] = useState<UserAnswer>({});
+  // managed by useQuestionNavigator below
   const [finished, setFinished] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const autoHelpShownRef = useRef(false);
@@ -46,6 +46,18 @@ function ExamClient() {
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
   const rule = RULES[bankParam] ?? RULES.A;
+
+  const {
+    index,
+    setIndex,
+    selected: selectedFromHook,
+    setCurrentAnswer,
+    answers,
+    setAnswers,
+    answeredCount,
+    next,
+    prev,
+  } = useQuestionNavigator({ questions, keyStrategy: "position" });
 
   // Load persisted filter preference per bank
   useEffect(() => {
@@ -100,24 +112,13 @@ function ExamClient() {
         setLoading(false);
       }
     })();
-  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total]);
+  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, setIndex, setAnswers]);
 
   const current = questions[index];
-  const selected = current ? answers[String(index)] ?? [] : [];
+  const selected = current ? selectedFromHook : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
 
-  const setCurrentAnswer = useCallback((keys: string[]) => {
-    if (!current) return;
-    const key = String(index);
-    setAnswers((prev) => ({ ...prev, [key]: keys }));
-  }, [current, index]);
-
-  const next = useCallback(() => {
-    setIndex((i) => Math.min(i + 1, questions.length - 1));
-  }, [questions.length]);
-  const prev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
-  }, []);
+  // replaced by useQuestionNavigator
 
   function submit() {
     setFinished(true);
@@ -178,14 +179,7 @@ function ExamClient() {
   const passed = score.correct >= rule.pass;
 
   // Derived helpers
-  const answeredCount = useMemo(() => {
-    let c = 0;
-    for (let i = 0; i < questions.length; i++) {
-      const key = String(i);
-      if ((answers[key] ?? []).length > 0) c += 1;
-    }
-    return c;
-  }, [answers, questions]);
+  // provided by useQuestionNavigator
 
   function keyOf(pos: number): string {
     return String(pos);
