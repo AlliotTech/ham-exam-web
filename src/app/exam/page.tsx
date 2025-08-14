@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 
 import { Dialog } from "@/components/ui/dialog";
-import { arraysEqual, sorted, formatMs } from "@/lib/utils";
+import { formatMs } from "@/lib/utils";
 
 import { useSearchParams } from "next/navigation";
 import { BottomBar } from "@/components/exam/bottom-bar";
@@ -24,6 +24,7 @@ import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
 import { MessageDialog } from "@/components/common/MessageDialog";
 import { getRule } from "@/lib/exam-rules";
+import { calculateScore, isPassed } from "@/lib/exam";
 
 // Rules centralized in lib/exam-rules
 
@@ -175,17 +176,11 @@ function ExamClient() {
     }
   }, [questions.length]);
 
-  const score = useMemo(() => {
-    let correct = 0;
-    for (let i = 0; i < questions.length; i++) {
-      const q = questions[i];
-      const key = getKeyByStrategy(questions[i], i);
-      const s = answers[key] ?? [];
-      if (arraysEqual(sorted(s), sorted(q.answer_keys))) correct += 1;
-    }
-    return { correct, total: questions.length };
-  }, [answers, questions, getKeyByStrategy]);
-  const passed = score.correct >= rule.pass;
+  const score = useMemo(
+    () => calculateScore(questions, answers, getKeyByStrategy),
+    [answers, questions, getKeyByStrategy],
+  );
+  const passed = isPassed(score.correct, rule.pass);
 
   // Derived helpers
   // provided by useQuestionNavigator
