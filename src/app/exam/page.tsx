@@ -417,6 +417,9 @@ function ExamClient() {
           setConfirmOpen(false);
           submit();
         }}
+        total={questions.length}
+        answeredCount={answeredCount}
+        flaggedCount={Object.values(flags).filter(Boolean).length}
       />
 
       {/* Settings Dialog */}
