@@ -14,7 +14,12 @@ import { arraysEqual, sorted } from "@/lib/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 
-const DEFAULT_EXAM_SIZE = 50;
+type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
+const RULES: Record<QuestionBank, ExamRule> = {
+  A: { total: 40, singles: 32, multiples: 8, minutes: 40, pass: 30 },
+  B: { total: 60, singles: 45, multiples: 15, minutes: 60, pass: 45 },
+  C: { total: 90, singles: 70, multiples: 20, minutes: 90, pass: 70 },
+};
 
 function ExamClient() {
   const [loading, setLoading] = useState(true);
@@ -24,26 +29,49 @@ function ExamClient() {
   const [finished, setFinished] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const autoHelpShownRef = useRef(false);
+  const [endAtMs, setEndAtMs] = useState<number | null>(null);
+  const [remainingMs, setRemainingMs] = useState<number>(0);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
+  const rule = RULES[bankParam] ?? RULES.A;
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
-        const picked = shuffle(qs).slice(0, DEFAULT_EXAM_SIZE);
+        const singles = qs.filter((q) => q.type === "single");
+        const multiples = qs.filter((q) => q.type === "multiple");
+        const takeSingles = Math.min(rule.singles, singles.length);
+        const takeMultiples = Math.min(rule.multiples, multiples.length);
+        const pickedSingles = shuffle(singles).slice(0, takeSingles);
+        const pickedMultiples = shuffle(multiples).slice(0, takeMultiples);
+        let picked = [...pickedSingles, ...pickedMultiples];
+        // If total not met (unlikely), fill from remaining pool
+        if (picked.length < rule.total) {
+          const remainingPool = shuffle(
+            qs.filter((q) => !picked.includes(q))
+          );
+          picked = picked.concat(remainingPool.slice(0, Math.max(0, rule.total - picked.length)));
+        }
+        // Randomize order for the exam
+        picked = shuffle(picked).slice(0, rule.total);
         setQuestions(picked);
         setIndex(0);
         setAnswers({});
+        // Setup timer
+        const duration = rule.minutes * 60 * 1000;
+        const end = Date.now() + duration;
+        setEndAtMs(end);
+        setRemainingMs(duration);
       } catch {
         alert(`题库 ${bankParam} 暂不可用`);
       } finally {
         setLoading(false);
       }
     })();
-  }, [bankParam]);
+  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total]);
 
   const current = questions[index];
   const selected = current ? answers[current.id ?? String(index)] ?? [] : [];
@@ -64,6 +92,30 @@ function ExamClient() {
 
   function submit() {
     setFinished(true);
+  }
+
+  // Countdown timer
+  useEffect(() => {
+    if (!endAtMs) return;
+    if (finished) return;
+    const id = window.setInterval(() => {
+      const left = Math.max(0, endAtMs - Date.now());
+      setRemainingMs(left);
+      if (left <= 0) {
+        window.clearInterval(id);
+        setFinished(true);
+      }
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, [endAtMs, finished]);
+
+  function formatMs(ms: number): string {
+    const totalSec = Math.max(0, Math.floor(ms / 1000));
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    if (h > 0) return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   }
 
   // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option
@@ -114,6 +166,7 @@ function ExamClient() {
     }
     return { correct, total: questions.length };
   }, [answers, questions]);
+  const passed = score.correct >= rule.pass;
 
   if (loading) return <div className="p-6">加载题库中...</div>;
   if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
@@ -126,9 +179,14 @@ function ExamClient() {
           <Settings className="h-4 w-4" />
         </Button>
       </div>
-      <div className="flex items-center gap-4">
-        <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
-        <Progress value={percent} className="h-2" />
+      <div className="flex items-center gap-4 justify-between flex-wrap">
+        <div className="flex items-center gap-4">
+          <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
+          <Progress value={percent} className="h-2" />
+        </div>
+        <div className="text-sm text-muted-foreground">
+          考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span>
+        </div>
       </div>
 
       <QuestionCard
@@ -166,6 +224,9 @@ function ExamClient() {
               得分：{score.correct} / {score.total}
             </div>
             <div className="text-sm text-muted-foreground">正确率：{Math.round((score.correct / score.total) * 100)}%</div>
+            <div className={`text-sm ${passed ? "text-green-600" : "text-red-600"}`}>
+              {passed ? "合格" : "不合格"}（合格线：{rule.pass} 题）
+            </div>
             <div className="text-xs text-muted-foreground">交卷后可继续浏览题目查看答案。</div>
           </div>
         </DialogContent>
@@ -191,7 +252,9 @@ function ExamClient() {
               </div>
             </div>
             <Separator />
-            <div className="text-xs text-muted-foreground">考试期间不提供搜索功能</div>
+            <div className="text-xs text-muted-foreground">
+              考试规则：A 类 40 题（单选 32，多选 8），40 分钟，30 题合格；B 类 60 题（单选 45，多选 15），60 分钟，45 题合格；C 类 90 题（单选 70，多选 20），90 分钟，70 题合格。多选题需与标准答案完全一致，否则不得分。
+            </div>
           </div>
         </DialogContent>
       </Dialog>
