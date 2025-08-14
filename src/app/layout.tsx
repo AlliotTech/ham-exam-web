@@ -15,11 +15,24 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "业余无线电执照考试模拟练习",
   description: "业余无线电执照考试模拟练习| 2025年10月题库",
+  manifest: "/manifest.json",
   icons: {
     icon: "/icon.svg",
     shortcut: "/icon.svg",
     apple: "/icon.svg",
   },
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "无线电考试"
+  },
+};
+
+export const viewport = {
+  themeColor: "#ffffff",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({

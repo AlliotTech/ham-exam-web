@@ -1,0 +1,23 @@
+{
+  "name": "业余无线电执照考试模拟练习",
+  "short_name": "无线电考试",
+  "description": "业余无线电执照考试模拟练习 | 2025年10月题库",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
