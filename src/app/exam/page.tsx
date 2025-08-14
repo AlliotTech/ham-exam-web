@@ -25,6 +25,14 @@ import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDial
 import { MessageDialog } from "@/components/common/MessageDialog";
 import { getRule } from "@/lib/exam-rules";
 import { calculateScore, isPassed } from "@/lib/exam";
+import {
+  clearExamSavedState,
+  loadExamSavedState,
+  saveExamState,
+  shouldResumeExam,
+  type ExamSavedState,
+} from "@/lib/exam-storage";
+import { ExamResumeDialog } from "@/components/exam/ExamResumeDialog";
 
 // Rules centralized in lib/exam-rules
 
@@ -43,6 +51,8 @@ function ExamClient() {
   const [filter, setFilter] = useState<"all" | "unanswered" | "flagged">("all");
   const [errorOpen, setErrorOpen] = useState(false);
   const [errorText, setErrorText] = useState<string>("");
+  const [resumeOpen, setResumeOpen] = useState(false);
+  const [pendingResume, setPendingResume] = useState<ExamSavedState | null>(null);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -83,6 +93,20 @@ function ExamClient() {
       try {
         setLoading(true);
         const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
+        // Try resume
+        const saved = loadExamSavedState(bankParam);
+        if (saved && shouldResumeExam(saved)) {
+          setPendingResume(saved);
+          setResumeOpen(true);
+          // Prepare questions to allow immediate resume when user确认
+          const picked = reconstructPickedQuestions(qs, saved);
+          setQuestions(picked);
+          setEndAtMs(saved.endAtMs);
+          // answers/flags/index will be applied on Confirm Resume
+          return;
+        }
+
+        // Fresh start
         const singles = qs.filter((q) => q.type === "single");
         const multiples = qs.filter((q) => q.type === "multiple");
         const takeSingles = Math.min(rule.singles, singles.length);
@@ -90,22 +114,18 @@ function ExamClient() {
         const pickedSingles = shuffle(singles).slice(0, takeSingles);
         const pickedMultiples = shuffle(multiples).slice(0, takeMultiples);
         let picked = [...pickedSingles, ...pickedMultiples];
-        // If total not met (unlikely), fill from remaining pool
         if (picked.length < rule.total) {
           const remainingPool = shuffle(qs.filter((q) => !picked.includes(q)));
           picked = picked.concat(remainingPool.slice(0, Math.max(0, rule.total - picked.length)));
         }
-        // Randomize order for the exam
         picked = shuffle(picked).slice(0, rule.total);
         setQuestions(picked);
         setIndex(0);
         setAnswers({});
         setFlags({});
-        // Setup timer
         const duration = rule.minutes * 60 * 1000;
         const end = Date.now() + duration;
         setEndAtMs(end);
-        // remaining time derived from useCountdown
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
@@ -114,6 +134,28 @@ function ExamClient() {
       }
     })();
   }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, setIndex, setAnswers]);
+
+  function reconstructPickedQuestions(all: QuestionItem[], saved: ExamSavedState): QuestionItem[] {
+    // Prefer reconstruct by questionIds
+    if (saved.questionIds && saved.questionIds.length > 0) {
+      const byId = new Map<string, QuestionItem>();
+      for (const q of all) {
+        const id = (q.id || q.codes?.J || "").toString();
+        if (id) byId.set(id, q);
+      }
+      const restored = saved.questionIds.map((id) => {
+        if (!id) return undefined;
+        return byId.get(id) as QuestionItem | undefined;
+      }).filter(Boolean) as QuestionItem[];
+      if (restored.length === saved.total) return restored;
+    }
+    // Fallback: snapshot
+    if (saved.questionsSnapshot && saved.questionsSnapshot.length > 0) {
+      return saved.questionsSnapshot.slice(0, saved.total);
+    }
+    // Worst fallback: pick fresh and ignore resume
+    return all.slice(0, Math.min(saved.total, all.length));
+  }
 
   const current = questions[index];
   const selected = current ? selectedFromHook : [];
@@ -124,11 +166,13 @@ function ExamClient() {
   function submit() {
     setFinished(true);
     setResultOpen(true);
+    clearExamSavedState(bankParam);
   }
 
   const remaining = useCountdown(endAtMs, () => {
     setFinished(true);
     setResultOpen(true);
+    clearExamSavedState(bankParam);
   });
   const remainingMs = remaining;
 
@@ -199,6 +243,80 @@ function ExamClient() {
         window.localStorage.setItem(`exam:answerCardFilter:${bankParam}`, v);
       } catch {}
     }
+  }
+
+  // Persist progress periodically and on critical changes
+  useEffect(() => {
+    if (!questions.length) return;
+    if (!endAtMs) return;
+    if (finished) return; // do not persist after finish
+    const answersByPosition: (string[] | null)[] = questions.map((q, pos) => {
+      const key = getKeyByStrategy(q, pos);
+      const v = answers[key];
+      return v && v.length ? [...v] : null;
+    });
+    const flagsByPosition: boolean[] = questions.map((q, pos) => {
+      const key = getKeyByStrategy(q, pos);
+      return !!flags[key];
+    });
+    const state: ExamSavedState = {
+      version: 1,
+      bank: bankParam as QuestionBank,
+      timestamp: Date.now(),
+      endAtMs: endAtMs,
+      index,
+      answersByPosition,
+      flagsByPosition,
+      total: questions.length,
+      questionIds: questions.map((q) => (q.id || q.codes?.J || null)),
+    };
+    saveExamState(state);
+  }, [answers, flags, index, endAtMs, questions, bankParam, finished, getKeyByStrategy]);
+
+  // Intercept page unload during active exam
+  useEffect(() => {
+    if (finished) return;
+    if (!endAtMs) return;
+    function onBeforeUnload(e: BeforeUnloadEvent) {
+      e.preventDefault();
+      e.returnValue = "考试仍在进行，离开将可能导致进度丢失";
+    }
+    window.addEventListener("beforeunload", onBeforeUnload);
+    return () => window.removeEventListener("beforeunload", onBeforeUnload);
+  }, [finished, endAtMs]);
+
+  function handleResumeConfirm() {
+    if (!pendingResume) return;
+    // Rebuild answers/flags/index
+    const restoredAnswers: Record<string, string[]> = {};
+    const restoredFlags: Record<string, boolean> = {};
+    for (let pos = 0; pos < questions.length; pos++) {
+      const q = questions[pos];
+      const key = getKeyByStrategy(q, pos);
+      const ans = pendingResume.answersByPosition[pos] || null;
+      if (ans && ans.length) restoredAnswers[key] = ans;
+      const flagged = !!pendingResume.flagsByPosition[pos];
+      if (flagged) restoredFlags[key] = true;
+    }
+    setAnswers(restoredAnswers);
+    setFlags(restoredFlags);
+    setIndex(Math.min(Math.max(pendingResume.index, 0), questions.length - 1));
+    setEndAtMs(pendingResume.endAtMs);
+    setResumeOpen(false);
+    setPendingResume(null);
+  }
+
+  function handleRestartConfirm() {
+    clearExamSavedState(bankParam);
+    // Reset to current picked questions & timer
+    setIndex(0);
+    setAnswers({});
+    setFlags({});
+    const duration = rule.minutes * 60 * 1000;
+    const end = Date.now() + duration;
+    setEndAtMs(end);
+    setResumeOpen(false);
+    setPendingResume(null);
   }
 
   if (loading) return <div className="p-6" aria-live="polite">加载题库中...</div>;
@@ -274,7 +392,7 @@ function ExamClient() {
               onClick={toggleFlagCurrent}
               className="active:scale-[0.98] transition-transform"
             >
-              {flags[String(index)] ? "取消标记" : "标记"}
+              {flags[getKeyByStrategy(current, index)] ? "取消标记" : "标记"}
             </Button>
             <Button
               variant="outline"
@@ -328,7 +446,7 @@ function ExamClient() {
               variant="outline"
               onClick={toggleFlagCurrent}
             >
-              {flags[String(index)] ? "取消标记" : "标记"}
+              {flags[getKeyByStrategy(current, index)] ? "取消标记" : "标记"}
             </Button>
             <Button
               className="w-full active:scale-[0.98] transition-transform"
@@ -376,6 +494,7 @@ function ExamClient() {
         filter={filter}
         onChangeFilter={setFilterAndPersist}
         onJumpTo={(i) => setIndex(i)}
+        currentIndex={index}
       />
 
       {/* Submit Confirm Dialog */}
@@ -393,6 +512,15 @@ function ExamClient() {
 
       {/* Settings Dialog */}
       <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+      <ExamResumeDialog
+        open={resumeOpen}
+        onOpenChange={setResumeOpen}
+        expiresInMs={Math.max(0, (pendingResume?.endAtMs ?? Date.now()) - Date.now())}
+        answeredCount={(pendingResume?.answersByPosition || []).filter(Boolean).length}
+        total={pendingResume?.total || questions.length}
+        onResume={handleResumeConfirm}
+        onRestart={handleRestartConfirm}
+      />
       <MessageDialog
         open={errorOpen}
         onOpenChange={setErrorOpen}

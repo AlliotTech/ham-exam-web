@@ -20,6 +20,7 @@ export type AnswerCardSheetProps = {
   filter: AnswerCardFilter;
   onChangeFilter: (f: AnswerCardFilter) => void;
   onJumpTo: (index: number) => void;
+  currentIndex?: number;
 };
 
 export function AnswerCardSheet({
@@ -32,6 +33,7 @@ export function AnswerCardSheet({
   filter,
   onChangeFilter,
   onJumpTo,
+  currentIndex = 0,
 }: AnswerCardSheetProps) {
   const answeredCount = React.useMemo(() => {
     let c = 0;
@@ -48,6 +50,22 @@ export function AnswerCardSheet({
     for (let i = 0; i < questions.length; i++) {
       const key = String(i);
       if (!(answers[key] && answers[key].length)) return i;
+    }
+    return -1;
+  }
+
+  function nextUnansweredIndex(from: number): number {
+    for (let i = from + 1; i < questions.length; i++) {
+      const key = String(i);
+      if (!(answers[key] && answers[key].length)) return i;
+    }
+    return -1;
+  }
+
+  function nextFlaggedIndex(from: number): number {
+    for (let i = from + 1; i < questions.length; i++) {
+      const key = String(i);
+      if (!!flags[key]) return i;
     }
     return -1;
   }
@@ -88,25 +106,53 @@ export function AnswerCardSheet({
             </div>
           </div>
           <Separator />
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="text-sm text-muted-foreground">点击题号跳转</div>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => {
-                const i = firstUnansweredIndex();
-                if (i >= 0) {
-                  onJumpTo(i);
-                  onOpenChange(false);
-                }
-              }}
-            >
-              跳到首个未答
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  const i = firstUnansweredIndex();
+                  if (i >= 0) {
+                    onJumpTo(i);
+                    onOpenChange(false);
+                  }
+                }}
+              >
+                首个未答
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  const i = nextUnansweredIndex(currentIndex ?? -1);
+                  if (i >= 0) {
+                    onJumpTo(i);
+                    onOpenChange(false);
+                  }
+                }}
+              >
+                下一个未答
+              </Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  const i = nextFlaggedIndex(currentIndex ?? -1);
+                  if (i >= 0) {
+                    onJumpTo(i);
+                    onOpenChange(false);
+                  }
+                }}
+              >
+                下一个标记
+              </Button>
+            </div>
           </div>
           <div className="grid grid-cols-6 gap-2 sm:grid-cols-8">
             {questions.map((q, i) => {
-              const key = String(i);
+               const key = String(i);
               const isAnswered = (answers[key] ?? []).length > 0;
               const isFlagged = !!flags[key];
               const selectedForFilter =
@@ -128,11 +174,11 @@ export function AnswerCardSheet({
                     onOpenChange(false);
                   }}
                 >
-                  <span>{i + 1}</span>
+                   <span>{i + 1}</span>
                   {isFlagged ? (
                     <span className="absolute -top-1 -right-1 inline-block size-3 rounded-full bg-yellow-400" />
                   ) : null}
-                  {finished ? (
+                   {finished ? (
                     <Badge
                       variant="secondary"
                       className={
@@ -142,11 +188,18 @@ export function AnswerCardSheet({
                     >
                       {correct ? "✓" : "✗"}
                     </Badge>
-                  ) : null}
+                   ) : null}
                 </button>
               );
             })}
           </div>
+          {finished ? (
+            <div className="pt-2 text-xs text-muted-foreground flex items-center gap-3">
+              <span className="inline-flex items-center gap-1"><span className="inline-block size-2 rounded-full bg-green-600" /> 正确</span>
+              <span className="inline-flex items-center gap-1"><span className="inline-block size-2 rounded-full bg-red-600" /> 错误</span>
+              <span className="inline-flex items-center gap-1"><span className="inline-block size-2 rounded-full bg-yellow-400" /> 已标记</span>
+            </div>
+          ) : null}
         </div>
       </SheetContent>
     </Sheet>
