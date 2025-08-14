@@ -19,6 +19,3 @@ export type QuestionItem = {
 export type UserAnswer = {
   [questionId: string]: string[]; // keys of selected options
 };
-
-
-

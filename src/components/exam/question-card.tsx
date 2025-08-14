@@ -19,7 +19,15 @@ type Props = {
   readOnly?: boolean;
 };
 
-export function QuestionCard({ index, total, question, selected, onChange, showImmediateAnswer, readOnly }: Props) {
+export function QuestionCard({
+  index,
+  total,
+  question,
+  selected,
+  onChange,
+  showImmediateAnswer,
+  readOnly,
+}: Props) {
   const isMultiple = question.type === "multiple";
 
   function toggleMulti(key: string) {
@@ -31,7 +39,8 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
   }
 
   const showAnswer = showImmediateAnswer ?? false;
-  const isCorrect = selected.length > 0 && arraysEqual(sorted(selected), sorted(question.answer_keys));
+  const isCorrect =
+    selected.length > 0 && arraysEqual(sorted(selected), sorted(question.answer_keys));
 
   return (
     <Card>
@@ -40,12 +49,21 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
           <span>
             第 {index + 1} / {total} 题
           </span>
-          <Badge variant="secondary">{question.type === "single" ? "单选" : question.type === "multiple" ? "多选" : "判断"}</Badge>
+          <Badge variant="secondary">
+            {question.type === "single" ? "单选" : question.type === "multiple" ? "多选" : "判断"}
+          </Badge>
           {question.pages?.start ? (
-            <Badge variant="outline">P.{question.pages.start}{question.pages?.end && question.pages.end !== question.pages.start ? `-${question.pages.end}` : ""}</Badge>
+            <Badge variant="outline">
+              P.{question.pages.start}
+              {question.pages?.end && question.pages.end !== question.pages.start
+                ? `-${question.pages.end}`
+                : ""}
+            </Badge>
           ) : null}
           {question.codes?.J ? (
-            <Badge variant="outline" title="题号">{question.codes.J}</Badge>
+            <Badge variant="outline" title="题号">
+              {question.codes.J}
+            </Badge>
           ) : null}
         </CardTitle>
       </CardHeader>
@@ -86,12 +104,24 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
               key={`rg-${index}`}
               name={`q-${index}`}
               value={selected[0] ?? undefined}
-              onValueChange={(v) => { if (!readOnly) { onChange(v ? [v] : []); } }}
+              onValueChange={(v) => {
+                if (!readOnly) {
+                  onChange(v ? [v] : []);
+                }
+              }}
             >
               {question.options.map((opt) => (
                 <div key={opt.key} className="flex items-start gap-2">
-                  <RadioGroupItem className="mt-1" value={opt.key} id={`${index}-${opt.key}`} disabled={!!readOnly} />
-                  <Label htmlFor={`${index}-${opt.key}`} className={`whitespace-pre-line leading-6 ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
+                  <RadioGroupItem
+                    className="mt-1"
+                    value={opt.key}
+                    id={`${index}-${opt.key}`}
+                    disabled={!!readOnly}
+                  />
+                  <Label
+                    htmlFor={`${index}-${opt.key}`}
+                    className={`whitespace-pre-line leading-6 ${readOnly ? "cursor-default" : "cursor-pointer"}`}
+                  >
                     <strong className="mr-2">{opt.key}.</strong>
                     {opt.text}
                   </Label>
@@ -115,4 +145,3 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
     </Card>
   );
 }
-

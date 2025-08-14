@@ -1,0 +1,9 @@
+.next
+node_modules
+dist
+build
+coverage
+*.lock
+public/questions/*.json
+public/questions/images/
+

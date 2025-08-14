@@ -17,7 +17,16 @@ type Props = {
   mobileBottom?: React.ReactNode; // e.g., 3 columns
 };
 
-export function BottomBar({ statsNode, answeredCount, total, left, right, center, mobileTop, mobileBottom }: Props) {
+export function BottomBar({
+  statsNode,
+  answeredCount,
+  total,
+  left,
+  right,
+  center,
+  mobileTop,
+  mobileBottom,
+}: Props) {
   return (
     <div
       className="fixed left-0 right-0 bottom-0 z-40 border-t bg-background/85 backdrop-blur supports-[backdrop-filter]:bg-background/60"
@@ -27,7 +36,9 @@ export function BottomBar({ statsNode, answeredCount, total, left, right, center
         {statsNode ? (
           <div className="text-sm text-muted-foreground text-center">{statsNode}</div>
         ) : (
-          <div className="text-sm text-muted-foreground text-center">已作答 {answeredCount ?? 0} / {total ?? 0}</div>
+          <div className="text-sm text-muted-foreground text-center">
+            已作答 {answeredCount ?? 0} / {total ?? 0}
+          </div>
         )}
         {/* Desktop */}
         <div className="hidden sm:flex items-center justify-between gap-2">
@@ -44,5 +55,3 @@ export function BottomBar({ statsNode, answeredCount, total, left, right, center
     </div>
   );
 }
-
-

@@ -1,5 +1,5 @@
-declare module 'next-pwa' {
-  import { NextConfig } from 'next';
+declare module "next-pwa" {
+  import { NextConfig } from "next";
 
   interface PWAConfig {
     dest?: string;

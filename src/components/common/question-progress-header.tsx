@@ -7,17 +7,24 @@ import { Progress } from "@/components/ui/progress";
 
 export type QuestionProgressHeaderProps = {
   percent: number;
-  left?: React.ReactNode;   // optional override
-  right?: React.ReactNode;  // settings/search buttons
-  meta?: React.ReactNode;   // extra information line
+  left?: React.ReactNode; // optional override
+  right?: React.ReactNode; // settings/search buttons
+  meta?: React.ReactNode; // extra information line
 };
 
-export function QuestionProgressHeader({ percent, left, right, meta }: QuestionProgressHeaderProps) {
+export function QuestionProgressHeader({
+  percent,
+  left,
+  right,
+  meta,
+}: QuestionProgressHeaderProps) {
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         {left ?? (
-          <Button asChild variant="outline"><Link href="/">返回首页</Link></Button>
+          <Button asChild variant="outline">
+            <Link href="/">返回首页</Link>
+          </Button>
         )}
         <div className="flex items-center gap-3">{right}</div>
       </div>
@@ -31,5 +38,3 @@ export function QuestionProgressHeader({ percent, left, right, meta }: QuestionP
     </div>
   );
 }
-
-

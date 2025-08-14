@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
@@ -16,7 +22,14 @@ type Props = {
   onChangeShowAnswer: (v: boolean) => void;
 };
 
-export function PracticeSettingsDialog({ open, onOpenChange, order, onChangeOrder, showAnswer, onChangeShowAnswer }: Props) {
+export function PracticeSettingsDialog({
+  open,
+  onOpenChange,
+  order,
+  onChangeOrder,
+  showAnswer,
+  onChangeShowAnswer,
+}: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[520px]">
@@ -27,7 +40,11 @@ export function PracticeSettingsDialog({ open, onOpenChange, order, onChangeOrde
         <div className="space-y-5">
           <div className="space-y-2">
             <div className="text-sm text-muted-foreground">顺序/随机</div>
-            <RadioGroup className="flex items-center gap-4" value={order} onValueChange={(v) => onChangeOrder(v as "sequential" | "random")}>
+            <RadioGroup
+              className="flex items-center gap-4"
+              value={order}
+              onValueChange={(v) => onChangeOrder(v as "sequential" | "random")}
+            >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="sequential" id="order-seq" />
                 <Label htmlFor="order-seq">顺序</Label>
@@ -39,7 +56,11 @@ export function PracticeSettingsDialog({ open, onOpenChange, order, onChangeOrde
             </RadioGroup>
           </div>
           <div className="flex items-center gap-2">
-            <Checkbox id="show-ans" checked={showAnswer} onCheckedChange={(v) => onChangeShowAnswer(!!v)} />
+            <Checkbox
+              id="show-ans"
+              checked={showAnswer}
+              onCheckedChange={(v) => onChangeShowAnswer(!!v)}
+            />
             <Label htmlFor="show-ans">显示正确答案</Label>
           </div>
           <Separator />
@@ -63,5 +84,3 @@ export function PracticeSettingsDialog({ open, onOpenChange, order, onChangeOrde
     </Dialog>
   );
 }
-
-

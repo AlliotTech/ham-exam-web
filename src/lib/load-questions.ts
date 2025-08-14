@@ -20,7 +20,10 @@ export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
   }
 }
 
-export async function loadQuestions(bank?: QuestionBank, opts?: { strict?: boolean }): Promise<QuestionItem[]> {
+export async function loadQuestions(
+  bank?: QuestionBank,
+  opts?: { strict?: boolean },
+): Promise<QuestionItem[]> {
   const strict = opts?.strict ?? false;
   const url = resolveQuestionsUrl(bank);
   const res = await fetch(url, { cache: "force-cache" });
@@ -40,6 +43,3 @@ export function shuffle<T>(arr: T[], rng = Math.random): T[] {
   }
   return copy;
 }
-
-
-

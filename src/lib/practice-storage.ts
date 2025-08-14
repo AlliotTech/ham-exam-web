@@ -115,5 +115,3 @@ export function shouldResume(saved: SavedState): boolean {
 export function normalizeJ(input: string): string {
   return (input || "").trim().toUpperCase();
 }
-
-

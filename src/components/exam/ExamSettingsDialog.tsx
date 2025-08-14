@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 
 type Props = {
@@ -31,12 +37,12 @@ export function ExamSettingsDialog({ open, onOpenChange }: Props) {
           </div>
           <Separator />
           <div className="text-xs text-muted-foreground">
-            考试规则：A 类 40 题（单选 32，多选 8），40 分钟，30 题合格；B 类 60 题（单选 45，多选 15），60 分钟，45 题合格；C 类 90 题（单选 70，多选 20），90 分钟，70 题合格。多选题需与标准答案完全一致，否则不得分。
+            考试规则：A 类 40 题（单选 32，多选 8），40 分钟，30 题合格；B 类 60 题（单选 45，多选
+            15），60 分钟，45 题合格；C 类 90 题（单选 70，多选 20），90 分钟，70
+            题合格。多选题需与标准答案完全一致，否则不得分。
           </div>
         </div>
       </DialogContent>
     </Dialog>
   );
 }
-
-

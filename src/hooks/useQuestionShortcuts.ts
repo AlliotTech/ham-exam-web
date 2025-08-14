@@ -48,5 +48,3 @@ export function useQuestionShortcuts(opts: QuestionShortcutsOptions): void {
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [onPrev, onNext, onSelectDigit, enableEnterSearch, onEnterSearch, isTypingTarget]);
 }
-
-

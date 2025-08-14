@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "无线电考试"
+    title: "无线电考试",
   },
 };
 
@@ -64,17 +64,21 @@ export default function RootLayout({
                       GitHub 仓库
                     </a>
                   </li>
-                  <li aria-hidden="true" className="text-border">·</li>
+                  <li aria-hidden="true" className="text-border">
+                    ·
+                  </li>
                   <li>
                     <a
                       href="https://www.iots.vip"
                       className="hover:underline underline-offset-4 hover:text-foreground transition-colors"
-                      aria-label="Alliot&apos;s blog"
+                      aria-label="Alliot's blog"
                     >
                       Alliot&apos;s blog
                     </a>
                   </li>
-                  <li aria-hidden="true" className="text-border">·</li>
+                  <li aria-hidden="true" className="text-border">
+                    ·
+                  </li>
                   <li>
                     <a
                       href="http://www.crac.org.cn/News/List?type=6&y="

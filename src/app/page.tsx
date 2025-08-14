@@ -37,10 +37,23 @@ export default function Home() {
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <div className="text-sm text-muted-foreground">选择题库</div>
-            <RadioGroup className="flex gap-6" value={bank} onValueChange={(v: "A" | "B" | "C") => setBank(v)}>
-              <div className="flex items-center gap-2"><RadioGroupItem id="bank-a" value="A" /><Label htmlFor="bank-a">A 类</Label></div>
-              <div className="flex items-center gap-2"><RadioGroupItem id="bank-b" value="B" /><Label htmlFor="bank-b">B 类</Label></div>
-              <div className="flex items-center gap-2"><RadioGroupItem id="bank-c" value="C" /><Label htmlFor="bank-c">C 类</Label></div>
+            <RadioGroup
+              className="flex gap-6"
+              value={bank}
+              onValueChange={(v: "A" | "B" | "C") => setBank(v)}
+            >
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="bank-a" value="A" />
+                <Label htmlFor="bank-a">A 类</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="bank-b" value="B" />
+                <Label htmlFor="bank-b">B 类</Label>
+              </div>
+              <div className="flex items-center gap-2">
+                <RadioGroupItem id="bank-c" value="C" />
+                <Label htmlFor="bank-c">C 类</Label>
+              </div>
             </RadioGroup>
           </div>
           {!isAvailable && !checking ? (

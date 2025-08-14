@@ -59,8 +59,8 @@ pnpm dev # 本地开发（默认启用 Turbopack）
 
 数据来源优先级：
 
-1) 本地环境变量 `DATASET_DIR` 指向包含 `class_a.csv`、`class_b.csv`、`class_c.csv`、`full.csv`、`images.csv` 的目录
-2) 若未设置则回退到远程原始数据（默认：`https://raw.githubusercontent.com/AlliotTech/crac-amateur-radio-exam-questions-2025-csv/main`）
+1. 本地环境变量 `DATASET_DIR` 指向包含 `class_a.csv`、`class_b.csv`、`class_c.csv`、`full.csv`、`images.csv` 的目录
+2. 若未设置则回退到远程原始数据（默认：`https://raw.githubusercontent.com/AlliotTech/crac-amateur-radio-exam-questions-2025-csv/main`）
 
 macOS 示例：
 
@@ -134,7 +134,10 @@ pnpm build
   "id": "LK0501",
   "codes": { "J": "LK0501", "P": "LK05" },
   "question": "题干文本",
-  "options": [ { "key": "A", "text": "选项 A" }, { "key": "B", "text": "选项 B" } ],
+  "options": [
+    { "key": "A", "text": "选项 A" },
+    { "key": "B", "text": "选项 B" }
+  ],
   "answer_keys": ["A"],
   "type": "single",
   "pages": null,
@@ -161,5 +164,3 @@ pnpm build
 
 - 题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`
 - 技术栈：Next.js、React、Tailwind CSS、Radix UI、Lucide Icons
-
-

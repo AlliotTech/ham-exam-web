@@ -20,8 +20,12 @@ export function ExamResultDialog({ open, onOpenChange, correct, total, passed, p
           <DialogTitle>成绩</DialogTitle>
         </DialogHeader>
         <div className="space-y-2">
-          <div>得分：{correct} / {total}</div>
-          <div className="text-sm text-muted-foreground">正确率：{Math.round((correct / total) * 100)}%</div>
+          <div>
+            得分：{correct} / {total}
+          </div>
+          <div className="text-sm text-muted-foreground">
+            正确率：{Math.round((correct / total) * 100)}%
+          </div>
           <div className={`text-sm ${passed ? "text-green-600" : "text-red-600"}`}>
             {passed ? "合格" : "不合格"}（合格线：{passLine} 题）
           </div>
@@ -31,5 +35,3 @@ export function ExamResultDialog({ open, onOpenChange, correct, total, passed, p
     </Dialog>
   );
 }
-
-

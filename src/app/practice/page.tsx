@@ -151,7 +151,11 @@ function PracticeClient() {
       const j = (q.codes?.J || "").toUpperCase();
       if (!j) return false;
       if (j === raw) return true; // exact
-      if (j.includes(",")) return j.split(",").map((s) => s.trim()).includes(raw);
+      if (j.includes(","))
+        return j
+          .split(",")
+          .map((s) => s.trim())
+          .includes(raw);
       return false;
     });
     // 2) fallback: partial J contains, e.g., input "LK05" should navigate to first match
@@ -270,12 +274,12 @@ function PracticeClient() {
     onPrev: prev,
     onNext: next,
     onSelectDigit: (n) => {
-      if (current && current.type !== 'multiple') {
+      if (current && current.type !== "multiple") {
         const opt = current.options?.[n - 1];
         if (opt) setCurrentAnswer([opt.key]);
       }
     },
-    enableEnterSearch: order === 'sequential',
+    enableEnterSearch: order === "sequential",
     onEnterSearch: () => setSearchOpen(true),
   });
 
@@ -292,7 +296,11 @@ function PracticeClient() {
       autoHelpShownRef.current = true;
       const timer = setTimeout(() => {
         setSettingsOpen(true);
-        try { window.localStorage.setItem("ui:shortcutsHelpSeen:practice", "1"); } catch { /* noop */ }
+        try {
+          window.localStorage.setItem("ui:shortcutsHelpSeen:practice", "1");
+        } catch {
+          /* noop */
+        }
       }, 300);
       return () => clearTimeout(timer);
     }
@@ -313,18 +321,30 @@ function PracticeClient() {
       />
       <QuestionProgressHeader
         percent={percent}
-        right={(
+        right={
           <>
             {order === "sequential" ? (
-              <Button size="icon" variant="outline" aria-label="搜索" title="搜索" onClick={() => setSearchOpen(true)}>
+              <Button
+                size="icon"
+                variant="outline"
+                aria-label="搜索"
+                title="搜索"
+                onClick={() => setSearchOpen(true)}
+              >
                 <Search className="h-4 w-4" />
               </Button>
             ) : null}
-            <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+            <Button
+              size="icon"
+              variant="outline"
+              aria-label="设置"
+              title="设置"
+              onClick={() => setSettingsOpen(true)}
+            >
               <Settings className="h-4 w-4" />
             </Button>
           </>
-        )}
+        }
       />
       <PracticeSettingsDialog
         open={settingsOpen}
@@ -357,14 +377,44 @@ function PracticeClient() {
       <BottomBar
         answeredCount={answeredCount}
         total={questions.length}
-        left={<Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">上一题</Button>}
-        right={<Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">下一题</Button>}
-        mobileTop={(
+        left={
+          <Button
+            onClick={prev}
+            disabled={index === 0}
+            variant="secondary"
+            className="active:scale-[0.98] transition-transform"
+          >
+            上一题
+          </Button>
+        }
+        right={
+          <Button
+            onClick={next}
+            disabled={index === questions.length - 1}
+            className="active:scale-[0.98] transition-transform"
+          >
+            下一题
+          </Button>
+        }
+        mobileTop={
           <div className="grid grid-cols-2 gap-2">
-            <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
-            <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              onClick={prev}
+              disabled={index === 0}
+              variant="secondary"
+            >
+              上一题
+            </Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              onClick={next}
+              disabled={index === questions.length - 1}
+            >
+              下一题
+            </Button>
           </div>
-        )}
+        }
       />
     </div>
   );
@@ -377,6 +427,3 @@ export default function PracticePage() {
     </Suspense>
   );
 }
-
-
-

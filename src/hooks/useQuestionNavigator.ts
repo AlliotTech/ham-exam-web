@@ -21,7 +21,9 @@ export type UseQuestionNavigatorResult = {
   reset: () => void;
 };
 
-export function useQuestionNavigator(opts: UseQuestionNavigatorOptions): UseQuestionNavigatorResult {
+export function useQuestionNavigator(
+  opts: UseQuestionNavigatorOptions,
+): UseQuestionNavigatorResult {
   const { questions, keyStrategy } = opts;
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<UserAnswer>({});
@@ -36,11 +38,14 @@ export function useQuestionNavigator(opts: UseQuestionNavigatorOptions): UseQues
 
   const current = questions[index];
 
-  const keyOf = useCallback((q: QuestionItem | undefined, pos: number): string => {
-    if (keyStrategy === "position") return String(pos);
-    const id = q?.id;
-    return id ? String(id) : String(pos);
-  }, [keyStrategy]);
+  const keyOf = useCallback(
+    (q: QuestionItem | undefined, pos: number): string => {
+      if (keyStrategy === "position") return String(pos);
+      const id = q?.id;
+      return id ? String(id) : String(pos);
+    },
+    [keyStrategy],
+  );
 
   const selected = useMemo(() => {
     if (!current) return [] as string[];
@@ -48,11 +53,14 @@ export function useQuestionNavigator(opts: UseQuestionNavigatorOptions): UseQues
     return answers[key] ?? [];
   }, [answers, current, index, keyOf]);
 
-  const setCurrentAnswer = useCallback((keys: string[]) => {
-    if (!current) return;
-    const key = keyOf(current, index);
-    setAnswers((prev) => ({ ...prev, [key]: keys }));
-  }, [current, index, keyOf]);
+  const setCurrentAnswer = useCallback(
+    (keys: string[]) => {
+      if (!current) return;
+      const key = keyOf(current, index);
+      setAnswers((prev) => ({ ...prev, [key]: keys }));
+    },
+    [current, index, keyOf],
+  );
 
   const next = useCallback(() => {
     setIndex((i) => Math.min(i + 1, questions.length - 1));
@@ -77,7 +85,16 @@ export function useQuestionNavigator(opts: UseQuestionNavigatorOptions): UseQues
     setAnswers({});
   }, []);
 
-  return { index, setIndex, selected, setCurrentAnswer, answers, setAnswers, answeredCount, next, prev, reset };
+  return {
+    index,
+    setIndex,
+    selected,
+    setCurrentAnswer,
+    answers,
+    setAnswers,
+    answeredCount,
+    next,
+    prev,
+    reset,
+  };
 }
-
-

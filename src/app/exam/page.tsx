@@ -7,10 +7,10 @@ import type { QuestionItem } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
- 
+
 import { Dialog } from "@/components/ui/dialog";
 import { arraysEqual, sorted } from "@/lib/utils";
- 
+
 import { useSearchParams } from "next/navigation";
 import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
@@ -23,7 +23,13 @@ import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
 import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
 
-type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
+type ExamRule = {
+  total: number;
+  singles: number;
+  multiples: number;
+  minutes: number;
+  pass: number;
+};
 const RULES: Record<QuestionBank, ExamRule> = {
   A: { total: 40, singles: 32, multiples: 8, minutes: 40, pass: 30 },
   B: { total: 60, singles: 45, multiples: 15, minutes: 60, pass: 45 },
@@ -92,9 +98,7 @@ function ExamClient() {
         let picked = [...pickedSingles, ...pickedMultiples];
         // If total not met (unlikely), fill from remaining pool
         if (picked.length < rule.total) {
-          const remainingPool = shuffle(
-            qs.filter((q) => !picked.includes(q))
-          );
+          const remainingPool = shuffle(qs.filter((q) => !picked.includes(q)));
           picked = picked.concat(remainingPool.slice(0, Math.max(0, rule.total - picked.length)));
         }
         // Randomize order for the exam
@@ -131,14 +135,17 @@ function ExamClient() {
     setFinished(true);
     setResultOpen(true);
   });
-  useEffect(() => { setRemainingMs(remaining); }, [remaining]);
+  useEffect(() => {
+    setRemainingMs(remaining);
+  }, [remaining]);
 
   function formatMs(ms: number): string {
     const totalSec = Math.max(0, Math.floor(ms / 1000));
     const h = Math.floor(totalSec / 3600);
     const m = Math.floor((totalSec % 3600) / 60);
     const s = totalSec % 60;
-    if (h > 0) return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    if (h > 0)
+      return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   }
 
@@ -155,14 +162,19 @@ function ExamClient() {
   // One-time settings auto prompt
   useEffect(() => {
     if (autoHelpShownRef.current) return;
-    if (typeof window === 'undefined') return;
-    const seen = window.localStorage.getItem('ui:shortcutsHelpSeen:exam') === '1';
-    if (seen) { autoHelpShownRef.current = true; return; }
+    if (typeof window === "undefined") return;
+    const seen = window.localStorage.getItem("ui:shortcutsHelpSeen:exam") === "1";
+    if (seen) {
+      autoHelpShownRef.current = true;
+      return;
+    }
     if (questions.length) {
       autoHelpShownRef.current = true;
       const timer = setTimeout(() => {
         setSettingsOpen(true);
-        try { window.localStorage.setItem('ui:shortcutsHelpSeen:exam', '1'); } catch {}
+        try {
+          window.localStorage.setItem("ui:shortcutsHelpSeen:exam", "1");
+        } catch {}
       }, 300);
       return () => clearTimeout(timer);
     }
@@ -197,7 +209,9 @@ function ExamClient() {
   function setFilterAndPersist(v: typeof filter) {
     setFilter(v);
     if (typeof window !== "undefined") {
-      try { window.localStorage.setItem(`exam:answerCardFilter:${bankParam}`, v); } catch {}
+      try {
+        window.localStorage.setItem(`exam:answerCardFilter:${bankParam}`, v);
+      } catch {}
     }
   }
 
@@ -208,21 +222,40 @@ function ExamClient() {
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4 pb-28 sm:pb-20">
       <QuestionProgressHeader
         percent={percent}
-        right={(
-          <Button size="icon" variant="outline" aria-label="设置" title="设置" onClick={() => setSettingsOpen(true)}>
+        right={
+          <Button
+            size="icon"
+            variant="outline"
+            aria-label="设置"
+            title="设置"
+            onClick={() => setSettingsOpen(true)}
+          >
             <Settings className="h-4 w-4" />
           </Button>
-        )}
-        meta={(
-          <>考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span></>
-        )}
+        }
+        meta={
+          <>
+            考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选{" "}
+            {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：
+            <span className={remainingMs <= 60_000 ? "text-red-600" : ""}>
+              {formatMs(remainingMs)}
+            </span>
+          </>
+        }
       />
       {/* Mobile info grid */}
       <div className="sm:hidden grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-muted-foreground">
         <div>考试类别：{bankParam} 类</div>
-        <div>试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）</div>
+        <div>
+          试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）
+        </div>
         <div>限时：{rule.minutes} 分钟</div>
-        <div>剩余：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span></div>
+        <div>
+          剩余：
+          <span className={remainingMs <= 60_000 ? "text-red-600" : ""}>
+            {formatMs(remainingMs)}
+          </span>
+        </div>
       </div>
 
       <QuestionCard
@@ -236,35 +269,119 @@ function ExamClient() {
       />
 
       <BottomBar
-        statsNode={<>已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}</>}
-        left={<Button onClick={prev} disabled={index === 0} variant="secondary" className="active:scale-[0.98] transition-transform">上一题</Button>}
-        right={(
+        statsNode={
           <>
-            <Button variant="outline" onClick={toggleFlagCurrent} className="active:scale-[0.98] transition-transform">{flags[String(index)] ? "取消标记" : "标记"}</Button>
-            <Button variant="outline" onClick={() => { setAnswerCardOpen(true); }} className="active:scale-[0.98] transition-transform">答题卡</Button>
-            <Button onClick={next} disabled={index === questions.length - 1} className="active:scale-[0.98] transition-transform">下一题</Button>
-            <Button onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished} className="active:scale-[0.98] transition-transform">交卷</Button>
+            已作答 {answeredCount} / {questions.length}｜标记{" "}
+            {Object.values(flags).filter(Boolean).length}
           </>
-        )}
-        mobileTop={(
+        }
+        left={
+          <Button
+            onClick={prev}
+            disabled={index === 0}
+            variant="secondary"
+            className="active:scale-[0.98] transition-transform"
+          >
+            上一题
+          </Button>
+        }
+        right={
+          <>
+            <Button
+              variant="outline"
+              onClick={toggleFlagCurrent}
+              className="active:scale-[0.98] transition-transform"
+            >
+              {flags[String(index)] ? "取消标记" : "标记"}
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setAnswerCardOpen(true);
+              }}
+              className="active:scale-[0.98] transition-transform"
+            >
+              答题卡
+            </Button>
+            <Button
+              onClick={next}
+              disabled={index === questions.length - 1}
+              className="active:scale-[0.98] transition-transform"
+            >
+              下一题
+            </Button>
+            <Button
+              onClick={() => setConfirmOpen(true)}
+              variant="destructive"
+              disabled={finished}
+              className="active:scale-[0.98] transition-transform"
+            >
+              交卷
+            </Button>
+          </>
+        }
+        mobileTop={
           <div className="grid grid-cols-2 gap-2">
-            <Button className="w-full active:scale-[0.98] transition-transform" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
-            <Button className="w-full active:scale-[0.98] transition-transform" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              onClick={prev}
+              disabled={index === 0}
+              variant="secondary"
+            >
+              上一题
+            </Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              onClick={next}
+              disabled={index === questions.length - 1}
+            >
+              下一题
+            </Button>
           </div>
-        )}
-        mobileBottom={(
+        }
+        mobileBottom={
           <div className="grid grid-cols-3 gap-2 mt-2">
-            <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-            <Button className="w-full active:scale-[0.98] transition-transform" variant="outline" onClick={() => { setAnswerCardOpen(true); }}>答题卡</Button>
-            <Button className="w-full active:scale-[0.98] transition-transform" onClick={() => { setConfirmOpen(true); }} variant="destructive" disabled={finished}>交卷</Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              variant="outline"
+              onClick={toggleFlagCurrent}
+            >
+              {flags[String(index)] ? "取消标记" : "标记"}
+            </Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              variant="outline"
+              onClick={() => {
+                setAnswerCardOpen(true);
+              }}
+            >
+              答题卡
+            </Button>
+            <Button
+              className="w-full active:scale-[0.98] transition-transform"
+              onClick={() => {
+                setConfirmOpen(true);
+              }}
+              variant="destructive"
+              disabled={finished}
+            >
+              交卷
+            </Button>
           </div>
-        )}
+        }
       />
 
       <Dialog open={resultOpen} onOpenChange={setResultOpen}>
         {/* Replaced by ExamResultDialog below */}
       </Dialog>
-      <ExamResultDialog open={resultOpen} onOpenChange={setResultOpen} correct={score.correct} total={score.total} passed={passed} passLine={rule.pass} />
+      <ExamResultDialog
+        open={resultOpen}
+        onOpenChange={setResultOpen}
+        correct={score.correct}
+        total={score.total}
+        passed={passed}
+        passLine={rule.pass}
+      />
 
       {/* Answer Card Sheet */}
       <AnswerCardSheet
@@ -280,15 +397,20 @@ function ExamClient() {
       />
 
       {/* Submit Confirm Dialog */}
-      <ExamSubmitConfirmDialog open={confirmOpen} onOpenChange={setConfirmOpen} onConfirm={() => { setConfirmOpen(false); submit(); }} />
+      <ExamSubmitConfirmDialog
+        open={confirmOpen}
+        onOpenChange={setConfirmOpen}
+        onConfirm={() => {
+          setConfirmOpen(false);
+          submit();
+        }}
+      />
 
       {/* Settings Dialog */}
       <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
     </div>
   );
 }
-
- 
 
 export default function ExamPage() {
   return (
@@ -297,5 +419,3 @@ export default function ExamPage() {
     </Suspense>
   );
 }
-
-

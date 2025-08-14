@@ -11,5 +11,3 @@ export function useNoSiteFooter(): void {
     return;
   }, []);
 }
-
-

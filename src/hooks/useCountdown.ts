@@ -18,5 +18,3 @@ export function useCountdown(endAtMs: number | null, onElapsed?: () => void): nu
 
   return remainingMs;
 }
-
-
