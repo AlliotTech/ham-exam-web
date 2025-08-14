@@ -69,11 +69,12 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
               {question.options.map((opt) => (
                 <label key={opt.key} className="flex items-start gap-2">
                   <Checkbox
+                    className="mt-1"
                     checked={selected.includes(opt.key)}
                     disabled={!!readOnly}
                     onCheckedChange={() => toggleMulti(opt.key)}
                   />
-                  <span className="whitespace-pre-line">
+                  <span className="whitespace-pre-line leading-6">
                     <strong className="mr-2">{opt.key}.</strong>
                     {opt.text}
                   </span>
@@ -89,8 +90,8 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
             >
               {question.options.map((opt) => (
                 <div key={opt.key} className="flex items-start gap-2">
-                  <RadioGroupItem value={opt.key} id={`${index}-${opt.key}`} disabled={!!readOnly} />
-                  <Label htmlFor={`${index}-${opt.key}`} className={`whitespace-pre-line ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
+                  <RadioGroupItem className="mt-1" value={opt.key} id={`${index}-${opt.key}`} disabled={!!readOnly} />
+                  <Label htmlFor={`${index}-${opt.key}`} className={`whitespace-pre-line leading-6 ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
                     <strong className="mr-2">{opt.key}.</strong>
                     {opt.text}
                   </Label>
