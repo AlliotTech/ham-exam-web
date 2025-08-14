@@ -238,13 +238,20 @@ function ExamClient() {
         </Button>
       </div>
       <div className="flex items-center gap-4 justify-between flex-wrap">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 w-full sm:w-auto">
           <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
-          <Progress value={percent} className="h-2" />
+          <Progress value={percent} className="h-2 flex-1 sm:flex-none" />
         </div>
-        <div className="text-sm text-muted-foreground">
+        <div className="hidden sm:block text-sm text-muted-foreground">
           考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span>
         </div>
+      </div>
+      {/* Mobile info grid */}
+      <div className="sm:hidden grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-muted-foreground">
+        <div>考试类别：{bankParam} 类</div>
+        <div>试题数：{rule.total}（单选 {rule.singles}，多选 {rule.multiples}）</div>
+        <div>限时：{rule.minutes} 分钟</div>
+        <div>剩余：<span className={remainingMs <= 60_000 ? "text-red-600" : ""}>{formatMs(remainingMs)}</span></div>
       </div>
 
       <QuestionCard
@@ -257,13 +264,15 @@ function ExamClient() {
         readOnly={finished}
       />
 
-      <div className="flex justify-between">
+      {/* Centered stats above controls */}
+      <div className="text-sm text-muted-foreground text-center">
+        已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}
+      </div>
+      {/* Controls: desktop */}
+      <div className="hidden sm:flex items-center justify-between flex-wrap gap-2">
         <Button onClick={prev} disabled={index === 0} variant="secondary">
           上一题
         </Button>
-        <div className="text-sm text-muted-foreground">
-          已作答 {answeredCount} / {questions.length}｜标记 {Object.values(flags).filter(Boolean).length}
-        </div>
         <div className="flex gap-2">
           <Button variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
           <Button variant="outline" onClick={() => setAnswerCardOpen(true)}>答题卡</Button>
@@ -273,6 +282,18 @@ function ExamClient() {
           <Button onClick={() => setConfirmOpen(true)} variant="outline" disabled={finished}>
             交卷
           </Button>
+        </div>
+      </div>
+      {/* Controls: mobile */}
+      <div className="sm:hidden">
+        <div className="grid grid-cols-2 gap-2">
+          <Button className="w-full" onClick={prev} disabled={index === 0} variant="secondary">上一题</Button>
+          <Button className="w-full" onClick={next} disabled={index === questions.length - 1}>下一题</Button>
+        </div>
+        <div className="grid grid-cols-3 gap-2 mt-2">
+          <Button className="w-full" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
+          <Button className="w-full" variant="outline" onClick={() => setAnswerCardOpen(true)}>答题卡</Button>
+          <Button className="w-full" onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished}>交卷</Button>
         </div>
       </div>
 
