@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 
 import { Dialog } from "@/components/ui/dialog";
-import { arraysEqual, sorted } from "@/lib/utils";
+import { arraysEqual, sorted, formatMs } from "@/lib/utils";
 
 import { useSearchParams } from "next/navigation";
 import { BottomBar } from "@/components/exam/bottom-bar";
@@ -23,19 +23,9 @@ import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
 import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
 import { MessageDialog } from "@/components/common/MessageDialog";
+import { getRule } from "@/lib/exam-rules";
 
-type ExamRule = {
-  total: number;
-  singles: number;
-  multiples: number;
-  minutes: number;
-  pass: number;
-};
-const RULES: Record<QuestionBank, ExamRule> = {
-  A: { total: 40, singles: 32, multiples: 8, minutes: 40, pass: 30 },
-  B: { total: 60, singles: 45, multiples: 15, minutes: 60, pass: 45 },
-  C: { total: 90, singles: 70, multiples: 20, minutes: 90, pass: 70 },
-};
+// Rules centralized in lib/exam-rules
 
 function ExamClient() {
   const [loading, setLoading] = useState(true);
@@ -45,7 +35,6 @@ function ExamClient() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const autoHelpShownRef = useRef(false);
   const [endAtMs, setEndAtMs] = useState<number | null>(null);
-  const [remainingMs, setRemainingMs] = useState<number>(0);
   const [resultOpen, setResultOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [answerCardOpen, setAnswerCardOpen] = useState(false);
@@ -56,7 +45,7 @@ function ExamClient() {
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
-  const rule = RULES[bankParam] ?? RULES.A;
+  const rule = getRule(bankParam);
 
   const {
     index,
@@ -68,6 +57,7 @@ function ExamClient() {
     answeredCount,
     next,
     prev,
+  getKeyByStrategy,
   } = useQuestionNavigator({ questions, keyStrategy: "position" });
 
   // Load persisted filter preference per bank
@@ -114,7 +104,7 @@ function ExamClient() {
         const duration = rule.minutes * 60 * 1000;
         const end = Date.now() + duration;
         setEndAtMs(end);
-        setRemainingMs(duration);
+        // remaining time derived from useCountdown
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
@@ -139,19 +129,7 @@ function ExamClient() {
     setFinished(true);
     setResultOpen(true);
   });
-  useEffect(() => {
-    setRemainingMs(remaining);
-  }, [remaining]);
-
-  function formatMs(ms: number): string {
-    const totalSec = Math.max(0, Math.floor(ms / 1000));
-    const h = Math.floor(totalSec / 3600);
-    const m = Math.floor((totalSec % 3600) / 60);
-    const s = totalSec % 60;
-    if (h > 0)
-      return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-    return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
-  }
+  const remainingMs = remaining;
 
   // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option
   useQuestionShortcuts({
@@ -201,25 +179,21 @@ function ExamClient() {
     let correct = 0;
     for (let i = 0; i < questions.length; i++) {
       const q = questions[i];
-      const key = String(i);
+      const key = getKeyByStrategy(questions[i], i);
       const s = answers[key] ?? [];
       if (arraysEqual(sorted(s), sorted(q.answer_keys))) correct += 1;
     }
     return { correct, total: questions.length };
-  }, [answers, questions]);
+  }, [answers, questions, getKeyByStrategy]);
   const passed = score.correct >= rule.pass;
 
   // Derived helpers
   // provided by useQuestionNavigator
 
-  function keyOf(pos: number): string {
-    return String(pos);
-  }
-
   function toggleFlagCurrent() {
     const q = current;
     if (!q) return;
-    const key = keyOf(index);
+    const key = getKeyByStrategy(q, index);
     setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
   }
 
@@ -232,8 +206,8 @@ function ExamClient() {
     }
   }
 
-  if (loading) return <div className="p-6">加载题库中...</div>;
-  if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
+  if (loading) return <div className="p-6" aria-live="polite">加载题库中...</div>;
+  if (!questions.length) return <div className="p-6" role="alert">题库暂不可用或为空</div>;
 
   return (
     <div className="container mx-auto px-4 py-6 max-w-4xl space-y-4 pb-28 sm:pb-20">
@@ -254,9 +228,7 @@ function ExamClient() {
           <>
             考试类别：{bankParam} 类｜试题数：{rule.total}（单选 {rule.singles}，多选{" "}
             {rule.multiples}）｜限时：{rule.minutes} 分钟｜剩余时间：
-            <span className={remainingMs <= 60_000 ? "text-red-600" : ""}>
-              {formatMs(remainingMs)}
-            </span>
+            <span className={remainingMs <= 60_000 ? "text-red-600" : ""} aria-live="polite">{formatMs(remainingMs)}</span>
           </>
         }
       />
@@ -269,9 +241,7 @@ function ExamClient() {
         <div>限时：{rule.minutes} 分钟</div>
         <div>
           剩余：
-          <span className={remainingMs <= 60_000 ? "text-red-600" : ""}>
-            {formatMs(remainingMs)}
-          </span>
+          <span className={remainingMs <= 60_000 ? "text-red-600" : ""} aria-live="polite">{formatMs(remainingMs)}</span>
         </div>
       </div>
 

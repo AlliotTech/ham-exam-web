@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useId } from "react";
 import type { QuestionItem } from "@/types/question";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
@@ -29,6 +30,7 @@ export function QuestionCard({
   readOnly,
 }: Props) {
   const isMultiple = question.type === "multiple";
+  const baseId = useId();
 
   function toggleMulti(key: string) {
     if (readOnly) return;
@@ -115,11 +117,11 @@ export function QuestionCard({
                   <RadioGroupItem
                     className="mt-1"
                     value={opt.key}
-                    id={`${index}-${opt.key}`}
+                    id={`${baseId}-${index}-${opt.key}`}
                     disabled={!!readOnly}
                   />
                   <Label
-                    htmlFor={`${index}-${opt.key}`}
+                    htmlFor={`${baseId}-${index}-${opt.key}`}
                     className={`whitespace-pre-line leading-6 ${readOnly ? "cursor-default" : "cursor-pointer"}`}
                   >
                     <strong className="mr-2">{opt.key}.</strong>

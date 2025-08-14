@@ -114,6 +114,7 @@ function PracticeClient() {
     answeredCount,
     next,
     prev,
+    getKeyByStrategy,
   } = useQuestionNavigator({ questions, keyStrategy: "id-prefer" });
   const current = questions[index];
   const selected = current ? selectedFromHook : [];

@@ -19,6 +19,7 @@ export type UseQuestionNavigatorResult = {
   next: () => void;
   prev: () => void;
   reset: () => void;
+  getKeyByStrategy: (q: QuestionItem | undefined, pos: number) => string;
 };
 
 export function useQuestionNavigator(
@@ -96,5 +97,6 @@ export function useQuestionNavigator(
     next,
     prev,
     reset,
+    getKeyByStrategy: keyOf,
   };
 }

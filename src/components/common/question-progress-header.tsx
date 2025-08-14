@@ -31,7 +31,7 @@ export function QuestionProgressHeader({
       <div className="flex items-center gap-4 justify-between flex-wrap">
         <div className="flex items-center gap-4 w-full sm:w-auto">
           <div className="min-w-24 text-sm text-muted-foreground">进度 {percent}%</div>
-          <Progress value={percent} className="h-2 flex-1 sm:flex-none" />
+          <Progress value={percent} className="h-2 flex-1 sm:flex-none" aria-label="作答进度" />
         </div>
         {meta ? <div className="hidden sm:block text-sm text-muted-foreground">{meta}</div> : null}
       </div>
