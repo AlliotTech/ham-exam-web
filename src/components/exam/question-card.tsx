@@ -81,11 +81,16 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
               ))}
             </div>
           ) : (
-            <RadioGroup value={selected[0] ?? ""} onValueChange={(v) => { if (!readOnly) onChange(v ? [v] : []); }}>
+            <RadioGroup
+              key={`rg-${index}`}
+              name={`q-${index}`}
+              value={selected[0] ?? undefined}
+              onValueChange={(v) => { if (!readOnly) onChange(v ? [v] : []); }}
+            >
               {question.options.map((opt) => (
                 <div key={opt.key} className="flex items-start gap-2">
-                  <RadioGroupItem value={opt.key} id={`${question.id}-${opt.key}`} disabled={!!readOnly} />
-                  <Label htmlFor={`${question.id}-${opt.key}`} className={`whitespace-pre-line ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
+                  <RadioGroupItem value={opt.key} id={`${index}-${opt.key}`} disabled={!!readOnly} />
+                  <Label htmlFor={`${index}-${opt.key}`} className={`whitespace-pre-line ${readOnly ? "cursor-default" : "cursor-pointer"}`}>
                     <strong className="mr-2">{opt.key}.</strong>
                     {opt.text}
                   </Label>
