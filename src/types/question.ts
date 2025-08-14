@@ -14,11 +14,7 @@ export type QuestionItem = {
   imageUrl?: string | null;
 };
 
-export type ExamSettings = {
-  numQuestions: number;
-  enableShuffle: boolean;
-  showImmediateAnswer: boolean;
-};
+// Removed unused ExamSettings
 
 export type UserAnswer = {
   [questionId: string]: string[]; // keys of selected options
