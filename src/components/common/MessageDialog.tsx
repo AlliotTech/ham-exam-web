@@ -35,7 +35,11 @@ export function MessageDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          {description ? <DialogDescription>{description}</DialogDescription> : null}
+          {description ? (
+            <DialogDescription>{description}</DialogDescription>
+          ) : (
+            <DialogDescription className="sr-only">弹窗提示</DialogDescription>
+          )}
         </DialogHeader>
         <DialogFooter>
           <Button

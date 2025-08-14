@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 type Props = {
   open: boolean;
@@ -18,6 +18,7 @@ export function ExamResultDialog({ open, onOpenChange, correct, total, passed, p
       <DialogContent>
         <DialogHeader>
           <DialogTitle>成绩</DialogTitle>
+          <DialogDescription className="sr-only">考试成绩详情与是否通过</DialogDescription>
         </DialogHeader>
         <div className="space-y-2">
           <div>

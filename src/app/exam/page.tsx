@@ -8,7 +8,6 @@ import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 
-import { Dialog } from "@/components/ui/dialog";
 import { formatMs } from "@/lib/utils";
 
 import { useSearchParams } from "next/navigation";
@@ -471,9 +470,7 @@ function ExamClient() {
         }
       />
 
-      <Dialog open={resultOpen} onOpenChange={setResultOpen}>
-        {/* Replaced by ExamResultDialog below */}
-      </Dialog>
+      {/* 移除占位 Dialog，直接使用 ExamResultDialog */}
       <ExamResultDialog
         open={resultOpen}
         onOpenChange={setResultOpen}
