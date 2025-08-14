@@ -23,8 +23,20 @@ export function PWAUpdatePrompt() {
 
     navigator.serviceWorker.addEventListener("controllerchange", onControllerChange);
 
+    let removeVisibility: (() => void) | undefined;
     navigator.serviceWorker.ready
       .then((reg) => {
+        // proactively check for update when page becomes visible
+        const onVisibility = () => {
+          if (document.visibilityState === "visible") {
+            try {
+              reg.update();
+            } catch {}
+          }
+        };
+        document.addEventListener("visibilitychange", onVisibility);
+        removeVisibility = () => document.removeEventListener("visibilitychange", onVisibility);
+
         // If a SW is waiting after updatefound, show prompt
         if (reg.waiting) {
           setWaitingWorker(reg.waiting);
@@ -45,13 +57,19 @@ export function PWAUpdatePrompt() {
 
     return () => {
       navigator.serviceWorker.removeEventListener("controllerchange", onControllerChange);
+      if (removeVisibility) removeVisibility();
     };
   }, []);
 
   function reloadWithNewSW() {
     if (!waitingWorker) return;
     // Tell the SW to skip waiting and activate immediately
-    waitingWorker.postMessage({ type: "SKIP_WAITING" });
+    try {
+      waitingWorker.postMessage({ type: "SKIP_WAITING" });
+    } catch {}
+    try {
+      waitingWorker.postMessage({ type: "skip-waiting" });
+    } catch {}
     // After controllerchange listener will close the dialog
   }
 

@@ -6,13 +6,33 @@ const isTurbopack = !!process.env.TURBOPACK;
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  async headers() {
+    return [
+      {
+        source: "/sw.js",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+        ],
+      },
+      {
+        source: "/manifest.json",
+        headers: [
+          { key: "Cache-Control", value: "no-cache, no-store, must-revalidate" },
+          { key: "Pragma", value: "no-cache" },
+          { key: "Expires", value: "0" },
+        ],
+      },
+    ];
+  },
 };
 
 const pwa = withPWA({
 	dest: "public",
 	disable: isDev,
 	register: true,
-	skipWaiting: false,
+	skipWaiting: true,
 	sw: "sw.js",
 	runtimeCaching: [
 		{
