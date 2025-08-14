@@ -7,10 +7,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { bankAvailable } from "@/lib/load-questions";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+// removed inline alert in favor of Bubble
 import { Bubble } from "@/components/common/Bubble";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   const [bank, setBank] = useState<"A" | "B" | "C">("A");
   const [checking, setChecking] = useState<boolean>(false);
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
@@ -31,6 +33,19 @@ export default function Home() {
       cancelled = true;
     };
   }, [bank]);
+
+  // Prefetch routes when current bank is available
+  useEffect(() => {
+    if (!isAvailable) return;
+    const practiceHref = `/practice?bank=${bank}`;
+    const examHref = `/exam?bank=${bank}`;
+    try {
+      router.prefetch(practiceHref);
+      router.prefetch(examHref);
+    } catch {
+      // ignore
+    }
+  }, [router, bank, isAvailable]);
   function showWarn(msg: string) {
     setWarnText(msg);
     setWarnOpen(true);
@@ -69,6 +84,12 @@ export default function Home() {
             <Button
               asChild
               disabled={checking}
+              onMouseEnter={() => {
+                if (!isAvailable) return;
+                try {
+                  router.prefetch(`/practice?bank=${bank}`);
+                } catch {}
+              }}
               onClick={(e) => {
                 if (!isAvailable) {
                   e.preventDefault();
@@ -82,6 +103,12 @@ export default function Home() {
               asChild
               variant="secondary"
               disabled={checking}
+              onMouseEnter={() => {
+                if (!isAvailable) return;
+                try {
+                  router.prefetch(`/exam?bank=${bank}`);
+                } catch {}
+              }}
               onClick={(e) => {
                 if (!isAvailable) {
                   e.preventDefault();
