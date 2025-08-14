@@ -1,8 +1,26 @@
-业余无线电执照考试模拟（2025 题库）
+## 业余无线电执照考试模拟（2025 题库）
+
+[![Node 20+](https://img.shields.io/badge/Node-%E2%89%A520.0-339933?logo=node.js)](https://nodejs.org)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
+[![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 
 基于官方最新题库构建的在线模拟与练习应用，支持 A / B / C 三类考试，提供真实规则抽题、计时交卷、练习搜索、答题卡与标记、PWA 安装等功能。
 
 题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`（感谢上游维护者）。
+
+## 目录
+
+- [功能特色](#功能特色)
+- [快速开始](#快速开始)
+- [数据集构建questions-json-与题图](#数据集构建questions-json-与题图)
+- [命令](#命令)
+- [页面与路由](#页面与路由)
+- [键盘快捷键](#键盘快捷键)
+- [PWA 与图标](#pwa-与图标)
+- [题目数据结构](#题目数据结构)
+- [隐私说明](#隐私说明)
+- [常见问题faq](#常见问题faq)
+- [致谢](#致谢)
 
 ## 功能特色
 
