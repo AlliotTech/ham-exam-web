@@ -8,11 +8,14 @@ import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
 import { bankAvailable } from "@/lib/load-questions";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Bubble } from "@/components/common/Bubble";
 
 export default function Home() {
   const [bank, setBank] = useState<"A" | "B" | "C">("A");
   const [checking, setChecking] = useState<boolean>(false);
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
+  const [warnOpen, setWarnOpen] = useState(false);
+  const [warnText, setWarnText] = useState<string>("");
 
   useEffect(() => {
     let cancelled = false;
@@ -28,6 +31,10 @@ export default function Home() {
       cancelled = true;
     };
   }, [bank]);
+  function showWarn(msg: string) {
+    setWarnText(msg);
+    setWarnOpen(true);
+  }
   return (
     <main className="container mx-auto px-4 py-10 max-w-3xl">
       <Card>
@@ -56,19 +63,35 @@ export default function Home() {
               </div>
             </RadioGroup>
           </div>
-          {!isAvailable && !checking ? (
-            <Alert>
-              <AlertDescription>题库 {bank} 暂不可用或为空，请更换题库。</AlertDescription>
-            </Alert>
-          ) : null}
 
-          <div className="flex gap-3">
-            <Button asChild disabled={checking || !isAvailable}>
+
+          <div className="flex gap-3 relative">
+            <Button
+              asChild
+              disabled={checking}
+              onClick={(e) => {
+                if (!isAvailable) {
+                  e.preventDefault();
+                  showWarn(`题库 ${bank} 暂不可用或为空，请先构建数据集`);
+                }
+              }}
+            >
               <Link href={{ pathname: "/practice", query: { bank } }}>开始练习</Link>
             </Button>
-            <Button asChild variant="secondary" disabled={checking || !isAvailable}>
+            <Button
+              asChild
+              variant="secondary"
+              disabled={checking}
+              onClick={(e) => {
+                if (!isAvailable) {
+                  e.preventDefault();
+                  showWarn(`题库 ${bank} 暂不可用或为空，请先构建数据集`);
+                }
+              }}
+            >
               <Link href={{ pathname: "/exam", query: { bank } }}>开始模拟考试</Link>
             </Button>
+            <Bubble open={warnOpen} onOpenChange={setWarnOpen}>{warnText}</Bubble>
           </div>
         </CardContent>
       </Card>

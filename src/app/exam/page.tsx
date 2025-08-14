@@ -22,6 +22,7 @@ import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
 import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
+import { MessageDialog } from "@/components/common/MessageDialog";
 
 type ExamRule = {
   total: number;
@@ -50,6 +51,8 @@ function ExamClient() {
   const [answerCardOpen, setAnswerCardOpen] = useState(false);
   const [flags, setFlags] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<"all" | "unanswered" | "flagged">("all");
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorText, setErrorText] = useState<string>("");
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -113,7 +116,8 @@ function ExamClient() {
         setEndAtMs(end);
         setRemainingMs(duration);
       } catch {
-        alert(`题库 ${bankParam} 暂不可用`);
+        setErrorText(`题库 ${bankParam} 暂不可用`);
+        setErrorOpen(true);
       } finally {
         setLoading(false);
       }
@@ -424,6 +428,13 @@ function ExamClient() {
 
       {/* Settings Dialog */}
       <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+      <MessageDialog
+        open={errorOpen}
+        onOpenChange={setErrorOpen}
+        title="加载失败"
+        description={errorText}
+        confirmText="知道了"
+      />
     </div>
   );
 }

@@ -16,6 +16,7 @@ import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 import { PracticeResumeDialog } from "@/components/practice/PracticeResumeDialog";
 import { PracticeSettingsDialog } from "@/components/practice/PracticeSettingsDialog";
 import { PracticeSearchDialog } from "@/components/practice/PracticeSearchDialog";
+import { MessageDialog } from "@/components/common/MessageDialog";
 import {
   clearSavedState,
   loadLastMode,
@@ -44,6 +45,8 @@ function PracticeClient() {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [noPromptThisBank, setNoPromptThisBank] = useState(false);
   const autoHelpShownRef = useRef(false);
+  const [errorOpen, setErrorOpen] = useState(false);
+  const [errorText, setErrorText] = useState<string>("");
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
@@ -63,7 +66,8 @@ function PracticeClient() {
         setIndex(0);
         setAnswers({});
       } catch {
-        alert(`题库 ${bankParam} 暂不可用`);
+        setErrorText(`题库 ${bankParam} 暂不可用`);
+        setErrorOpen(true);
       } finally {
         setLoading(false);
       }
@@ -426,6 +430,14 @@ function PracticeClient() {
             </Button>
           </div>
         }
+      />
+
+      <MessageDialog
+        open={errorOpen}
+        onOpenChange={setErrorOpen}
+        title="加载失败"
+        description={errorText}
+        confirmText="知道了"
       />
     </div>
   );
