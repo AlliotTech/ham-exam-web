@@ -181,8 +181,10 @@ async function build() {
         await fs.writeFile(path.join(outImgDir, base), data);
         imageUrl = `/questions/images/${base}`;
       }
+      // Generate a unique, stable ID per bank entry to avoid collisions (e.g., repeated J like "LX")
+      const generatedId = `${bankKey}-${out.length + 1}`; // 1-based per bank
       out.push({
-        id: jraw || null,
+        id: generatedId,
         codes: { J: jraw || null, P: p || null },
         question: q,
         options,

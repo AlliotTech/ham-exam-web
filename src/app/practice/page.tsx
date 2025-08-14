@@ -115,7 +115,7 @@ function PracticeClient() {
     next,
     prev,
     getKeyByStrategy,
-  } = useQuestionNavigator({ questions, keyStrategy: "id-prefer" });
+  } = useQuestionNavigator({ questions, keyStrategy: "position" });
   const current = questions[index];
   const selected = current ? selectedFromHook : [];
   const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
@@ -188,9 +188,8 @@ function PracticeClient() {
     if (order !== "sequential") return;
     const orderIndices = questions.map((q) => allQuestions.indexOf(q));
     if (orderIndices.some((i) => i < 0)) return;
-    const answersByPosition: (string[] | null)[] = orderIndices.map((_, pos) => {
-      const q = questions[pos];
-      const key = q?.id ?? String(pos);
+    const answersByPosition: (string[] | null)[] = questions.map((q, pos) => {
+      const key = getKeyByStrategy(q, pos);
       return answers[key] ? [...answers[key]] : null;
     });
     const answeredCount = answersByPosition.filter(Boolean).length;
@@ -208,7 +207,7 @@ function PracticeClient() {
       total: allQuestions.length,
     };
     saveState(payload);
-  }, [allQuestions, questions, index, answers, order, showAnswer, bankParam]);
+  }, [allQuestions, questions, index, answers, order, showAnswer, bankParam, getKeyByStrategy]);
 
   // live suggestions based on J code or question text (sequential mode only)
   const deferredJump = useDeferredValue(jumpInput);
@@ -250,7 +249,7 @@ function PracticeClient() {
     // Rebuild answers keyed by current position-dependent keys
     const restored: UserAnswer = {};
     reconstructed.forEach((q, pos) => {
-      const key = q.id ?? String(pos);
+      const key = getKeyByStrategy(q, pos);
       const val = answersByPosition[pos];
       if (val && val.length) restored[key] = val;
     });

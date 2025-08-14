@@ -33,13 +33,7 @@ export function QuestionCard({
   const isMultiple = question.type === "multiple";
   const baseId = useId();
 
-  function toggleMulti(key: string) {
-    if (readOnly) return;
-    const set = new Set(selected);
-    if (set.has(key)) set.delete(key);
-    else set.add(key);
-    onChange(Array.from(set));
-  }
+  // multi-select handled inline via onCheckedChange
 
   const showAnswer = showImmediateAnswer ?? false;
   const isCorrect =
@@ -85,12 +79,18 @@ export function QuestionCard({
           {isMultiple ? (
             <div className="grid gap-2">
               {question.options.map((opt) => (
-                <label key={opt.key} className="flex items-start gap-2">
+                <label key={`${index}-${opt.key}`} className="flex items-start gap-2">
                   <Checkbox
                     className="mt-1"
                     checked={selected.includes(opt.key)}
                     disabled={!!readOnly}
-                    onCheckedChange={() => toggleMulti(opt.key)}
+                    onCheckedChange={(v) => {
+                      if (readOnly) return;
+                      const set = new Set(selected);
+                      if (v) set.add(opt.key);
+                      else set.delete(opt.key);
+                      onChange(Array.from(set));
+                    }}
                   />
                   <span className="whitespace-pre-line leading-6">
                     <strong className="mr-2">{opt.key}.</strong>
@@ -103,7 +103,7 @@ export function QuestionCard({
             <RadioGroup
               key={`rg-${index}`}
               name={`q-${index}`}
-              value={selected[0] ?? undefined}
+              value={selected[0] ?? ""}
               onValueChange={(v) => {
                 if (!readOnly) {
                   onChange(v ? [v] : []);
