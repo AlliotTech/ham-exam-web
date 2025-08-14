@@ -16,6 +16,7 @@ import { useSearchParams } from "next/navigation";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Separator as UiSeparator } from "@/components/ui/separator";
+import { haptics } from "@/lib/haptics";
 
 type ExamRule = { total: number; singles: number; multiples: number; minutes: number; pass: number };
 const RULES: Record<QuestionBank, ExamRule> = {
@@ -104,10 +105,18 @@ function ExamClient() {
   }, [current, index]);
 
   const next = useCallback(() => {
-    setIndex((i) => Math.min(i + 1, questions.length - 1));
+    setIndex((i) => {
+      const ni = Math.min(i + 1, questions.length - 1);
+      if (ni !== i) haptics.light();
+      return ni;
+    });
   }, [questions.length]);
   const prev = useCallback(() => {
-    setIndex((i) => Math.max(i - 1, 0));
+    setIndex((i) => {
+      const ni = Math.max(i - 1, 0);
+      if (ni !== i) haptics.light();
+      return ni;
+    });
   }, []);
 
   function submit() {
@@ -209,6 +218,7 @@ function ExamClient() {
     if (!q) return;
     const key = keyOf(index);
     setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
+    haptics.selection();
   }
 
   function firstUnansweredIndex(): number {
@@ -279,8 +289,8 @@ function ExamClient() {
               上一题
             </Button>
             <div className="flex gap-2">
-              <Button variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-              <Button variant="outline" onClick={() => setAnswerCardOpen(true)}>答题卡</Button>
+          <Button variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
+          <Button variant="outline" onClick={() => { setAnswerCardOpen(true); haptics.selection(); }}>答题卡</Button>
               <Button onClick={next} disabled={index === questions.length - 1}>
                 下一题
               </Button>
@@ -297,8 +307,8 @@ function ExamClient() {
             </div>
             <div className="grid grid-cols-3 gap-2 mt-2">
               <Button className="w-full" variant="outline" onClick={toggleFlagCurrent}>{flags[String(index)] ? "取消标记" : "标记"}</Button>
-              <Button className="w-full" variant="outline" onClick={() => setAnswerCardOpen(true)}>答题卡</Button>
-              <Button className="w-full" onClick={() => setConfirmOpen(true)} variant="destructive" disabled={finished}>交卷</Button>
+              <Button className="w-full" variant="outline" onClick={() => { setAnswerCardOpen(true); haptics.selection(); }}>答题卡</Button>
+              <Button className="w-full" onClick={() => { setConfirmOpen(true); haptics.medium(); }} variant="destructive" disabled={finished}>交卷</Button>
             </div>
           </div>
         </div>

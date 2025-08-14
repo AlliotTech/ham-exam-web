@@ -8,6 +8,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Badge } from "@/components/ui/badge";
 import { arraysEqual, sorted } from "@/lib/utils";
+import { haptics } from "@/lib/haptics";
 
 type Props = {
   index: number;
@@ -28,6 +29,7 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
     if (set.has(key)) set.delete(key);
     else set.add(key);
     onChange(Array.from(set));
+    haptics.selection();
   }
 
   const showAnswer = showImmediateAnswer ?? false;
@@ -85,7 +87,7 @@ export function QuestionCard({ index, total, question, selected, onChange, showI
               key={`rg-${index}`}
               name={`q-${index}`}
               value={selected[0] ?? undefined}
-              onValueChange={(v) => { if (!readOnly) onChange(v ? [v] : []); }}
+              onValueChange={(v) => { if (!readOnly) { onChange(v ? [v] : []); haptics.selection(); } }}
             >
               {question.options.map((opt) => (
                 <div key={opt.key} className="flex items-start gap-2">
