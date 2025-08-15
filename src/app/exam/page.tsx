@@ -17,7 +17,6 @@ import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { AnswerCardSheet } from "@/components/exam/answer-card-sheet";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
 import { useCountdown } from "@/hooks/useCountdown";
-import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
 import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
@@ -32,43 +31,66 @@ import {
   type ExamSavedState,
 } from "@/lib/exam-storage";
 import { ExamResumeDialog } from "@/components/exam/ExamResumeDialog";
+import { useExamStore } from "@/store/exam";
 
-// Rules centralized in lib/exam-rules
+// Helper to get a unique key for a question
+const getKeyByStrategy = (q: QuestionItem | undefined, pos: number) => {
+  if (!q) return `pos:${pos}`;
+  return (q.id || q.codes?.J || `pos:${pos}`).toString();
+};
 
 function ExamClient() {
   const [loading, setLoading] = useState(true);
-  const [questions, setQuestions] = useState<QuestionItem[]>([]);
-  // managed by useQuestionNavigator below
-  const [finished, setFinished] = useState(false);
+  // UI state remains in component
   const [settingsOpen, setSettingsOpen] = useState(false);
-  const autoHelpShownRef = useRef(false);
-  const [endAtMs, setEndAtMs] = useState<number | null>(null);
   const [resultOpen, setResultOpen] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [answerCardOpen, setAnswerCardOpen] = useState(false);
-  const [flags, setFlags] = useState<Record<string, boolean>>({});
   const [filter, setFilter] = useState<"all" | "unanswered" | "flagged">("all");
   const [errorOpen, setErrorOpen] = useState(false);
   const [errorText, setErrorText] = useState<string>("");
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<ExamSavedState | null>(null);
+  const autoHelpShownRef = useRef(false);
 
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
   const rule = getRule(bankParam);
 
+  // Zustand store selectors
   const {
-    index,
-    setIndex,
-    selected: selectedFromHook,
-    setCurrentAnswer,
+    questions,
+    currentIndex,
     answers,
-    setAnswers,
-    answeredCount,
-    next,
-    prev,
-  getKeyByStrategy,
-  } = useQuestionNavigator({ questions, keyStrategy: "position" });
+    flags,
+    finished,
+    endAtMs,
+    startExam,
+    nextQuestion,
+    prevQuestion,
+    jumpToQuestion,
+    answer: setAnswer,
+    toggleFlag,
+    submit: submitExam,
+    loadSavedState,
+    reset: resetExam,
+  } = useExamStore();
+
+  const currentQuestion = useMemo(() => questions[currentIndex], [questions, currentIndex]);
+  const answeredCount = useMemo(() => {
+    let count = 0;
+    answers.forEach((a) => {
+      if (a && a.length > 0) count++;
+    });
+    return count;
+  }, [answers]);
+  const flaggedCount = useMemo(() => {
+    let count = 0;
+    flags.forEach((f) => {
+      if (f) count++;
+    });
+    return count;
+  }, [flags]);
 
   // Load persisted filter preference per bank
   useEffect(() => {
@@ -81,50 +103,39 @@ function ExamClient() {
     } catch {}
   }, [bankParam]);
 
-  useEffect(() => {
-    // no-op retained to preserve hook ordering if needed
-    return;
-  }, []);
   useNoSiteFooter();
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
-        const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
-        // Try resume
+        const allQuestions = await loadQuestions(bankParam, { strict: true });
         const saved = loadExamSavedState(bankParam);
+
         if (saved && shouldResumeExam(saved)) {
           setPendingResume(saved);
           setResumeOpen(true);
-          // Prepare questions to allow immediate resume when user确认
-          const picked = reconstructPickedQuestions(qs, saved);
-          setQuestions(picked);
-          setEndAtMs(saved.endAtMs);
-          // answers/flags/index will be applied on Confirm Resume
+          // Reconstruct questions for immediate resume
+          const picked = reconstructPickedQuestions(allQuestions, saved);
+          // Pre-load questions into store but wait for user confirmation to load the rest
+          loadSavedState({ questions: picked, endAtMs: saved.endAtMs });
           return;
         }
 
         // Fresh start
-        const singles = qs.filter((q) => q.type === "single");
-        const multiples = qs.filter((q) => q.type === "multiple");
+        const singles = allQuestions.filter((q) => q.type === "single");
+        const multiples = allQuestions.filter((q) => q.type === "multiple");
         const takeSingles = Math.min(rule.singles, singles.length);
         const takeMultiples = Math.min(rule.multiples, multiples.length);
         const pickedSingles = shuffle(singles).slice(0, takeSingles);
         const pickedMultiples = shuffle(multiples).slice(0, takeMultiples);
         let picked = [...pickedSingles, ...pickedMultiples];
         if (picked.length < rule.total) {
-          const remainingPool = shuffle(qs.filter((q) => !picked.includes(q)));
+          const remainingPool = shuffle(allQuestions.filter((q) => !picked.includes(q)));
           picked = picked.concat(remainingPool.slice(0, Math.max(0, rule.total - picked.length)));
         }
         picked = shuffle(picked).slice(0, rule.total);
-        setQuestions(picked);
-        setIndex(0);
-        setAnswers({});
-        setFlags({});
-        const duration = rule.minutes * 60 * 1000;
-        const end = Date.now() + duration;
-        setEndAtMs(end);
+        startExam(bankParam, picked, rule.minutes);
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
@@ -132,65 +143,60 @@ function ExamClient() {
         setLoading(false);
       }
     })();
-  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, setIndex, setAnswers]);
+    
+    return () => {
+      resetExam();
+    }
+  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, startExam, loadSavedState, resetExam]);
 
   function reconstructPickedQuestions(all: QuestionItem[], saved: ExamSavedState): QuestionItem[] {
-    // Prefer reconstruct by questionIds
     if (saved.questionIds && saved.questionIds.length > 0) {
-      const byId = new Map<string, QuestionItem>();
-      for (const q of all) {
-        const id = (q.id || q.codes?.J || "").toString();
-        if (id) byId.set(id, q);
-      }
-      const restored = saved.questionIds.map((id) => {
-        if (!id) return undefined;
-        return byId.get(id) as QuestionItem | undefined;
-      }).filter(Boolean) as QuestionItem[];
+      const byId = new Map(all.map(q => [(q.id || q.codes?.J || '').toString(), q]));
+      const restored = saved.questionIds.map(id => id ? byId.get(id) : undefined).filter(Boolean) as QuestionItem[];
       if (restored.length === saved.total) return restored;
     }
-    // Fallback: snapshot
     if (saved.questionsSnapshot && saved.questionsSnapshot.length > 0) {
       return saved.questionsSnapshot.slice(0, saved.total);
     }
-    // Worst fallback: pick fresh and ignore resume
     return all.slice(0, Math.min(saved.total, all.length));
   }
 
-  const current = questions[index];
-  const selected = current ? selectedFromHook : [];
-  const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
+  const percent = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
-  // replaced by useQuestionNavigator
-
-  function submit() {
-    setFinished(true);
+  function handleSubmit() {
+    submitExam();
     setResultOpen(true);
     clearExamSavedState(bankParam);
   }
 
-  const remaining = useCountdown(endAtMs, () => {
-    setFinished(true);
-    setResultOpen(true);
-    clearExamSavedState(bankParam);
+  const remainingMs = useCountdown(endAtMs, () => {
+    if (!finished) {
+      handleSubmit();
+    }
   });
-  const remainingMs = remaining;
 
-  // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option
+  const currentKey = getKeyByStrategy(currentQuestion, currentIndex);
+  const selectedAnswers = answers.get(currentKey) || [];
+
+  function setCurrentAnswer(newAnswer: string[]) {
+    setAnswer(currentKey, newAnswer);
+  }
+
   useQuestionShortcuts({
-    onPrev: prev,
-    onNext: next,
+    onPrev: prevQuestion,
+    onNext: nextQuestion,
     onSelectDigit: (n, detail) => {
-      const opt = current?.options?.[n - 1];
+      const opt = currentQuestion?.options?.[n - 1];
       if (!opt) return;
-      if (current?.type === "multiple") {
+      if (currentQuestion?.type === "multiple") {
         const isStrict = detail?.shiftKey === true || detail?.metaKey === true;
         if (isStrict) {
           setCurrentAnswer([opt.key]);
         } else {
-          const set = new Set(selected);
-          if (set.has(opt.key)) set.delete(opt.key);
-          else set.add(opt.key);
-          setCurrentAnswer(Array.from(set));
+          const newSelection = new Set(selectedAnswers);
+          if (newSelection.has(opt.key)) newSelection.delete(opt.key);
+          else newSelection.add(opt.key);
+          setCurrentAnswer(Array.from(newSelection));
         }
       } else {
         setCurrentAnswer([opt.key]);
@@ -198,10 +204,8 @@ function ExamClient() {
     },
   });
 
-  // One-time settings auto prompt
   useEffect(() => {
-    if (autoHelpShownRef.current) return;
-    if (typeof window === "undefined") return;
+    if (autoHelpShownRef.current || typeof window === "undefined") return;
     const seen = window.localStorage.getItem("ui:shortcutsHelpSeen:exam") === "1";
     if (seen) {
       autoHelpShownRef.current = true;
@@ -219,20 +223,19 @@ function ExamClient() {
     }
   }, [questions.length]);
 
-  const score = useMemo(
-    () => calculateScore(questions, answers, getKeyByStrategy),
-    [answers, questions, getKeyByStrategy],
-  );
-  const passed = isPassed(score.correct, rule.pass);
+  const { score, passed } = useMemo(() => {
+    const answersRecord: Record<string, string[]> = {};
+    answers.forEach((value, key) => {
+      answersRecord[key] = value;
+    });
+    const scoreResult = calculateScore(questions, answersRecord, getKeyByStrategy);
+    const passedResult = isPassed(scoreResult.correct, rule.pass);
+    return { score: scoreResult, passed: passedResult };
+  }, [answers, questions, rule.pass]);
 
-  // Derived helpers
-  // provided by useQuestionNavigator
-
-  function toggleFlagCurrent() {
-    const q = current;
-    if (!q) return;
-    const key = getKeyByStrategy(q, index);
-    setFlags((prev) => ({ ...prev, [key]: !prev[key] }));
+  function handleToggleFlag() {
+    if (!currentQuestion) return;
+    toggleFlag(currentKey);
   }
 
   function setFilterAndPersist(v: typeof filter) {
@@ -244,76 +247,67 @@ function ExamClient() {
     }
   }
 
-  // Persist progress periodically and on critical changes
   useEffect(() => {
-    if (!questions.length) return;
-    if (!endAtMs) return;
-    if (finished) return; // do not persist after finish
-    const answersByPosition: (string[] | null)[] = questions.map((q, pos) => {
-      const key = getKeyByStrategy(q, pos);
-      const v = answers[key];
-      return v && v.length ? [...v] : null;
-    });
-    const flagsByPosition: boolean[] = questions.map((q, pos) => {
-      const key = getKeyByStrategy(q, pos);
-      return !!flags[key];
-    });
+    if (!questions.length || !endAtMs || finished) return;
+    
+    const answersByPosition: (string[] | null)[] = [];
+    const flagsByPosition: boolean[] = [];
+    for(let i = 0; i < questions.length; i++) {
+      const q = questions[i];
+      const key = getKeyByStrategy(q, i);
+      const ans = answers.get(key);
+      answersByPosition.push(ans && ans.length ? [...ans] : null);
+      flagsByPosition.push(!!flags.get(key));
+    }
+
     const state: ExamSavedState = {
       version: 1,
-      bank: bankParam as QuestionBank,
+      bank: bankParam,
       timestamp: Date.now(),
       endAtMs: endAtMs,
-      index,
+      index: currentIndex,
       answersByPosition,
       flagsByPosition,
       total: questions.length,
       questionIds: questions.map((q) => (q.id || q.codes?.J || null)),
     };
     saveExamState(state);
-  }, [answers, flags, index, endAtMs, questions, bankParam, finished, getKeyByStrategy]);
+  }, [answers, flags, currentIndex, endAtMs, questions, bankParam, finished]);
 
-  // Intercept page unload during active exam
   useEffect(() => {
-    if (finished) return;
-    if (!endAtMs) return;
-    function onBeforeUnload(e: BeforeUnloadEvent) {
+    if (finished || !endAtMs) return;
+    const onBeforeUnload = (e: BeforeUnloadEvent) => {
       e.preventDefault();
       e.returnValue = "考试仍在进行，离开将可能导致进度丢失";
-    }
+    };
     window.addEventListener("beforeunload", onBeforeUnload);
     return () => window.removeEventListener("beforeunload", onBeforeUnload);
   }, [finished, endAtMs]);
 
   function handleResumeConfirm() {
     if (!pendingResume) return;
-    // Rebuild answers/flags/index
-    const restoredAnswers: Record<string, string[]> = {};
-    const restoredFlags: Record<string, boolean> = {};
+    const restoredAnswers = new Map<string, string[]>();
+    const restoredFlags = new Map<string, boolean>();
     for (let pos = 0; pos < questions.length; pos++) {
       const q = questions[pos];
       const key = getKeyByStrategy(q, pos);
       const ans = pendingResume.answersByPosition[pos] || null;
-      if (ans && ans.length) restoredAnswers[key] = ans;
-      const flagged = !!pendingResume.flagsByPosition[pos];
-      if (flagged) restoredFlags[key] = true;
+      if (ans && ans.length) restoredAnswers.set(key, ans);
+      if (pendingResume.flagsByPosition[pos]) restoredFlags.set(key, true);
     }
-    setAnswers(restoredAnswers);
-    setFlags(restoredFlags);
-    setIndex(Math.min(Math.max(pendingResume.index, 0), questions.length - 1));
-    setEndAtMs(pendingResume.endAtMs);
+    loadSavedState({
+      answers: restoredAnswers,
+      flags: restoredFlags,
+      currentIndex: Math.min(Math.max(pendingResume.index, 0), questions.length - 1),
+      endAtMs: pendingResume.endAtMs,
+    });
     setResumeOpen(false);
     setPendingResume(null);
   }
 
   function handleRestartConfirm() {
     clearExamSavedState(bankParam);
-    // Reset to current picked questions & timer
-    setIndex(0);
-    setAnswers({});
-    setFlags({});
-    const duration = rule.minutes * 60 * 1000;
-    const end = Date.now() + duration;
-    setEndAtMs(end);
+    startExam(bankParam, questions, rule.minutes);
     setResumeOpen(false);
     setPendingResume(null);
   }
@@ -344,7 +338,6 @@ function ExamClient() {
           </>
         }
       />
-      {/* Mobile info grid */}
       <div className="sm:hidden grid grid-cols-2 gap-x-3 gap-y-1 text-xs text-muted-foreground">
         <div>考试类别：{bankParam} 类</div>
         <div>
@@ -358,10 +351,10 @@ function ExamClient() {
       </div>
 
       <QuestionCard
-        index={index}
+        index={currentIndex}
         total={questions.length}
-        question={current}
-        selected={selected}
+        question={currentQuestion}
+        selected={selectedAnswers}
         onChange={setCurrentAnswer}
         showImmediateAnswer={finished}
         readOnly={finished}
@@ -370,14 +363,13 @@ function ExamClient() {
       <BottomBar
         statsNode={
           <>
-            已作答 {answeredCount} / {questions.length}｜标记{" "}
-            {Object.values(flags).filter(Boolean).length}
+            已作答 {answeredCount} / {questions.length}｜标记 {flaggedCount}
           </>
         }
         left={
           <Button
-            onClick={prev}
-            disabled={index === 0}
+            onClick={prevQuestion}
+            disabled={currentIndex === 0}
             variant="secondary"
             className="active:scale-[0.98] transition-transform"
           >
@@ -388,23 +380,21 @@ function ExamClient() {
           <>
             <Button
               variant="outline"
-              onClick={toggleFlagCurrent}
+              onClick={handleToggleFlag}
               className="active:scale-[0.98] transition-transform"
             >
-              {flags[getKeyByStrategy(current, index)] ? "取消标记" : "标记"}
+              {flags.get(currentKey) ? "取消标记" : "标记"}
             </Button>
             <Button
               variant="outline"
-              onClick={() => {
-                setAnswerCardOpen(true);
-              }}
+              onClick={() => setAnswerCardOpen(true)}
               className="active:scale-[0.98] transition-transform"
             >
               答题卡
             </Button>
             <Button
-              onClick={next}
-              disabled={index === questions.length - 1}
+              onClick={nextQuestion}
+              disabled={currentIndex === questions.length - 1}
               className="active:scale-[0.98] transition-transform"
             >
               下一题
@@ -423,16 +413,16 @@ function ExamClient() {
           <div className="grid grid-cols-2 gap-2">
             <Button
               className="w-full active:scale-[0.98] transition-transform"
-              onClick={prev}
-              disabled={index === 0}
+              onClick={prevQuestion}
+              disabled={currentIndex === 0}
               variant="secondary"
             >
               上一题
             </Button>
             <Button
               className="w-full active:scale-[0.98] transition-transform"
-              onClick={next}
-              disabled={index === questions.length - 1}
+              onClick={nextQuestion}
+              disabled={currentIndex === questions.length - 1}
             >
               下一题
             </Button>
@@ -443,24 +433,20 @@ function ExamClient() {
             <Button
               className="w-full active:scale-[0.98] transition-transform"
               variant="outline"
-              onClick={toggleFlagCurrent}
+              onClick={handleToggleFlag}
             >
-              {flags[getKeyByStrategy(current, index)] ? "取消标记" : "标记"}
+              {flags.get(currentKey) ? "取消标记" : "标记"}
             </Button>
             <Button
               className="w-full active:scale-[0.98] transition-transform"
               variant="outline"
-              onClick={() => {
-                setAnswerCardOpen(true);
-              }}
+              onClick={() => setAnswerCardOpen(true)}
             >
               答题卡
             </Button>
             <Button
               className="w-full active:scale-[0.98] transition-transform"
-              onClick={() => {
-                setConfirmOpen(true);
-              }}
+              onClick={() => setConfirmOpen(true)}
               variant="destructive"
               disabled={finished}
             >
@@ -470,7 +456,6 @@ function ExamClient() {
         }
       />
 
-      {/* 移除占位 Dialog，直接使用 ExamResultDialog */}
       <ExamResultDialog
         open={resultOpen}
         onOpenChange={setResultOpen}
@@ -480,7 +465,6 @@ function ExamClient() {
         passLine={rule.pass}
       />
 
-      {/* Answer Card Sheet */}
       <AnswerCardSheet
         open={answerCardOpen}
         onOpenChange={setAnswerCardOpen}
@@ -490,24 +474,23 @@ function ExamClient() {
         finished={finished}
         filter={filter}
         onChangeFilter={setFilterAndPersist}
-        onJumpTo={(i) => setIndex(i)}
-        currentIndex={index}
+        onJumpTo={jumpToQuestion}
+        currentIndex={currentIndex}
+        getKey={getKeyByStrategy}
       />
 
-      {/* Submit Confirm Dialog */}
       <ExamSubmitConfirmDialog
         open={confirmOpen}
         onOpenChange={setConfirmOpen}
         onConfirm={() => {
           setConfirmOpen(false);
-          submit();
+          handleSubmit();
         }}
         total={questions.length}
         answeredCount={answeredCount}
-        flaggedCount={Object.values(flags).filter(Boolean).length}
+        flaggedCount={flaggedCount}
       />
 
-      {/* Settings Dialog */}
       <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
       <ExamResumeDialog
         open={resumeOpen}

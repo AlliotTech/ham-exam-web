@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import type { QuestionItem, UserAnswer } from "@/types/question";
+import type { QuestionItem } from "@/types/question";
 import { Sheet, SheetContent, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -11,17 +11,20 @@ import { PreviewableImage } from "@/components/common/PreviewableImage";
 
 export type AnswerCardFilter = "all" | "unanswered" | "flagged";
 
+import type { AnswersMap, FlagsMap } from "@/store/exam";
+
 export type AnswerCardSheetProps = {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   questions: QuestionItem[];
-  answers: UserAnswer;
-  flags: Record<string, boolean>;
+  answers: AnswersMap;
+  flags: FlagsMap;
   finished: boolean;
   filter: AnswerCardFilter;
   onChangeFilter: (f: AnswerCardFilter) => void;
   onJumpTo: (index: number) => void;
   currentIndex?: number;
+  getKey: (q: QuestionItem, i: number) => string;
 };
 
 export function AnswerCardSheet({
@@ -35,39 +38,45 @@ export function AnswerCardSheet({
   onChangeFilter,
   onJumpTo,
   currentIndex = 0,
+  getKey,
 }: AnswerCardSheetProps) {
   // image preview handled by PreviewableImage
   const answeredCount = React.useMemo(() => {
     let c = 0;
-    for (let i = 0; i < questions.length; i++) {
-      const key = String(i);
-      if ((answers[key] ?? []).length > 0) c += 1;
-    }
+    answers.forEach((ans) => {
+      if (ans && ans.length > 0) c++;
+    });
     return c;
-  }, [answers, questions]);
+  }, [answers]);
 
-  const flaggedCount = React.useMemo(() => Object.values(flags).filter(Boolean).length, [flags]);
+  const flaggedCount = React.useMemo(() => {
+    let c = 0;
+    flags.forEach((flagged) => {
+      if (flagged) c++;
+    });
+    return c;
+  }, [flags]);
 
   function firstUnansweredIndex(): number {
     for (let i = 0; i < questions.length; i++) {
-      const key = String(i);
-      if (!(answers[key] && answers[key].length)) return i;
+      const key = getKey(questions[i], i);
+      if (!answers.has(key) || (answers.get(key) || []).length === 0) return i;
     }
     return -1;
   }
 
   function nextUnansweredIndex(from: number): number {
     for (let i = from + 1; i < questions.length; i++) {
-      const key = String(i);
-      if (!(answers[key] && answers[key].length)) return i;
+      const key = getKey(questions[i], i);
+      if (!answers.has(key) || (answers.get(key) || []).length === 0) return i;
     }
     return -1;
   }
 
   function nextFlaggedIndex(from: number): number {
     for (let i = from + 1; i < questions.length; i++) {
-      const key = String(i);
-      if (!!flags[key]) return i;
+      const key = getKey(questions[i], i);
+      if (flags.get(key)) return i;
     }
     return -1;
   }
@@ -154,16 +163,16 @@ export function AnswerCardSheet({
           </div>
           <div className="grid grid-cols-6 gap-2 sm:grid-cols-8">
             {questions.map((q, i) => {
-               const key = String(i);
-              const isAnswered = (answers[key] ?? []).length > 0;
-              const isFlagged = !!flags[key];
+              const key = getKey(q, i);
+              const userAnswer = answers.get(key) || [];
+              const isAnswered = userAnswer.length > 0;
+              const isFlagged = !!flags.get(key);
               const selectedForFilter =
                 filter === "all" ||
                 (filter === "unanswered" && !isAnswered) ||
                 (filter === "flagged" && isFlagged);
               if (!selectedForFilter) return null;
-              const userSel = answers[key] ?? [];
-              const correct = arraysEqual(sorted(userSel), sorted(q.answer_keys));
+              const correct = arraysEqual(sorted(userAnswer), sorted(q.answer_keys));
               return (
                 <div key={`q-${i}`} className="relative">
                   <button
