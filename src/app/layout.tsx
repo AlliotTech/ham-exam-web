@@ -67,7 +67,7 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen min-h-[100dvh] flex flex-col`}
       >
         <PWAUpdatePrompt />
         <main className="flex-1">{children}</main>
