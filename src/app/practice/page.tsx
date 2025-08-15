@@ -2,8 +2,8 @@
 
 import * as React from "react";
 import { Suspense, useEffect, useState, useRef, useDeferredValue, useMemo } from "react";
-import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
-import type { QuestionItem, UserAnswer } from "@/types/question";
+import { loadQuestions, type QuestionBank } from "@/lib/load-questions";
+import type { QuestionItem } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
 import { Search, Settings } from "lucide-react";
@@ -12,7 +12,6 @@ import { BottomBar } from "@/components/exam/bottom-bar";
 import { useNoSiteFooter } from "@/hooks/useNoSiteFooter";
 import { useQuestionShortcuts } from "@/hooks/useQuestionShortcuts";
 import { QuestionProgressHeader } from "@/components/common/question-progress-header";
-import { useQuestionNavigator } from "@/hooks/useQuestionNavigator";
 import { PracticeResumeDialog } from "@/components/practice/PracticeResumeDialog";
 import { PracticeSettingsDialog } from "@/components/practice/PracticeSettingsDialog";
 import { PracticeSearchDialog } from "@/components/practice/PracticeSearchDialog";
@@ -29,16 +28,17 @@ import {
   shouldResume,
   type SavedState,
 } from "@/lib/practice-storage";
+import { usePracticeStore, type AnswersMap } from "@/store/practice";
+
+const getKeyByStrategy = (q: QuestionItem | undefined, pos: number) => {
+  if (!q) return `pos:${pos}`;
+  return (q.id || q.codes?.J || `pos:${pos}`).toString();
+};
 
 function PracticeClient() {
   useNoSiteFooter();
-  const [loading, setLoading] = useState(true);
-  const [allQuestions, setAllQuestions] = useState<QuestionItem[]>([]);
-  const [questions, setQuestions] = useState<QuestionItem[]>([]);
-  const [order, setOrder] = useState<"sequential" | "random">("sequential");
+  // Component-level UI state
   const [jumpInput, setJumpInput] = useState("");
-  const [showAnswer, setShowAnswer] = useState<boolean>(true);
-  // Debounced search state derived via useDeferredValue/useMemo
   const [resumeOpen, setResumeOpen] = useState(false);
   const [pendingResume, setPendingResume] = useState<null | SavedState>(null);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -51,178 +51,135 @@ function PracticeClient() {
   const search = useSearchParams();
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
 
+  const {
+    allQuestions,
+    questions,
+    currentIndex,
+    answers,
+    order,
+    showAnswer,
+    isLoading,
+    loadBank,
+    setOrder,
+    nextQuestion,
+    prevQuestion,
+    jumpToQuestion,
+    answer,
+    toggleShowAnswer,
+    reset,
+    applySavedState,
+  } = usePracticeStore();
+
   // Initialize 'no prompt for this bank' checkbox from storage
   useEffect(() => {
     setNoPromptThisBank(!!loadNoResume(bankParam));
   }, [bankParam]);
 
+  // Load questions for the bank
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
-        const qs = await loadQuestions(bankParam as QuestionBank, { strict: true });
-        setAllQuestions(qs);
-        setQuestions(order === "random" ? shuffle(qs) : qs);
-        setIndex(0);
-        setAnswers({});
+        const qs = await loadQuestions(bankParam, { strict: true });
+        loadBank(bankParam, qs);
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
-      } finally {
-        setLoading(false);
       }
     })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bankParam]);
+    
+    return () => {
+      reset();
+    }
+  }, [bankParam, loadBank, reset]);
 
-  // Initialize order from last saved preference once questions are loaded
+  // Initialize order from last saved preference
   useEffect(() => {
-    if (!allQuestions.length) return;
+    if (isLoading) return;
     const last = loadLastMode();
     if (last && last !== order) {
-      applyOrder(last);
+      setOrder(last);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [allQuestions]);
+  }, [isLoading, order, setOrder]);
 
-  // After loading questions, check if there is a saved progress to optionally resume (only for sequential)
+  // Check for saved progress to resume
   useEffect(() => {
-    if (!allQuestions.length) return;
-    if (order !== "sequential") return;
+    if (isLoading || order !== "sequential" || loadNoResume(bankParam)) return;
     const lastMode = loadLastMode();
-    if (lastMode === "random") return; // if user last used random, do not prompt
-    if (loadNoResume(bankParam)) return; // user opted out for this bank
+    if (lastMode === "random") return;
+    
     const saved = loadSavedState(bankParam);
-    if (!saved) return;
-    // Validate saved state
-    if (saved.total !== allQuestions.length) return;
-    if (saved.order !== "sequential") return;
-    if (shouldResume(saved)) {
+    if (saved && saved.total === allQuestions.length && saved.order === "sequential" && shouldResume(saved)) {
       setPendingResume(saved);
       setResumeOpen(true);
     }
-    // do not auto-apply; wait for user choice
-  }, [bankParam, allQuestions, order]);
+  }, [bankParam, allQuestions.length, order, isLoading]);
 
-  const {
-    index,
-    setIndex,
-    selected: selectedFromHook,
-    setCurrentAnswer,
-    answers,
-    setAnswers,
-    answeredCount,
-    next,
-    prev,
-    getKeyByStrategy,
-  } = useQuestionNavigator({ questions, keyStrategy: "position" });
-  const current = questions[index];
-  const selected = current ? selectedFromHook : [];
-  const percent = questions.length ? Math.round(((index + 1) / questions.length) * 100) : 0;
+  const currentQuestion = questions[currentIndex];
+  const selectedAnswers = currentQuestion ? answers.get(getKeyByStrategy(currentQuestion, currentIndex)) || [] : [];
+  const percent = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
-  function applyOrder(nextOrder: "sequential" | "random") {
+  function handleSetOrder(nextOrder: "sequential" | "random") {
     setOrder(nextOrder);
-    if (!allQuestions.length) return;
-    if (nextOrder === "random") {
-      setQuestions(shuffle(allQuestions));
-    } else {
-      setQuestions(allQuestions);
-    }
-    setIndex(0);
-    setAnswers({});
     saveLastMode(nextOrder);
-    // When switching to sequential, if there is a saved record, prompt to resume
+    // Prompt for resume if switching to sequential and a valid save exists
     if (nextOrder === "sequential") {
       const saved = loadSavedState(bankParam);
-      if (
-        saved &&
-        saved.order === "sequential" &&
-        saved.total === allQuestions.length &&
-        !loadNoResume(bankParam) &&
-        shouldResume(saved)
-      ) {
+      if (saved && saved.order === "sequential" && saved.total === allQuestions.length && !loadNoResume(bankParam) && shouldResume(saved)) {
         setPendingResume(saved);
         setResumeOpen(true);
       }
     }
   }
 
-  function handleJump() {
-    if (order !== "sequential") return;
-    const raw = normalizeJ(jumpInput);
-    if (!raw) return;
-    // 1) exact/partial J match
-    let pos = questions.findIndex((q) => {
-      const j = (q.codes?.J || "").toUpperCase();
-      if (!j) return false;
-      if (j === raw) return true; // exact
-      if (j.includes(","))
-        return j
-          .split(",")
-          .map((s) => s.trim())
-          .includes(raw);
-      return false;
-    });
-    // 2) fallback: partial J contains, e.g., input "LK05" should navigate to first match
-    if (pos < 0) {
-      pos = questions.findIndex((q) => {
-        const j = (q.codes?.J || "").toUpperCase();
-        return j.includes(raw);
-      });
-    }
-    // 3) fallback: keyword in question text
-    if (pos < 0) {
-      const keyword = jumpInput.trim().toUpperCase();
-      pos = questions.findIndex((q) => q.question.toUpperCase().includes(keyword));
-    }
-    if (pos >= 0) {
-      setIndex(pos);
-    } else {
-      alert(`未找到题号：${raw}`);
-    }
+  function handleSetCurrentAnswer(newAnswer: string[]) {
+    if (!currentQuestion) return;
+    const key = getKeyByStrategy(currentQuestion, currentIndex);
+    answer(key, newAnswer);
   }
 
-  // Persist progress (only in sequential mode)
+  // Persist progress (sequential mode only)
   useEffect(() => {
-    if (!questions.length) return;
-    if (order !== "sequential") return;
-    const orderIndices = questions.map((q) => allQuestions.indexOf(q));
-    if (orderIndices.some((i) => i < 0)) return;
-    const answersByPosition: (string[] | null)[] = questions.map((q, pos) => {
-      const key = getKeyByStrategy(q, pos);
-      return answers[key] ? [...answers[key]] : null;
-    });
-    const answeredCount = answersByPosition.filter(Boolean).length;
-    // Avoid saving empty progress (initial load)
-    if (index === 0 && answeredCount === 0) return;
+    if (isLoading || order !== "sequential") return;
+
+    const answersByPosition: (string[] | null)[] = [];
+    for(let i = 0; i < questions.length; i++) {
+        const q = questions[i];
+        const key = getKeyByStrategy(q, i);
+        const ans = answers.get(key);
+        answersByPosition.push(ans && ans.length > 0 ? [...ans] : null);
+    }
+    
+    if (currentIndex === 0 && answersByPosition.filter(Boolean).length === 0) return;
+
     const payload: SavedState = {
       version: 1,
-      bank: bankParam as QuestionBank,
+      bank: bankParam,
       timestamp: Date.now(),
-      index,
+      index: currentIndex,
       order,
       showAnswer,
-      orderIndices,
+      orderIndices: questions.map((q) => allQuestions.indexOf(q)).filter(i => i >= 0),
       answersByPosition,
       total: allQuestions.length,
     };
     saveState(payload);
-  }, [allQuestions, questions, index, answers, order, showAnswer, bankParam, getKeyByStrategy]);
+  }, [allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
 
-  // live suggestions based on J code or question text (sequential mode only)
+  // Search functionality
   const deferredJump = useDeferredValue(jumpInput);
   const jumpQueryUpper = useMemo(() => {
     if (order !== "sequential") return "";
     return deferredJump.trim().toUpperCase();
   }, [order, deferredJump]);
+
   const computedMatches = useMemo(() => {
     if (!jumpQueryUpper) return [] as { pos: number; j: string; text: string }[];
     const results: { pos: number; j: string; text: string }[] = [];
     for (let i = 0; i < questions.length; i++) {
       const item = questions[i];
       const jraw = (item.codes?.J || "").toUpperCase();
-      const jParts = jraw ? jraw.split(",").map((s) => s.trim()) : [];
-      const byJ = jParts.some((p) => p.includes(jumpQueryUpper));
+      const jParts = jraw ? jraw.split(",").map((s: string) => s.trim()) : [];
+      const byJ = jParts.some((p: string) => p.includes(jumpQueryUpper));
       const byText = item.question.toUpperCase().includes(jumpQueryUpper);
       if (byJ || byText) {
         results.push({ pos: i, j: jParts[0] || "-", text: item.question });
@@ -231,31 +188,53 @@ function PracticeClient() {
     }
     return results;
   }, [jumpQueryUpper, questions]);
+
   const jumpLoading = useMemo(() => {
     if (order !== "sequential") return false;
     const raw = jumpInput.trim();
-    if (!raw) return false;
-    return deferredJump.trim() !== raw;
+    return raw ? deferredJump.trim() !== raw : false;
   }, [order, jumpInput, deferredJump]);
+
+  function handleJump() {
+    if (order !== "sequential") return;
+    const raw = normalizeJ(jumpInput);
+    if (!raw) return;
+    let pos = questions.findIndex((q) => {
+      const j = (q.codes?.J || "").toUpperCase();
+      if (!j) return false;
+      if (j === raw || j.split(",").map((s: string) => s.trim()).includes(raw)) return true;
+      return false;
+    });
+    if (pos < 0) pos = questions.findIndex((q) => (q.codes?.J || "").toUpperCase().includes(raw));
+    if (pos < 0) pos = questions.findIndex((q) => q.question.toUpperCase().includes(jumpInput.trim().toUpperCase()));
+    
+    if (pos >= 0) {
+      jumpToQuestion(pos);
+    } else {
+      alert(`未找到题号：${raw}`);
+    }
+  }
 
   function handleResume() {
     if (!pendingResume) return;
-    const { order: savedOrder, orderIndices, answersByPosition, index: savedIndex } = pendingResume;
-    // Apply order and reconstruct questions
-    const qs = allQuestions;
-    const reconstructed = orderIndices.map((orig) => qs[orig]).filter(Boolean) as QuestionItem[];
-    setQuestions(reconstructed);
-    setOrder(savedOrder);
-    // Rebuild answers keyed by current position-dependent keys
-    const restored: UserAnswer = {};
+    const { orderIndices, answersByPosition, index: savedIndex, showAnswer: savedShowAnswer } = pendingResume;
+    
+    const reconstructed = orderIndices.map((origIdx) => allQuestions[origIdx]).filter(Boolean) as QuestionItem[];
+    const restoredAnswers: AnswersMap = new Map();
     reconstructed.forEach((q, pos) => {
       const key = getKeyByStrategy(q, pos);
       const val = answersByPosition[pos];
-      if (val && val.length) restored[key] = val;
+      if (val && val.length) restoredAnswers.set(key, val);
     });
-    setAnswers(restored);
-    setIndex(Math.min(Math.max(savedIndex, 0), reconstructed.length - 1));
-    setShowAnswer(pendingResume.showAnswer);
+
+    applySavedState({
+      order: 'sequential',
+      questions: reconstructed,
+      answers: restoredAnswers,
+      currentIndex: Math.min(Math.max(savedIndex, 0), reconstructed.length - 1),
+      showAnswer: savedShowAnswer,
+    });
+
     if (noPromptThisBank) saveNoResume(bankParam, true);
     setResumeOpen(false);
     setPendingResume(null);
@@ -263,65 +242,56 @@ function PracticeClient() {
 
   function handleRestart() {
     clearSavedState(bankParam);
-    // Reset to current order setting
-    if (order === "random") setQuestions(shuffle(allQuestions));
-    else setQuestions(allQuestions);
-    setIndex(0);
-    setAnswers({});
+    setOrder(order); // re-apply current order to reset questions
     if (noPromptThisBank) saveNoResume(bankParam, true);
     setResumeOpen(false);
     setPendingResume(null);
   }
 
-  // Keyboard shortcuts: Left/Right to navigate; 1-9 to pick option (single-choice); Enter to open search in sequential
   useQuestionShortcuts({
-    onPrev: prev,
-    onNext: next,
+    onPrev: prevQuestion,
+    onNext: nextQuestion,
     onSelectDigit: (n, detail) => {
-      const opt = current?.options?.[n - 1];
+      const opt = currentQuestion?.options?.[n - 1];
       if (!opt) return;
-      if (current?.type === "multiple") {
+      if (currentQuestion?.type === "multiple") {
         const isStrict = detail?.shiftKey === true || detail?.metaKey === true;
         if (isStrict) {
-          setCurrentAnswer([opt.key]);
+          handleSetCurrentAnswer([opt.key]);
         } else {
-          const set = new Set(selected);
-          if (set.has(opt.key)) set.delete(opt.key);
-          else set.add(opt.key);
-          setCurrentAnswer(Array.from(set));
+          const newSelection = new Set(selectedAnswers);
+          if (newSelection.has(opt.key)) newSelection.delete(opt.key);
+          else newSelection.add(opt.key);
+          handleSetCurrentAnswer(Array.from(newSelection));
         }
       } else {
-        setCurrentAnswer([opt.key]);
+        handleSetCurrentAnswer([opt.key]);
       }
     },
     enableEnterSearch: order === "sequential",
     onEnterSearch: () => setSearchOpen(true),
   });
 
-  // One-time settings auto prompt (do not interfere with resume dialog)
   useEffect(() => {
-    if (autoHelpShownRef.current) return;
-    if (typeof window === "undefined") return;
+    if (autoHelpShownRef.current || typeof window === "undefined") return;
     const seen = window.localStorage.getItem("ui:shortcutsHelpSeen:practice") === "1";
     if (seen) {
       autoHelpShownRef.current = true;
       return;
     }
-    if (!resumeOpen && allQuestions.length) {
+    if (!resumeOpen && !isLoading) {
       autoHelpShownRef.current = true;
       const timer = setTimeout(() => {
         setSettingsOpen(true);
         try {
           window.localStorage.setItem("ui:shortcutsHelpSeen:practice", "1");
-        } catch {
-          /* noop */
-        }
+        } catch {}
       }, 300);
       return () => clearTimeout(timer);
     }
-  }, [allQuestions.length, resumeOpen]);
+  }, [isLoading, resumeOpen]);
 
-  if (loading) return <div className="p-6">加载题库中...</div>;
+  if (isLoading) return <div className="p-6">加载题库中...</div>;
   if (!questions.length) return <div className="p-6">题库暂不可用或为空</div>;
 
   return (
@@ -330,7 +300,7 @@ function PracticeClient() {
         open={resumeOpen}
         onOpenChange={setResumeOpen}
         noPromptThisBank={noPromptThisBank}
-        setNoPromptThisBank={(v) => setNoPromptThisBank(v)}
+        setNoPromptThisBank={setNoPromptThisBank}
         onRestart={handleRestart}
         onResume={handleResume}
       />
@@ -365,9 +335,9 @@ function PracticeClient() {
         open={settingsOpen}
         onOpenChange={setSettingsOpen}
         order={order}
-        onChangeOrder={(v) => applyOrder(v)}
+        onChangeOrder={handleSetOrder}
         showAnswer={showAnswer}
-        onChangeShowAnswer={(v) => setShowAnswer(v)}
+        onChangeShowAnswer={toggleShowAnswer}
       />
       <PracticeSearchDialog
         open={order === "sequential" && searchOpen}
@@ -376,26 +346,29 @@ function PracticeClient() {
         setJumpInput={setJumpInput}
         computedMatches={computedMatches}
         jumpLoading={jumpLoading}
-        onPick={(pos) => setIndex(pos)}
-        onJump={() => handleJump()}
+        onPick={jumpToQuestion}
+        onJump={handleJump}
       />
 
       <QuestionCard
-        index={index}
+        index={currentIndex}
         total={questions.length}
-        question={current}
-        selected={selected}
-        onChange={setCurrentAnswer}
+        question={currentQuestion}
+        selected={selectedAnswers}
+        onChange={handleSetCurrentAnswer}
         showImmediateAnswer={showAnswer}
       />
 
       <BottomBar
-        answeredCount={answeredCount}
-        total={questions.length}
+        statsNode={
+            <>
+                题库：{bankParam} 类｜模式：{order === 'sequential' ? '顺序练习' : '随机练习'}｜进度：{currentIndex + 1} / {questions.length}
+            </>
+        }
         left={
           <Button
-            onClick={prev}
-            disabled={index === 0}
+            onClick={prevQuestion}
+            disabled={currentIndex === 0}
             variant="secondary"
             className="active:scale-[0.98] transition-transform"
           >
@@ -404,8 +377,8 @@ function PracticeClient() {
         }
         right={
           <Button
-            onClick={next}
-            disabled={index === questions.length - 1}
+            onClick={nextQuestion}
+            disabled={currentIndex === questions.length - 1}
             className="active:scale-[0.98] transition-transform"
           >
             下一题
@@ -415,16 +388,16 @@ function PracticeClient() {
           <div className="grid grid-cols-2 gap-2">
             <Button
               className="w-full active:scale-[0.98] transition-transform"
-              onClick={prev}
-              disabled={index === 0}
+              onClick={prevQuestion}
+              disabled={currentIndex === 0}
               variant="secondary"
             >
               上一题
             </Button>
             <Button
               className="w-full active:scale-[0.98] transition-transform"
-              onClick={next}
-              disabled={index === questions.length - 1}
+              onClick={nextQuestion}
+              disabled={currentIndex === questions.length - 1}
             >
               下一题
             </Button>

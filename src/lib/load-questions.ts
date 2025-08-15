@@ -1,5 +1,7 @@
 import type { QuestionItem } from "@/types/question";
 
+export type { QuestionItem };
+
 export type QuestionBank = "A" | "B" | "C";
 
 export function resolveQuestionsUrl(bank?: QuestionBank): string {
