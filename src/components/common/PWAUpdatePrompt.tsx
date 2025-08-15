@@ -37,21 +37,25 @@ export function PWAUpdatePrompt() {
         document.addEventListener("visibilitychange", onVisibility);
         removeVisibility = () => document.removeEventListener("visibilitychange", onVisibility);
 
-        // If a SW is waiting after updatefound, show prompt
+        const onUpdate = () => {
+          const installingWorker = reg.installing;
+          if (installingWorker) {
+            installingWorker.onstatechange = () => {
+              if (installingWorker.state === "installed" && navigator.serviceWorker.controller) {
+                setWaitingWorker(installingWorker);
+                setOpen(true);
+              }
+            };
+          }
+        };
+
+        // First time registration may have waiting worker
         if (reg.waiting) {
           setWaitingWorker(reg.waiting);
           setOpen(true);
         }
-        reg.addEventListener("updatefound", () => {
-          const sw = reg.installing;
-          if (!sw) return;
-          sw.addEventListener("statechange", () => {
-            if (sw.state === "installed" && navigator.serviceWorker.controller) {
-              setWaitingWorker(reg.waiting || sw);
-              setOpen(true);
-            }
-          });
-        });
+
+        reg.addEventListener("updatefound", onUpdate);
       })
       .catch(() => {});
 
