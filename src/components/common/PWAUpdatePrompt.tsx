@@ -12,16 +12,8 @@ export function PWAUpdatePrompt() {
   useEffect(() => {
     if (typeof window === "undefined" || !("serviceWorker" in navigator)) return;
 
-    function onControllerChange() {
-      // The new SW has taken control; reload to get fresh content
-      setOpen(false);
-      setWaitingWorker(null);
-      try {
-        window.location.reload();
-      } catch {}
-    }
-
-    navigator.serviceWorker.addEventListener("controllerchange", onControllerChange);
+    // The controllerchange event is too broad and can cause a flash of the prompt.
+    // It's better to handle the reload manually after the user clicks the update button.
 
     let removeVisibility: (() => void) | undefined;
     navigator.serviceWorker.ready
@@ -60,7 +52,6 @@ export function PWAUpdatePrompt() {
       .catch(() => {});
 
     return () => {
-      navigator.serviceWorker.removeEventListener("controllerchange", onControllerChange);
       if (removeVisibility) removeVisibility();
     };
   }, []);
@@ -74,7 +65,8 @@ export function PWAUpdatePrompt() {
     try {
       waitingWorker.postMessage({ type: "skip-waiting" });
     } catch {}
-    // After controllerchange listener will close the dialog
+    // Reload the page to apply the update
+    window.location.reload();
   }
 
   return (
