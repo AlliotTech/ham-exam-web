@@ -32,7 +32,7 @@ const pwa = withPWA({
 	dest: "public",
 	disable: isDev,
 	register: true,
-	skipWaiting: true,
+	skipWaiting: false,
 	sw: "sw.js",
 	runtimeCaching: [
 		{
