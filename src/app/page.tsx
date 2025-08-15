@@ -58,7 +58,12 @@ export default function Home() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <div className="text-sm text-muted-foreground">选择题库</div>
+            <div className="flex items-baseline justify-between">
+              <div className="text-sm text-muted-foreground">选择题库</div>
+              <div className="text-xs text-muted-foreground">
+                当前题库为 2025 年 10 月版本
+              </div>
+            </div>
             <RadioGroup
               className="flex gap-6"
               value={bank}
