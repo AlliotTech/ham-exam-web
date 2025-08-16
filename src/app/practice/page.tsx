@@ -142,14 +142,18 @@ function PracticeClient() {
     if (isLoading || order !== "sequential") return;
 
     const answersByPosition: (string[] | null)[] = [];
-    for(let i = 0; i < questions.length; i++) {
-        const q = questions[i];
-        const key = getKeyByStrategy(q, i);
-        const ans = answers.get(key);
-        answersByPosition.push(ans && ans.length > 0 ? [...ans] : null);
+    for (let i = 0; i < questions.length; i++) {
+      const q = questions[i];
+      const key = getKeyByStrategy(q, i);
+      const ans = answers.get(key);
+      answersByPosition.push(ans && ans.length > 0 ? [...ans] : null);
     }
-    
+
     if (currentIndex === 0 && answersByPosition.filter(Boolean).length === 0) return;
+
+    // Build order indices relative to original question set; if any missing, skip saving to avoid misalignm
+    const orderIndices = questions.map((q) => allQuestions.indexOf(q));
+    if (orderIndices.some((i) => i < 0)) return;
 
     const payload: SavedState = {
       version: 1,
@@ -158,7 +162,7 @@ function PracticeClient() {
       index: currentIndex,
       order,
       showAnswer,
-      orderIndices: questions.map((q) => allQuestions.indexOf(q)).filter(i => i >= 0),
+      orderIndices,
       answersByPosition,
       total: allQuestions.length,
     };
