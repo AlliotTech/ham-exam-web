@@ -161,6 +161,6 @@ pnpm build
   - 搜索功能仅在“顺序模式”开启，支持 J 码与关键词。
 
 ## 致谢
-
+- [Tencent EdgeOne](https://edgeone.ai/?from=github)  [<img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="图片" style="height: 1em; vertical-align: middle;">](https://edgeone.ai/?from=github)
 - 题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`
 - 技术栈：Next.js、React、Tailwind CSS、Radix UI、Lucide Icons
