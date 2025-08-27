@@ -2,16 +2,64 @@ import type { QuestionBankConfig, QuestionVersion, QuestionVersionId, QuestionBa
 
 export class QuestionBankManager {
   private config: QuestionBankConfig | null = null;
+  private configVersion: string | null = null;
 
-  async loadConfig(): Promise<QuestionBankConfig> {
-    if (this.config) return this.config;
+  async loadConfig(forceRefresh = false): Promise<QuestionBankConfig> {
+    // 只有在强制刷新时才清除缓存
+    if (forceRefresh) {
+      this.config = null;
+      this.configVersion = null;
+    }
 
-    const response = await fetch('/questions/config.json', { cache: 'force-cache' });
+    if (this.config && !forceRefresh) return this.config;
+
+    // 使用 no-cache 避免浏览器缓存问题，同时添加时间戳参数防止缓存
+    const timestamp = Date.now();
+    const response = await fetch(`/questions/config.json?t=${timestamp}`, {
+      cache: 'no-cache',
+      headers: {
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        'Pragma': 'no-cache'
+      }
+    });
+
     if (!response.ok) throw new Error('Failed to load question bank config');
 
-    this.config = await response.json();
+    const newConfig = await response.json();
+    if (!newConfig) throw new Error('Invalid question bank config');
+
+    // 检查配置文件是否更新
+    if (this.configVersion && newConfig.version !== this.configVersion) {
+      // 配置文件已更新，清除相关缓存
+      this.clearRelatedCache();
+    }
+
+    this.config = newConfig;
+    this.configVersion = newConfig.version;
     if (!this.config) throw new Error('Invalid question bank config');
     return this.config;
+  }
+
+  private clearRelatedCache(): void {
+    // 清除版本状态缓存
+    if (typeof window !== 'undefined') {
+      try {
+        // 发送事件通知其他组件配置文件已更新
+        window.dispatchEvent(new CustomEvent('questionBankConfigUpdated'));
+      } catch (error) {
+        console.warn('Failed to dispatch config update event:', error);
+      }
+    }
+  }
+
+  // 提供强制刷新方法
+  async refreshConfig(): Promise<QuestionBankConfig> {
+    return this.loadConfig(true);
+  }
+
+  // 获取当前配置版本
+  getConfigVersion(): string | null {
+    return this.configVersion;
   }
 
   async getLatestVersion(): Promise<QuestionVersion | null> {
@@ -19,13 +67,13 @@ export class QuestionBankManager {
     return config.versions.find(v => v.isLatest) || null;
   }
 
-  async getVersion(versionId: QuestionVersionId): Promise<QuestionVersion | null> {
-    const config = await this.loadConfig();
+  async getVersion(versionId: QuestionVersionId, forceRefresh = false): Promise<QuestionVersion | null> {
+    const config = await this.loadConfig(forceRefresh);
     return config.versions.find(v => v.id === versionId) || null;
   }
 
-  async getAllVersions(): Promise<QuestionVersion[]> {
-    const config = await this.loadConfig();
+  async getAllVersions(forceRefresh = false): Promise<QuestionVersion[]> {
+    const config = await this.loadConfig(forceRefresh);
     return config.versions.sort((a, b) =>
       new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
     );

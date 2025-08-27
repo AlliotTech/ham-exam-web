@@ -1,4 +1,6 @@
 {
+  "version": "1.0.0",
+  "lastModified": "2025-08-27T12:00:00Z",
   "versions": [
     {
       "id": "2025-10",
@@ -19,7 +21,7 @@
           "description": "C类题库"
         }
       },
-      "updatedAt": "2025-10-01T00:00:00Z"
+      "updatedAt": "2025-08-27T12:00:00Z"
     }
   ]
 }

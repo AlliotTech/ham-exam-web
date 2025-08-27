@@ -84,11 +84,34 @@ export async function loadQuestions(
 export async function loadQuestionsWithVersion(
   versionId: QuestionVersionId | undefined,
   bank: QuestionBankType,
-  opts?: { strict?: boolean },
+  opts?: { strict?: boolean; forceRefresh?: boolean },
 ): Promise<QuestionItem[]> {
   const strict = opts?.strict ?? false;
+  const forceRefresh = opts?.forceRefresh ?? false;
+
   const url = await resolveQuestionsUrlWithVersion(versionId, bank);
-  const res = await fetch(url, { cache: "force-cache" });
+
+  // 根据是否强制刷新选择缓存策略
+  const cacheStrategy = forceRefresh ? 'no-cache' : 'force-cache';
+
+  // 添加时间戳参数防止缓存
+  const separator = url.includes('?') ? '&' : '?';
+  const finalUrl = forceRefresh ? `${url}${separator}t=${Date.now()}` : url;
+
+  const fetchOptions: RequestInit = {
+    cache: cacheStrategy,
+  };
+
+  // 只在强制刷新时添加headers
+  if (forceRefresh) {
+    fetchOptions.headers = {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    };
+  }
+
+  const res = await fetch(finalUrl, fetchOptions);
+
   if (!res.ok) throw new Error("Failed to load questions JSON");
   const data = (await res.json()) as QuestionItem[];
   if (strict && (!Array.isArray(data) || data.length === 0)) {

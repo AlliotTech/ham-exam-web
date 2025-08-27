@@ -15,8 +15,19 @@ export interface VersionStatusMap {
 
 export class VersionStatusManager {
   private statusCache: VersionStatusMap = {};
-  private readonly CACHE_DURATION = 5 * 60 * 1000; // 5分钟缓存
+  private readonly CACHE_DURATION = 60 * 1000; // 缩短到1分钟
+  private readonly SHORT_CACHE_DURATION = 10 * 1000; // 新增短缓存，用于不可用状态
   private checkingPromises: Map<string, Promise<VersionStatus>> = new Map();
+
+  constructor() {
+    // 监听配置文件更新事件
+    if (typeof window !== 'undefined') {
+      window.addEventListener('questionBankConfigUpdated', () => {
+        console.log('配置文件已更新，清除版本状态缓存');
+        this.clearCache();
+      });
+    }
+  }
 
   /**
    * 获取版本状态，支持缓存
@@ -28,7 +39,13 @@ export class VersionStatusManager {
     // 检查缓存是否有效
     if (!forceRefresh && this.statusCache[cacheKey]) {
       const cached = this.statusCache[cacheKey];
-      if (now - cached.lastChecked < this.CACHE_DURATION) {
+      const age = now - cached.lastChecked;
+
+      // 根据状态类型使用不同缓存时间
+      // 可用版本使用较长缓存时间，不可用的使用短缓存时间
+      const maxAge = cached.isAvailable ? this.CACHE_DURATION : this.SHORT_CACHE_DURATION;
+
+      if (age < maxAge) {
         return cached;
       }
     }
@@ -93,6 +110,17 @@ export class VersionStatusManager {
    */
   async refreshVersionStatus(versionId: QuestionVersionId): Promise<VersionStatus> {
     return this.getVersionStatus(versionId, true);
+  }
+
+  /**
+   * 刷新所有版本状态
+   */
+  async refreshAllVersionStatuses(): Promise<VersionStatus[]> {
+    const allVersions = await questionBankManager.getAllVersions(true);
+    const refreshPromises = allVersions.map(version =>
+      this.refreshVersionStatus(version.id)
+    );
+    return Promise.all(refreshPromises);
   }
 
   /**

@@ -111,8 +111,8 @@ function ExamClient() {
     (async () => {
       try {
         setLoading(true);
-        const allQuestions = await loadQuestionsWithVersion(versionParam, bankParam, { strict: true });
-        const saved = loadExamSavedStateWithVersion(bankParam, versionParam);
+        const allQuestions = await loadQuestionsWithVersion(versionParam || undefined, bankParam, { strict: true });
+        const saved = loadExamSavedStateWithVersion(bankParam, versionParam || undefined);
 
         if (saved && shouldResumeExam(saved)) {
           setPendingResume(saved);
@@ -168,7 +168,7 @@ function ExamClient() {
   function handleSubmit() {
     submitExam();
     setResultOpen(true);
-    clearExamSavedStateWithVersion(bankParam, versionParam);
+    clearExamSavedStateWithVersion(bankParam, versionParam || undefined);
   }
 
   const remainingMs = useCountdown(endAtMs, () => {
@@ -265,7 +265,7 @@ function ExamClient() {
     const state: ExamSavedState = {
       version: 2,
       bank: bankParam,
-      versionId: versionParam,
+      versionId: versionParam || undefined,
       timestamp: Date.now(),
       endAtMs: endAtMs,
       index: currentIndex,
@@ -309,7 +309,7 @@ function ExamClient() {
   }
 
   function handleRestartConfirm() {
-    clearExamSavedState(bankParam);
+    clearExamSavedStateWithVersion(bankParam, versionParam || undefined);
     startExam(bankParam, questions, rule.minutes);
     setResumeOpen(false);
     setPendingResume(null);

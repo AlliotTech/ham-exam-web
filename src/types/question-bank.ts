@@ -17,6 +17,8 @@ export interface QuestionVersion {
 }
 
 export interface QuestionBankConfig {
+  version: string;
+  lastModified: string;
   versions: QuestionVersion[];
 }
 

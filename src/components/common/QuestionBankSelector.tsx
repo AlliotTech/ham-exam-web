@@ -1,11 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, XCircle, AlertCircle, Loader2 } from "lucide-react";
+import { CheckCircle, XCircle, AlertCircle, Loader2, RefreshCw } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// 刷新按钮状态枚举
+enum RefreshState {
+  IDLE = 'idle',
+  LOADING = 'loading',
+  SUCCESS = 'success',
+  ERROR = 'error'
+}
 import { questionBankManager } from "@/lib/question-bank-manager";
 import { versionStatusManager } from "@/lib/version-status-manager";
 import type { QuestionVersion, QuestionVersionId, QuestionBankType } from "@/types/question-bank";
@@ -36,50 +46,66 @@ export function QuestionBankSelector({
 }: QuestionBankSelectorProps) {
   const [versions, setVersions] = useState<VersionWithStatus[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshState, setRefreshState] = useState<RefreshState>(RefreshState.IDLE);
+
+  const loadVersionsWithStatus = useCallback(async () => {
+    try {
+      setLoading(true);
+      const [allVersions, statusResults] = await Promise.all([
+        questionBankManager.getAllVersions(),
+        versionStatusManager.getAllVersionStatuses()
+      ]);
+
+      // 合并版本信息和状态信息
+      const versionsWithStatus: VersionWithStatus[] = allVersions.map(version => {
+        const status = statusResults.find(s => s.versionId === version.id);
+        return {
+          ...version,
+          status: status ? {
+            isAvailable: status.isAvailable,
+            availableBanks: status.availableBanks,
+            error: status.error,
+          } : undefined,
+          isLoading: !status,
+        };
+      });
+
+      setVersions(versionsWithStatus);
+
+      // 如果没有选择版本，默认选择最新可用版本
+      if (!selectedVersion && versionsWithStatus.length > 0) {
+        const latestAvailable = versionsWithStatus.find(v => v.isLatest && v.status?.isAvailable) ||
+                              versionsWithStatus.find(v => v.status?.isAvailable) ||
+                              versionsWithStatus[0];
+        if (latestAvailable) {
+          onVersionChange(latestAvailable.id);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to load question bank versions:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, [selectedVersion, onVersionChange]);
 
   useEffect(() => {
-    async function loadVersionsWithStatus() {
-      try {
-        setLoading(true);
-        const [allVersions, statusResults] = await Promise.all([
-          questionBankManager.getAllVersions(),
-          versionStatusManager.getAllVersionStatuses()
-        ]);
-
-        // 合并版本信息和状态信息
-        const versionsWithStatus: VersionWithStatus[] = allVersions.map(version => {
-          const status = statusResults.find(s => s.versionId === version.id);
-          return {
-            ...version,
-            status: status ? {
-              isAvailable: status.isAvailable,
-              availableBanks: status.availableBanks,
-              error: status.error,
-            } : undefined,
-            isLoading: !status,
-          };
-        });
-
-        setVersions(versionsWithStatus);
-
-        // 如果没有选择版本，默认选择最新可用版本
-        if (!selectedVersion && versionsWithStatus.length > 0) {
-          const latestAvailable = versionsWithStatus.find(v => v.isLatest && v.status?.isAvailable) ||
-                                versionsWithStatus.find(v => v.status?.isAvailable) ||
-                                versionsWithStatus[0];
-          if (latestAvailable) {
-            onVersionChange(latestAvailable.id);
-          }
-        }
-      } catch (error) {
-        console.error("Failed to load question bank versions:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-
     loadVersionsWithStatus();
-  }, [selectedVersion, onVersionChange]);
+  }, [loadVersionsWithStatus]);
+
+  // 监听配置文件更新事件
+  useEffect(() => {
+    const handleConfigUpdate = () => {
+      console.log('检测到配置文件更新，重新加载版本信息');
+      loadVersionsWithStatus();
+    };
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('questionBankConfigUpdated', handleConfigUpdate);
+      return () => {
+        window.removeEventListener('questionBankConfigUpdated', handleConfigUpdate);
+      };
+    }
+  }, [loadVersionsWithStatus]);
 
   useEffect(() => {
     // 当版本改变时，自动选择第一个可用的题库
@@ -93,6 +119,43 @@ export function QuestionBankSelector({
       }
     }
   }, [selectedVersion, selectedBank, versions, onBankChange]);
+
+  const handleRefresh = async () => {
+    if (refreshState === RefreshState.LOADING) return; // 防止重复点击
+
+    setRefreshState(RefreshState.LOADING);
+
+    try {
+      // 强制刷新配置文件
+      await questionBankManager.refreshConfig();
+
+      // 刷新版本状态
+      const versions = await questionBankManager.getAllVersions(true);
+      await Promise.all(
+        versions.map(v => versionStatusManager.refreshVersionStatus(v.id))
+      );
+
+      // 重新加载组件状态
+      await loadVersionsWithStatus();
+
+      console.log('配置刷新完成');
+      setRefreshState(RefreshState.SUCCESS);
+
+      // 3秒后自动恢复到闲置状态
+      setTimeout(() => {
+        setRefreshState(RefreshState.IDLE);
+      }, 3000);
+
+    } catch (error) {
+      console.error('刷新配置失败:', error);
+      setRefreshState(RefreshState.ERROR);
+
+      // 3秒后自动恢复到闲置状态
+      setTimeout(() => {
+        setRefreshState(RefreshState.IDLE);
+      }, 3000);
+    }
+  };
 
   const selectedVersionData = versions.find(v => v.id === selectedVersion);
   const availableBanks = selectedVersionData?.status?.availableBanks || [];
@@ -129,6 +192,54 @@ export function QuestionBankSelector({
     return version.status.error || "无可用题库";
   };
 
+  // 获取刷新按钮内容
+  const getRefreshButtonContent = () => {
+    switch (refreshState) {
+      case RefreshState.LOADING:
+        return (
+          <div className="flex items-center gap-1">
+            <Loader2 className="h-3 w-3 animate-spin" />
+            <span className="text-xs">刷新中...</span>
+          </div>
+        );
+      case RefreshState.SUCCESS:
+        return (
+          <div className="flex items-center gap-1">
+            <CheckCircle className="h-3 w-3 text-green-500 animate-in fade-in slide-in-from-left-1 duration-300" />
+            <span className="text-xs text-green-600 animate-in fade-in slide-in-from-right-1 duration-300">成功</span>
+          </div>
+        );
+      case RefreshState.ERROR:
+        return (
+          <div className="flex items-center gap-1">
+            <XCircle className="h-3 w-3 text-red-500 animate-in fade-in slide-in-from-left-1 duration-300" />
+            <span className="text-xs text-red-600 animate-in fade-in slide-in-from-right-1 duration-300">失败</span>
+          </div>
+        );
+      default:
+        return (
+          <div className="flex items-center gap-1">
+            <RefreshCw className="h-3 w-3 transition-transform hover:rotate-12" />
+            <span className="text-xs">刷新</span>
+          </div>
+        );
+    }
+  };
+
+  // 获取按钮样式
+  const getButtonVariant = () => {
+    switch (refreshState) {
+      case RefreshState.SUCCESS:
+        return "outline border-green-200 bg-green-50 hover:bg-green-100";
+      case RefreshState.ERROR:
+        return "outline border-red-200 bg-red-50 hover:bg-red-100";
+      case RefreshState.LOADING:
+        return "outline";
+      default:
+        return "outline";
+    }
+  };
+
   if (loading) {
     return (
       <div className="space-y-4">
@@ -146,11 +257,26 @@ export function QuestionBankSelector({
       <div className="space-y-2">
         <div className="flex items-baseline justify-between">
           <div className="text-sm text-muted-foreground">题库版本</div>
-          {selectedVersionData && (
-            <div className="text-xs text-muted-foreground">
-              更新时间: {new Date(selectedVersionData.updatedAt).toLocaleDateString('zh-CN')}
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {selectedVersionData && (
+              <div className="text-xs text-muted-foreground">
+                更新时间: {new Date(selectedVersionData.updatedAt).toLocaleDateString('zh-CN')}
+              </div>
+            )}
+            <Button
+              onClick={handleRefresh}
+              disabled={refreshState === RefreshState.LOADING || disabled}
+              variant="outline"
+              size="sm"
+              className={cn(
+                "h-7 px-2 transition-all duration-300",
+                getButtonVariant()
+              )}
+            >
+              {getRefreshButtonContent()}
+              <span className="sr-only">刷新配置</span>
+            </Button>
+          </div>
         </div>
         <Select
           value={selectedVersion || ""}
