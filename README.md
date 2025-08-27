@@ -10,16 +10,18 @@
 
 ## 目录
 
+- [业余无线电执照考试模拟（2025 题库）](#业余无线电执照考试模拟2025-题库)
+- [目录](#目录)
 - [功能特色](#功能特色)
 - [快速开始](#快速开始)
-- [数据集构建questions-json-与题图](#数据集构建questions-json-与题图)
+- [数据集构建（questions JSON 与题图）](#数据集构建questions-json-与题图)
 - [命令](#命令)
 - [页面与路由](#页面与路由)
 - [键盘快捷键](#键盘快捷键)
 - [PWA 与图标](#pwa-与图标)
 - [题目数据结构](#题目数据结构)
 - [隐私说明](#隐私说明)
-- [常见问题faq](#常见问题faq)
+- [常见问题（FAQ）](#常见问题faq)
 - [致谢](#致谢)
 
 ## 功能特色
@@ -161,6 +163,6 @@ pnpm build
   - 搜索功能仅在“顺序模式”开启，支持 J 码与关键词。
 
 ## 致谢
-- [Tencent EdgeOne](https://edgeone.ai/?from=github)  [<img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="图片" style="height: 1em; vertical-align: middle;">](https://edgeone.ai/?from=github)
+- 本项目 CDN 加速及安全防护由 [Tencent EdgeOne](https://edgeone.ai/?from=github) 赞助：EdgeOne 提供长期有效的免费套餐，包含不限量的流量和请求，覆盖中国大陆节点，且无任何超额收费，感兴趣的朋友可以点击下面的链接领取：  [<img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="图片" style="height: 1em; vertical-align: middle;">](https://edgeone.ai/?from=github) [亚洲最佳CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
 - 题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`
 - 技术栈：Next.js、React、Tailwind CSS、Radix UI、Lucide Icons
