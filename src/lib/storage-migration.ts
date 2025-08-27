@@ -1,5 +1,5 @@
 import { questionBankManager } from "@/lib/question-bank-manager";
-import type { QuestionVersionId } from "@/types/question-bank";
+import type { QuestionItem } from "@/types/question";
 
 /**
  * 存储迁移服务
@@ -17,7 +17,7 @@ interface LegacyExamSavedState {
   flagsByPosition: boolean[];
   total: number;
   questionIds?: (string | null)[];
-  questionsSnapshot?: any[];
+  questionsSnapshot?: QuestionItem[];
 }
 
 interface LegacyPracticeSavedState {

@@ -74,25 +74,29 @@ function PracticeClient() {
 
   // Initialize 'no prompt for this bank' checkbox from storage
   useEffect(() => {
-    setNoPromptThisBank(!!loadNoResumeWithVersion(bankParam, versionParam || undefined || undefined));
-  }, [bankParam, versionParam || undefined]);
+    const version = versionParam || undefined;
+    setNoPromptThisBank(!!loadNoResumeWithVersion(bankParam, version));
+  }, [bankParam, versionParam]);
 
   // Load questions for the bank
   useEffect(() => {
-    (async () => {
+    const loadQuestions = async () => {
+      const version = versionParam || undefined;
       try {
-        const qs = await loadQuestionsWithVersion(versionParam || undefined || undefined, bankParam, { strict: true });
+        const qs = await loadQuestionsWithVersion(version, bankParam, { strict: true });
         loadBank(bankParam, qs);
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
       }
-    })();
+    };
+
+    loadQuestions();
 
     return () => {
       reset();
     }
-  }, [versionParam || undefined, bankParam, loadBank, reset]);
+  }, [versionParam, bankParam, loadBank, reset]);
 
   // Initialize order from last saved preference
   useEffect(() => {
@@ -105,16 +109,17 @@ function PracticeClient() {
 
   // Check for saved progress to resume
   useEffect(() => {
-    if (isLoading || order !== "sequential" || loadNoResumeWithVersion(bankParam, versionParam || undefined)) return;
+    const version = versionParam || undefined;
+    if (isLoading || order !== "sequential" || loadNoResumeWithVersion(bankParam, version)) return;
     const lastMode = loadLastMode();
     if (lastMode === "random") return;
 
-    const saved = loadSavedStateWithVersion(bankParam, versionParam || undefined);
+    const saved = loadSavedStateWithVersion(bankParam, version);
     if (saved && saved.total === allQuestions.length && saved.order === "sequential" && shouldResume(saved)) {
       setPendingResume(saved);
       setResumeOpen(true);
     }
-  }, [versionParam || undefined, bankParam, allQuestions.length, order, isLoading]);
+  }, [versionParam, bankParam, allQuestions.length, order, isLoading]);
 
   const currentQuestion = questions[currentIndex];
   const selectedAnswers = currentQuestion ? answers.get(getKeyByStrategy(currentQuestion, currentIndex)) || [] : [];
@@ -170,7 +175,7 @@ function PracticeClient() {
       total: allQuestions.length,
     };
     saveState(payload);
-  }, [versionParam || undefined, allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
+  }, [versionParam, allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
 
   // Search functionality
   const deferredJump = useDeferredValue(jumpInput);
