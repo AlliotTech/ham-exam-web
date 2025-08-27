@@ -3,17 +3,17 @@
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { useEffect, useState } from "react";
-import { bankAvailable } from "@/lib/load-questions";
-// removed inline alert in favor of Bubble
+import { bankAvailableWithVersion } from "@/lib/load-questions";
+import { QuestionBankSelector } from "@/components/common/QuestionBankSelector";
 import { Bubble } from "@/components/common/Bubble";
 import { useRouter } from "next/navigation";
+import type { QuestionVersionId, QuestionBankType } from "@/types/question-bank";
 
 export default function Home() {
   const router = useRouter();
-  const [bank, setBank] = useState<"A" | "B" | "C">("A");
+  const [versionId, setVersionId] = useState<QuestionVersionId | undefined>();
+  const [bank, setBank] = useState<QuestionBankType>("A");
   const [checking, setChecking] = useState<boolean>(false);
   const [isAvailable, setIsAvailable] = useState<boolean>(false);
   const [warnOpen, setWarnOpen] = useState(false);
@@ -22,8 +22,10 @@ export default function Home() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
+      if (!versionId) return;
+
       setChecking(true);
-      const ok = await bankAvailable(bank);
+      const ok = await bankAvailableWithVersion(versionId, bank);
       if (!cancelled) {
         setIsAvailable(ok);
         setChecking(false);
@@ -32,20 +34,20 @@ export default function Home() {
     return () => {
       cancelled = true;
     };
-  }, [bank]);
+  }, [versionId, bank]);
 
   // Prefetch routes when current bank is available
   useEffect(() => {
-    if (!isAvailable) return;
-    const practiceHref = `/practice?bank=${bank}`;
-    const examHref = `/exam?bank=${bank}`;
+    if (!isAvailable || !versionId) return;
+    const practiceHref = `/practice?version=${versionId}&bank=${bank}`;
+    const examHref = `/exam?version=${versionId}&bank=${bank}`;
     try {
       router.prefetch(practiceHref);
       router.prefetch(examHref);
     } catch {
       // ignore
     }
-  }, [router, bank, isAvailable]);
+  }, [router, versionId, bank, isAvailable]);
   function showWarn(msg: string) {
     setWarnText(msg);
     setWarnOpen(true);
@@ -57,71 +59,52 @@ export default function Home() {
           <CardTitle>业余无线电执照考试模拟练习</CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-2">
-            <div className="flex items-baseline justify-between">
-              <div className="text-sm text-muted-foreground">选择题库</div>
-              <div className="text-xs text-muted-foreground">
-                当前题库为 2025 年 10 月版本
-              </div>
-            </div>
-            <RadioGroup
-              className="flex gap-6"
-              value={bank}
-              onValueChange={(v: "A" | "B" | "C") => setBank(v)}
-            >
-              <div className="flex items-center gap-2">
-                <RadioGroupItem id="bank-a" value="A" />
-                <Label htmlFor="bank-a">A 类</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <RadioGroupItem id="bank-b" value="B" />
-                <Label htmlFor="bank-b">B 类</Label>
-              </div>
-              <div className="flex items-center gap-2">
-                <RadioGroupItem id="bank-c" value="C" />
-                <Label htmlFor="bank-c">C 类</Label>
-              </div>
-            </RadioGroup>
-          </div>
+          <QuestionBankSelector
+            selectedVersion={versionId}
+            selectedBank={bank}
+            onVersionChange={setVersionId}
+            onBankChange={setBank}
+            disabled={checking}
+          />
 
 
           <div className="flex gap-3 relative">
             <Button
               asChild
-              disabled={checking}
+              disabled={checking || !versionId}
               onMouseEnter={() => {
-                if (!isAvailable) return;
+                if (!isAvailable || !versionId) return;
                 try {
-                  router.prefetch(`/practice?bank=${bank}`);
+                  router.prefetch(`/practice?version=${versionId}&bank=${bank}`);
                 } catch {}
               }}
               onClick={(e) => {
-                if (!isAvailable) {
+                if (!isAvailable || !versionId) {
                   e.preventDefault();
                   showWarn(`题库 ${bank} 暂不可用或为空，请先构建数据集`);
                 }
               }}
             >
-              <Link href={{ pathname: "/practice", query: { bank } }}>开始练习</Link>
+              <Link href={{ pathname: "/practice", query: { version: versionId, bank } }}>开始练习</Link>
             </Button>
             <Button
               asChild
               variant="secondary"
-              disabled={checking}
+              disabled={checking || !versionId}
               onMouseEnter={() => {
-                if (!isAvailable) return;
+                if (!isAvailable || !versionId) return;
                 try {
-                  router.prefetch(`/exam?bank=${bank}`);
+                  router.prefetch(`/exam?version=${versionId}&bank=${bank}`);
                 } catch {}
               }}
               onClick={(e) => {
-                if (!isAvailable) {
+                if (!isAvailable || !versionId) {
                   e.preventDefault();
                   showWarn(`题库 ${bank} 暂不可用或为空，请先构建数据集`);
                 }
               }}
             >
-              <Link href={{ pathname: "/exam", query: { bank } }}>开始模拟考试</Link>
+              <Link href={{ pathname: "/exam", query: { version: versionId, bank } }}>开始模拟考试</Link>
             </Button>
             <Bubble open={warnOpen} onOpenChange={setWarnOpen}>{warnText}</Bubble>
           </div>
