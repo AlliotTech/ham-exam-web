@@ -1,15 +1,38 @@
 import type { QuestionItem } from "@/types/question";
+import type { QuestionVersionId, QuestionBankType } from "@/types/question-bank";
+import { questionBankManager } from "@/lib/question-bank-manager";
 
 export type { QuestionItem };
 
 export type QuestionBank = "A" | "B" | "C";
 
+// 保留原有函数以确保向后兼容性
 export function resolveQuestionsUrl(bank?: QuestionBank): string {
   // Prefer static JSON under /questions/ generated at build time.
   const b = bank ? bank : "A";
   return b === "A" || b === "B" || b === "C" ? `/questions/${b}.json` : `/questions/full.json`;
 }
 
+// 新增支持版本的函数
+export async function resolveQuestionsUrlWithVersion(
+  versionId: QuestionVersionId | undefined,
+  bank: QuestionBankType
+): Promise<string> {
+  // 如果没有指定版本，使用默认逻辑（向后兼容）
+  if (!versionId) {
+    return resolveQuestionsUrl(bank);
+  }
+
+  try {
+    return await questionBankManager.resolveQuestionsUrl(versionId, bank);
+  } catch (error) {
+    // 如果版本不存在，回退到默认逻辑
+    console.warn(`Version ${versionId} not found, falling back to default:`, error);
+    return resolveQuestionsUrl(bank);
+  }
+}
+
+// 保留原有函数以确保向后兼容性
 export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
   const url = resolveQuestionsUrl(bank);
   const res = await fetch(url, { cache: "force-cache" });
@@ -22,6 +45,26 @@ export async function bankAvailable(bank: QuestionBank): Promise<boolean> {
   }
 }
 
+// 新增支持版本的函数
+export async function bankAvailableWithVersion(
+  versionId: QuestionVersionId | undefined,
+  bank: QuestionBankType
+): Promise<boolean> {
+  // 如果没有指定版本，使用默认逻辑（向后兼容）
+  if (!versionId) {
+    return await bankAvailable(bank);
+  }
+
+  try {
+    return await questionBankManager.checkBankAvailable(versionId, bank);
+  } catch (error) {
+    // 如果版本不存在，回退到默认逻辑
+    console.warn(`Version ${versionId} not found, falling back to default:`, error);
+    return await bankAvailable(bank);
+  }
+}
+
+// 保留原有函数以确保向后兼容性
 export async function loadQuestions(
   bank?: QuestionBank,
   opts?: { strict?: boolean },
@@ -33,6 +76,46 @@ export async function loadQuestions(
   const data = (await res.json()) as QuestionItem[];
   if (strict && (!Array.isArray(data) || data.length === 0)) {
     throw new Error(`Questions for bank ${bank ?? "default"} empty`);
+  }
+  return data;
+}
+
+// 新增支持版本的函数
+export async function loadQuestionsWithVersion(
+  versionId: QuestionVersionId | undefined,
+  bank: QuestionBankType,
+  opts?: { strict?: boolean; forceRefresh?: boolean },
+): Promise<QuestionItem[]> {
+  const strict = opts?.strict ?? false;
+  const forceRefresh = opts?.forceRefresh ?? false;
+
+  const url = await resolveQuestionsUrlWithVersion(versionId, bank);
+
+  // 根据是否强制刷新选择缓存策略
+  const cacheStrategy = forceRefresh ? 'no-cache' : 'force-cache';
+
+  // 添加时间戳参数防止缓存
+  const separator = url.includes('?') ? '&' : '?';
+  const finalUrl = forceRefresh ? `${url}${separator}t=${Date.now()}` : url;
+
+  const fetchOptions: RequestInit = {
+    cache: cacheStrategy,
+  };
+
+  // 只在强制刷新时添加headers
+  if (forceRefresh) {
+    fetchOptions.headers = {
+      'Cache-Control': 'no-cache, no-store, must-revalidate',
+      'Pragma': 'no-cache'
+    };
+  }
+
+  const res = await fetch(finalUrl, fetchOptions);
+
+  if (!res.ok) throw new Error("Failed to load questions JSON");
+  const data = (await res.json()) as QuestionItem[];
+  if (strict && (!Array.isArray(data) || data.length === 0)) {
+    throw new Error(`Questions for bank ${bank} (version ${versionId || 'default'}) empty`);
   }
   return data;
 }

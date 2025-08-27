@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "lastModified": "2025-08-27T12:00:00Z",
+  "versions": [
+    {
+      "id": "2025-10",
+      "name": "2025年10月版本",
+      "description": "当前题库版本",
+      "isLatest": true,
+      "banks": {
+        "A": {
+          "path": "/questions/A.json",
+          "description": "A类题库"
+        },
+        "B": {
+          "path": "/questions/B.json",
+          "description": "B类题库"
+        },
+        "C": {
+          "path": "/questions/C.json",
+          "description": "C类题库"
+        }
+      },
+      "updatedAt": "2025-08-27T12:00:00Z"
+    }
+  ]
+}

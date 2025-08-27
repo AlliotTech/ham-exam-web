@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Suspense, useEffect, useState, useRef, useDeferredValue, useMemo } from "react";
-import { loadQuestions, type QuestionBank } from "@/lib/load-questions";
+import { loadQuestionsWithVersion, type QuestionBank } from "@/lib/load-questions";
+import type { QuestionVersionId } from "@/types/question-bank";
 import type { QuestionItem } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
@@ -17,13 +18,13 @@ import { PracticeSettingsDialog } from "@/components/practice/PracticeSettingsDi
 import { PracticeSearchDialog } from "@/components/practice/PracticeSearchDialog";
 import { MessageDialog } from "@/components/common/MessageDialog";
 import {
-  clearSavedState,
+  clearSavedStateWithVersion,
   loadLastMode,
-  loadNoResume,
-  loadSavedState,
+  loadNoResumeWithVersion,
+  loadSavedStateWithVersion,
   normalizeJ,
   saveLastMode,
-  saveNoResume,
+  saveNoResumeWithVersion,
   saveState,
   shouldResume,
   type SavedState,
@@ -49,6 +50,7 @@ function PracticeClient() {
   const [errorText, setErrorText] = useState<string>("");
 
   const search = useSearchParams();
+  const versionParam = search.get("version") as QuestionVersionId | null;
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
 
   const {
@@ -72,25 +74,29 @@ function PracticeClient() {
 
   // Initialize 'no prompt for this bank' checkbox from storage
   useEffect(() => {
-    setNoPromptThisBank(!!loadNoResume(bankParam));
-  }, [bankParam]);
+    const version = versionParam || undefined;
+    setNoPromptThisBank(!!loadNoResumeWithVersion(bankParam, version));
+  }, [bankParam, versionParam]);
 
   // Load questions for the bank
   useEffect(() => {
-    (async () => {
+    const loadQuestions = async () => {
+      const version = versionParam || undefined;
       try {
-        const qs = await loadQuestions(bankParam, { strict: true });
+        const qs = await loadQuestionsWithVersion(version, bankParam, { strict: true });
         loadBank(bankParam, qs);
       } catch {
         setErrorText(`题库 ${bankParam} 暂不可用`);
         setErrorOpen(true);
       }
-    })();
-    
+    };
+
+    loadQuestions();
+
     return () => {
       reset();
     }
-  }, [bankParam, loadBank, reset]);
+  }, [versionParam, bankParam, loadBank, reset]);
 
   // Initialize order from last saved preference
   useEffect(() => {
@@ -103,16 +109,17 @@ function PracticeClient() {
 
   // Check for saved progress to resume
   useEffect(() => {
-    if (isLoading || order !== "sequential" || loadNoResume(bankParam)) return;
+    const version = versionParam || undefined;
+    if (isLoading || order !== "sequential" || loadNoResumeWithVersion(bankParam, version)) return;
     const lastMode = loadLastMode();
     if (lastMode === "random") return;
-    
-    const saved = loadSavedState(bankParam);
+
+    const saved = loadSavedStateWithVersion(bankParam, version);
     if (saved && saved.total === allQuestions.length && saved.order === "sequential" && shouldResume(saved)) {
       setPendingResume(saved);
       setResumeOpen(true);
     }
-  }, [bankParam, allQuestions.length, order, isLoading]);
+  }, [versionParam, bankParam, allQuestions.length, order, isLoading]);
 
   const currentQuestion = questions[currentIndex];
   const selectedAnswers = currentQuestion ? answers.get(getKeyByStrategy(currentQuestion, currentIndex)) || [] : [];
@@ -123,8 +130,8 @@ function PracticeClient() {
     saveLastMode(nextOrder);
     // Prompt for resume if switching to sequential and a valid save exists
     if (nextOrder === "sequential") {
-      const saved = loadSavedState(bankParam);
-      if (saved && saved.order === "sequential" && saved.total === allQuestions.length && !loadNoResume(bankParam) && shouldResume(saved)) {
+      const saved = loadSavedStateWithVersion(bankParam, versionParam || undefined);
+      if (saved && saved.order === "sequential" && saved.total === allQuestions.length && !loadNoResumeWithVersion(bankParam, versionParam || undefined) && shouldResume(saved)) {
         setPendingResume(saved);
         setResumeOpen(true);
       }
@@ -156,8 +163,9 @@ function PracticeClient() {
     if (orderIndices.some((i) => i < 0)) return;
 
     const payload: SavedState = {
-      version: 1,
+      version: 2,
       bank: bankParam,
+      versionId: versionParam || undefined,
       timestamp: Date.now(),
       index: currentIndex,
       order,
@@ -167,7 +175,7 @@ function PracticeClient() {
       total: allQuestions.length,
     };
     saveState(payload);
-  }, [allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
+  }, [versionParam, allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
 
   // Search functionality
   const deferredJump = useDeferredValue(jumpInput);
@@ -239,15 +247,15 @@ function PracticeClient() {
       showAnswer: savedShowAnswer,
     });
 
-    if (noPromptThisBank) saveNoResume(bankParam, true);
+    if (noPromptThisBank) saveNoResumeWithVersion(bankParam, true, versionParam || undefined);
     setResumeOpen(false);
     setPendingResume(null);
   }
 
   function handleRestart() {
-    clearSavedState(bankParam);
+    clearSavedStateWithVersion(bankParam, versionParam || undefined);
     setOrder(order); // re-apply current order to reset questions
-    if (noPromptThisBank) saveNoResume(bankParam, true);
+    if (noPromptThisBank) saveNoResumeWithVersion(bankParam, true, versionParam || undefined);
     setResumeOpen(false);
     setPendingResume(null);
   }

@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import { Suspense, useEffect, useMemo, useState, useRef } from "react";
-import { loadQuestions, shuffle, type QuestionBank } from "@/lib/load-questions";
+import { loadQuestionsWithVersion, shuffle, type QuestionBank } from "@/lib/load-questions";
+import type { QuestionVersionId } from "@/types/question-bank";
 import type { QuestionItem } from "@/types/question";
 import { QuestionCard } from "@/components/exam/question-card";
 import { Button } from "@/components/ui/button";
@@ -24,8 +25,8 @@ import { MessageDialog } from "@/components/common/MessageDialog";
 import { getRule } from "@/lib/exam-rules";
 import { calculateScore, isPassed } from "@/lib/exam";
 import {
-  clearExamSavedState,
-  loadExamSavedState,
+  clearExamSavedStateWithVersion,
+  loadExamSavedStateWithVersion,
   saveExamState,
   shouldResumeExam,
   type ExamSavedState,
@@ -54,6 +55,7 @@ function ExamClient() {
   const autoHelpShownRef = useRef(false);
 
   const search = useSearchParams();
+  const versionParam = search.get("version") as QuestionVersionId | null;
   const bankParam = (search.get("bank") as QuestionBank | null) ?? "A";
   const rule = getRule(bankParam);
 
@@ -109,8 +111,8 @@ function ExamClient() {
     (async () => {
       try {
         setLoading(true);
-        const allQuestions = await loadQuestions(bankParam, { strict: true });
-        const saved = loadExamSavedState(bankParam);
+        const allQuestions = await loadQuestionsWithVersion(versionParam || undefined, bankParam, { strict: true });
+        const saved = loadExamSavedStateWithVersion(bankParam, versionParam || undefined);
 
         if (saved && shouldResumeExam(saved)) {
           setPendingResume(saved);
@@ -147,7 +149,7 @@ function ExamClient() {
     return () => {
       resetExam();
     }
-  }, [bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, startExam, loadSavedState, resetExam]);
+  }, [versionParam, bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, startExam, loadSavedState, resetExam]);
 
   function reconstructPickedQuestions(all: QuestionItem[], saved: ExamSavedState): QuestionItem[] {
     if (saved.questionIds && saved.questionIds.length > 0) {
@@ -166,7 +168,7 @@ function ExamClient() {
   function handleSubmit() {
     submitExam();
     setResultOpen(true);
-    clearExamSavedState(bankParam);
+    clearExamSavedStateWithVersion(bankParam, versionParam || undefined);
   }
 
   const remainingMs = useCountdown(endAtMs, () => {
@@ -261,8 +263,9 @@ function ExamClient() {
     }
 
     const state: ExamSavedState = {
-      version: 1,
+      version: 2,
       bank: bankParam,
+      versionId: versionParam || undefined,
       timestamp: Date.now(),
       endAtMs: endAtMs,
       index: currentIndex,
@@ -272,7 +275,7 @@ function ExamClient() {
       questionIds: questions.map((q) => (q.id || q.codes?.J || null)),
     };
     saveExamState(state);
-  }, [answers, flags, currentIndex, endAtMs, questions, bankParam, finished]);
+  }, [answers, flags, currentIndex, endAtMs, questions, bankParam, versionParam, finished]);
 
   useEffect(() => {
     if (finished || !endAtMs) return;
@@ -306,7 +309,7 @@ function ExamClient() {
   }
 
   function handleRestartConfirm() {
-    clearExamSavedState(bankParam);
+    clearExamSavedStateWithVersion(bankParam, versionParam || undefined);
     startExam(bankParam, questions, rule.minutes);
     setResumeOpen(false);
     setPendingResume(null);
