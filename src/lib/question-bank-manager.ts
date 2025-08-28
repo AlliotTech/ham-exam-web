@@ -1,6 +1,6 @@
 import type { QuestionBankConfig, QuestionVersion, QuestionVersionId, QuestionBankType } from "@/types/question-bank";
 import { logger } from './logger';
-import { handleError, NetworkError, NotFoundError } from './error-handler';
+import { handleError, NetworkError, ValidationError, NotFoundError } from './error-handler';
 
 export class QuestionBankManager {
   private config: QuestionBankConfig | null = null;
@@ -43,7 +43,7 @@ export class QuestionBankManager {
 
       this.config = newConfig;
       this.configVersion = newConfig.version;
-      return this.config;
+      return newConfig;
     } catch (error) {
       throw handleError(error, 'QuestionBankManager.loadConfig');
     }
