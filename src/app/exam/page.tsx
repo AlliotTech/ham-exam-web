@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Settings } from "lucide-react";
 
 import { formatMs } from "@/lib/utils";
+import { logger } from "@/lib/logger";
 
 import { useSearchParams } from "next/navigation";
 import { BottomBar } from "@/components/exam/bottom-bar";
@@ -289,23 +290,40 @@ function ExamClient() {
 
   function handleResumeConfirm() {
     if (!pendingResume) return;
-    const restoredAnswers = new Map<string, string[]>();
-    const restoredFlags = new Map<string, boolean>();
-    for (let pos = 0; pos < questions.length; pos++) {
-      const q = questions[pos];
-      const key = getKeyByStrategy(q, pos);
-      const ans = pendingResume.answersByPosition[pos] || null;
-      if (ans && ans.length) restoredAnswers.set(key, ans);
-      if (pendingResume.flagsByPosition[pos]) restoredFlags.set(key, true);
+    
+    try {
+      const restoredAnswers = new Map<string, string[]>();
+      const restoredFlags = new Map<string, boolean>();
+      
+      // 验证数据完整性
+      if (!Array.isArray(pendingResume.answersByPosition) || !Array.isArray(pendingResume.flagsByPosition)) {
+        throw new Error('Invalid saved state data structure');
+      }
+      
+      for (let pos = 0; pos < questions.length; pos++) {
+        const q = questions[pos];
+        const key = getKeyByStrategy(q, pos);
+        const ans = pendingResume.answersByPosition[pos] || null;
+        if (ans && ans.length) restoredAnswers.set(key, ans);
+        if (pendingResume.flagsByPosition[pos]) restoredFlags.set(key, true);
+      }
+      
+      loadSavedState({
+        answers: restoredAnswers,
+        flags: restoredFlags,
+        currentIndex: Math.min(Math.max(pendingResume.index, 0), questions.length - 1),
+        endAtMs: pendingResume.endAtMs,
+      });
+      
+      setResumeOpen(false);
+      setPendingResume(null);
+    } catch (error) {
+      logger.error('Error during exam state restoration:', error);
+      // 恢复失败时清除状态并关闭对话框
+      setResumeOpen(false);
+      setPendingResume(null);
+      // 可以在这里添加用户友好的错误提示
     }
-    loadSavedState({
-      answers: restoredAnswers,
-      flags: restoredFlags,
-      currentIndex: Math.min(Math.max(pendingResume.index, 0), questions.length - 1),
-      endAtMs: pendingResume.endAtMs,
-    });
-    setResumeOpen(false);
-    setPendingResume(null);
   }
 
   function handleRestartConfirm() {
