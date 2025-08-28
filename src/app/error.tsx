@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { logger } from '@/lib/logger';
 
 export default function GlobalError({
   error,
@@ -10,8 +11,8 @@ export default function GlobalError({
   reset: () => void;
 }) {
   React.useEffect(() => {
-    // Optional: log error to monitoring
-    // console.error(error);
+    // Log error to monitoring
+    logger.error('Global error occurred', error);
   }, [error]);
   return (
     <html lang="zh-CN">

@@ -18,6 +18,7 @@ enum RefreshState {
 }
 import { questionBankManager } from "@/lib/question-bank-manager";
 import { versionStatusManager } from "@/lib/version-status-manager";
+import { logger } from '@/lib/logger';
 import type { QuestionVersion, QuestionVersionId, QuestionBankType } from "@/types/question-bank";
 
 interface QuestionBankSelectorProps {
@@ -82,7 +83,7 @@ export function QuestionBankSelector({
         }
       }
     } catch (error) {
-      console.error("Failed to load question bank versions:", error);
+      logger.error("Failed to load question bank versions", error);
     } finally {
       setLoading(false);
     }
@@ -95,7 +96,7 @@ export function QuestionBankSelector({
   // 监听配置文件更新事件
   useEffect(() => {
     const handleConfigUpdate = () => {
-      console.log('检测到配置文件更新，重新加载版本信息');
+      logger.debug('检测到配置文件更新，重新加载版本信息');
       loadVersionsWithStatus();
     };
 
@@ -138,7 +139,7 @@ export function QuestionBankSelector({
       // 重新加载组件状态
       await loadVersionsWithStatus();
 
-      console.log('配置刷新完成');
+      logger.debug('配置刷新完成');
       setRefreshState(RefreshState.SUCCESS);
 
       // 3秒后自动恢复到闲置状态
@@ -147,7 +148,7 @@ export function QuestionBankSelector({
       }, 3000);
 
     } catch (error) {
-      console.error('刷新配置失败:', error);
+      logger.error('刷新配置失败', error);
       setRefreshState(RefreshState.ERROR);
 
       // 3秒后自动恢复到闲置状态

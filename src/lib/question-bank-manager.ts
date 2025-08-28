@@ -1,43 +1,52 @@
 import type { QuestionBankConfig, QuestionVersion, QuestionVersionId, QuestionBankType } from "@/types/question-bank";
+import { logger } from './logger';
+import { handleError, NetworkError, NotFoundError } from './error-handler';
 
 export class QuestionBankManager {
   private config: QuestionBankConfig | null = null;
   private configVersion: string | null = null;
 
   async loadConfig(forceRefresh = false): Promise<QuestionBankConfig> {
-    // 只有在强制刷新时才清除缓存
-    if (forceRefresh) {
-      this.config = null;
-      this.configVersion = null;
-    }
-
-    if (this.config && !forceRefresh) return this.config;
-
-    // 使用 no-cache 避免浏览器缓存问题，同时添加时间戳参数防止缓存
-    const timestamp = Date.now();
-    const response = await fetch(`/questions/config.json?t=${timestamp}`, {
-      cache: 'no-cache',
-      headers: {
-        'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache'
+    try {
+      // 只有在强制刷新时才清除缓存
+      if (forceRefresh) {
+        this.config = null;
+        this.configVersion = null;
       }
-    });
 
-    if (!response.ok) throw new Error('Failed to load question bank config');
+      if (this.config && !forceRefresh) return this.config;
 
-    const newConfig = await response.json();
-    if (!newConfig) throw new Error('Invalid question bank config');
+      // 使用 no-cache 避免浏览器缓存问题，同时添加时间戳参数防止缓存
+      const timestamp = Date.now();
+      const response = await fetch(`/questions/config.json?t=${timestamp}`, {
+        cache: 'no-cache',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'Pragma': 'no-cache'
+        }
+      });
 
-    // 检查配置文件是否更新
-    if (this.configVersion && newConfig.version !== this.configVersion) {
-      // 配置文件已更新，清除相关缓存
-      this.clearRelatedCache();
+      if (!response.ok) {
+        throw new NetworkError(`Failed to load question bank config: ${response.status} ${response.statusText}`);
+      }
+
+      const newConfig = await response.json();
+      if (!newConfig) {
+        throw new ValidationError('Invalid question bank config: empty response');
+      }
+
+      // 检查配置文件是否更新
+      if (this.configVersion && newConfig.version !== this.configVersion) {
+        logger.debug('Configuration file updated, clearing related cache');
+        this.clearRelatedCache();
+      }
+
+      this.config = newConfig;
+      this.configVersion = newConfig.version;
+      return this.config;
+    } catch (error) {
+      throw handleError(error, 'QuestionBankManager.loadConfig');
     }
-
-    this.config = newConfig;
-    this.configVersion = newConfig.version;
-    if (!this.config) throw new Error('Invalid question bank config');
-    return this.config;
   }
 
   private clearRelatedCache(): void {
@@ -47,7 +56,7 @@ export class QuestionBankManager {
         // 发送事件通知其他组件配置文件已更新
         window.dispatchEvent(new CustomEvent('questionBankConfigUpdated'));
       } catch (error) {
-        console.warn('Failed to dispatch config update event:', error);
+        handleError(error, 'QuestionBankManager.clearRelatedCache');
       }
     }
   }
@@ -80,26 +89,32 @@ export class QuestionBankManager {
   }
 
   async resolveQuestionsUrl(versionId: QuestionVersionId, bank: QuestionBankType): Promise<string> {
-    const version = await this.getVersion(versionId);
-    if (!version) throw new Error(`Version ${versionId} not found`);
+    try {
+      const version = await this.getVersion(versionId);
+      if (!version) {
+        throw new NotFoundError(`Version ${versionId} not found`);
+      }
 
-    // 兼容性处理：将版本路径映射到实际文件
-    // 当前版本直接使用根目录下的文件
-    const path = version.banks[bank].path;
+      // 兼容性处理：将版本路径映射到实际文件
+      // 当前版本直接使用根目录下的文件
+      const path = version.banks[bank].path;
 
-    // 如果是标准的根目录路径，直接返回
-    if (path.startsWith('/questions/') && !path.includes('/questions/202')) {
+      // 如果是标准的根目录路径，直接返回
+      if (path.startsWith('/questions/') && !path.includes('/questions/202')) {
+        return path;
+      }
+
+      // 如果是版本目录路径，映射到实际文件
+      // 例如: /questions/2025-10/A.json -> /questions/A.json
+      const match = path.match(/^\/questions\/[^\/]+\/([ABC]\.json)$/);
+      if (match) {
+        return `/questions/${match[1]}`;
+      }
+
       return path;
+    } catch (error) {
+      throw handleError(error, 'QuestionBankManager.resolveQuestionsUrl');
     }
-
-    // 如果是版本目录路径，映射到实际文件
-    // 例如: /questions/2025-10/A.json -> /questions/A.json
-    const match = path.match(/^\/questions\/[^\/]+\/([ABC]\.json)$/);
-    if (match) {
-      return `/questions/${match[1]}`;
-    }
-
-    return path;
   }
 
   async checkBankAvailable(versionId: QuestionVersionId, bank: QuestionBankType): Promise<boolean> {
@@ -110,7 +125,8 @@ export class QuestionBankManager {
 
       const data = await res.json();
       return Array.isArray(data) && data.length > 0;
-    } catch {
+    } catch (error) {
+      logger.debug(`Bank ${bank} not available for version ${versionId}`, error);
       return false;
     }
   }

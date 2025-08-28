@@ -1,5 +1,6 @@
 import { questionBankManager } from "@/lib/question-bank-manager";
 import type { QuestionItem } from "@/types/question";
+import { logger } from './logger';
 
 /**
  * 存储迁移服务
@@ -47,12 +48,12 @@ export async function migrateExamStorage(): Promise<void> {
 
     if (legacyExamKeys.length === 0) return;
 
-    console.log('发现旧版本考试存储，正在迁移...');
+    logger.info('发现旧版本考试存储，正在迁移...');
 
     // 获取最新版本作为默认迁移目标
     const latestVersion = await questionBankManager.getLatestVersion();
     if (!latestVersion) {
-      console.warn('未找到最新版本，跳过迁移');
+      logger.warn('未找到最新版本，跳过迁移');
       return;
     }
 
@@ -82,15 +83,15 @@ export async function migrateExamStorage(): Promise<void> {
         // 删除旧版本数据
         window.localStorage.removeItem(legacyKey);
 
-        console.log(`迁移考试存储: ${legacyKey} -> ${newKey}`);
+        logger.info(`迁移考试存储: ${legacyKey} -> ${newKey}`);
       } catch (error) {
-        console.error(`迁移考试存储失败 ${legacyKey}:`, error);
+        logger.error(`迁移考试存储失败 ${legacyKey}`, error);
       }
     }
 
-    console.log('考试存储迁移完成');
+    logger.info('考试存储迁移完成');
   } catch (error) {
-    console.error('考试存储迁移过程出错:', error);
+    logger.error('考试存储迁移过程出错', error);
   }
 }
 
@@ -114,12 +115,12 @@ export async function migratePracticeStorage(): Promise<void> {
 
     if (legacyPracticeKeys.length === 0) return;
 
-    console.log('发现旧版本练习存储，正在迁移...');
+    logger.info('发现旧版本练习存储，正在迁移...');
 
     // 获取最新版本作为默认迁移目标
     const latestVersion = await questionBankManager.getLatestVersion();
     if (!latestVersion) {
-      console.warn('未找到最新版本，跳过迁移');
+      logger.warn('未找到最新版本，跳过迁移');
       return;
     }
 
@@ -149,15 +150,15 @@ export async function migratePracticeStorage(): Promise<void> {
         // 删除旧版本数据
         window.localStorage.removeItem(legacyKey);
 
-        console.log(`迁移练习存储: ${legacyKey} -> ${newKey}`);
+        logger.info(`迁移练习存储: ${legacyKey} -> ${newKey}`);
       } catch (error) {
-        console.error(`迁移练习存储失败 ${legacyKey}:`, error);
+        logger.error(`迁移练习存储失败 ${legacyKey}`, error);
       }
     }
 
-    console.log('练习存储迁移完成');
+    logger.info('练习存储迁移完成');
   } catch (error) {
-    console.error('练习存储迁移过程出错:', error);
+    logger.error('练习存储迁移过程出错', error);
   }
 }
 
@@ -179,12 +180,12 @@ export async function migratePreferenceStorage(): Promise<void> {
 
     if (legacyNoResumeKeys.length === 0) return;
 
-    console.log('发现旧版本偏好设置，正在迁移...');
+    logger.info('发现旧版本偏好设置，正在迁移...');
 
     // 获取最新版本作为默认迁移目标
     const latestVersion = await questionBankManager.getLatestVersion();
     if (!latestVersion) {
-      console.warn('未找到最新版本，跳过迁移');
+      logger.warn('未找到最新版本，跳过迁移');
       return;
     }
 
@@ -208,15 +209,15 @@ export async function migratePreferenceStorage(): Promise<void> {
         // 删除旧key
         window.localStorage.removeItem(legacyKey);
 
-        console.log(`迁移偏好设置: ${legacyKey} -> ${newKey}`);
+        logger.info(`迁移偏好设置: ${legacyKey} -> ${newKey}`);
       } catch (error) {
-        console.error(`迁移偏好设置失败 ${legacyKey}:`, error);
+        logger.error(`迁移偏好设置失败 ${legacyKey}`, error);
       }
     }
 
-    console.log('偏好设置迁移完成');
+    logger.info('偏好设置迁移完成');
   } catch (error) {
-    console.error('偏好设置迁移过程出错:', error);
+    logger.error('偏好设置迁移过程出错', error);
   }
 }
 
@@ -224,7 +225,7 @@ export async function migratePreferenceStorage(): Promise<void> {
  * 执行所有存储迁移
  */
 export async function migrateAllStorage(): Promise<void> {
-  console.log('开始执行存储迁移...');
+  logger.info('开始执行存储迁移...');
 
   await Promise.all([
     migrateExamStorage(),
@@ -232,7 +233,7 @@ export async function migrateAllStorage(): Promise<void> {
     migratePreferenceStorage()
   ]);
 
-  console.log('所有存储迁移完成');
+  logger.info('所有存储迁移完成');
 }
 
 /**

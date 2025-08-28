@@ -1,5 +1,6 @@
 import { questionBankManager } from "@/lib/question-bank-manager";
 import type { QuestionVersion, QuestionVersionId, QuestionBankType } from "@/types/question-bank";
+import { logger } from './logger';
 
 export interface VersionStatus {
   versionId: QuestionVersionId;
@@ -23,7 +24,7 @@ export class VersionStatusManager {
     // 监听配置文件更新事件
     if (typeof window !== 'undefined') {
       window.addEventListener('questionBankConfigUpdated', () => {
-        console.log('配置文件已更新，清除版本状态缓存');
+        logger.debug('配置文件已更新，清除版本状态缓存');
         this.clearCache();
       });
     }

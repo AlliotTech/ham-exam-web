@@ -1,6 +1,7 @@
 import type { QuestionItem } from "@/types/question";
 import type { QuestionVersionId, QuestionBankType } from "@/types/question-bank";
 import { questionBankManager } from "@/lib/question-bank-manager";
+import { logger } from './logger';
 
 export type { QuestionItem };
 
@@ -27,7 +28,7 @@ export async function resolveQuestionsUrlWithVersion(
     return await questionBankManager.resolveQuestionsUrl(versionId, bank);
   } catch (error) {
     // 如果版本不存在，回退到默认逻辑
-    console.warn(`Version ${versionId} not found, falling back to default:`, error);
+    logger.warn(`Version ${versionId} not found, falling back to default`, error);
     return resolveQuestionsUrl(bank);
   }
 }
@@ -59,7 +60,7 @@ export async function bankAvailableWithVersion(
     return await questionBankManager.checkBankAvailable(versionId, bank);
   } catch (error) {
     // 如果版本不存在，回退到默认逻辑
-    console.warn(`Version ${versionId} not found, falling back to default:`, error);
+    logger.warn(`Version ${versionId} not found, falling back to default`, error);
     return await bankAvailable(bank);
   }
 }
