@@ -49,5 +49,11 @@
   },
   "engines": {
     "node": "22.x"
+  },
+  "overrides": {
+    "sourcemap-codec": "npm:@jridgewell/sourcemap-codec@^1.5.0",
+    "inflight": "npm:lru-cache@^10.0.0",
+    "glob": "^10.0.0",
+    "source-map": "^0.7.4"
   }
 }
