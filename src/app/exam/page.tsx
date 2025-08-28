@@ -322,7 +322,8 @@ function ExamClient() {
       // 恢复失败时清除状态并关闭对话框
       setResumeOpen(false);
       setPendingResume(null);
-      // 可以在这里添加用户友好的错误提示
+      setErrorText('恢复考试进度失败，可能是由于数据损坏。将为您重新开始考试。');
+      setErrorOpen(true);
     }
   }
 
