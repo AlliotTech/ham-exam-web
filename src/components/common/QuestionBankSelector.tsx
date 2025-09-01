@@ -59,6 +59,7 @@ export function QuestionBankSelector({
   const [errorMessage, setErrorMessage] = useState<string>('');
   const [errorType, setErrorType] = useState<ErrorType | null>(null);
   const [retryCount, setRetryCount] = useState(0);
+  const [isAutoRetrying, setIsAutoRetrying] = useState(false);
 
   const loadVersionsWithStatus = useCallback(async () => {
     try {
@@ -140,11 +141,13 @@ export function QuestionBankSelector({
       setErrorMessage('');
       setErrorType(null);
 
-      // 如果是重试，增加重试计数
+      // 如果是重试，增加重试计数；如果是手动点击，重置计数和自动重试状态
       if (isRetry) {
         setRetryCount(prev => prev + 1);
+        setIsAutoRetrying(true);
       } else {
         setRetryCount(0);
+        setIsAutoRetrying(false);
       }
 
       // 强制刷新配置文件
@@ -162,6 +165,7 @@ export function QuestionBankSelector({
       logger.debug('配置刷新完成');
       setRefreshState(RefreshState.SUCCESS);
       setRetryCount(0); // 成功后重置重试计数
+      setIsAutoRetrying(false); // 成功后重置自动重试状态
 
       // 3秒后自动恢复到闲置状态
       setTimeout(() => {
@@ -194,14 +198,16 @@ export function QuestionBankSelector({
       setErrorMessage(errorMsg);
       setRefreshState(RefreshState.ERROR);
 
-      // 自动重试逻辑（最多3次）
-      if (retryCount < 2) {
+      // 只在首次失败且未在自动重试中时进行自动重试
+      if (!isRetry && !isAutoRetrying && retryCount < 2) {
         const retryDelay = Math.pow(2, retryCount) * 1000; // 指数退避：1s, 2s
+        logger.debug(`自动重试 ${retryCount + 1}/2，延迟 ${retryDelay}ms`);
         setTimeout(() => {
           handleRefresh(true);
         }, retryDelay);
       } else {
-        // 达到最大重试次数后，3秒后恢复到闲置状态
+        // 达到最大重试次数、正在自动重试中失败、或者是手动重试失败后，停止自动重试
+        setIsAutoRetrying(false);
         setTimeout(() => {
           setRefreshState(RefreshState.IDLE);
         }, 3000);
@@ -252,7 +258,7 @@ export function QuestionBankSelector({
           <div className="flex items-center gap-1">
             <Loader2 className="h-3 w-3 animate-spin" />
             <span className="text-xs">
-              {retryCount > 0 ? `重试中(${retryCount}/3)...` : '刷新中...'}
+              {isAutoRetrying && retryCount > 0 ? `自动重试(${retryCount}/2)...` : '刷新中...'}
             </span>
           </div>
         );
@@ -268,7 +274,7 @@ export function QuestionBankSelector({
           <div className="flex items-center gap-1">
             <XCircle className="h-3 w-3 text-red-500 animate-in fade-in slide-in-from-left-1 duration-300" />
             <span className="text-xs text-red-600 animate-in fade-in slide-in-from-right-1 duration-300">
-              {retryCount >= 2 ? '重试' : '失败'}
+              {retryCount >= 2 || isAutoRetrying ? '重试' : '失败'}
             </span>
           </div>
         );
@@ -380,7 +386,7 @@ export function QuestionBankSelector({
         </Select>
         
         {/* 错误提示区域 */}
-        {refreshState === RefreshState.ERROR && errorMessage && retryCount >= 2 && (
+        {refreshState === RefreshState.ERROR && errorMessage && (retryCount >= 2 || !isAutoRetrying) && (
           <div className="mt-2 p-3 bg-orange-50 border border-orange-200 rounded-md">
             <div className="flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
