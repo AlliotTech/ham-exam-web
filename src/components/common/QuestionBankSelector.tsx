@@ -61,44 +61,48 @@ export function QuestionBankSelector({
   const [retryCount, setRetryCount] = useState(0);
   const [isAutoRetrying, setIsAutoRetrying] = useState(false);
 
-  const loadVersionsWithStatus = useCallback(async () => {
-    try {
-      setLoading(true);
-      const [allVersions, statusResults] = await Promise.all([
-        questionBankManager.getAllVersions(),
-        versionStatusManager.getAllVersionStatuses()
-      ]);
+  const loadVersionsWithStatus = useCallback(() => {
+    const performLoad = async () => {
+      try {
+        setLoading(true);
+        const [allVersions, statusResults] = await Promise.all([
+          questionBankManager.getAllVersions(),
+          versionStatusManager.getAllVersionStatuses()
+        ]);
 
-      // 合并版本信息和状态信息
-      const versionsWithStatus: VersionWithStatus[] = allVersions.map(version => {
-        const status = statusResults.find(s => s.versionId === version.id);
-        return {
-          ...version,
-          status: status ? {
-            isAvailable: status.isAvailable,
-            availableBanks: status.availableBanks,
-            error: status.error,
-          } : undefined,
-          isLoading: !status,
-        };
-      });
+        // 合并版本信息和状态信息
+        const versionsWithStatus: VersionWithStatus[] = allVersions.map(version => {
+          const status = statusResults.find(s => s.versionId === version.id);
+          return {
+            ...version,
+            status: status ? {
+              isAvailable: status.isAvailable,
+              availableBanks: status.availableBanks,
+              error: status.error,
+            } : undefined,
+            isLoading: !status,
+          };
+        });
 
-      setVersions(versionsWithStatus);
+        setVersions(versionsWithStatus);
 
-      // 如果没有选择版本，默认选择最新可用版本
-      if (!selectedVersion && versionsWithStatus.length > 0) {
-        const latestAvailable = versionsWithStatus.find(v => v.isLatest && v.status?.isAvailable) ||
-                              versionsWithStatus.find(v => v.status?.isAvailable) ||
-                              versionsWithStatus[0];
-        if (latestAvailable) {
-          onVersionChange(latestAvailable.id);
+        // 如果没有选择版本，默认选择最新可用版本
+        if (!selectedVersion && versionsWithStatus.length > 0) {
+          const latestAvailable = versionsWithStatus.find(v => v.isLatest && v.status?.isAvailable) ||
+                                versionsWithStatus.find(v => v.status?.isAvailable) ||
+                                versionsWithStatus[0];
+          if (latestAvailable) {
+            onVersionChange(latestAvailable.id);
+          }
         }
+      } catch (error) {
+        logger.error("Failed to load question bank versions", error);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      logger.error("Failed to load question bank versions", error);
-    } finally {
-      setLoading(false);
-    }
+    };
+
+    performLoad();
   }, [selectedVersion, onVersionChange]);
 
   useEffect(() => {
@@ -133,87 +137,91 @@ export function QuestionBankSelector({
     }
   }, [selectedVersion, selectedBank, versions, onBankChange]);
 
-  const handleRefresh = async (isRetry = false) => {
+  const handleRefresh = useCallback((isRetry = false) => {
     if (refreshState === RefreshState.LOADING) return; // 防止重复点击
 
-    try {
-      setRefreshState(RefreshState.LOADING);
-      setErrorMessage('');
-      setErrorType(null);
+    const performRefresh = async () => {
+      try {
+        setRefreshState(RefreshState.LOADING);
+        setErrorMessage('');
+        setErrorType(null);
 
-      // 如果是重试，增加重试计数；如果是手动点击，重置计数和自动重试状态
-      if (isRetry) {
-        setRetryCount(prev => prev + 1);
-        setIsAutoRetrying(true);
-      } else {
-        setRetryCount(0);
-        setIsAutoRetrying(false);
-      }
-
-      // 强制刷新配置文件
-      await questionBankManager.refreshConfig();
-
-      // 刷新版本状态
-      const versions = await questionBankManager.getAllVersions(true);
-      await Promise.all(
-        versions.map(v => versionStatusManager.refreshVersionStatus(v.id))
-      );
-
-      // 重新加载组件状态
-      await loadVersionsWithStatus();
-
-      logger.debug('配置刷新完成');
-      setRefreshState(RefreshState.SUCCESS);
-      setRetryCount(0); // 成功后重置重试计数
-      setIsAutoRetrying(false); // 成功后重置自动重试状态
-
-      // 3秒后自动恢复到闲置状态
-      setTimeout(() => {
-        setRefreshState(RefreshState.IDLE);
-      }, 3000);
-
-    } catch (error) {
-      logger.error('刷新配置失败', error);
-      
-      // 分析错误类型
-      let errorTypeResult = ErrorType.UNKNOWN;
-      let errorMsg = '刷新失败，请重试';
-      
-      if (error instanceof Error) {
-        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-          errorTypeResult = ErrorType.NETWORK;
-          errorMsg = '网络连接失败，请检查网络后重试';
-        } else if (error.message.includes('timeout')) {
-          errorTypeResult = ErrorType.TIMEOUT;
-          errorMsg = '请求超时，请重试';
-        } else if (error.message.includes('config')) {
-          errorTypeResult = ErrorType.CONFIG;
-          errorMsg = '配置文件加载失败，请重试';
+        // 如果是重试，增加重试计数；如果是手动点击，重置计数和自动重试状态
+        if (isRetry) {
+          setRetryCount(prev => prev + 1);
+          setIsAutoRetrying(true);
         } else {
-          errorMsg = error.message || '未知错误，请重试';
+          setRetryCount(0);
+          setIsAutoRetrying(false);
         }
-      }
-      
-      setErrorType(errorTypeResult);
-      setErrorMessage(errorMsg);
-      setRefreshState(RefreshState.ERROR);
 
-      // 只在首次失败且未在自动重试中时进行自动重试
-      if (!isRetry && !isAutoRetrying && retryCount < 2) {
-        const retryDelay = Math.pow(2, retryCount) * 1000; // 指数退避：1s, 2s
-        logger.debug(`自动重试 ${retryCount + 1}/2，延迟 ${retryDelay}ms`);
-        setTimeout(() => {
-          handleRefresh(true);
-        }, retryDelay);
-      } else {
-        // 达到最大重试次数、正在自动重试中失败、或者是手动重试失败后，停止自动重试
-        setIsAutoRetrying(false);
+        // 强制刷新配置文件
+        await questionBankManager.refreshConfig();
+
+        // 刷新版本状态
+        const versions = await questionBankManager.getAllVersions(true);
+        await Promise.all(
+          versions.map(v => versionStatusManager.refreshVersionStatus(v.id))
+        );
+
+        // 重新加载组件状态
+        await loadVersionsWithStatus();
+
+        logger.debug('配置刷新完成');
+        setRefreshState(RefreshState.SUCCESS);
+        setRetryCount(0); // 成功后重置重试计数
+        setIsAutoRetrying(false); // 成功后重置自动重试状态
+
+        // 3秒后自动恢复到闲置状态
         setTimeout(() => {
           setRefreshState(RefreshState.IDLE);
         }, 3000);
+
+      } catch (error) {
+        logger.error('刷新配置失败', error);
+        
+        // 分析错误类型
+        let errorTypeResult = ErrorType.UNKNOWN;
+        let errorMsg = '刷新失败，请重试';
+        
+        if (error instanceof Error) {
+          if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+            errorTypeResult = ErrorType.NETWORK;
+            errorMsg = '网络连接失败，请检查网络后重试';
+          } else if (error.message.includes('timeout')) {
+            errorTypeResult = ErrorType.TIMEOUT;
+            errorMsg = '请求超时，请重试';
+          } else if (error.message.includes('config')) {
+            errorTypeResult = ErrorType.CONFIG;
+            errorMsg = '配置文件加载失败，请重试';
+          } else {
+            errorMsg = error.message || '未知错误，请重试';
+          }
+        }
+        
+        setErrorType(errorTypeResult);
+        setErrorMessage(errorMsg);
+        setRefreshState(RefreshState.ERROR);
+
+        // 只在首次失败且未在自动重试中时进行自动重试
+        if (!isRetry && !isAutoRetrying && retryCount < 2) {
+          const retryDelay = Math.pow(2, retryCount) * 1000; // 指数退避：1s, 2s
+          logger.debug(`自动重试 ${retryCount + 1}/2，延迟 ${retryDelay}ms`);
+          setTimeout(() => {
+            handleRefresh(true);
+          }, retryDelay);
+        } else {
+          // 达到最大重试次数、正在自动重试中失败、或者是手动重试失败后，停止自动重试
+          setIsAutoRetrying(false);
+          setTimeout(() => {
+            setRefreshState(RefreshState.IDLE);
+          }, 3000);
+        }
       }
-    }
-  };
+    };
+
+    performRefresh();
+  }, [refreshState, isAutoRetrying, retryCount, loadVersionsWithStatus]);
 
   const selectedVersionData = versions.find(v => v.id === selectedVersion);
   const availableBanks = selectedVersionData?.status?.availableBanks || [];
@@ -391,7 +399,9 @@ export function QuestionBankSelector({
             <div className="flex items-start gap-2">
               <AlertCircle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
               <div className="flex-1">
-                <div className="text-sm font-medium text-orange-800">刷新失败</div>
+                <div className="text-sm font-medium text-orange-800">
+                  刷新失败 {errorType && `(${errorType})`}
+                </div>
                 <div className="text-xs text-orange-700 mt-1">{errorMessage}</div>
                 <div className="mt-2">
                   <Button
