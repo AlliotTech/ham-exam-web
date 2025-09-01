@@ -16,6 +16,14 @@ enum RefreshState {
   SUCCESS = 'success',
   ERROR = 'error'
 }
+
+// 错误类型枚举
+enum ErrorType {
+  NETWORK = 'network',
+  CONFIG = 'config',
+  TIMEOUT = 'timeout',
+  UNKNOWN = 'unknown'
+}
 import { questionBankManager } from "@/lib/question-bank-manager";
 import { versionStatusManager } from "@/lib/version-status-manager";
 import { logger } from '@/lib/logger';
@@ -48,6 +56,9 @@ export function QuestionBankSelector({
   const [versions, setVersions] = useState<VersionWithStatus[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshState, setRefreshState] = useState<RefreshState>(RefreshState.IDLE);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [errorType, setErrorType] = useState<ErrorType | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
 
   const loadVersionsWithStatus = useCallback(async () => {
     try {
@@ -121,12 +132,21 @@ export function QuestionBankSelector({
     }
   }, [selectedVersion, selectedBank, versions, onBankChange]);
 
-  const handleRefresh = async () => {
+  const handleRefresh = async (isRetry = false) => {
     if (refreshState === RefreshState.LOADING) return; // 防止重复点击
 
-    setRefreshState(RefreshState.LOADING);
-
     try {
+      setRefreshState(RefreshState.LOADING);
+      setErrorMessage('');
+      setErrorType(null);
+
+      // 如果是重试，增加重试计数
+      if (isRetry) {
+        setRetryCount(prev => prev + 1);
+      } else {
+        setRetryCount(0);
+      }
+
       // 强制刷新配置文件
       await questionBankManager.refreshConfig();
 
@@ -141,6 +161,7 @@ export function QuestionBankSelector({
 
       logger.debug('配置刷新完成');
       setRefreshState(RefreshState.SUCCESS);
+      setRetryCount(0); // 成功后重置重试计数
 
       // 3秒后自动恢复到闲置状态
       setTimeout(() => {
@@ -149,12 +170,42 @@ export function QuestionBankSelector({
 
     } catch (error) {
       logger.error('刷新配置失败', error);
+      
+      // 分析错误类型
+      let errorTypeResult = ErrorType.UNKNOWN;
+      let errorMsg = '刷新失败，请重试';
+      
+      if (error instanceof Error) {
+        if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          errorTypeResult = ErrorType.NETWORK;
+          errorMsg = '网络连接失败，请检查网络后重试';
+        } else if (error.message.includes('timeout')) {
+          errorTypeResult = ErrorType.TIMEOUT;
+          errorMsg = '请求超时，请重试';
+        } else if (error.message.includes('config')) {
+          errorTypeResult = ErrorType.CONFIG;
+          errorMsg = '配置文件加载失败，请重试';
+        } else {
+          errorMsg = error.message || '未知错误，请重试';
+        }
+      }
+      
+      setErrorType(errorTypeResult);
+      setErrorMessage(errorMsg);
       setRefreshState(RefreshState.ERROR);
 
-      // 3秒后自动恢复到闲置状态
-      setTimeout(() => {
-        setRefreshState(RefreshState.IDLE);
-      }, 3000);
+      // 自动重试逻辑（最多3次）
+      if (retryCount < 2) {
+        const retryDelay = Math.pow(2, retryCount) * 1000; // 指数退避：1s, 2s
+        setTimeout(() => {
+          handleRefresh(true);
+        }, retryDelay);
+      } else {
+        // 达到最大重试次数后，3秒后恢复到闲置状态
+        setTimeout(() => {
+          setRefreshState(RefreshState.IDLE);
+        }, 3000);
+      }
     }
   };
 
@@ -200,7 +251,9 @@ export function QuestionBankSelector({
         return (
           <div className="flex items-center gap-1">
             <Loader2 className="h-3 w-3 animate-spin" />
-            <span className="text-xs">刷新中...</span>
+            <span className="text-xs">
+              {retryCount > 0 ? `重试中(${retryCount}/3)...` : '刷新中...'}
+            </span>
           </div>
         );
       case RefreshState.SUCCESS:
@@ -214,7 +267,9 @@ export function QuestionBankSelector({
         return (
           <div className="flex items-center gap-1">
             <XCircle className="h-3 w-3 text-red-500 animate-in fade-in slide-in-from-left-1 duration-300" />
-            <span className="text-xs text-red-600 animate-in fade-in slide-in-from-right-1 duration-300">失败</span>
+            <span className="text-xs text-red-600 animate-in fade-in slide-in-from-right-1 duration-300">
+              {retryCount >= 2 ? '重试' : '失败'}
+            </span>
           </div>
         );
       default:
@@ -265,14 +320,17 @@ export function QuestionBankSelector({
               </div>
             )}
             <Button
-              onClick={handleRefresh}
+              onClick={() => handleRefresh(false)}
               disabled={refreshState === RefreshState.LOADING || disabled}
               variant="outline"
               size="sm"
               className={cn(
                 "h-7 px-2 transition-all duration-300",
-                getButtonVariant()
+                getButtonVariant(),
+                // 确保错误状态下按钮仍然可见和可用
+                refreshState === RefreshState.ERROR && "border-orange-300 bg-orange-50 hover:bg-orange-100"
               )}
+              title={errorMessage || "刷新题库配置"}
             >
               {getRefreshButtonContent()}
               <span className="sr-only">刷新配置</span>
@@ -320,6 +378,29 @@ export function QuestionBankSelector({
             ))}
           </SelectContent>
         </Select>
+        
+        {/* 错误提示区域 */}
+        {refreshState === RefreshState.ERROR && errorMessage && retryCount >= 2 && (
+          <div className="mt-2 p-3 bg-orange-50 border border-orange-200 rounded-md">
+            <div className="flex items-start gap-2">
+              <AlertCircle className="h-4 w-4 text-orange-500 mt-0.5 flex-shrink-0" />
+              <div className="flex-1">
+                <div className="text-sm font-medium text-orange-800">刷新失败</div>
+                <div className="text-xs text-orange-700 mt-1">{errorMessage}</div>
+                <div className="mt-2">
+                  <Button
+                    onClick={() => handleRefresh(false)}
+                    size="sm"
+                    variant="outline"
+                    className="h-6 px-2 text-xs border-orange-300 text-orange-700 hover:bg-orange-100"
+                  >
+                    手动重试
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* 题库类型选择 */}
