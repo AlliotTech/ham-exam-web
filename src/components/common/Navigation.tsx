@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Camera, Home, BookOpen, FileText } from "lucide-react";
+import { Camera, Home } from "lucide-react";
 
 export function Navigation() {
   const pathname = usePathname();
