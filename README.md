@@ -1,168 +1,96 @@
-## 业余无线电执照考试模拟（2025 题库）
+# 业余无线电执照考试模拟
 
-[![Node 20+](https://img.shields.io/badge/Node-%E2%89%A520.0-339933?logo=node.js)](https://nodejs.org)
+[![Node 22+](https://img.shields.io/badge/Node-%E2%89%A522.0-339933?logo=node.js)](https://nodejs.org)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 
-基于官方最新题库构建的在线模拟与练习应用，支持 A / B / C 三类考试，提供真实规则抽题、计时交卷、练习搜索、答题卡与标记、PWA 安装等功能。
-
-题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`（感谢上游维护者）。
-
-## 目录
-
-- [业余无线电执照考试模拟（2025 题库）](#业余无线电执照考试模拟2025-题库)
-- [目录](#目录)
-- [功能特色](#功能特色)
-- [快速开始](#快速开始)
-- [数据集构建（questions JSON 与题图）](#数据集构建questions-json-与题图)
-- [命令](#命令)
-- [页面与路由](#页面与路由)
-- [键盘快捷键](#键盘快捷键)
-- [PWA 与图标](#pwa-与图标)
-- [题目数据结构](#题目数据结构)
-- [隐私说明](#隐私说明)
-- [常见问题（FAQ）](#常见问题faq)
-- [致谢](#致谢)
+基于最新题库的在线模拟与练习应用，支持 A/B/C 三类考试，提供完整的考试模拟体验和便捷的练习工具。
 
 ## 功能特色
 
-- **模拟考试（A/B/C 类）**：按照真实考试规则随机抽题（单选/多选比例、总题数与限时），提供倒计时与自动交卷；交卷后显示分数、正确率与是否合格，并可继续浏览题目与标准答案。
-- **练习模式（顺序/随机）**：支持顺序与随机两种题序；可切换“显示正确答案”；自动保存进度并在恰当时机提示“继续上次/重新开始”（可按题库选择不再提示）。
-- **答题卡与标记**：侧边答题卡快速跳转题目，支持筛选“全部/未答/已标记”；可对题目打标以便回看。
-- **搜索与跳转（练习顺序模式）**：输入题号 J 码（如 LK0501）或关键词实时匹配并跳转，带少量结果预览。
-- **计时与成绩**：进度条与剩余时间提醒；成绩弹窗展示正确数/总题数、正确率与合格线；多选题需与标准答案完全一致才计分。
-- **键盘快捷键**：←/→ 切换上一题/下一题；数字 1-9 直接选择单选项；Enter 打开搜索（练习顺序模式）。
-- **移动优先 UI**：响应式布局与底部操作栏，移动端操作便捷；图片懒加载与轻量动效兼顾性能与体验。
-- **PWA 支持**：提供 `manifest.json` 与自动生成图标，可添加到主屏幕，具备基础离线能力（依赖浏览器缓存）。
-- **题库与资源管理**：构建时生成静态 JSON（`public/questions/`），前端直接加载；题目附图懒加载，减少网络与渲染开销。
-- **隐私与本地存储**：使用浏览器 `localStorage` 保存练习记录与偏好设置，不上传个人数据，无第三方统计脚本。
+### 核心功能
+- **📝 模拟考试**：A/B/C 三类考试，支持真实规则抽题、计时交卷和成绩统计
+- **🎯 练习模式**：顺序/随机练习，进度保存，答案解析
+- **🔍 智能搜索**：题号和关键词搜索（练习模式）
+- **📱 照片处理**：报名照片尺寸调整工具
+
+### 用户体验
+- **⌨️ 键盘快捷键**：方向键切换题目，数字键选择选项
+- **📋 答题卡**：快速导航，题目标记，进度跟踪
+- **📱 移动优先**：响应式设计，PWA 支持，可离线使用
+- **💾 本地存储**：隐私保护，所有数据保存在本地
 
 ## 快速开始
 
-环境要求：Node.js 20+
+### 环境要求
+- Node.js 22+
+- pnpm / npm / yarn
+
+### 安装与运行
 
 ```bash
-pnpm i # 或 npm i / yarn
-pnpm dev # 本地开发（默认启用 Turbopack）
-```
+# 安装依赖
+pnpm install
 
-打开浏览器访问 `http://localhost:3000`。
+# 本地开发
+pnpm dev
 
-若首次运行看到题库为空或 404，请先执行“数据集构建”。
-
-## 数据集构建（questions JSON 与题图）
-
-本项目在构建阶段将 CSV 题库与图片转换为可直接由前端加载的静态资源：
-
-- 题目 JSON 输出至：`public/questions/{A,B,C,full}.json`
-- 附图输出至：`public/questions/images/*.jpg`
-
-构建脚本：`scripts/build-dataset.mjs`
-
-数据来源优先级：
-
-1. 本地环境变量 `DATASET_DIR` 指向包含 `class_a.csv`、`class_b.csv`、`class_c.csv`、`full.csv`、`images.csv` 的目录
-2. 若未设置则回退到远程原始数据（默认：`https://raw.githubusercontent.com/AlliotTech/crac-amateur-radio-exam-questions-2025-csv/main`）
-
-macOS 示例：
-
-```bash
-export DATASET_DIR="/Users/<you>/Downloads/tmp/crac-amateur-radio-exam-questions-2025-csv"
-```
-
-执行构建：
-
-```bash
-# 单独运行（可在开发前先生成静态题库）
-node ./scripts/build-dataset.mjs
-
-# 生产构建会自动执行（prebuild 钩子会依次运行数据集构建与图标生成）
+# 生产构建
 pnpm build
+
+# 启动生产服务
+pnpm start
 ```
 
-图片映射说明：
+访问 `http://localhost:3000` 开始使用。
 
-- `images.csv` 用于将 J 码（如 `LK0501`）映射到题图路径（如 `images/0.jpg`）。
-- 构建时会将图片复制到 `public/questions/images/` 并在题目 JSON 中填充 `imageUrl` 字段。
-- 选项文本中形如 `[F]LK0500.jpg` 的提示会被清理，不影响显示。
+### 数据集构建
 
-## 命令
+项目首次运行需要构建题库数据：
 
-```json
-{
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "prebuild": "node ./scripts/build-dataset.mjs && node ./scripts/generate-pwa-icons.mjs",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  }
-}
+```bash
+# 单独构建数据集
+node ./scripts/build-dataset.mjs
 ```
 
-- `dev`：本地开发（推荐先生成数据集以避免 404）
-- `build`：生产构建，自动先执行 `prebuild`
-- `start`：启动生产服务
-- `lint`：代码检查
+数据来源支持本地文件或远程仓库，详见脚本注释。
 
-## 页面与路由
+## 页面路由
 
-- `/`：首页
-- `/practice?bank=A|B|C`：练习模式（支持顺序/随机、显示答案、保存/恢复进度、搜索）
-- `/exam?bank=A|B|C`：模拟考试（真实规则抽题、倒计时、交卷与成绩）
+- `/` - 首页，选择题库和模式
+- `/practice?bank=A|B|C` - 练习模式
+- `/exam?bank=A|B|C` - 模拟考试
+- `/photo-processor` - 照片处理工具
 
-`bank` 省略时默认 `A`。
+## 快捷键
 
-## 键盘快捷键
+- `← / →` - 上一题 / 下一题
+- `1-9` - 选择对应选项（单选题）
+- `Enter` - 打开搜索（练习模式）
 
-- 通用：`← / →` 上一题 / 下一题
-- 单选题：`1-9` 直接选择选项
-- 练习（顺序模式）：`Enter` 打开搜索
+## 技术栈
 
-## PWA 与图标
+- **Frontend**: Next.js 15, React 19, TypeScript
+- **UI**: Tailwind CSS, Radix UI, Lucide Icons
+- **State**: Zustand
+- **PWA**: @ducanh2912/next-pwa
+- **Build**: Turbopack
 
-- 清单：`public/manifest.json`
-- 图标：`public/pwa-icon.svg` 为源文件，构建阶段通过 `scripts/generate-pwa-icons.mjs` 生成 192/512 PNG 图标
-- 安装：在兼容浏览器中通过地址栏或菜单“添加到主屏幕”
+## 隐私与数据
 
-说明：未强制注册 Service Worker，离线能力主要依赖浏览器缓存与静态资源策略。
+- 所有数据存储在浏览器本地 (`localStorage`)
+- 不收集或上传任何个人数据
+- 支持 PWA，可离线使用
 
-## 题目数据结构
+## 常见问题
 
-静态题库 JSON 的单题结构如下：
-
-```json
-{
-  "id": "LK0501",
-  "codes": { "J": "LK0501", "P": "LK05" },
-  "question": "题干文本",
-  "options": [
-    { "key": "A", "text": "选项 A" },
-    { "key": "B", "text": "选项 B" }
-  ],
-  "answer_keys": ["A"],
-  "type": "single",
-  "pages": null,
-  "imageUrl": "/questions/images/0.jpg"
-}
-```
-
-类型定义参见：`src/types/question.ts`
-
-## 隐私说明
-
-仅在本地浏览器 `localStorage` 存储练习记录（题序、答案）、显示偏好与个别提示开关；不收集、不上传任何个人数据。
-
-## 常见问题（FAQ）
-
-- 构建后访问题库 JSON 404？
-  - 先运行数据集构建脚本，确认 `public/questions/` 下存在 `A.json/B.json/C.json` 与 `images/` 目录。
-- 图片不显示？
-  - 确认 `images.csv` 存在且与题库匹配；构建脚本会将题图复制到 `public/questions/images/`。
-- 练习搜索无效？
-  - 搜索功能仅在“顺序模式”开启，支持 J 码与关键词。
+- **题库为空或404？** 请先运行 `node ./scripts/build-dataset.mjs` 构建数据集
+- **图片不显示？** 确认已正确构建数据集，图片文件应在 `public/questions/images/`
+- **搜索无效？** 搜索功能仅在练习模式的顺序模式下可用
 
 ## 致谢
 - 本项目 CDN 加速及安全防护由 [Tencent EdgeOne](https://edgeone.ai/?from=github) 赞助：EdgeOne 提供长期有效的免费套餐，包含不限量的流量和请求，覆盖中国大陆节点，且无任何超额收费，感兴趣的朋友可以点击下面的链接领取：  [<img src="https://edgeone.ai/media/34fe3a45-492d-4ea4-ae5d-ea1087ca7b4b.png" alt="图片" style="height: 1em; vertical-align: middle;">](https://edgeone.ai/?from=github) [亚洲最佳CDN、边缘和安全解决方案 - Tencent EdgeOne](https://edgeone.ai/zh?from=github)
-- 题库来源：`TimXiedada/crac-amateur-radio-exam-questions-2025-csv`
-- 技术栈：Next.js、React、Tailwind CSS、Radix UI、Lucide Icons
+
+- **题库数据**: [TimXiedada/crac-amateur-radio-exam-questions-2025-csv](https://github.com/TimXiedada/crac-amateur-radio-exam-questions-2025-csv)
+
+- **开源组件**: Next.js, React, Tailwind CSS, Radix UI, Lucide Icons

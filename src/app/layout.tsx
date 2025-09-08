@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PWAUpdatePrompt } from "@/components/common/PWAUpdatePrompt";
+import { ConditionalNavigation } from "@/components/common/ConditionalNavigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,8 +20,8 @@ export const metadata: Metadata = {
   description: "业余无线电执照考试模拟练习| 2025年10月题库",
   manifest: "/manifest.json",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
+    icon: "/pwa-icon.svg",
+    shortcut: "/pwa-icon.svg",
     apple: "/apple-touch-icon.png",
   },
   appleWebApp: {
@@ -67,9 +68,10 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen min-h-[100dvh] flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] flex flex-col`}
       >
         <PWAUpdatePrompt />
+        <ConditionalNavigation />
         <main className="flex-1">{children}</main>
         <footer className="mt-8 border-t bg-secondary/40">
           <div className="max-w-screen-lg mx-auto px-4">

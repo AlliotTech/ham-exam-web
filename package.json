@@ -23,6 +23,7 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "compressorjs": "^1.2.1",
     "lucide-react": "^0.539.0",
     "next": "15.4.6",
     "react": "19.1.0",
