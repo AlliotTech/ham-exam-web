@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const Compressor = require('compressorjs');
-import { PhotoType, PhotoProcessorParams, PhotoResult, PHOTO_CONFIG } from '@/types/photo';
+import { PhotoType, PhotoResult, PHOTO_CONFIG } from '@/types/photo';
 
 /**
  * 处理照片压缩
