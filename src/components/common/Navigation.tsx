@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Camera, Home } from "lucide-react";
 
@@ -30,8 +31,8 @@ export function Navigation() {
           {/* Logo/Brand */}
           <Link href="/" className="flex items-center space-x-2">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">无</span>
+              <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center p-1">
+                <Image src="/pwa-icon.svg" alt="网站图标" width={32} height={32} className="w-full h-full" />
               </div>
               <span className="font-semibold text-gray-900 hidden sm:block">
                 业余无线电考试

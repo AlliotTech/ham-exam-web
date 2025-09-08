@@ -20,8 +20,8 @@ export const metadata: Metadata = {
   description: "业余无线电执照考试模拟练习| 2025年10月题库",
   manifest: "/manifest.json",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
+    icon: "/pwa-icon.svg",
+    shortcut: "/pwa-icon.svg",
     apple: "/apple-touch-icon.png",
   },
   appleWebApp: {
