@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PhotoProcessor } from "@/components/common/PhotoProcessor";
+import { PhotoProcessor } from "@/components/photo-processor/PhotoProcessor";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 

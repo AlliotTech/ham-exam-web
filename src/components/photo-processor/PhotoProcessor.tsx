@@ -53,7 +53,7 @@ export function PhotoProcessor() {
             <a 
               href="http://82.157.138.16:8091/CRAC/crac/index.html" 
               target="_blank" 
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
               className="text-blue-600 hover:text-blue-800 underline"
             >
               业余无线电台操作技术能力验证及信息管理系统
