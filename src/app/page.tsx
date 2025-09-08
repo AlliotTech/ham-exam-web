@@ -110,6 +110,31 @@ export default function Home() {
           </div>
         </CardContent>
       </Card>
+      
+      {/* 相关工具和服务 */}
+      <div className="mt-8 p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
+        <div className="flex items-start gap-4">
+          <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+            <span className="text-blue-600 text-lg">🛠️</span>
+          </div>
+          <div className="flex-1">
+            <h3 className="text-lg font-medium text-gray-900 mb-2">
+              相关工具
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">
+              为您的无线电考试报名提供便捷的辅助工具，一站式解决报名需求
+            </p>
+            <Button variant="outline" asChild className="bg-white hover:bg-gray-50">
+              <Link href="/photo-processor" className="flex items-center gap-2">
+                📷 报名照片处理工具
+                <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">
+                  新功能
+                </span>
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
     </main>
   );
 }

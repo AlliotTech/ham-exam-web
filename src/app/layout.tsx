@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { PWAUpdatePrompt } from "@/components/common/PWAUpdatePrompt";
+import { Navigation } from "@/components/common/Navigation";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -67,9 +68,10 @@ export default function RootLayout({
   return (
     <html lang="zh-CN">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen min-h-[100dvh] flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] flex flex-col`}
       >
         <PWAUpdatePrompt />
+        <Navigation />
         <main className="flex-1">{children}</main>
         <footer className="mt-8 border-t bg-secondary/40">
           <div className="max-w-screen-lg mx-auto px-4">
