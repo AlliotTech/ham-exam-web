@@ -4,7 +4,9 @@
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
 [![React 19](https://img.shields.io/badge/React-19-61DAFB?logo=react)](https://react.dev)
 
-基于最新题库的在线模拟与练习应用，支持 A/B/C 三类考试，提供完整的考试模拟体验和便捷的练习工具。
+基于最新2025年题库的业余无线电执照考试模拟应用，支持A/B/C三类考试，提供完整的模拟考试、智能化练习、关键词搜索、报名照片处理等功能，采用Next.js 15 + React 19技术栈，支持PWA离线使用，数据本地存储确保隐私安全。   
+
+在线demo： [业余无线电考试](https://ham-exam.iots.vip/)  
 
 ## 功能特色
 
