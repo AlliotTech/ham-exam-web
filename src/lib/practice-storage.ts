@@ -9,6 +9,7 @@ export type SavedState = {
   index: number;
   order: "sequential" | "random";
   showAnswer: boolean;
+  showExplanation?: boolean;
   orderIndices: number[];
   answersByPosition: (string[] | null)[];
   total: number;

@@ -9,13 +9,17 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 type Props = {
   open: boolean;
   onOpenChange: (v: boolean) => void;
+  showExplanation?: boolean;
+  onChangeShowExplanation?: (v: boolean) => void;
 };
 
-export function ExamSettingsDialog({ open, onOpenChange }: Props) {
+export function ExamSettingsDialog({ open, onOpenChange, showExplanation = true, onChangeShowExplanation }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[520px]">
@@ -24,6 +28,14 @@ export function ExamSettingsDialog({ open, onOpenChange }: Props) {
           <DialogDescription>快捷键与考试说明</DialogDescription>
         </DialogHeader>
         <div className="space-y-5">
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="exam-show-expl"
+              checked={!!showExplanation}
+              onCheckedChange={(v) => onChangeShowExplanation?.(!!v)}
+            />
+            <Label htmlFor="exam-show-expl">显示答案解析（仅交卷后）</Label>
+          </div>
           <div className="space-y-2 text-sm">
             <div className="text-muted-foreground">快捷键</div>
             <div className="flex items-center justify-between">

@@ -14,6 +14,7 @@ export interface PracticeState {
   answers: AnswersMap;
   order: PracticeMode;
   showAnswer: boolean;
+  showExplanation: boolean;
   isLoading: boolean;
 }
 
@@ -25,6 +26,7 @@ export interface PracticeActions {
   jumpToQuestion: (index: number) => void;
   answer: (questionKey: string, answer: string[]) => void;
   toggleShowAnswer: () => void;
+  toggleShowExplanation: () => void;
   reset: () => void;
   applySavedState: (saved: {
     order: PracticeMode;
@@ -32,6 +34,7 @@ export interface PracticeActions {
     answers: AnswersMap;
     currentIndex: number;
     showAnswer: boolean;
+    showExplanation: boolean;
   }) => void;
 }
 
@@ -45,6 +48,7 @@ const initialState: PracticeState = {
   answers: new Map(),
   order: 'sequential',
   showAnswer: true,
+  showExplanation: true,
   isLoading: true,
 };
 
@@ -100,6 +104,10 @@ export const usePracticeStore = create<PracticeStore>((set, get) => ({
     set((state) => ({ showAnswer: !state.showAnswer }));
   },
 
+  toggleShowExplanation: () => {
+    set((state) => ({ showExplanation: !state.showExplanation }));
+  },
+
   applySavedState: (saved) => {
     set({
       order: saved.order,
@@ -107,6 +115,7 @@ export const usePracticeStore = create<PracticeStore>((set, get) => ({
       answers: saved.answers,
       currentIndex: saved.currentIndex,
       showAnswer: saved.showAnswer,
+      showExplanation: saved.showExplanation,
     });
   },
 

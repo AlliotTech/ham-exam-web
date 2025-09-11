@@ -23,6 +23,7 @@ import { ExamSettingsDialog } from "@/components/exam/ExamSettingsDialog";
 import { ExamResultDialog } from "@/components/exam/ExamResultDialog";
 import { ExamSubmitConfirmDialog } from "@/components/exam/ExamSubmitConfirmDialog";
 import { MessageDialog } from "@/components/common/MessageDialog";
+import { ExplanationCard } from "@/components/common/ExplanationCard";
 import { getRule } from "@/lib/exam-rules";
 import { calculateScore, isPassed } from "@/lib/exam";
 import {
@@ -49,6 +50,7 @@ function ExamClient() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [answerCardOpen, setAnswerCardOpen] = useState(false);
   const [filter, setFilter] = useState<"all" | "unanswered" | "flagged">("all");
+  const [showExplanation, setShowExplanation] = useState<boolean>(true);
   const [errorOpen, setErrorOpen] = useState(false);
   const [errorText, setErrorText] = useState<string>("");
   const [resumeOpen, setResumeOpen] = useState(false);
@@ -103,6 +105,10 @@ function ExamClient() {
       const v = window.localStorage.getItem(key) as typeof filter | null;
       if (v === "all" || v === "unanswered" || v === "flagged") setFilter(v);
       else setFilter("all");
+      const explKey = `exam:showExplanation:${bankParam}`;
+      const expl = window.localStorage.getItem(explKey);
+      if (expl === "0") setShowExplanation(false);
+      else setShowExplanation(true);
     } catch {}
   }, [bankParam]);
 
@@ -250,6 +256,15 @@ function ExamClient() {
     }
   }
 
+  function setShowExplanationAndPersist(v: boolean) {
+    setShowExplanation(v);
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.setItem(`exam:showExplanation:${bankParam}`, v ? "1" : "0");
+      } catch {}
+    }
+  }
+
   useEffect(() => {
     if (!questions.length || !endAtMs || finished) return;
     
@@ -382,6 +397,10 @@ function ExamClient() {
         readOnly={finished}
       />
 
+      {finished && showExplanation ? (
+        <ExplanationCard question={currentQuestion} />
+      ) : null}
+
       <BottomBar
         statsNode={
           <>
@@ -513,7 +532,12 @@ function ExamClient() {
         flaggedCount={flaggedCount}
       />
 
-      <ExamSettingsDialog open={settingsOpen} onOpenChange={setSettingsOpen} />
+      <ExamSettingsDialog
+        open={settingsOpen}
+        onOpenChange={setSettingsOpen}
+        showExplanation={showExplanation}
+        onChangeShowExplanation={setShowExplanationAndPersist}
+      />
       <ExamResumeDialog
         open={resumeOpen}
         onOpenChange={setResumeOpen}
