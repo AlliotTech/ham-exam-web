@@ -20,6 +20,8 @@ type Props = {
   onChangeOrder: (v: "sequential" | "random") => void;
   showAnswer: boolean;
   onChangeShowAnswer: (v: boolean) => void;
+  showExplanation: boolean;
+  onChangeShowExplanation: (v: boolean) => void;
 };
 
 export function PracticeSettingsDialog({
@@ -29,6 +31,8 @@ export function PracticeSettingsDialog({
   onChangeOrder,
   showAnswer,
   onChangeShowAnswer,
+  showExplanation,
+  onChangeShowExplanation,
 }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -62,6 +66,14 @@ export function PracticeSettingsDialog({
               onCheckedChange={(v) => onChangeShowAnswer(!!v)}
             />
             <Label htmlFor="show-ans">显示正确答案</Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="show-expl"
+              checked={showExplanation}
+              onCheckedChange={(v) => onChangeShowExplanation(!!v)}
+            />
+            <Label htmlFor="show-expl">显示答案解析</Label>
           </div>
           <Separator />
           <div className="space-y-2 text-sm">

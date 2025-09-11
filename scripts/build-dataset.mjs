@@ -154,6 +154,14 @@ async function build() {
     const rows = parseCsv(csv);
     const header = rows.shift() || [];
     const idx = headerIndex(header);
+    // Try to resolve explanation column with flexible aliases
+    const explanationCol =
+      idx["Explanation"] ??
+      idx["explanation"] ??
+      idx["解析"] ??
+      idx["analysis"] ??
+      idx["Analysis"] ??
+      null;
     const out = [];
     for (const r of rows) {
       const jraw = (r[idx["J"]] || "").trim();
@@ -174,6 +182,7 @@ async function build() {
       const answer_keys = (t || "").split("").filter((ch) => ch >= "A" && ch <= "Z");
       const type = answer_keys.length <= 1 ? "single" : "multiple";
       let imageUrl = null;
+      const explanation = (explanationCol != null ? (r[explanationCol] || "").trim() : "") || undefined;
       const imageRel = primaryJ ? mapJtoImage.get(primaryJ) : null; // e.g., images/0.jpg
       if (imageRel) {
         const base = path.basename(imageRel); // 0.jpg
@@ -192,6 +201,7 @@ async function build() {
         type,
         pages: undefined,
         imageUrl,
+        explanation,
       });
     }
     const outName = bankKey === "full" ? "full.json" : `${bankKey}.json`;

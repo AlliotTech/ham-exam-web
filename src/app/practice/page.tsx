@@ -17,6 +17,7 @@ import { PracticeResumeDialog } from "@/components/practice/PracticeResumeDialog
 import { PracticeSettingsDialog } from "@/components/practice/PracticeSettingsDialog";
 import { PracticeSearchDialog } from "@/components/practice/PracticeSearchDialog";
 import { MessageDialog } from "@/components/common/MessageDialog";
+import { ExplanationCard } from "@/components/common/ExplanationCard";
 import {
   clearSavedStateWithVersion,
   loadLastMode,
@@ -60,6 +61,7 @@ function PracticeClient() {
     answers,
     order,
     showAnswer,
+    showExplanation,
     isLoading,
     loadBank,
     setOrder,
@@ -68,6 +70,7 @@ function PracticeClient() {
     jumpToQuestion,
     answer,
     toggleShowAnswer,
+    toggleShowExplanation,
     reset,
     applySavedState,
   } = usePracticeStore();
@@ -170,12 +173,13 @@ function PracticeClient() {
       index: currentIndex,
       order,
       showAnswer,
+      showExplanation,
       orderIndices,
       answersByPosition,
       total: allQuestions.length,
     };
     saveState(payload);
-  }, [versionParam, allQuestions, questions, currentIndex, answers, order, showAnswer, bankParam, isLoading]);
+  }, [versionParam, allQuestions, questions, currentIndex, answers, order, showAnswer, showExplanation, bankParam, isLoading]);
 
   // Search functionality
   const deferredJump = useDeferredValue(jumpInput);
@@ -245,6 +249,7 @@ function PracticeClient() {
       answers: restoredAnswers,
       currentIndex: Math.min(Math.max(savedIndex, 0), reconstructed.length - 1),
       showAnswer: savedShowAnswer,
+      showExplanation: pendingResume.showExplanation ?? true,
     });
 
     if (noPromptThisBank) saveNoResumeWithVersion(bankParam, true, versionParam || undefined);
@@ -350,6 +355,8 @@ function PracticeClient() {
         onChangeOrder={handleSetOrder}
         showAnswer={showAnswer}
         onChangeShowAnswer={toggleShowAnswer}
+        showExplanation={showExplanation}
+        onChangeShowExplanation={toggleShowExplanation}
       />
       <PracticeSearchDialog
         open={order === "sequential" && searchOpen}
@@ -370,6 +377,10 @@ function PracticeClient() {
         onChange={handleSetCurrentAnswer}
         showImmediateAnswer={showAnswer}
       />
+
+      {showExplanation ? (
+        <ExplanationCard question={currentQuestion} />
+      ) : null}
 
       <BottomBar
         statsNode={

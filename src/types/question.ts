@@ -12,6 +12,7 @@ export type QuestionItem = {
   type: "single" | "multiple";
   pages?: { start: number | null; end: number | null };
   imageUrl?: string | null;
+  explanation?: string;
 };
 
 // Removed unused ExamSettings
