@@ -53,18 +53,8 @@ export function loadSavedStateWithVersion(bank: string | null, versionId?: Quest
   }
 }
 
-// 保留原有函数以确保向后兼容性
+// 保存练习状态（已支持版本ID）
 export function saveState(state: SavedState) {
-  if (typeof window === "undefined") return;
-  try {
-    window.localStorage.setItem(storageKey(state.bank, state.versionId), JSON.stringify(state));
-  } catch {
-    // ignore
-  }
-}
-
-// 新增支持版本的函数
-export function saveStateWithVersion(state: SavedState) {
   if (typeof window === "undefined") return;
   try {
     window.localStorage.setItem(storageKey(state.bank, state.versionId), JSON.stringify(state));
