@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { PWAUpdatePrompt } from "@/components/common/PWAUpdatePrompt";
 import { ConditionalNavigation } from "@/components/common/ConditionalNavigation";
@@ -70,6 +71,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-[100dvh] flex flex-col`}
       >
+        <Script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5453400863646747"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <PWAUpdatePrompt />
         <ConditionalNavigation />
         <main className="flex-1">{children}</main>
