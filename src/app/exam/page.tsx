@@ -42,6 +42,18 @@ const getKeyByStrategy = (q: QuestionItem | undefined, pos: number) => {
   return (q.id || q.codes?.J || `pos:${pos}`).toString();
 };
 
+function reconstructPickedQuestions(all: QuestionItem[], saved: ExamSavedState): QuestionItem[] {
+  if (saved.questionIds && saved.questionIds.length > 0) {
+    const byId = new Map(all.map(q => [(q.id || q.codes?.J || '').toString(), q]));
+    const restored = saved.questionIds.map(id => id ? byId.get(id) : undefined).filter(Boolean) as QuestionItem[];
+    if (restored.length === saved.total) return restored;
+  }
+  if (saved.questionsSnapshot && saved.questionsSnapshot.length > 0) {
+    return saved.questionsSnapshot.slice(0, saved.total);
+  }
+  return all.slice(0, Math.min(saved.total, all.length));
+}
+
 function ExamClient() {
   const [loading, setLoading] = useState(true);
   // UI state remains in component
@@ -97,21 +109,6 @@ function ExamClient() {
     return count;
   }, [flags]);
 
-  // Load persisted filter preference per bank
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    try {
-      const key = `exam:answerCardFilter:${bankParam}`;
-      const v = window.localStorage.getItem(key) as typeof filter | null;
-      if (v === "all" || v === "unanswered" || v === "flagged") setFilter(v);
-      else setFilter("all");
-      const explKey = `exam:showExplanation:${bankParam}`;
-      const expl = window.localStorage.getItem(explKey);
-      if (expl === "0") setShowExplanation(false);
-      else setShowExplanation(true);
-    } catch {}
-  }, [bankParam]);
-
   useNoSiteFooter();
 
   useEffect(() => {
@@ -119,6 +116,12 @@ function ExamClient() {
       try {
         setLoading(true);
         const allQuestions = await loadQuestionsWithVersion(versionParam || undefined, bankParam, { strict: true });
+        try {
+          const key = `exam:answerCardFilter:${bankParam}`;
+          const v = window.localStorage.getItem(key);
+          setFilter(v === "unanswered" || v === "flagged" ? v : "all");
+          setShowExplanation(window.localStorage.getItem(`exam:showExplanation:${bankParam}`) !== "0");
+        } catch {}
         const saved = loadExamSavedStateWithVersion(bankParam, versionParam || undefined);
 
         if (saved && shouldResumeExam(saved)) {
@@ -158,17 +161,6 @@ function ExamClient() {
     }
   }, [versionParam, bankParam, rule.minutes, rule.multiples, rule.singles, rule.total, startExam, loadSavedState, resetExam]);
 
-  function reconstructPickedQuestions(all: QuestionItem[], saved: ExamSavedState): QuestionItem[] {
-    if (saved.questionIds && saved.questionIds.length > 0) {
-      const byId = new Map(all.map(q => [(q.id || q.codes?.J || '').toString(), q]));
-      const restored = saved.questionIds.map(id => id ? byId.get(id) : undefined).filter(Boolean) as QuestionItem[];
-      if (restored.length === saved.total) return restored;
-    }
-    if (saved.questionsSnapshot && saved.questionsSnapshot.length > 0) {
-      return saved.questionsSnapshot.slice(0, saved.total);
-    }
-    return all.slice(0, Math.min(saved.total, all.length));
-  }
 
   const percent = questions.length ? Math.round(((currentIndex + 1) / questions.length) * 100) : 0;
 
@@ -541,7 +533,7 @@ function ExamClient() {
       <ExamResumeDialog
         open={resumeOpen}
         onOpenChange={setResumeOpen}
-        expiresInMs={Math.max(0, (pendingResume?.endAtMs ?? Date.now()) - Date.now())}
+        expiresInMs={remainingMs}
         answeredCount={(pendingResume?.answersByPosition || []).filter(Boolean).length}
         total={pendingResume?.total || questions.length}
         onResume={handleResumeConfirm}

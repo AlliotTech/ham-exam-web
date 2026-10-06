@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
 export function useCountdown(endAtMs: number | null, onElapsed?: () => void): number {
-  const [remainingMs, setRemainingMs] = useState<number>(0);
+  const [nowMs, setNowMs] = useState(() => Date.now());
 
   useEffect(() => {
     if (!endAtMs) return;
     const id = window.setInterval(() => {
-      const left = Math.max(0, endAtMs - Date.now());
-      setRemainingMs(left);
-      if (left <= 0) {
+      const now = Date.now();
+      setNowMs(now);
+      if (now >= endAtMs) {
         window.clearInterval(id);
         onElapsed?.();
       }
@@ -16,5 +16,5 @@ export function useCountdown(endAtMs: number | null, onElapsed?: () => void): nu
     return () => window.clearInterval(id);
   }, [endAtMs, onElapsed]);
 
-  return remainingMs;
+  return endAtMs ? Math.max(0, endAtMs - nowMs) : 0;
 }
