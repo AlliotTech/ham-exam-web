@@ -137,7 +137,7 @@ export function QuestionBankSelector({
     }
   }, [selectedVersion, selectedBank, versions, onBankChange]);
 
-  const handleRefresh = useCallback((isRetry = false) => {
+  const handleRefresh = useCallback(function refresh(isRetry = false) {
     if (refreshState === RefreshState.LOADING) return; // 防止重复点击
 
     const performRefresh = async () => {
@@ -208,7 +208,7 @@ export function QuestionBankSelector({
           const retryDelay = Math.pow(2, retryCount) * 1000; // 指数退避：1s, 2s
           logger.debug(`自动重试 ${retryCount + 1}/2，延迟 ${retryDelay}ms`);
           setTimeout(() => {
-            handleRefresh(true);
+            refresh(true);
           }, retryDelay);
         } else {
           // 达到最大重试次数、正在自动重试中失败、或者是手动重试失败后，停止自动重试
