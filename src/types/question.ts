@@ -13,6 +13,7 @@ export type QuestionItem = {
   pages?: { start: number | null; end: number | null };
   imageUrl?: string | null;
   explanation?: string;
+  mnemonic?: string;
 };
 
 // Removed unused ExamSettings

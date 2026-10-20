@@ -129,6 +129,26 @@ async function build() {
   await ensureDir(outBaseDir);
   await ensureDir(outImgDir);
 
+  // Load AI-generated explanations & mnemonics (optional file in the dataset repo).
+  // Keyed by the I column (MC code, globally unique), e.g.
+  // { "MC2-0001": { "explanation": "...", "mnemonic": "..." } }
+  const aiExplanations = new Map();
+  try {
+    const txt = await readTextLocalOrRemote("ai_explanations.json");
+    const data = JSON.parse(txt);
+    for (const [code, v] of Object.entries(data)) {
+      if (v && (v.explanation || v.mnemonic)) {
+        aiExplanations.set(code.trim(), {
+          explanation: (v.explanation || "").trim() || undefined,
+          mnemonic: (v.mnemonic || "").trim() || undefined,
+        });
+      }
+    }
+    console.log(`Loaded ${aiExplanations.size} AI explanations from dataset.`);
+  } catch {
+    console.log("No ai_explanations.json in dataset, building without AI explanations.");
+  }
+
   // Load image map
   const imagesCsv = await readTextLocalOrRemote("images.csv");
   const imgRows = parseCsv(imagesCsv);
@@ -182,7 +202,14 @@ async function build() {
       const answer_keys = (t || "").split("").filter((ch) => ch >= "A" && ch <= "Z");
       const type = answer_keys.length <= 1 ? "single" : "multiple";
       let imageUrl = null;
-      const explanation = (explanationCol != null ? (r[explanationCol] || "").trim() : "") || undefined;
+      const ai = (r[idx["I"]] || "").trim()
+        ? aiExplanations.get((r[idx["I"]] || "").trim())
+        : null;
+      const explanation =
+        (explanationCol != null ? (r[explanationCol] || "").trim() : "") ||
+        ai?.explanation ||
+        undefined;
+      const mnemonic = ai?.mnemonic || undefined;
       const imageRel = primaryJ ? mapJtoImage.get(primaryJ) : null; // e.g., images/0.jpg
       if (imageRel) {
         const base = path.basename(imageRel); // 0.jpg
@@ -202,6 +229,7 @@ async function build() {
         pages: undefined,
         imageUrl,
         explanation,
+        mnemonic,
       });
     }
     const outName = bankKey === "full" ? "full.json" : `${bankKey}.json`;

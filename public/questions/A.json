@@ -29,7 +29,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "专门针对无线电管理的行政法规是《中华人民共和国无线电管理条例》，由国务院和中央军事委员会制定（AC）。行政法规只能由国务院制定，工信部只能制定部门规章，故D错；B项文件名称根本不存在，故B错。",
+    "mnemonic": "条例=行政法规，制定者=国务院+中央军委"
   },
   {
     "id": "A-2",
@@ -61,7 +63,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台的管理文件是《业余无线电台管理办法》，制定机构是工业和信息化部（AC）。该文件属于部门规章，由工信部制定而非国务院，故D错；B项《暂行规定》是旧称，现行名称为“管理办法”，故B错。",
+    "mnemonic": "办法是部门规章，制定者=工信部"
   },
   {
     "id": "A-3",
@@ -92,7 +96,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "依法对业余无线电台实施监督管理的是国家无线电管理机构和省、自治区、直辖市无线电管理机构（A）。业余无线电协会是民间组织无执法权，体育机构和公安部门也不负责业余电台管理，故B、C、D均错。",
+    "mnemonic": "监管靠两级：国家无委+省级无委"
   },
   {
     "id": "A-4",
@@ -123,7 +129,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "“业余业务”“卫星业余业务”“业余电台”的具体定义出自《中华人民共和国无线电频率划分规定》（A），这是我国频率划分与业务定义的基准文件。《无线电管理条例》只作原则性规定而不给术语定义，故B错；C、D文件与术语定义无关。",
+    "mnemonic": "业务术语定义，看频率划分规定"
   },
   {
     "id": "A-5",
@@ -154,7 +162,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "最新版《业余无线电台管理办法》自2024年3月1日起施行（A）。该日期是部令公布的明确施行日，2024年12月1日、2025年两个日期均无依据，故B、C、D错。",
+    "mnemonic": "新版办法施行日：2024年3月1日"
   },
   {
     "id": "A-6",
@@ -185,7 +195,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "将频段列入频率划分表、规定供一种或多种业务使用的过程称为“划分”（A）。划分的对象是业务；B“分配”是把频率给部门或区域使用，C“指配”是批准给具体电台，D“授权”不是无线电管理的专用术语。",
+    "mnemonic": "划分—分给业务，分饼给业务"
   },
   {
     "id": "A-7",
@@ -216,7 +228,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "把频率或频道规定由一个或多个部门在指定区域内使用的过程称为“分配”（A）。分配的对象是部门/区域，区别于A项“划分”（对象是业务）和C项“指配”（对象是具体电台），故B、C错；D“授权”非专用术语。",
+    "mnemonic": "分配—配给部门和区域"
   },
   {
     "id": "A-8",
@@ -247,7 +261,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "把频率或频道批准给具体无线电台在规定条件下使用的过程称为“指配”（A）。指配是管理的最末一环、对象精确到台站；B“划分”对象是业务、C“分配”对象是部门区域，均错；D“授权”非专用术语。",
+    "mnemonic": "指配—指定到具体电台"
   },
   {
     "id": "A-9",
@@ -278,7 +294,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "同一频段划分给多种业务时，业务分为主要业务和次要业务两类（A），次要业务不得对主要业务造成有害干扰。B、C、D的分类方式在频率划分表中不存在，故错。",
+    "mnemonic": "一频多业务：分主要和次要"
   },
   {
     "id": "A-10",
@@ -309,7 +327,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "辐射是指能量流以无线电波形式向外发出，闪电产生的电磁波干扰符合定义（A）。B项沿电源线窜入的是传导干扰而非辐射；C、D是器件内部的磁场/电场，没有向外发出无线电波，故错。",
+    "mnemonic": "辐射=能量向外发出无线电波"
   },
   {
     "id": "A-11",
@@ -340,7 +360,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射专指由无线电发信电台产生的辐射或辐射产物，业余电台的杂散产物属于发射（A）。B项接收机本振辐射、C项医用高频设备、D项闪电均不是“发信电台”产生的，故不属于发射。",
+    "mnemonic": "发射专指发信电台的辐射"
   },
   {
     "id": "A-12",
@@ -374,7 +396,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四个选项均正确（ABCD）。无线电测定是总概念（利用无线电波传播特性测位置、速度等）；无线电导航是用于导航的测定；无线电定位是除导航外的测定；无线电测向是用接收无线电波确定方向的测定，四者定义互不冲突。",
+    "mnemonic": "测定总纲：导航+定位+测向"
   },
   {
     "id": "A-13",
@@ -405,7 +429,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电台指为开展业余业务（含卫星业余业务）使用的一台或多台发信机、收信机或其组合（含附属设备）（A）。B、C、D用“只能包含一个”限定数量，与“一个或者多个”的法定定义直接矛盾，故错。",
+    "mnemonic": "业余电台=一台或多台收发信机"
   },
   {
     "id": "A-14",
@@ -437,7 +463,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余业务是供爱好者自我训练、相互通信和技术研究的无线电通信业务；卫星业余业务是利用卫星空间电台开展相同目的的业务（AB）。C、D错在“以及其他无线电业务”——业余电台只能在业余业务和卫星业余业务内通信。",
+    "mnemonic": "业余业务三目的：训练、通信、研究"
   },
   {
     "id": "A-15",
@@ -469,7 +497,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电爱好者是经正式批准、对无线电技术有兴趣的人，其兴趣纯系个人爱好而不涉及谋取利润（AB）。C错在“可涉及谋取利润”，与非营利性质矛盾；D错，法规对爱好者身份没有年龄限制。",
+    "mnemonic": "爱好者=批准+兴趣+不图利"
   },
   {
     "id": "A-16",
@@ -501,7 +531,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射类别是用标准符号标示的某发射的一组特性，包括主载波调制方式、调制信号、被发送信息的类型及其他信号特性（AB）。C、D谈的是电台收发信机数量，与发射类别的定义无关，是干扰项。",
+    "mnemonic": "发射类别=发射特性的一组符号"
   },
   {
     "id": "A-17",
@@ -532,7 +564,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "单边带发射是指只传送一个边带的调幅发射（A）。SSB是调幅AM的衍生方式，取上边带或下边带之一，故B、D的“调频”错；C错在把“不传送载波”当定义，抑制载波是常见做法但不是定义本身。",
+    "mnemonic": "单边带=调幅只取一个边带"
   },
   {
     "id": "A-18",
@@ -565,7 +599,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "干扰是由无用能量对接收产生的影响，表现为性能下降、误解或信息丢失，且若无该无用能量后果可避免（ABC）。D项“不会对接收产生影响”直接否定了干扰的定义，故错。",
+    "mnemonic": "干扰=无用能量使接收变差"
   },
   {
     "id": "A-19",
@@ -597,7 +633,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "有害干扰指危害无线电导航等安全业务正常运行，或严重损害、阻碍、一再阻断正常无线电通信业务的干扰（AB）。C错，产生有害干扰要受处罚；D错，业余电台不得对任何电台造成有害干扰，不限于业余电台。",
+    "mnemonic": "有害干扰=害安全、断正常通信"
   },
   {
     "id": "A-20",
@@ -630,7 +668,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "次要业务台站不得对主要业务电台产生有害干扰，也不得就主要业务的有害干扰要求保护，但可要求保护不受将来同业务或次要业务台站的有害干扰（ABC）。D错，业余电台的干扰义务不限于业余电台之间。",
+    "mnemonic": "次要业务：不扰主要，不求保护"
   },
   {
     "id": "A-21",
@@ -661,7 +701,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "协调国际无线电管理的国际组织是国际电信联盟ITU（A），它制定《无线电规则》并分配全球频率。B国际业余无线电联盟是爱好者组织，C联合国大会、D教科文组织均不负责无线电管理。",
+    "mnemonic": "国际无线电协调=国际电信联盟"
   },
   {
     "id": "A-22",
@@ -692,7 +734,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "国际业余无线电联盟（IARU）主张把业余无线电看作一种国家资源（A），以争取各国政策支持。B、C、D（拉动经济、休闲娱乐、国防后备）都不是IARU的正式定位。",
+    "mnemonic": "IARU：业余无线电是国家资源"
   },
   {
     "id": "A-23",
@@ -723,7 +767,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电信是指利用有线、无线电、光等电磁系统传送信息的通信，邮政通信不靠电磁系统传送信息，故不属于电信（A）。B、C、D（有线、无线电、光通信）都属于电信范畴。",
+    "mnemonic": "邮政不算电信，电信靠电磁传信"
   },
   {
     "id": "A-24",
@@ -754,7 +800,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无线电通信专指利用无线电波进行的符号、信号、文字、图像、声音等信息的传输、发射或接收（A）。B错，光通信不属于无线电通信；C错，信息类型不限于所列举；D错，加热应用不属于“通信”。",
+    "mnemonic": "无线电通信=用无线电波传信息"
   },
   {
     "id": "A-25",
@@ -785,7 +833,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "地面无线电通信指在地球表面及大气层内进行的无线电通信，航空通信属于此类（A）。B错，水上通信也属于；C错，卫星通信不属于地面无线电通信；D错，天波通信仍属地面无线电通信。",
+    "mnemonic": "地面通信含航空水上，不含卫星"
   },
   {
     "id": "A-26",
@@ -816,7 +866,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无线电波指频率3000GHz以下、在空间传播的电磁波（A）。B错在漏掉“在空间传播”的限定；C、D的频率范围（30Hz–30GHz、3kHz–3000MHz）都窄于法定定义，故错。",
+    "mnemonic": "无线电波=3000GHz以下空间传播"
   },
   {
     "id": "A-27",
@@ -849,7 +901,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "个人申请需提交：申请表；身份证明复印件（未成年人还需监护人身份证明及关系说明材料）；无线电发射设备相关说明材料（ABC）。D错，“本人申请书、操作证书原件复印件”不是新版办法要求的申请材料。",
+    "mnemonic": "个人三件套：申请表+身份+设备说明"
   },
   {
     "id": "A-28",
@@ -882,7 +936,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "单位申请需提交：申请表；无线电发射设备相关说明材料；单位营业执照等复印件及技术负责人为本单位工作人员的说明材料（ABC）。D错，技术负责人的申请书和操作证书原件不是法定申请材料。",
+    "mnemonic": "单位三件套：申请表+执照+设备说明"
   },
   {
     "id": "A-29",
@@ -916,7 +972,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项条件都符合规定（ABCD）：设备须依法取得型号核准且核准频率范围包含业余频段；自制、改装、拼装等未核准设备须符合国家标准和无线电管理规定，且发射频率范围仅限于业余业务频段。",
+    "mnemonic": "设备要么有核准，要么限业余频段"
   },
   {
     "id": "A-30",
@@ -947,7 +1005,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对自制、改装、拼装等未取得型号核准的设备进行技术检测时，无线电管理机构不得收取任何费用（A）。这是新版办法明确的免费条款，B、C、D的各类收费说法均错。",
+    "mnemonic": "自制设备检测，一律免费"
   },
   {
     "id": "A-31",
@@ -979,7 +1039,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "15瓦以上短波业余电台及涉及国家主权、安全的其他重要电台，由国家无线电管理机构作出许可决定，并可委托所在地或申请人住所地省局现场核查（AB）。C错在许可机关，D错在A类证书无权申请此类电台。",
+    "mnemonic": "15瓦以上短波，归国家局许可"
   },
   {
     "id": "A-32",
@@ -1013,7 +1075,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项均为执照载明事项（ABCD）：设台人、操作技术能力类别编号；呼号、台址/区域、频率、功率；执照编号、颁发日期、有效期、发证机关及特别规定；中继台、信标台还载明工作模式等。",
+    "mnemonic": "执照载明：人、证、号、址、频、率"
   },
   {
     "id": "A-33",
@@ -1044,7 +1108,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电台执照有效期不超过5年（A）。1年、2年、3年均与法定上限不符，故B、C、D错。",
+    "mnemonic": "执照有效期：最长五年"
   },
   {
     "id": "A-34",
@@ -1077,7 +1143,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "执照可采用纸质或电子形式，两者同等法律效力，样式由国家无委统一规定（ABC）。D错，执照有有效期限制，并非终身有效。",
+    "mnemonic": "纸电同效，样式全国统一"
   },
   {
     "id": "A-35",
@@ -1109,7 +1177,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "新版办法施行前已依法取得执照的，在有效期内可按执照载明参数使用，且2012年部令第22号旧办法同时废止（AB）。C错，施行日是2024年3月1日；D错，过渡期内不强制按新办法变更使用。",
+    "mnemonic": "旧执照过渡：按原参数用到期"
   },
   {
     "id": "A-36",
@@ -1140,7 +1210,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "具备《业余无线电台操作证书》（验证证书）者操作业余电台不受年龄限制（A），未成年人持证也可独立操作。B、C、D设定的14/16/18周岁门槛在法规中不存在。",
+    "mnemonic": "持证操作，不限年龄"
   },
   {
     "id": "A-37",
@@ -1171,7 +1243,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "未成年人可以申请设置、使用规定条件内的业余无线电台（A），法规未设最低年龄门槛。B、C、D的14/16/18周岁说法均无依据。",
+    "mnemonic": "未成年人可按规定设台"
   },
   {
     "id": "A-38",
@@ -1202,7 +1276,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "有固定台址的业余电台向电台所在地的省、自治区、直辖市无线电管理机构申请（A）。B民间机构、C协会无许可权；D国家局只管15瓦以上短波等特殊电台，故错。",
+    "mnemonic": "有固定台址：向设台地省局申请"
   },
   {
     "id": "A-39",
@@ -1233,7 +1309,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "没有固定台址的业余电台向申请人住所地的省、自治区、直辖市无线电管理机构申请（A）。B民间机构、C协会无许可权；D国家局不管普通电台，故错。",
+    "mnemonic": "无固定台址：向住所地省局申请"
   },
   {
     "id": "A-40",
@@ -1266,7 +1344,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "设台条件包括：熟悉无线电管理规定；具有相应操作技术能力并通过验证；设备依法取得型号核准，自制等设备符合国家标准和管理规定（ABC）。D错，法规不要求加入指定协会。",
+    "mnemonic": "设台三条件：懂规定、有能力、设备合规"
   },
   {
     "id": "A-41",
@@ -1297,7 +1377,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "执照有效期届满需继续使用的，应在届满30个工作日前向作出许可决定的无委申请更换执照（A）。“半年内”“两个月内”“三个月内”均与法定期限不符，故B、C、D错。",
+    "mnemonic": "换执照：到期前30个工作日申请"
   },
   {
     "id": "A-42",
@@ -1328,7 +1410,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "变更执照载明事项应及时向作出许可决定的无委申请办理变更手续（A）。B错，不能等到届满才办；C错，载明事项变更无论设备是否更换都要办；D错，备案不能代替变更许可。",
+    "mnemonic": "事项变更：及时向原许可机关申请"
   },
   {
     "id": "A-43",
@@ -1359,7 +1443,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "终止使用业余电台，应向作出许可决定的无线电管理机构办理执照注销手续（A）。B国家局只管特殊电台，C协会、D受托单位均无权办理注销。",
+    "mnemonic": "注销执照：找原许可机关"
   },
   {
     "id": "A-44",
@@ -1391,7 +1477,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "终止使用应及时办理注销、交回执照，并自注销之日起60个工作日内拆除电台及天线等附属设备并妥善处理（AB）。C错在“6个月”期限；D错，只交回执照而不拆除不符合要求。",
+    "mnemonic": "注销后60个工作日内拆除设备"
   },
   {
     "id": "A-45",
@@ -1424,7 +1512,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "中继台的正确定义是A（接收并放大转发，扩大通联范围）；B是信标台的定义；C错在“衰减转发、缩小范围”与中继作用相反；D错在“接收信标信号”，信标台是发射而非接收。题目问“错误的是”，故选BCD。",
+    "mnemonic": "中继=放大转发扩大范围"
   },
   {
     "id": "A-46",
@@ -1457,7 +1547,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "信标台的正确定义是A（发射信标信号、辅助验证传播条件的单发电台）；B错在“接收”；C是中继台的定义；D错在“衰减、缩小范围”。题目问“错误的是”，故选BCD。",
+    "mnemonic": "信标=单发信号验传播"
   },
   {
     "id": "A-47",
@@ -1489,7 +1581,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "中继台应向覆盖区内业余电台提供平等服务，台址布局符合资源共享、集约要求（AB）。C错，中继台不得搞成员优先；D错，不得强制收费，故C、D错。",
+    "mnemonic": "中继台：平等服务，不得收费"
   },
   {
     "id": "A-48",
@@ -1523,7 +1617,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项都正确（ABCD）：台址布局资源共享集约；向覆盖区内电台平等服务；明确设台地点、频率、技术参数等要求并公布；服务区域超本行政区域时与地方无委协调。",
+    "mnemonic": "中继设置四要求：共享、平等、公开、协调"
   },
   {
     "id": "A-49",
@@ -1554,7 +1650,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "中继台的设置和技术参数应符合国家以及设台地的地方无委的规定（A）。B民间组织规划、C仅地方规定、D申请人主观需求都没有法定效力，故错。",
+    "mnemonic": "中继台参数：符合国家+地方无委规定"
   },
   {
     "id": "A-50",
@@ -1585,7 +1683,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "可组织A类和B类验证的是国家无委和省、自治区、直辖市无委（A）。B漏了国家局；C教育体育机构、D地方协会均无权组织验证。",
+    "mnemonic": "A、B类验证：国家+省级无委组织"
   },
   {
     "id": "A-51",
@@ -1616,7 +1716,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "C类验证由国家无线电管理机构负责组织（A）。B省级无委、C两级、D协会均不符合C类验证的组织层级规定。",
+    "mnemonic": "C类验证：国家局亲自组织"
   },
   {
     "id": "A-52",
@@ -1647,7 +1749,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "参加操作技术能力验证不向参加人员收取考试费用（A），这是新版办法的明确规定。B、C、D的收费说法均错。",
+    "mnemonic": "验证考试，免费参加"
   },
   {
     "id": "A-53",
@@ -1678,7 +1782,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "各类操作技术能力的证明文件是无委颁发的“业余无线电台操作技术能力验证证书”（A）。B、C、D的协会证书或证明信件均非法定证明文件。",
+    "mnemonic": "能力证明=无委颁发的验证证书"
   },
   {
     "id": "A-54",
@@ -1711,7 +1817,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "国家无委及其委托机构可组织A、B、C三类验证（ABC）。D“一级个人业余电台操作证书”是旧体系称谓，不在新版三类验证之内，故错。",
+    "mnemonic": "验证分A、B、C三类"
   },
   {
     "id": "A-55",
@@ -1744,7 +1852,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "操作技术能力分为A类、B类、C类（ABC），对应不同的频率范围和功率权限。D项“D类”不存在，故错。",
+    "mnemonic": "操作能力三档：A、B、C"
   },
   {
     "id": "A-56",
@@ -1776,7 +1886,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "不同类别业余电台的主要区别在于允许工作的频率范围和允许发射的最大发射功率（AB）。C设备功能、D天线高度长度不是类别划分依据，故错。",
+    "mnemonic": "类别区别：频率范围+最大功率"
   },
   {
     "id": "A-57",
@@ -1807,7 +1919,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "A类允许在30–3000MHz频段工作，最大发射功率不大于25瓦（A）。B、D的50瓦/15瓦功率错，C的“各业余频段”范围错——A类不含30MHz以下频段。",
+    "mnemonic": "A类：30到3000MHz，25瓦封顶"
   },
   {
     "id": "A-58",
@@ -1838,7 +1952,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "B类：30MHz以下频段小于15瓦，或30MHz以上频段不大于25瓦（A）。注意“小于15瓦”不含15瓦；B的100瓦是旧B类/C类权限，C、D的功率与频段搭配均错。",
+    "mnemonic": "B类：30M以下<15瓦，以上≤25瓦"
   },
   {
     "id": "A-59",
@@ -1869,7 +1985,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "C类：30MHz以下频段不大于1000瓦，或30MHz以上频段不大于25瓦（A）。1000瓦短波是C类的标志性权限；B的100瓦是旧B类，C、D的功率搭配均错。",
+    "mnemonic": "C类：30M以下1000瓦，以上25瓦"
   },
   {
     "id": "A-60",
@@ -1901,7 +2019,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "参加A类验证应熟悉无线电管理规定、具有一定的操作技术能力（AB）。法规对A类验证没有年龄要求，故C、D的18/16周岁说法错。",
+    "mnemonic": "A类验证：懂规定、有技术，不限龄"
   },
   {
     "id": "A-61",
@@ -1933,7 +2053,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "参加B类验证应依法取得业余电台执照6个月以上，并具有相应的实际操作经验（AB）。C、D的年龄要求在法规中不存在，故错。",
+    "mnemonic": "B类验证：持照半年+有实操经验"
   },
   {
     "id": "A-62",
@@ -1965,7 +2087,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "参加C类验证应依法取得载明30MHz以下频段的执照18个月以上，并具有实际操作经验（AB）。C、D的6个月、12个月期限与法定18个月不符，故错。",
+    "mnemonic": "C类验证：持30M以下执照18个月"
   },
   {
     "id": "A-63",
@@ -1997,7 +2121,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "持A类证可申请设置最大发射功率不大于25瓦的VHF、UHF频段业余电台（AB）。C、D错，A类不允许工作在HF频段（30MHz以下）。",
+    "mnemonic": "A类设台：25瓦VHF/UHF，无短波"
   },
   {
     "id": "A-64",
@@ -2031,7 +2157,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项都对（ABCD）：25瓦VHF/UHF；小于15瓦HF；小于1瓦（e.i.r.p.）LF。B类在30MHz以下限15瓦以下（含LF的1瓦e.i.r.p.特别限值）。",
+    "mnemonic": "B类设台：25瓦VU、15瓦下HF、1瓦LF"
   },
   {
     "id": "A-65",
@@ -2065,7 +2193,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项都对（ABCD）：25瓦VHF/UHF；不大于1000瓦HF；开展特殊技术试验确需超25瓦VHF的也可申请。C类是短波大功率的唯一合法通道。",
+    "mnemonic": "C类设台：千瓦短波+特殊试验通道"
   },
   {
     "id": "A-66",
@@ -2097,7 +2227,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "确需超出执照载明功率限值开展特殊技术试验的，需经颁发执照的无委批准；且只有取得C类证并持照的人员经批准可临时在限定条件下操作（AB）。C、D错，A类、B类无此资格。",
+    "mnemonic": "超功率试验：C类持照+批准才行"
   },
   {
     "id": "A-67",
@@ -2129,7 +2261,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "未成年人持A类或B类证，只能设置最大发射功率不大于25瓦的VHF频段业余电台（AB）。C、D错，未成年人不得设置HF频段电台（15瓦HF也不行）。",
+    "mnemonic": "未成年人：只能玩25瓦VHF"
   },
   {
     "id": "A-68",
@@ -2163,7 +2297,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项都对（ABCD）：题库和验证标准由国家无委制定；验证时间、要求提前向社会公布；成绩合格颁发验证证书；不得收取费用。",
+    "mnemonic": "验证四件事：国家出题、提前公布、合格发证、免费"
   },
   {
     "id": "A-69",
@@ -2195,7 +2331,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "新版办法施行前取得的B类证继续有效，可按原许可权限申请30MHz以下不大于100瓦、30MHz以上不大于25瓦的电台（AB）。C错，不强制按新B类范围；D错，旧证并非失效。",
+    "mnemonic": "旧B类证：按原权限继续有效"
   },
   {
     "id": "A-70",
@@ -2228,7 +2366,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "正确使用呼号的方法：每次通信建立及结束时发送本台呼号；通信过程中不定期（间隔不超过10分钟）发送；鼓励用技术手段自动发送（ABC）。D错，不得用姓名、代号、别名或呼号片段代替完整呼号。",
+    "mnemonic": "呼号三报：开头、结尾、十分钟内"
   },
   {
     "id": "A-71",
@@ -2259,7 +2399,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无委颁发业余电台执照时应同时核发呼号（A），执照与呼号一次办结。B服务机构核发、C先执照后另申请、D自选呼号报批，均不符合法定流程。",
+    "mnemonic": "执照呼号，一次办结同时核发"
   },
   {
     "id": "A-72",
@@ -2290,7 +2432,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "申请人已取得（中继台、信标台呼号以外的）其他业余电台呼号的，无委不再核发新呼号（A），一人一呼号。B再核发、C更换、D自选报批均错。",
+    "mnemonic": "一人一呼号，不再重复核发"
   },
   {
     "id": "A-73",
@@ -2322,7 +2466,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号停止使用应依法注销；除中继台、信标台呼号外，其他呼号注销1年后可重新投入分配（AB）。C错在“不用注销”；D错在“立即”重新分配，须满1年。",
+    "mnemonic": "呼号注销满一年，才可再分配"
   },
   {
     "id": "A-74",
@@ -2353,7 +2499,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "注销的呼号在重新投入分配前，申请人再次申请设台获准的，无委应同时核发其已注销的呼号（A），即优先恢复原呼号。B核发新呼号、C不再核发、D不能再申请均错。",
+    "mnemonic": "重设台：优先恢复原注销呼号"
   },
   {
     "id": "A-75",
@@ -2385,7 +2533,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "在他人的合法电台上操作发射，应使用所操作电台的呼号或实际操作人员取得的呼号；用操作者呼号时格式须符合国内外相关要求（AB）。C、D错，在他人电台上操作是允许的。",
+    "mnemonic": "借台操作：用该台或本人呼号"
   },
   {
     "id": "A-76",
@@ -2418,7 +2568,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "参加或举办通联比赛等重大业余活动，经主办方报国家无委批准，且呼号符合国际规则的，可临时使用其他业余电台呼号（ABC）。D错，并非任何时候都不能临时使用。",
+    "mnemonic": "临时借呼号：比赛+国家局批准"
   },
   {
     "id": "A-77",
@@ -2452,7 +2604,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号由四部分组成：第一部分呼号前缀、第二部分电台种类、第三部分分区编号、第四部分呼号后缀（ABCD），四项缺一不可。",
+    "mnemonic": "呼号四段：前缀、种类、分区、后缀"
   },
   {
     "id": "A-78",
@@ -2484,7 +2638,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号前缀（第一部分）由一位字母组成，为ITU分配给中国的呼号前缀字母B（AB）。C的BA、D的A都不是我国业余电台呼号前缀，故错。",
+    "mnemonic": "呼号前缀：一位字母B"
   },
   {
     "id": "A-79",
@@ -2518,7 +2674,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项都对（ABCD）：G、H、I、D、A、B、C、E、F、K、L用于一般电台；J用于空间业余电台；R用于中继台和信标台；S、T、Y、Z等由国家无委保留。",
+    "mnemonic": "种类字母：一般多字母，J空间R中继"
   },
   {
     "id": "A-80",
@@ -2551,7 +2709,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区编号（第三部分）由一位数字组成，表示业余电台分区号；空间业余电台分区号为1（ABC）。D错，空间电台分区号不是2。",
+    "mnemonic": "分区编号：一位数字，空间台为1"
   },
   {
     "id": "A-81",
@@ -2584,7 +2744,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号后缀由1～4位字母或字母数字组合组成；1位、4位及带数字的后缀由国家无委保留；QOA～QUZ及SOS等易混淆组合不用作后缀（ABC）。D错，后缀不只是数字。",
+    "mnemonic": "后缀1到4位，避用SOS等混淆组合"
   },
   {
     "id": "A-82",
@@ -2617,7 +2779,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "省局核发一般呼号时：第二部分按G、H、I、D、A、B、C、E、F、K、L顺序，第四部分按双字母、三字母组合顺序编制；前缀全国相同（ABC）。D错，各省分区号不同。",
+    "mnemonic": "省局发呼号：种类按序，后缀双三字母"
   },
   {
     "id": "A-83",
@@ -2648,7 +2812,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对已核发的呼号不满意也不能申请另行核发（A），颁发执照的无委已核发呼号的不再另行核发。B更新类别、C缴费、D延续时申请，均无此规定。",
+    "mnemonic": "呼号不满意，也不能换"
   },
   {
     "id": "A-84",
@@ -2679,7 +2845,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "各地呼号前缀字母和后缀字符的可用范围由国家无委编制和分配（A），全国统一管理。B地方自行分配、C民间建议、D爱好者建议均无依据。",
+    "mnemonic": "呼号资源：国家无委统一编制分配"
   },
   {
     "id": "A-85",
@@ -2712,7 +2880,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "每次通信建立时、结束时应主动发送本台呼号，通信过程中每十分钟应发送一次（ABC）。D错，不得自造呼号作为补充标识。",
+    "mnemonic": "呼号三报：开头结尾加十分钟"
   },
   {
     "id": "A-86",
@@ -2746,7 +2916,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号由呼号前缀、电台种类、分区编号、呼号后缀四部分组成（ABCD），与LY0077题的四部分划分一致，四项缺一不可。",
+    "mnemonic": "呼号四段：前缀、种类、分区、后缀"
   },
   {
     "id": "A-87",
@@ -2777,7 +2949,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "任何情况下都必须使用完整呼号（A），不允许用呼号片段（如后缀）代替。B、C、D以“相识友台”“本地频段”“国内通联”为由用不完整呼号的做法均违反规定。",
+    "mnemonic": "任何情况，都必须用完整呼号"
   },
   {
     "id": "A-88",
@@ -2808,7 +2982,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "不可以把地区码加后缀视作电台呼号（A），这是不完整的表述，不具标识意义。B、C、D以熟悉程度或频段为由使用不完整呼号的做法均错。",
+    "mnemonic": "地区码加后缀≠完整呼号"
   },
   {
     "id": "A-89",
@@ -2839,7 +3015,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余分区号为1的是北京（A）。黑龙江、吉林、辽宁是2区，上海是3区，故B、C、D错。",
+    "mnemonic": "1区北京，首都分区号最小"
   },
   {
     "id": "A-90",
@@ -2872,7 +3050,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余分区号为2的是黑龙江、吉林、辽宁（ABC），即东北三省。D广东是7区，故错。",
+    "mnemonic": "2区=东北三省：黑吉辽"
   },
   {
     "id": "A-91",
@@ -2906,7 +3086,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 3 覆盖华北地区：天津（3 字头）、河北、山西和内蒙古同属分区 3，均为相邻省份。四个选项均为该分区省份，故 ABCD 全选。区分重点在分区 3 包括天津，常见错项是误入其他分区。",
+    "mnemonic": "三分天京蒙，天蒙山河西：天津内蒙古河北山西"
   },
   {
     "id": "A-92",
@@ -2939,7 +3121,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 4 覆盖华东：上海、江苏、山东同属分区 4，官方答案为 ABC。海南属于分区 7，故 D 错误。记住 4 区是“江沪鲁”，即可排除海南。",
+    "mnemonic": "四分沪苏鲁，江沪山东齐"
   },
   {
     "id": "A-93",
@@ -2972,7 +3156,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 5 覆盖东南沿海：浙江、福建、江西同属分区 5，官方答案为 ABC。广西属于分区 7，故 D 错误。记忆要点是闽浙赣同为 5 区。",
+    "mnemonic": "五分浙闽赣：浙江福建江西"
   },
   {
     "id": "A-94",
@@ -3005,7 +3191,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 6 覆盖中原：安徽、河南、湖北同属分区 6，官方答案为 ABC。四川属于分区 8，故 D 错误。记住“皖豫鄂”为 6 区即可答对。",
+    "mnemonic": "六分皖豫鄂：安徽河南湖北"
   },
   {
     "id": "A-95",
@@ -3039,7 +3227,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 7 覆盖中南华南：湖南、广东、广西、海南同属分区 7，故 ABCD 全选。这四个省份在地理上连续，经常成组考。答案没有排除项，直接全选即可。",
+    "mnemonic": "七分湘粤桂琼：湖南广东广西海南"
   },
   {
     "id": "A-96",
@@ -3073,7 +3263,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 8 覆盖西南：四川、重庆、贵州、云南同属分区 8，故 ABCD 全选。注意重庆与四川同属 8 区，不要误把重庆归入 0 区或其他区。",
+    "mnemonic": "八分川渝贵滇：四川重庆贵州云南"
   },
   {
     "id": "A-97",
@@ -3107,7 +3299,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 9 覆盖西北东部：陕西、甘肃、宁夏、青海同属分区 9，故 ABCD 全选。四个均为西北邻省，记忆为“陕甘宁青”成组。",
+    "mnemonic": "九分陕甘宁青：陕西甘肃宁夏青海"
   },
   {
     "id": "A-98",
@@ -3139,7 +3333,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分区号 0 覆盖西北西部和西藏：新疆和西藏同属分区 0，官方答案为 AB。上海属 4 区、重庆属 8 区，故 C、D 错误。记住“新藏为零”。",
+    "mnemonic": "零分新藏记：新疆西藏"
   },
   {
     "id": "A-99",
@@ -3170,7 +3366,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《业余无线电台管理办法》规定，设置使用业余电台必须向无线电管理机构提出申请并取得电台执照，故答案为 A。B、C、D 所列的协会、单位或居委会都没有发证权力，属常见干扰项。",
+    "mnemonic": "设台先办证，找无委才管用"
   },
   {
     "id": "A-100",
@@ -3201,7 +3399,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台的法定用途是“相互通信、技术研究和自我训练”，故答案为 A。B、C、D 把电台当作生活聊天、娱乐或行车工具，超出法定用途，均为错误。",
+    "mnemonic": "三用途：通信研究自我训练"
   },
   {
     "id": "A-101",
@@ -3232,7 +3432,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "多台设备的业余电台视为一个业余电台，指配一个呼号，但每台发射设备都要经核定、参数载入执照，故答案为 A。B、D 的“只需核定其中一台”违反“所有设备均核定”要求，C 的“每台一个呼号”不符合“一个电台一个呼号”原则。",
+    "mnemonic": "一台一呼号，多机全要核"
   },
   {
     "id": "A-102",
@@ -3263,7 +3465,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余中继台必须有专人负责监控管理，并配备有效遥控手段，保证在产生有害干扰时能及时停发，故答案为 A。B 的加密防接入、C 的加大功率压制干扰、D 的热备份均非法规要求的必备措施，且加大功率本身违法。",
+    "mnemonic": "中继必备：专人看管加遥控"
   },
   {
     "id": "A-103",
@@ -3294,7 +3498,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余中继台是对全体爱好者开放的公共资源，应向覆盖区内所有业余电台平等提供服务并公开技术参数，故答案为 A。B、C 的“仅供出资者或成员使用”、D 的“收费才准用”都违反平等服务原则，均错误。",
+    "mnemonic": "中继人人用，参数全公开"
   },
   {
     "id": "A-104",
@@ -3325,7 +3531,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "国内业余模拟调频中继台采用标准频差：144MHz 频段 600kHz、430MHz 频段 5MHz，故答案为 A。B 的非标准频差、C 的随意变频、D 的任意选频都不符合规范，会造成互操作混乱，故错误。",
+    "mnemonic": "频差记牢：144 六百，430 五兆"
   },
   {
     "id": "A-105",
@@ -3357,7 +3565,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "商品设备须依法取得型号核准且核准频率范围包含业余频段（A）；自制、改装、拼装设备须符合国家标准和管理规定且发射频率仅限业余频段（B），故答案为 AB。C 的“自制不受限制”和 D 的“国际标准即可”都违反法规，错误。",
+    "mnemonic": "商品看核准，自制限业余"
   },
   {
     "id": "A-106",
@@ -3388,7 +3598,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "申请设台必须熟悉无线电管理规定并遵守业余无线电规范，“只为行车方便、不遵守规范”的说法错误，故答案为 A。B 的“法规迎合个人需求”、C 的“非爱好者可用”、D 的“定义因人而异”都曲解了设台条件。",
+    "mnemonic": "不守规矩，设台没资格"
   },
   {
     "id": "A-107",
@@ -3419,7 +3631,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余频率上出现非业余干扰发射时，按规定业余台只能用于相互通信、技术研究和自我训练，按住话筒去“普法”本身就是违法通信，故答案为 A。B、C、D 把这种违规行为说成正确或提倡，均错误。",
+    "mnemonic": "遇干扰别喊话，喊话就违规"
   },
   {
     "id": "A-108",
@@ -3450,7 +3664,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "转发广播、互联网聊天、电话和其他电台的联络信号，信息产生方不是业余电台，违反了业余台“只能用于相互通信、技术研究和自我训练”的规定，故答案为 A。B 的“送什么都行”、C 的“调试例外”、D 的“不算错误”都不成立。",
+    "mnemonic": "转发外来信号，业余台禁行"
   },
   {
     "id": "A-109",
@@ -3481,7 +3697,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "为他人、单位或组织转达信息属于“第三方通信”，违反业余台法定用途，故为违法行为，答案为 A。B、C、D 的“内容不违法就行”“无偿就行”“公益就行”都不改变其违法性质。",
+    "mnemonic": "替人传话，业余台违法"
   },
   {
     "id": "A-110",
@@ -3512,7 +3730,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "未经批准，业余电台不得以任何方式广播或发射通播性质信号，协会向会员播通知、讲座也属此类，故为违法，答案为 A。B、C、D 以“有利提高技术”“应急训练”“宣传法规”为由开脱，均不成立。",
+    "mnemonic": "未批准先广播，就是违法"
   },
   {
     "id": "A-111",
@@ -3543,7 +3763,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "通信中任何时候都应使用明语或业余界公认的缩略语、简语，不得使用暗语，故答案为 A。B、C 的自创缩略语暗语、D 的用方言让人听不懂都违反明语要求，故错误。",
+    "mnemonic": "通信用明语，暗语不能用"
   },
   {
     "id": "A-112",
@@ -3574,7 +3796,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "有操作能力证明但尚未设台的人，可以在他人业余电台上操作，使用该台呼号，由设台人对不当操作造成的干扰负责，故答案为 A。B 的自编呼号、C 的一律不准、D 的年龄区分均错误。",
+    "mnemonic": "借台操作，用台主呼号"
   },
   {
     "id": "A-113",
@@ -3607,7 +3831,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射操作实习须由设台人或其技术负责人现场监督指导（A），所用频率和功率应在 B 类证书范围内（B）且不得超过监督指导人证书的范围（C），故官方答案为 ABC。D 的“任何情况下都不行”与实习制度矛盾，错误。",
+    "mnemonic": "实习三条件：有人带、不超限"
   },
   {
     "id": "A-114",
@@ -3638,7 +3864,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "设台人对发射设备的法定责任是保证设备正常工作、避免对其他无线电业务造成有害干扰，故答案为 A。B 的追新款、C 的拼功率、D 的常开机都不是法定义务，且可能违法。",
+    "mnemonic": "设备管好用，不扰他业务"
   },
   {
     "id": "A-115",
@@ -3669,7 +3897,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余爱好者使用收信设备只能接收与业余业务和卫星业余业务有关的信号，不得接收无关信号，故答案为 A。B、C、D 的“随便接收”“查不出就行”“个人兴趣就行”都违反规定。",
+    "mnemonic": "收信有限制，只收业余波"
   },
   {
     "id": "A-116",
@@ -3700,7 +3930,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无意收到非业余业务信息时，不得传播、公布，故答案为 A。B 的台间共享、C 的非无线电方式交流、D 的随便传播利用都违反保密义务，错误。",
+    "mnemonic": "无意收到的，绝不外传"
   },
   {
     "id": "A-117",
@@ -3731,7 +3963,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台不得发送与业余业务和卫星业余业务无关的信号，广播录音、周围声音均属此类，故答案为 A。B、C、D 的“无保密性就行”“显示信号质量”“提神”都不是合法理由。",
+    "mnemonic": "无关信号，一律不发"
   },
   {
     "id": "A-118",
@@ -3762,7 +3996,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "利用业余电台发布、传播违反法律或公共道德的信息，国家态度是禁止，故答案为 A。B 的不提倡、C 的容忍、D 的“道德问题不算”都低估了违法性质。",
+    "mnemonic": "违法违德信息，发布就禁止"
   },
   {
     "id": "A-119",
@@ -3793,7 +4029,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "出租车装业余电台传递载客信息属于谋取商业利益，违反严禁利用业余电台谋利的规定，故答案为 A。B、C、D 的“占频率不好”“不影响就行”“不查就行”都回避了商业用途违法的本质。",
+    "mnemonic": "电台拉客，谋利违法"
   },
   {
     "id": "A-120",
@@ -3824,7 +4062,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "利用业余电台通信促销产品或推动商业活动属于谋取商业利益，态度是禁止，故答案为 A。B 的“有利于发展”、C 的“组织获利就行”、D 的“经营为生可容忍”都不能成为例外。",
+    "mnemonic": "电台做广告，一律禁止"
   },
   {
     "id": "A-121",
@@ -3855,7 +4095,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "用强信号压制他人正常通信、在业余频率转播音乐广播，违反严禁阻碍其他电台通信的规定，属违法行为，故答案为 A。B、C、D 只说“不妥”“谅解”“不文明”，都弱化了违法性质。",
+    "mnemonic": "压台播音乐，违法阻通信"
   },
   {
     "id": "A-122",
@@ -3886,7 +4128,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电活动影响公共通信安全，设台使用人应当加强自律，故答案为 A。B、C 的“个人无责靠管理或协会”、D 的“有证就可为所欲为”都否定了设台人的自律责任。",
+    "mnemonic": "用好电台，靠的是自律"
   },
   {
     "id": "A-123",
@@ -3917,7 +4161,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台法定用途为相互通信、技术研究和自我训练，故答案为 A。B 的救灾车队广播、C 的娱乐路况、D 的民兵训练都不属于业余业务的法定用途。",
+    "mnemonic": "三用途再记：通信研究训练"
   },
   {
     "id": "A-124",
@@ -3948,7 +4194,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电爱好者的基本条件是对无线电技术有兴趣并经无线电管理机构批准设台使用，故答案为 A。B 缺批准条件，C、D 把入会或技术水平当必要条件，均错误。",
+    "mnemonic": "爱好者条件：有兴趣加批准"
   },
   {
     "id": "A-125",
@@ -3982,7 +4230,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台禁止：在境内做电波参数测试监测（A）、向境外提供涉国家安全电波资料（B）、故意收发执照许可事项之外的信号（C）、传播公布利用无意接收的信息（D），故 ABCD 全选。四项均为管理条例明令禁止行为。",
+    "mnemonic": "四禁：测波、泄密、越权、泄信"
   },
   {
     "id": "A-126",
@@ -4016,7 +4266,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台应遵守：在业余/卫星业余频段内收发（A）、不得擅自用频（B）、不得对合法业务造成有害干扰（C）、不得利用电台违法犯罪（D），故 ABCD 全选。四项都是基本义务。",
+    "mnemonic": "四守：守频段、守许可、不干扰、不违法"
   },
   {
     "id": "A-127",
@@ -4049,7 +4301,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "收听民用航空、铁路机车、渔船海事电台通联（A、B、C）都超出业余业务范围，属违规；收听国际空间站业余电台（D）是业余业务本身，合法，故答案为 ABC。",
+    "mnemonic": "空铁海事别偷听，空间站业余可听"
   },
   {
     "id": "A-128",
@@ -4082,7 +4336,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "企业批量生产未核准的设备（A）、核准频率不含业余的设备（B）、改软件扩频到业余频段的设备（C）都不能作为自制改装业余台使用，故答案为 ABC。D 的依法改装且核准含业余频段是合法的，故不选。",
+    "mnemonic": "三不能用：无证、频不对、改软件"
   },
   {
     "id": "A-129",
@@ -4116,7 +4372,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "使用业余台不得：发布传播禁止信息（A）、谋取商业利益等超属性目的（B）、故意干扰阻碍他台通信（C）、故意收发执照载明事项之外的信号（D），故 ABCD 全选。四项均为禁止行为。",
+    "mnemonic": "四不准：禁言禁商禁扰禁越权"
   },
   {
     "id": "A-130",
@@ -4150,7 +4408,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "使用业余台不得：传播公布利用无意接收的信息（A）、擅自编制使用呼号（B）、涂改倒卖出租出借执照（C）、向境外提供涉国家安全电波资料（D），故 ABCD 全选。四项均为禁止行为。",
+    "mnemonic": "四不准续：泄信、假呼号、倒执照、泄密"
   },
   {
     "id": "A-131",
@@ -4184,7 +4444,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "使用业余台应当：定期维护（A）、性能符合国家标准（B）和无线电管理规定（C）、避免对合法电台产生有害干扰（D），故 ABCD 全选。四项都是设台人的维护义务。",
+    "mnemonic": "四应当：勤维护、达标准、不干扰"
   },
   {
     "id": "A-132",
@@ -4217,7 +4479,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "通信语言正确做法是使用明语（A）、公认缩略语简语（B）、公开技术体制和通信协议（C），故答案为 ABC。D 的自创特殊缩略语等同暗语，违反明语要求，不选。",
+    "mnemonic": "语言三用：明语、公认语、公开协议"
   },
   {
     "id": "A-133",
@@ -4248,7 +4512,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "只有在突发重大自然灾害等紧急情况下，业余电台才可以和非业余电台进行规定内容的通信，故答案为 A。B、C、D 把日常训练、公益活动也纳入允许范围，扩大了例外，错误。",
+    "mnemonic": "应急通信：大灾大难才破例"
   },
   {
     "id": "A-134",
@@ -4279,7 +4545,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台与非业余台通信的条件是突发重大自然灾害等紧急情况，且内容限于抢险救灾直接相关的紧急事务或应急部门交办任务，故答案为 A。B、C、D 的公益活动、青少年教育、技术研究都不构成法定例外。",
+    "mnemonic": "非常之时，非常之联，限救灾"
   },
   {
     "id": "A-135",
@@ -4310,7 +4578,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "在突发重大自然灾害等紧急情况下，业余台通信内容可以涉及应急救援相关部门交办的任务，故答案为 A。B 的平时任何时候、C 的平时训练、D 的日常公益都超出了“突发紧急”的限定，错误。",
+    "mnemonic": "紧急才接令，平时不越界"
   },
   {
     "id": "A-136",
@@ -4344,7 +4614,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "突发事件应急处置中：可与非业余台通信（A）、内容限直接相关紧急事务（B）、危急时可不经批准临时设台但 48 小时内报告（C）、紧急消除后及时关闭（D），故 ABCD 全选。四项均为法规原话。",
+    "mnemonic": "应急四条：可联、限事、48小时报、事毕关"
   },
   {
     "id": "A-137",
@@ -4375,7 +4647,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台设置使用人应接受无线电管理机构的监督检查，故答案为 A。B 的民间组织独立检查、C 的居委会物委会、D 的计量部门都没有法定监督权，故错误。",
+    "mnemonic": "监督只认无委一家"
   },
   {
     "id": "A-138",
@@ -4409,7 +4683,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频谱资源：属国家所有（A）、统一规划合理开发有偿使用（B）、鼓励科研推广提高效率（C）、国家可依法实施无线电管制（D），故 ABCD 全选。四项都是条例总则内容。",
+    "mnemonic": "频谱四句：国家有、统一管、鼓励研、可管制"
   },
   {
     "id": "A-139",
@@ -4443,7 +4719,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "任何单位个人不得擅自用频（A）、不得对合法业务造成有害干扰（B）、不得利用电台违法犯罪（C）、设用业余台须遵守无线电管理条例（D），故 ABCD 全选。四项都是基本法律义务。",
+    "mnemonic": "四不得一遵守，牢记不犯错"
   },
   {
     "id": "A-140",
@@ -4474,7 +4752,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "擅自设台用频、干扰无线电秩序情节严重的处三年以下有期徒刑等，单位犯罪并罚，这是刑法第 288 条“扰乱无线电通讯管理秩序罪”，故答案为 A。B、C、D 所列法规没有该刑罚条款。",
+    "mnemonic": "擅设台扰秩序，刑法来治罪"
   },
   {
     "id": "A-141",
@@ -4505,7 +4785,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "“无线电频谱资源属于国家所有”出自《民法典》第二百五十二条，故答案为 A。B 宪法、C 刑法、D 电信法都没有这一条文表述，故错误。",
+    "mnemonic": "频谱属国家，民法典二五二"
   },
   {
     "id": "A-142",
@@ -4536,7 +4818,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无线电管制是在特定时间和特定区域内依法实施的，故答案为 A。B 的全国所有时间、C 的特定范围所有时间、D 的例行范围时间都扩大了管制的时空限定，错误。",
+    "mnemonic": "管制记住：特定时空才管"
   },
   {
     "id": "A-143",
@@ -4567,7 +4851,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无线电管制是对无线电波的发射、辐射和传播实施的强制性管理，故答案为 A。B 的指导自律、C、D 的管设备生产销售都混淆了管制对象和性质，错误。",
+    "mnemonic": "管制管电波，强制才有效"
   },
   {
     "id": "A-144",
@@ -4598,7 +4884,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "实施管制时可限制或禁止业余台使用，并对特定频率实施技术阻断，故答案为 A。B 的管设备生产销售、C 的只限不禁、D 的依法设台不在管制范围都错误。",
+    "mnemonic": "管制一到，业余台也得停"
   },
   {
     "id": "A-145",
@@ -4630,7 +4918,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "全国或跨省管制由国务院和中央军委决定（A），省内管制由省政府和相关军区决定（B），故答案为 AB。C、D 把决定权给了无线电管理机构，级别不够，错误。",
+    "mnemonic": "管制谁决定：国务军委，省府军区"
   },
   {
     "id": "A-146",
@@ -4662,7 +4952,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "违反管制命令的由国家或省级无线电管理机构处罚（A），违反治安管理规定的由公安机关处罚（B），故答案为 AB。C 的协会、D 的军区专门机构没有该处罚权。",
+    "mnemonic": "违反管制：无委罚，治安公安罚"
   },
   {
     "id": "A-147",
@@ -4695,7 +4987,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台违反管制可：责令改正，拒不改正关闭查封暂扣拆除（A）；情节严重吊销执照（B）；违反治安由公安处罚（C），故答案为 ABC。D 的“警告或三万元以下罚款”不是该条的处罚种类。",
+    "mnemonic": "违管制三罚：改正、吊销、公安罚"
   },
   {
     "id": "A-148",
@@ -4727,7 +5021,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "未经许可擅自用频：责令改正、没收设备和违法所得、可并处 5 万元以下罚款（A）；拒不改正并处 5 万以上 20 万以下罚款（B），故答案为 AB。C、D 的劝告拆除、书面检查、一千元罚款是旧规表述，不适用。",
+    "mnemonic": "擅用频率：五万起步，拒改二十万"
   },
   {
     "id": "A-149",
@@ -4759,7 +5055,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "擅自设置使用业余台：责令改正、没收设备和违法所得、可并处 5 万元以下罚款（A）；拒不改正并处 5 万以上 20 万以下罚款（B），故答案为 AB。C、D 的劝告拆除、书面检查不适用现行条例。",
+    "mnemonic": "黑台处罚：没收加五万，拒改二十万"
   },
   {
     "id": "A-150",
@@ -4790,7 +5088,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "擅自设台从事诈骗等违法活动，尚不构成犯罪的，并处 20 万元以上 50 万元以下罚款，故答案为 A。B 的 5-20 万是一般擅设的档，C、D 的劝告拆除、书面检查不适用。",
+    "mnemonic": "黑台搞诈骗，二十万到五十万"
   },
   {
     "id": "A-151",
@@ -4822,7 +5122,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "不按执照许可事项设台：责令改正、没收违法所得、可并处 3 万元以下罚款（A）；造成严重后果吊销执照并处 3 万以上 10 万以下罚款（B），故答案为 AB。C、D 的旧规表述不适用。",
+    "mnemonic": "不按执照来，三万到十万"
   },
   {
     "id": "A-152",
@@ -4854,7 +5156,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "故意收发执照外信号、传播公布利用无意接收信息：责令改正、没收违法所得、可并处 3 万元以下罚款（A）；严重吊销执照并处 3 万以上 10 万以下罚款（B），故答案为 AB。与上题同一处罚档。",
+    "mnemonic": "越权收发加泄信，三万到十万"
   },
   {
     "id": "A-153",
@@ -4886,7 +5190,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "擅自编制使用呼号：责令改正、没收违法所得、可并处 3 万元以下罚款（A）；严重吊销执照并处 3 万以上 10 万以下罚款（B），故答案为 AB。呼号违规与执照外收发同档处罚。",
+    "mnemonic": "假呼号上台，三万到十万"
   },
   {
     "id": "A-154",
@@ -4917,7 +5223,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台干扰无线电业务：责令改正，拒不改正没收产生干扰的设备、并处 5 万以上 20 万以下罚款、吊销执照，故答案为 A。B、C、D 的劝告拆除、书面检查都不是该条处罚。",
+    "mnemonic": "干扰他业务，没收吊证罚二十万"
   },
   {
     "id": "A-155",
@@ -4948,7 +5256,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对船舶航天航空铁路等涉及人身安全的频率产生有害干扰，处 20 万元以上 50 万元以下罚款，故答案为 A。B、C、D 的劝告拆除、书面检查档太低，不适用。",
+    "mnemonic": "干扰生命线，二十万到五十万"
   },
   {
     "id": "A-156",
@@ -4980,7 +5290,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "研制生产销售维修大功率设备未抑制电波发射：责令改正，拒不改正没收设备并处 3 万以上 10 万以下罚款（A）；严重并处 10 万以上 30 万以下罚款（B），故答案为 AB。C、D 的旧规表述不适用。",
+    "mnemonic": "大功率不抑制，三万到三十万"
   },
   {
     "id": "A-157",
@@ -5012,7 +5324,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "境外组织个人在境内做电波参数测试监测：责令改正，拒不改正没收设备并处 3 万以上 10 万以下罚款（A）；严重并处 10 万以上 30 万以下罚款（B），故答案为 AB。C、D 不适用。",
+    "mnemonic": "境外测电波，三万到三十万"
   },
   {
     "id": "A-158",
@@ -5044,7 +5358,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "向境外提供涉国家安全电波资料：责令改正，拒不改正没收设备并处 3 万以上 10 万以下罚款（A）；严重并处 10 万以上 30 万以下罚款（B），故答案为 AB。与上题同档。",
+    "mnemonic": "电波资料给境外，三万到三十万"
   },
   {
     "id": "A-159",
@@ -5076,7 +5392,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "生产进口未核准设备：责令改正处 5 万以上 20 万以下罚款（A）；拒不改正没收设备并处 20 万以上 100 万以下罚款（B），故答案为 AB。C、D 的旧规表述不适用。",
+    "mnemonic": "无核准生产卖，五万到一百万"
   },
   {
     "id": "A-160",
@@ -5108,7 +5426,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "销售应核准设备未办销售备案：责令改正（A）；拒不改正处 1 万以上 3 万以下罚款（B），故答案为 AB。C、D 的拆除、书面检查不适用。",
+    "mnemonic": "卖设备不备案，一万到三万"
   },
   {
     "id": "A-161",
@@ -5140,7 +5460,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "违反条例：构成违反治安管理行为的给予治安处罚（A），构成犯罪的追究刑事责任（B），故答案为 AB。官方未选 C、D：C 的海关处罚属海关法范畴，D 的“只需无委处罚”绝对化错误。",
+    "mnemonic": "违法三层罚：无委、治安、刑法"
   },
   {
     "id": "A-162",
@@ -5171,7 +5493,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "隐瞒情况、提供虚假材料或虚假承诺申请设台许可的，无线电管理机构不予许可并给予警告，故答案为 A。B、C、D 的限期改正、罚款、查封没收是其他违法情形的处罚，不适用。",
+    "mnemonic": "骗证申请，不许可加警告"
   },
   {
     "id": "A-163",
@@ -5203,7 +5527,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以欺骗贿赂等不正当手段取得执照的，依法给予行政处罚（A），构成犯罪的追究刑事责任（B），故答案为 AB。C、D 的限期改正、警告查封不是该条处罚。",
+    "mnemonic": "骗来的执照，行政加刑事"
   },
   {
     "id": "A-164",
@@ -5234,7 +5560,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《治安管理处罚法》规定：故意干扰无线电业务或产生有害干扰、经指出拒不消除的，处 5 日以上 10 日以下拘留，情节严重 10 日以上 15 日以下，故答案为 A。B、C 的“不拘留”“不处罚”、D 的“只不扰业余台”都错误。",
+    "mnemonic": "恶意干扰不改，拘留五到十五天"
   },
   {
     "id": "A-165",
@@ -5268,7 +5596,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《网络安全法》要求用网遵守宪法法律公序良俗（A）、不危害国家安全荣誉利益（B）、不编造传播虚假信息扰乱秩序（C）、不侵害他人名誉隐私知识产权（D），故 ABCD 全选。四项均为法条原文。",
+    "mnemonic": "上网四不：守法、不害国、不造谣、不侵权"
   },
   {
     "id": "A-166",
@@ -5299,7 +5629,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《国家安全法》表述为：以人民安全为宗旨，以政治安全为根本，以经济安全为基础，以军事文化社会安全为保障，故答案为 A。B、C、D 的顺序错乱，不符合法条原文。",
+    "mnemonic": "国安四定：宗旨根本基础保障"
   },
   {
     "id": "A-167",
@@ -5333,7 +5665,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "公民组织国安义务：遵守国安法律法规（A）、及时报告危害国安线索（B）、如实提供证据（C）、为国安工作提供便利协助（D），故 ABCD 全选。四项均为法条原文。",
+    "mnemonic": "国安四义务：守法、报告、举证、协助"
   },
   {
     "id": "A-168",
@@ -5364,7 +5698,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "在业余业务为次要业务或与其他主要业务共用的频率上发射，应遵守无线电管理机构对该频率的使用规定，故答案为 A。B 的“听不到就用”、C 的“只看划分规定”、D 的“任意用再避让”都忽视了管理机构的具体规定。",
+    "mnemonic": "次要频率用，听无委规定"
   },
   {
     "id": "A-169",
@@ -5395,7 +5731,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余台在管理机构核准的频段内享有平等的频率使用权，故答案为 A。B 的“任何频段平等”、C 的“类别不同优先不同”、D 的“协会优先”都错误，核准范围外无使用权，类别间无优先。",
+    "mnemonic": "核准频段内，人人平等用"
   },
   {
     "id": "A-170",
@@ -5426,7 +5764,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "作为次要业务，业余台不得对主要业务电台产生有害干扰，故答案为 A。B 的要求保护、C 的表述对象错误、D 的容许短时干扰都违反次要业务规则。",
+    "mnemonic": "次要对主要，绝不添干扰"
   },
   {
     "id": "A-171",
@@ -5457,7 +5797,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "作为次要业务，业余台不得对来自主要业务电台的有害干扰提出保护要求，故答案为 A。B 的要求保护、C 的对象错误、D 的容许短时干扰都错误。",
+    "mnemonic": "主要扰次要，忍了不许告"
   },
   {
     "id": "A-172",
@@ -5488,7 +5830,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "作为次要业务，业余台可要求保护不受来自同一业务或其他次要业务电台的有害干扰，故答案为 A。B 的对主要业务要求保护、C 的不得要求保护、D 的容许短时干扰都错误。",
+    "mnemonic": "次要之间，可求保护"
   },
   {
     "id": "A-173",
@@ -5519,7 +5863,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国分配给业余和卫星业余业务专用的频段为 7、14、21、28MHz 和 47GHz，故答案为 A。B、C、D 混入了 144MHz、3.5MHz、10GHz 等共用或非专用频段，错误。",
+    "mnemonic": "专用五段：7、14、21、28、47G"
   },
   {
     "id": "A-174",
@@ -5550,7 +5896,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "30MHz 以下业余为主要业务的共用频段为 1.8、3.5、14.25、18.068、24.89MHz，故答案为 A。B、C、D 混入了 7、21、10.1、29.7MHz 等专用或次要频段，错误。",
+    "mnemonic": "主要共用段：1.8、3.5、14.25、18、24.89"
   },
   {
     "id": "A-175",
@@ -5581,7 +5929,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VHF/UHF 范围内业余作为主要业务的共用频率是 50MHz 和 144MHz，故答案为 A。B、C、D 中的 430MHz、220MHz 业余为次要业务，故错误。",
+    "mnemonic": "VHF主要业余：50和144"
   },
   {
     "id": "A-176",
@@ -5612,7 +5962,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余为唯一主要业务的共用频段共 3 个，3GHz 以下的是 144-146MHz，故答案为 A。B、C、D 的个数和频段对应错误，如 7.0-7.2MHz 是专用频段。",
+    "mnemonic": "唯一主要三段，低频144-146"
   },
   {
     "id": "A-177",
@@ -5643,7 +5995,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1200MHz 以下业余为次要业务的共用频段为 135.7kHz、5351.5kHz、10.1MHz、430MHz，故答案为 A。B、C、D 混入了 3.5、7、50、144MHz 等主要或专用频段，错误。",
+    "mnemonic": "次要四段：135k、5351k、10.1M、430M"
   },
   {
     "id": "A-178",
@@ -5674,7 +6028,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国分配给业余和卫星业余业务频率最高的频段是 248-250GHz，且为唯一主要业务，故答案为 A。B、C、D 的频率更低或共用类别错误。",
+    "mnemonic": "最高频段248G，唯一主要业务"
   },
   {
     "id": "A-179",
@@ -5705,7 +6061,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "WARC-76 世界无线电行政大会为业余业务新增的三个 HF 频段为 30 米（10.1-10.15MHz）、17 米（18.068-18.168MHz）、12 米（24.89-24.99MHz），俗称 WARC 频段。错误选项混淆了各波段的小数部分（如把 18.068 写成 18.1、24.89 写成 24.068 等）。",
+    "mnemonic": "30米101、17米18068、12米2489"
   },
   {
     "id": "A-180",
@@ -5736,7 +6094,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "40 米波段在 ITU 一区为 7.0-7.2MHz、二区为 7.0-7.3MHz、三区为 7.0-7.2MHz，我国属三区，业余业务在此为专用业务。错误选项要么把三区的上限错记为 7.3，要么把各区范围张冠李戴。",
+    "mnemonic": "40米：122（1区2、2区3、三区2）"
   },
   {
     "id": "A-181",
@@ -5767,7 +6127,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "160 米波段频率范围为 1800-2000kHz，我国划分中业余业务为主要业务。错误选项缩小了范围（1800-1900 或 1900-2000）或错记为次要/专用业务。",
+    "mnemonic": "160米：18到20，主要业务"
   },
   {
     "id": "A-182",
@@ -5798,7 +6160,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "80 米波段频率范围为 3.5-3.9MHz，我国划分中业余业务为主要业务。错误选项错记为次要业务，或把上限错写成 4.0MHz、下限错写成 3.5-3.6MHz。",
+    "mnemonic": "80米：3.5到3.9，主要业务"
   },
   {
     "id": "A-183",
@@ -5829,7 +6193,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "20 米波段 14-14.25MHz 为业余业务专用，14.25-14.35MHz 为主要业务（与其他业务共用）。错误选项错记了专用与主要的分界点（14.15 或 14.35）。",
+    "mnemonic": "20米：14.25分界，前专用后主要"
   },
   {
     "id": "A-184",
@@ -5860,7 +6226,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "15 米波段频率范围为 21-21.45MHz，业余业务为专用业务。错误选项错记为主要/次要业务，或把上限错写成 21.35MHz。",
+    "mnemonic": "15米：21到21.45，专用"
   },
   {
     "id": "A-185",
@@ -5891,7 +6259,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "10 米波段频率范围为 28-29.7MHz，业余业务为专用业务。错误选项错记为主要/次要业务，或把上限错写成 29.6MHz、30MHz。",
+    "mnemonic": "10米：28到29.7，专用"
   },
   {
     "id": "A-186",
@@ -5922,7 +6292,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "6 米波段频率范围为 50-54MHz，我国划分中业余业务为主要业务。错误选项缩小了范围（50-52）或错记为次要/专用业务。",
+    "mnemonic": "6米：50到54，主要业务"
   },
   {
     "id": "A-187",
@@ -5953,7 +6325,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "2 米波段为 144-148MHz；其中 144-146MHz 业余业务为唯一主要业务，146-148MHz 为与其他业务共同作为主要业务。错误选项把范围缩小为 144-146MHz，或错记为专用/次要业务。",
+    "mnemonic": "2米：144-146独占主要，146-148共享主要"
   },
   {
     "id": "A-188",
@@ -5984,7 +6358,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "0.7 米波段频率范围为 430-440MHz，我国划分中业余业务为次要业务。错误选项错记为主要/专用业务，或把范围扩大为 420-470MHz。",
+    "mnemonic": "0.7米：430到440，次要业务"
   },
   {
     "id": "A-189",
@@ -6015,7 +6391,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "在 430-440MHz 频段，我国分配的主要业务是无线电定位和航空无线电导航，业余业务作为次要业务与其共用，次要业务不得对主要业务造成有害干扰。固定、移动、水上/航空移动均不是该频段的主要业务。",
+    "mnemonic": "430段老大：定位加航空导航"
   },
   {
     "id": "A-190",
@@ -6046,7 +6424,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国分配给业余业务和卫星业余业务的低频（LF）频段为 135.7-137.8kHz。472-479kHz 属于中频（MF）范围，其余选项的频率数字有误。",
+    "mnemonic": "最低频段：135.7到137.8kHz"
   },
   {
     "id": "A-191",
@@ -6077,7 +6457,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "应避让的 IARU 信标频率为 14.100、18.110、21.150、24.930、28.200MHz，业余电台应在这些频率 ±500Hz 范围内避免发射。错误选项混入了 7.100、10.070 等非信标频率。",
+    "mnemonic": "14100、18110、21150、24930、28200"
   },
   {
     "id": "A-192",
@@ -6108,7 +6490,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "7MHz 频段我国范围为 7.0-7.2MHz，采用 LSB 时信号能量在载频下方，占用带宽约 3kHz，故实际可用载频为 7.030-7.200MHz（下限加 30kHz 余量）。直接取 7.000 开头的选项会使边带落到频段之外。",
+    "mnemonic": "7M下边带：下限加30k"
   },
   {
     "id": "A-193",
@@ -6139,7 +6523,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "14MHz 频段为 14-14.35MHz，USB 信号能量在载频上方；语音段从 14.100MHz 开始，故可用载频为 14.100-14.350MHz（上限减信号带宽）。低于 14.100 的是 CW/数字模式段，不用于 USB 通话。",
+    "mnemonic": "14M上边带：14100起，到上限"
   },
   {
     "id": "A-194",
@@ -6170,7 +6556,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "18MHz 频段为 18.068-18.168MHz，语音从 18.110MHz 开始，加 500Hz 保护（避让信标 18.110±500Hz），USB 可用载频为 18.1105-18.168MHz。其他选项的起止点超出了频段或保护要求。",
+    "mnemonic": "18M：181105起，避信标加500Hz"
   },
   {
     "id": "A-195",
@@ -6201,7 +6589,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "21MHz 频段语音段为 21.125-21.45MHz，但须避让 21.150MHz 信标 ±500Hz，即扣除 21.1495-21.1505，故答案为 21.125-21.45MHz 除去该小段。B 项未扣除信标保护段，C、D 项范围过大。",
+    "mnemonic": "21M语音段挖掉信标±500Hz"
   },
   {
     "id": "A-196",
@@ -6232,7 +6622,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "24MHz 频段为 24.89-24.99MHz，语音从 24.930MHz 信标之上开始，加 500Hz 保护，USB 可用载频为 24.9305-24.99MHz。其他选项的起点低于信标保护要求或起止点错误。",
+    "mnemonic": "24M：249305起，信标上加500Hz"
   },
   {
     "id": "A-197",
@@ -6263,7 +6655,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "29MHz（10 米）频段中 USB 话音段为 28.3-29.3MHz；29.3-29.51MHz 留给卫星业务，29.51-29.7MHz 为 FM/中继段。B、D 项范围过大，C 项下限错误。",
+    "mnemonic": "29M的USB：283到293"
   },
   {
     "id": "A-198",
@@ -6294,7 +6688,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "29MHz 频段中 FM 话音（含中继）段为 29.51-29.7MHz。28.3-29.3MHz 是 USB 话音段，29.3-29.51MHz 为卫星业务段，均不应被 FM 占用。",
+    "mnemonic": "29M的FM：2951到297"
   },
   {
     "id": "A-199",
@@ -6325,7 +6721,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "144MHz 频段中 144-144.035MHz 为 EME/弱信号段、145.8-146MHz 为卫星业务段，本地 FM 联络应避开这两段。B 项正是话音联络常用的 144.035-145.8MHz，不应避开。",
+    "mnemonic": "144M避开：头35k和卫星段"
   },
   {
     "id": "A-200",
@@ -6356,7 +6754,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "430MHz 频段中 431.9-432.240MHz 为弱信号/EME 段、435-438MHz 为卫星业务段，本地联络应避开。其他选项的频率组合与 IARU 三区波段规划不符。",
+    "mnemonic": "430M避开：弱信号段和卫星段"
   },
   {
     "id": "A-201",
@@ -6387,7 +6787,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发信频率指载频，信号实际占用的频谱会向边带方向扩展；为使整个发射信号不超出频段下限 F1，载频至少应为 F1 加上信号下边带的频率宽度（LSB 时）或相应保护。取 F1 本身会使边带落到频段之外。",
+    "mnemonic": "下限F1：载频往上加边带宽"
   },
   {
     "id": "A-202",
@@ -6418,7 +6820,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "同理，为使整个发射信号不超出频段上限 F2，载频至多应为 F2 减去信号上边带的频率宽度（USB 时）。取 F2 本身或再往上加都会使边带越界。",
+    "mnemonic": "上限F2：载频往下减边带宽"
   },
   {
     "id": "A-203",
@@ -6449,7 +6853,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《无线电规则》指出 5-30MHz 短波频段传播条件特殊、极易造成远距离干扰，ITU 鼓励各主管部门在可行时改用其他通信手段，以防止对远距离无线电通信的有害干扰。其他选项鼓励本地通信优先或建大功率中继站，与规则精神相反。",
+    "mnemonic": "短波太拥挤，能不用就不用"
   },
   {
     "id": "A-204",
@@ -6480,7 +6886,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《无线电规则》总原则是：发射电台只应辐射为保证满意服务所必要的功率。功率过大不仅浪费频谱，还会增加对其他电台的干扰，因此 B、C、D 中辐射尽量大功率的说法均错误。",
+    "mnemonic": "功率原则：够用就好，不图大"
   },
   {
     "id": "A-205",
@@ -6511,7 +6919,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电频率是公共资源，任何业余电台对业余频率均享有平等使用权，俱乐部约定的网络频率并无排他性。其他电台按通信惯例要求加入时应无条件欢迎，B、C、D 的排斥做法均违背平等使用原则。",
+    "mnemonic": "业余频率人人平等，来者欢迎"
   },
   {
     "id": "A-206",
@@ -6542,7 +6952,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ITU《无线电规则》明确禁止所有电台发射阻尼波，因为其频谱宽、效率低且干扰严重，早已被淘汰。调幅、调频、调相均为合法的调制方式，不在禁止之列。",
+    "mnemonic": "禁的是阻尼波：火花发射淘汰"
   },
   {
     "id": "A-207",
@@ -6576,7 +6988,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项均为《无线电管理条例》规制的违法行为：干扰无线电业务正常进行、向境外提供涉及国家安全的电波参数、擅自编制使用呼号、故意收发执照载明事项之外的信号并传播利用无意接收的信息，均由无线电管理机构依法处理。",
+    "mnemonic": "干扰、泄密、假呼号、乱收发：全违法"
   },
   {
     "id": "A-208",
@@ -6608,7 +7022,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余业务使用频率无需取得无线电频率使用许可，且免收无线电频率占用费，这是国家对业余无线电活动的扶持政策。故正确项为 A、B，C、D 与之矛盾。",
+    "mnemonic": "业余频率：免许可、免收费"
   },
   {
     "id": "A-209",
@@ -6639,7 +7055,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "135.7-137.8kHz 落在 30-300kHz 范围内，按频谱划分属于低频（LF），对应波长为长波。甚低频为 3-30kHz，特低频、超低频更低，均不对应该频段。",
+    "mnemonic": "137kHz：低频长波"
   },
   {
     "id": "A-210",
@@ -6670,7 +7088,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "135.7-137.8kHz 属于 30-300kHz 的低频频段，英文缩写为 LF。VLF 为甚低频（3-30kHz），ULF、SLF 频率更低，与该频段不符。",
+    "mnemonic": "低频英文：LF"
   },
   {
     "id": "A-211",
@@ -6701,7 +7121,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1800-2000kHz 即 1.8-2MHz，落在 300kHz-3MHz 范围内，属于中频（MF），对应波长为中波。低频上限为 300kHz，高频为 3-30MHz，均不对应该频段。",
+    "mnemonic": "1.8兆：中频中波"
   },
   {
     "id": "A-212",
@@ -6732,7 +7154,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1800-2000kHz 属于 300kHz-3MHz 的中频频段，英文缩写为 MF。HF 为 3-30MHz，LF 为 30-300kHz，VHF 更高，均与该频段不符。",
+    "mnemonic": "中频英文：MF"
   },
   {
     "id": "A-213",
@@ -6763,7 +7187,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "28-29.7MHz 落在 3-30MHz 范围内，属于高频（HF），对应波长为短波，这也是俗称的 10 米短波波段。中频上限为 3MHz，甚高频从 30MHz 起，均不对应该频段。",
+    "mnemonic": "28兆：高频短波"
   },
   {
     "id": "A-214",
@@ -6794,7 +7220,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "28-29.7MHz 属于 3-30MHz 的高频频段，英文缩写为 HF。MF 为中频（300kHz-3MHz），VHF 为甚高频（30-300MHz），LF 更低，均不符。",
+    "mnemonic": "高频英文：HF"
   },
   {
     "id": "A-215",
@@ -6825,7 +7253,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "50-54MHz 落在 30-300MHz 范围内，属于甚高频（VHF），对应波长为米波，这也是俗称的 6 米波段。高频上限为 30MHz，特高频、超高频更高，均不对应该频段。",
+    "mnemonic": "50兆：甚高频米波"
   },
   {
     "id": "A-216",
@@ -6856,7 +7286,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "50-54MHz 属于 30-300MHz 的甚高频频段，英文缩写为 VHF。HF 上限为 30MHz，UHF 为 300MHz-3GHz，SHF 更高，均不符。",
+    "mnemonic": "甚高频英文：VHF"
   },
   {
     "id": "A-217",
@@ -6887,7 +7319,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "2300-2450MHz 即 2.3-2.45GHz，落在 300MHz-3GHz 范围内，属于特高频（UHF），对应波长为分米波。甚高频为米波，超高频为 3-30GHz 的厘米波，均不对应该频段。",
+    "mnemonic": "2.4G：特高频分米波"
   },
   {
     "id": "A-218",
@@ -6918,7 +7352,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "公众对讲机属于公众移动通信范畴，与业余业务是不同业务，业余电台不得与公众对讲机通信，更不得通过扩频改装跨业务联络。B、C、D 均试图在功率上做文章，仍改变不了跨业务通信违法的性质。",
+    "mnemonic": "业余台不对讲机：业务不同不通联"
   },
   {
     "id": "A-219",
@@ -6949,7 +7385,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "2300-2450MHz 属于 300MHz-3GHz 的特高频频段，英文缩写为 UHF。VHF 为 30-300MHz，HF 为 3-30MHz，SHF 为 3-30GHz，均不符。",
+    "mnemonic": "特高频英文：UHF"
   },
   {
     "id": "A-220",
@@ -6980,7 +7418,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "5.650-5.850GHz 落在 3-30GHz 范围内，属于超高频（SHF），对应波长为厘米波。特高频为分米波（300MHz-3GHz），极高频为 30GHz 以上的毫米波，均不对应该频段。",
+    "mnemonic": "5.8G：超高频厘米波"
   },
   {
     "id": "A-221",
@@ -7011,7 +7451,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "5.650-5.850GHz 属于 3-30GHz 的超高频频段，英文缩写为 SHF。UHF 为 300MHz-3GHz，EHF 为 30-300GHz，VHF 更低，均不符。",
+    "mnemonic": "超高频英文：SHF"
   },
   {
     "id": "A-222",
@@ -7042,7 +7484,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "10-10.5GHz 落在 3-30GHz 范围内，属于超高频（SHF），对应波长为厘米波。特高频为分米波，极高频为毫米波，甚高频为米波，均不对应该频段。",
+    "mnemonic": "10G也是：超高频厘米波"
   },
   {
     "id": "A-223",
@@ -7073,7 +7517,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "10-10.5GHz 属于 3-30GHz 的超高频频段，英文缩写为 SHF。UHF 上限为 3GHz，EHF 从 30GHz 起，VHF 更低，均不符。",
+    "mnemonic": "Ku附近10G：还是SHF"
   },
   {
     "id": "A-224",
@@ -7104,7 +7550,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "241-250GHz 落在 30-300GHz 范围内，属于极高频（EHF），对应波长为毫米波，是我国划分给业余业务的最高频段。超高频为厘米波，特高频为分米波，至高频（300GHz 以上）尚未正式划分。",
+    "mnemonic": "241G：极高频毫米波，业余最高"
   },
   {
     "id": "A-225",
@@ -7135,7 +7583,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "241-250GHz 属于 30-300GHz 的极高频频段，英文缩写为 EHF。SHF 为 3-30GHz，UHF 更低，THF 指 300GHz 以上的至高频，均不符。",
+    "mnemonic": "极高频英文：EHF"
   },
   {
     "id": "A-226",
@@ -7166,7 +7616,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ITU《无线电规则》将世界划分为 3 个无线电管理区域，我国位于第 3 区。40 区、89 区、17 区的说法分别对应其他划分体系（如 CQ 分区、ITU 分区），不是 ITU 的区域划分。",
+    "mnemonic": "ITU分3区，中国在3区"
   },
   {
     "id": "A-227",
@@ -7197,7 +7649,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "把全球分为 3 个无线电管理区域的划分由国际电信联盟（ITU）在其《无线电规则》中制定。ARRL、IARU 的出版物和《CQ》杂志的奖状规则均无此立法效力。",
+    "mnemonic": "三区划分看ITU无线电规则"
   },
   {
     "id": "A-228",
@@ -7228,7 +7682,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ITU 区域划分概要：一区为欧洲、俄罗斯亚洲部分、蒙古及部分西北亚国家；二区为南北美洲；三区为亚洲其余部分和大洋洲，我国属三区。B、C、D 均把二、三区或一区的位置对调，描述错误。",
+    "mnemonic": "一欧二美三亚太：中国三区"
   },
   {
     "id": "A-229",
@@ -7259,7 +7715,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国属 ITU 第三区，该区 40 米业余波段为 7.000-7.200MHz。B 项的 7.300 是二区上限，C、D 项虚构了区内再分专用/共用的安排，均不正确。",
+    "mnemonic": "三区40米：7000到7200"
   },
   {
     "id": "A-230",
@@ -7290,7 +7748,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM 带宽 20kHz（左右各 10kHz），频率容限 ±2kHz：下限 = 144.035 + 0.010 + 0.002 = 144.047MHz，上限 = 145.800 - 0.010 - 0.002 = 145.788MHz。B、D 项下限只加了带宽一半或未加容限，C 项上限未扣除容限，均不完整。",
+    "mnemonic": "FM：上下各加半带宽加容限"
   },
   {
     "id": "A-231",
@@ -7321,7 +7781,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "USB 语音从 144.035MHz 开始，带宽小于 3kHz（上边带），频率容限 ±2kHz：下限 = 144.035 + 0.002 = 144.037MHz，上限 = 145.800 - 0.003 - 0.002 = 145.795MHz。其他选项的加减组合不符合带宽与容限的要求。",
+    "mnemonic": "USB：下限加容限，上限减带宽减容限"
   },
   {
     "id": "A-232",
@@ -7352,7 +7814,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM 带宽 20kHz（左右各 10kHz），容限 ±2kHz：下限 = 438 + 0.010 + 0.002 = 438.012MHz，上限 = 440 - 0.010 - 0.002 = 439.988MHz。B、D 项下限未正确留出保护，C 项上限超出 440MHz 频段边缘。",
+    "mnemonic": "70厘米FM：438012到439988"
   },
   {
     "id": "A-233",
@@ -7383,7 +7847,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "USB 带宽小于 3kHz，容限 ±2kHz：下限 = 438 + 0.002 = 438.002MHz，上限 = 440 - 0.003 - 0.002 = 439.995MHz。B 项下限低于频段起点保护，C 项上限超出 440MHz。",
+    "mnemonic": "70厘米USB：438002到439995"
   },
   {
     "id": "A-234",
@@ -7414,7 +7880,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "10 米波段中 29.3-29.51MHz 留给卫星业余业务（卫星下行），地面话音及其他通信方式不应占用。其他选项的频率范围属于话音或 FM 段，不在卫星保留范围内。",
+    "mnemonic": "10米卫星段：293到2951"
   },
   {
     "id": "A-235",
@@ -7445,7 +7913,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "144MHz 频段中 145.8-146MHz 留给卫星业余业务（卫星上下行），地面话音及其他通信方式不应占用。其他选项属于 EME、弱信号或话音段，不在卫星保留范围内。",
+    "mnemonic": "144M卫星段：1458到146"
   },
   {
     "id": "A-236",
@@ -7476,7 +7946,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "430MHz 频段中 435-438MHz 留给卫星业余业务（卫星上行），地面话音及其他通信方式不应占用。其他选项属于弱信号、话音或中继段，不在卫星保留范围内。",
+    "mnemonic": "430M卫星段：435到438"
   },
   {
     "id": "A-237",
@@ -7507,7 +7979,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "通话时清晰表述呼号和重要信息中英语字母的标准方法是使用 ITU 规定的标准字母解释法（如 NATO 音标字母），它在国际上通用且不易误听。打比方、拍电码、AI 朗读均非通用的话音拼读规范。",
+    "mnemonic": "字母拼读用标准解释法"
   },
   {
     "id": "A-238",
@@ -7538,7 +8012,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：B=Bravo、H=Hotel、1=One、X=Xray、Y=Yankee、Z=Zulu，故 BH1XYZ 拼读为 Bravo Hotel One Xray Yankee Zulu。其他选项对应的是不同呼号的拼读，与 BH1XYZ 无关。",
+    "mnemonic": "BH1XYZ：BH1，XYZ"
   },
   {
     "id": "A-239",
@@ -7569,7 +8045,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：B=Bravo、7=Seven、C=Charlie、R=Romeo、A=Alfa，故 B7CRA 拼读为 Bravo Seven Charlie Romeo Alfa。其他选项对应的是不同呼号的拼读。",
+    "mnemonic": "B7CRA：B7，CRA"
   },
   {
     "id": "A-240",
@@ -7600,7 +8078,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：4=Four、U=Uniform、1=One、N=November，故 4U1UN 拼读为 Four Uniform One Uniform November。注意两个 U 都拼读为 Uniform。其他选项对应不同呼号。",
+    "mnemonic": "4U1UN：双U都读Uniform"
   },
   {
     "id": "A-241",
@@ -7631,7 +8111,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：V=Victor、R=Romeo、2=Two、Z=Zulu、Q=Quebec、W=Whiskey，故 VR2ZQW 拼读为 Victor Romeo Two Zulu Quebec Whiskey。其他选项对应不同呼号。",
+    "mnemonic": "VR2ZQW：VR2，ZQW"
   },
   {
     "id": "A-242",
@@ -7662,7 +8144,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：B=Bravo、S=Sierra、7=Seven、H=Hotel，故 BS7H 拼读为 Bravo Sierra Seven Hotel。其他选项是带 portable 的长呼号拼读，与 BS7H 无关。",
+    "mnemonic": "BS7H：BS7，H"
   },
   {
     "id": "A-243",
@@ -7693,7 +8177,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按 ITU 标准字母解释法：J=Juliett、A=Alfa、2=Two、I=India、G=Golf、Y=Yankee，故 JA2IGY 拼读为 Juliett Alfa Two India Golf Yankee。其他选项对应不同呼号。",
+    "mnemonic": "JA2IGY：JA2，IGY"
   },
   {
     "id": "A-244",
@@ -7724,7 +8210,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "斜杠后的 VE6 表示在加拿大操作，拼读时读作 Portable Victor Echo Six，即 Kilo Three Tango Romeo Xray Portable Victor Echo Six。其他选项的 portable 部分与斜杠后缀不符。",
+    "mnemonic": "斜杠后：Portable加新呼号"
   },
   {
     "id": "A-245",
@@ -7755,7 +8243,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "3DA0FZ/DL5CMP 是异地操作呼号，斜杠后部分读作 Portable，即 Three Delta Alfa Zero Foxtrot Zulu Portable Delta Lima Five Charlie Mike Papa。其他选项的 portable 部分与实际后缀不符。",
+    "mnemonic": "斜杠读Portable，前后都拼全"
   },
   {
     "id": "A-246",
@@ -7786,7 +8276,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CQ 是非特指的普遍呼叫，表示呼叫任何一部国内和国外业余电台，任何听到的人都可以应答。它不是专门呼叫国内或国外电台，也没有排斥国内电台的意思。",
+    "mnemonic": "CQ=谁都行，来者应答"
   },
   {
     "id": "A-247",
@@ -7817,7 +8309,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发起 CQ 呼叫的标准做法是呼叫 CQ 并报出己方呼号，为清晰起见可重复一两次 CQ 并对呼号进行字母拼读。B 项的寒暄式呼叫、C、D 项的机械重复均不符合业余无线电通信惯例。",
+    "mnemonic": "发CQ：呼CQ报呼号，拼读更清楚"
   },
   {
     "id": "A-248",
@@ -7848,7 +8342,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "回答 CQ 呼叫时应先报出对方的呼号再报出自己的呼号，为清晰起见可重复关键内容或进行字母拼读。B 项顺序颠倒，C 项重复呼叫 CQ，D 项先给信号报告，均不符合惯例。",
+    "mnemonic": "应答：先对方呼号，再自己"
   },
   {
     "id": "A-249",
@@ -7879,7 +8375,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼叫另一业余电台时应先报对方呼号再报自己呼号，建立通信后再提出希望与小明通话。直接呼叫 CQ 加人名或用口语我是小强均不符合呼叫程序。",
+    "mnemonic": "先对后己：建联后再点名"
   },
   {
     "id": "A-250",
@@ -7910,7 +8408,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台建立通信后双方应首先交换信号报告（RST/RS），这是确认双向通信质量的基础。操作员名字、地点、设备情况是后续寒暄内容，不是首要交换的信息。",
+    "mnemonic": "建联第一件事：交换信号报告"
   },
   {
     "id": "A-251",
@@ -7941,7 +8441,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "立即交换信号报告是为了让双方了解传播情况，从而安排最适合的操作方式（如调整功率、天线或改用其他模式）。它不是无意义的报务形式，也不是校准功率或评奖的工具。",
+    "mnemonic": "信号报告：摸传播，定打法"
   },
   {
     "id": "A-252",
@@ -7972,7 +8474,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "RST 中 R 代表 Readability，即信号的可辩度（可读性），分 1-5 级；S 代表信号强度，T 代表电码音调的纯净度。B、C 项分别对应 S 和 T 的含义，D 项的 QRK 与 RST 无关。",
+    "mnemonic": "RST的R：可辩度Readability"
   },
   {
     "id": "A-253",
@@ -8003,7 +8507,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CW 用 RST 三位报告（可辩度-强度-音调），FM 话音用 RS 两位报告（可辩度-强度）。题中可辩度 5、强度 5、CW 音调 9，故 CW 为 559、FM 为 55。B 项把两种模式搞反，C、D 项虚报 599/59 不诚实。",
+    "mnemonic": "CW三位RST，话音两位RS"
   },
   {
     "id": "A-254",
@@ -8034,7 +8540,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发起呼叫前应先守听，若可能只听到通信一方而误判频率空闲，应先询问有人使用频率吗，确认无应答后再发起呼叫。B 项用语不规范，C、D 项先呼叫后让频会干扰他人正常联络。",
+    "mnemonic": "呼叫前先问：有人用频吗"
   },
   {
     "id": "A-255",
@@ -8065,7 +8573,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "BH1ZZZ 请求插入的正确方法是：在一方刚停止讲话的间隙迅速发出插入或 break，如获回应再报呼号请求插入，待对方正式邀请后才开始对话。讲话中插入、加大功率强行插入或直接讲进去均不礼貌。",
+    "mnemonic": "插入三步：间隙喊break，等邀请再说话"
   },
   {
     "id": "A-256",
@@ -8096,7 +8606,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "联络中听到遇险电台要求插入，应立即与该台确认险情并了解其需要什么帮助，遇险通信具有最高优先级。变更频率、停止发射或转找他人都会延误救援，均不正确。",
+    "mnemonic": "遇险插入：最高优先，立即确认救援"
   },
   {
     "id": "A-257",
@@ -8127,7 +8639,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "请求插入他人对话前应先思考：自己的加入是否会影响原通信双方的交谈乐趣，尊重原有联络。信号质量、操作等级、谈话内容都不是插入与否的决定因素。",
+    "mnemonic": "想插入先想：会不会扫人家的兴"
   },
   {
     "id": "A-258",
@@ -8158,7 +8672,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发现他台操作技巧不规范但未造成严重干扰时，应通过电话、邮件等私下渠道提出善意的改进建议。在频率上当面指正会占用公共频率且伤和气，动辄上报管理机构则小题大做。",
+    "mnemonic": "小毛病私下说，别在频率上吵"
   },
   {
     "id": "A-259",
@@ -8189,7 +8705,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "受到违法或不明电台严重干扰时，正确做法是不予理睬，避免与其纠缠，同时收集有关信息并向无线电管理机构举报。在频率上宣传法规、以大功率压制都会加剧干扰、违反规定。",
+    "mnemonic": "被干扰：不理睬，取证，举报"
   },
   {
     "id": "A-260",
@@ -8220,7 +8738,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "与几十千米外电台长谈技术和个人话题，应选用电话或互联网，而不应长时间占用业余频率。业余频率是公共资源，长篇闲聊既不符合业余业务宗旨，也挤占他人使用机会。",
+    "mnemonic": "长聊私事：打电话上网，别占频率"
   },
   {
     "id": "A-261",
@@ -8251,7 +8771,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "法规和国际惯例要求业余电台日志记载的必要内容是：通信时间、通信频率、通信模式、对方呼号、双方信号报告。对方姓名、设备、天线、天气等是可选的补充信息，不是必要内容。",
+    "mnemonic": "日志五要素：时间频率模式呼号报告"
   },
   {
     "id": "A-262",
@@ -8282,7 +8804,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "日志必要内容用英文缩写即 DATE、TIME、FREQ、MODE、CALL（对方）、RST（双方）。B、C、D 项混入了 QTH、RIG、WX、PWR 等非必要项目，不符合法规和惯例要求。",
+    "mnemonic": "DATE TIME FREQ MODE CALL RST"
   },
   {
     "id": "A-263",
@@ -8316,7 +8840,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "交换 QSL 卡的意义包括：确认本地、国内乃至世界范围的无线电联络；检验包括自制发射机在内的本台设备运作表现；作为申请奖状的证明；以及纯粹的收集欣赏展示。四项均正确，故选 ABCD。",
+    "mnemonic": "QSL四用：确认、验设备、申奖状、收藏"
   },
   {
     "id": "A-264",
@@ -8350,7 +8876,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSL卡片是通联的书面凭证，四项缺一不可：双方呼号确认联络对象，信号报告与UTC时间确认联络质量与时刻，模式与频率确认联络方式，签章和通信地址确认卡片真实性与回卡渠道。缺少任一项都会使卡片失去证明效力。",
+    "mnemonic": "双呼号报告时间，模式频率签章地址"
   },
   {
     "id": "A-265",
@@ -8381,7 +8909,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "非通联证明的卡片须在通信方式栏注明“现场交流”或“Eyeball QSO”，且绝不能赠送空白卡片，因为空白卡可能被冒用伪造通联记录。B错在空白卡不可当名片散发；C错在未联络不能发确认卡；D错在呼号栏不能写操作员名字代替。",
+    "mnemonic": "非通联写Eyeball，空白卡片不能送"
   },
   {
     "id": "A-266",
@@ -8412,7 +8942,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "IRC是国际回邮券，作用是替对方承担回邮邮资。收到夹带IRC的国外卡片时，应先查日志核实联络真实性，再直接寄往对方地址回卡。B跳过核实不可取；C错在国外来卡应直邮而非经国内卡片局；D无视对方既失礼也浪费了IRC。",
+    "mnemonic": "先验日志再直邮，IRC专款回邮用"
   },
   {
     "id": "A-267",
@@ -8443,7 +8975,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "迫切需要回卡时直接邮寄并附SASE（贴足邮资、写好地址的回邮信封），可最大限度提高回卡率。B错：填错应重写，涂改液会使卡片作废；C错：邮寄地址应填地址栏，QTH栏填的是发射地点；D错：经卡片局寄出就不应再要求对方直接回卡。",
+    "mnemonic": "急要回卡附SASE，填错重写不涂改"
   },
   {
     "id": "A-268",
@@ -8474,7 +9008,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SWL即短波收听者，只收听不发射，常寄出收听报告卡（SWL卡）请求确认，收到后回卡是国际惯例的礼节。广播爱好者、DIY爱好者、监测员都不是这一行为的主体。",
+    "mnemonic": "只听不发寄收听卡，SWL回卡是礼节"
   },
   {
     "id": "A-269",
@@ -8505,7 +9041,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国144MHz频段中继上下行频差为0.6MHz，430MHz频段为5MHz，这是国内中继台的标准设置，事先设好可避免通联中手忙脚乱。B是频道步进值；C、D的数值不符合国内中继规范。",
+    "mnemonic": "2米差0.6，70厘米差5兆"
   },
   {
     "id": "A-270",
@@ -8536,7 +9074,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "经中继呼叫应报出对方呼号再报自己呼号，清晰表明呼叫对象和身份。“break”是紧急插入用语不可滥用；在中继上呼叫CQ既不礼貌也低效；干等对方呼叫则纯属碰运气。",
+    "mnemonic": "中继呼叫：先报对方，再报自己"
   },
   {
     "id": "A-271",
@@ -8567,7 +9107,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "中继台是应急通信的生命线，使用原则是除必要简短联络外保持上下行频率空闲，随时响应突发灾害等紧急呼叫。B的“接近饱和”与应急备勤相悖；C、D把中继当广播和聊天工具，均属占用公共资源。",
+    "mnemonic": "中继保持空闲，应急随时能用"
   },
   {
     "id": "A-272",
@@ -8598,7 +9140,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发起呼叫前应守听并询问频率是否空闲，标准问法是Is this frequency in use?等。“Calling you, Roger?”语义不通，不能表达询问是否空闲的意思。B、C、D都是常用正确表达。",
+    "mnemonic": "问空闲用in use，Calling you不行"
   },
   {
     "id": "A-273",
@@ -8629,7 +9173,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM/SSB话音CQ的规范格式是：CQ三遍＋完整呼号＋NATO音标拼读＋说明呼叫CQ等回答。B呼号不全且用语随意；C呼号残缺；D连呼三遍CQ后只说“您请讲”，对象不明。",
+    "mnemonic": "CQ加全呼号，音标拼读报清楚"
   },
   {
     "id": "A-274",
@@ -8660,7 +9206,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "英文话音CQ同样要求完整呼号＋拼读＋standing by（等回答）。B的Go ahead、C的Come on过于随意且呼号不全；D的Back to you用于已建立联络后交话，不适用于发起CQ。",
+    "mnemonic": "英文CQ：全呼号拼读加standing by"
   },
   {
     "id": "A-275",
@@ -8691,7 +9239,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "话音呼叫特定电台的规范是：对方呼号三遍＋“这里是”＋本台呼号＋拼读＋“听到请回答”。B、C、D呼号残缺或用语不规范，容易让对方无法确认身份。",
+    "mnemonic": "叫特定台：对方三遍加自己全呼号"
   },
   {
     "id": "A-276",
@@ -8722,7 +9272,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "英文版呼叫特定台同样：对方呼号三遍＋this is＋本台呼号＋拼读＋calling you and standing by。B把己方呼号说成对方，C呼号残缺，D用over over收尾不规范。",
+    "mnemonic": "英文叫台：对方三遍this is加拼读"
   },
   {
     "id": "A-277",
@@ -8753,7 +9305,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "给信号报告应点名对方呼号，清晰报出“57”，并以“是否抄收？”确认对方收到。B把报告当成征求意见；C、D没有明确呼叫对象，不符合通联规范。",
+    "mnemonic": "报告点名加确认，是否抄收问一句"
   },
   {
     "id": "A-278",
@@ -8784,7 +9338,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "英文信号报告规范说法是“BH1ZZZ, you are 57, QSL?”，即点名、给报告、请求确认三要素。B的may I rate、C的Hey开头、D对象错乱，都不符合规范。",
+    "mnemonic": "英文报告三要素：点名、57、QSL"
   },
   {
     "id": "A-279",
@@ -8815,7 +9371,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QTH的含义就是电台所在地，所以“我的QTH是成都”正确。QRT是关机，QRO是增大功率，QRV是准备好收信，含义都不对。",
+    "mnemonic": "所在地用QTH，关机加功率都不是"
   },
   {
     "id": "A-280",
@@ -8846,7 +9404,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "英文同样用My QTH is Chengdu表示所在地。I QRT（我要关机）、I run QRO（我加大功率）、I am QRV（我准备好）都答非所问。",
+    "mnemonic": "My QTH is，所在地标准说"
   },
   {
     "id": "A-281",
@@ -8877,7 +9437,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "Cheerio（英）、Ciao（意）、Dosvidaniya（俄）都是各国语言中的告别祝福，体现了业余无线电跨越国界的友谊。B、C、D只描述了语言现象，没有点出互致祝愿和再见的含义。",
+    "mnemonic": "多国语言道再见，友谊跨越国界线"
   },
   {
     "id": "A-282",
@@ -8908,7 +9470,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QRP小功率操作对方反映信号不好时，追问是否需要加功率用QRO?（要我加大功率吗？）。QSO是联络，QRP是减小功率（正好相反），QRS是请发慢。",
+    "mnemonic": "信号不好问加功率，QRO"
   },
   {
     "id": "A-283",
@@ -8939,7 +9503,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "认为QRP功率已够、协商降功率用QRP?（我减小功率好吗？）。B的QRO是加大功率，正好相反；C的QRU是问有无消息；D的QRT是关机。",
+    "mnemonic": "协商降功率用QRP，QRO是反的"
   },
   {
     "id": "A-284",
@@ -8970,7 +9536,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "呼号后附加/QRP表示该电台声明自己已降低发射功率进行小功率操作。官方定义即“我已降低发射功率”，B的“至5W”过于具体，C、D与功率无关。",
+    "mnemonic": "呼号后缀/QRP，声明已降功率"
   },
   {
     "id": "A-285",
@@ -9001,7 +9569,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "请对方加快发报速度用PSE QRQ。QRS是请放慢（正好相反），QRT是关机，QTR不是速度相关简语。",
+    "mnemonic": "请快发PSE QRQ，快慢QR分清"
   },
   {
     "id": "A-286",
@@ -9032,7 +9602,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对方要求加快时，反问确认用QRQ?（要我发快吗？）。QRS是放慢，QRT是关机，QTR无关。",
+    "mnemonic": "确认加快问QRQ"
   },
   {
     "id": "A-287",
@@ -9063,7 +9635,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "请对方放慢发报速度用PSE QRS。QRQ是加快（正好相反），QSY是改频率，QSL是确认收妥。",
+    "mnemonic": "请慢发PSE QRS"
   },
   {
     "id": "A-288",
@@ -9094,7 +9668,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对方要求放慢时，反问确认用QRS?（要我发慢吗？）。QRQ是加快，QSY是改频率，QSL是确认。",
+    "mnemonic": "确认放慢问QRS"
   },
   {
     "id": "A-289",
@@ -9125,7 +9701,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QRT的含义是“我要关闭收发信机了”，用于结束当天通联活动告别。B是QSY（改频率），C、D是生造的含义。",
+    "mnemonic": "QRT是要关机，今天到此停"
   },
   {
     "id": "A-290",
@@ -9156,7 +9734,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "结束联络前询问对方是否还有消息，用QRU?（你还有事吗？）。QRL是问频率忙否，QRB问距离，QRQ是加快发报。",
+    "mnemonic": "结束前问还有事，QRU"
   },
   {
     "id": "A-291",
@@ -9187,7 +9767,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "告知对方这里已无事用QRU陈述句。QRL是频率忙，QRM是他台干扰，QRN是天电干扰，都不表示“无事”。",
+    "mnemonic": "无事可报发QRU"
   },
   {
     "id": "A-292",
@@ -9218,7 +9800,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QRV有“准备好、能参加”之意，相约对方参加业余无线电活动用“QRV IN 活动名?”。QSY是改频率，C语义不通，D的QRT是关机。",
+    "mnemonic": "相约活动问QRV IN"
   },
   {
     "id": "A-293",
@@ -9249,7 +9833,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QRV的含义是“我准备好收信了”。B是QRL（正忙于联络），C是QRU（有消息要发），D是QRP（减小功率）。",
+    "mnemonic": "QRV准备好，收信没问题"
   },
   {
     "id": "A-294",
@@ -9280,7 +9866,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "没听清对方呼号请重发用QRZ?（谁在呼叫我？）。QRU是问有无消息，QSY是改频率，QSA问信号强度。",
+    "mnemonic": "呼号没听清，QRZ请重发"
   },
   {
     "id": "A-295",
@@ -9311,7 +9899,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QRZ陈述为“呼叫你的电台是……”，疑问式为“谁在呼叫我？”。B是QRV，C是QRL，D是QRP的含义。",
+    "mnemonic": "QRZ问谁在叫我，陈述报呼号"
   },
   {
     "id": "A-296",
@@ -9342,7 +9932,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国早期文献用QSA加5个等级表示信号报告（QSA1-5为信号强度等级）。QSB是衰落，QSD是键控缺陷，QSK是全插入，都不是强度报告简语。",
+    "mnemonic": "老文献信号报告，QSA分五级"
   },
   {
     "id": "A-297",
@@ -9373,7 +9965,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "询问自己信号是否衰落用QSB?。QSD是键控缺陷，QRB问距离，QSP是转信。",
+    "mnemonic": "信号衰落问QSB"
   },
   {
     "id": "A-298",
@@ -9404,7 +9998,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSB的含义是“你的信号正在衰落”。B是QSD（键控缺陷），C是请重复消息，D是QSK（全插入）。",
+    "mnemonic": "QSB信号衰落，S记Signal衰"
   },
   {
     "id": "A-299",
@@ -9435,7 +10031,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "问自己发报手法有无毛病用QSD?（我的电键发报有毛病吗？）。QSB是衰落，QSV无此意，QRM是干扰。",
+    "mnemonic": "手法毛病问QSD，D记Defect"
   },
   {
     "id": "A-300",
@@ -9466,7 +10064,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "指出对方某个字母发得不好用“QSD AT 字母”，如QSD AT Y。B、C、D的简语都没有“键控缺陷”含义。",
+    "mnemonic": "某字母发得差，QSD AT加字母"
   },
   {
     "id": "A-301",
@@ -9497,7 +10097,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "键击声属于键控缺陷（keying defect），请对方检查用“QSD PSE CK”。QRI、QRH、TVI都没有键控缺陷的含义。",
+    "mnemonic": "键击声是缺陷，QSD请检查"
   },
   {
     "id": "A-302",
@@ -9528,7 +10130,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSK即全插入（full break-in），指发报时能在电码间隙中听到对方电台的插入。B是QSB，C是QSD，D是请重复消息。",
+    "mnemonic": "QSK全插入，间隙能听对方"
   },
   {
     "id": "A-303",
@@ -9559,7 +10163,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "请对方确认收妥消息用QSL?。QRZ是问谁呼叫，QSP是转信，QRO是加功率。",
+    "mnemonic": "请确认收妥，发QSL"
   },
   {
     "id": "A-304",
@@ -9590,7 +10196,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSL的含义是“我确认抄收了你所发送的消息”。B、D是QSL卡片层面的引申义，C是请重复消息，都不是QSL简语的本义。",
+    "mnemonic": "QSL确认抄收，消息已收到"
   },
   {
     "id": "A-305",
@@ -9621,7 +10229,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSO指业余电台间的（当前）联络，可直接或经转信建立。B是QSL卡片交换，C是QSP转信，D是QRU无事。",
+    "mnemonic": "QSO就是通联，联络进行中"
   },
   {
     "id": "A-306",
@@ -9652,7 +10262,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "请对方帮助转信到某电台用“QSP ×××?”。QRD、QSX、QRV都没有转信含义（QSX指在某频率收听）。",
+    "mnemonic": "请转信用QSP加呼号"
   },
   {
     "id": "A-307",
@@ -9683,7 +10295,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSP的含义是“我可以将你的消息转信至某个电台”，常指帮助他台中转消息。B是QSL卡片，C是QSO联络，D是QRU无事。",
+    "mnemonic": "QSP帮转信，中转消息行"
   },
   {
     "id": "A-308",
@@ -9714,7 +10328,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSX 的含义是'我在……频率守听'，加问号即请求对方守听，本题就是'请在7074kHz守听我的FT8吗'。QSY 是改频率、QSL 是确认抄收、QRU 是询问有无待发电报，都与'帮忙守听'无关。",
+    "mnemonic": "QSX 专管守听，X 像竖起的天线。"
   },
   {
     "id": "A-309",
@@ -9745,7 +10361,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSX 也可用陈述句，表示'我正在7074kHz守听FT8联络'。QSY 是改变频率、QSL 是确认收妥、QRU 是询问有无电报，都不能表达'正在守听'的状态。",
+    "mnemonic": "陈述句 QSX：我正在守听中。"
   },
   {
     "id": "A-310",
@@ -9776,7 +10394,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSY 含义为'我要改变发射频率至……'，作疑问句即协商对方改频。QRY 是轮次、QSV 是发送调试信号、QRV 是准备好收发，均无改频之意。",
+    "mnemonic": "QSY 拐个弯，频率要换频。"
   },
   {
     "id": "A-311",
@@ -9807,7 +10427,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSY 直译为'改变发射频率'，后接频率参数使用。关闭电台用 QRT，结束联络互致祝愿用 73，变更操作方式另有说法，均与 QSY 无关。",
+    "mnemonic": "SY 像 shift，QSY 就是换频率。"
   },
   {
     "id": "A-312",
@@ -9838,7 +10460,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QTH 意为'我的位置是……'，加问号即询问对方电台位置。QRA 是电台名称、QSP 是中转、QSA 是信号强度，都不能用来问位置。",
+    "mnemonic": "QTH 问地头，你人在哪里。"
   },
   {
     "id": "A-313",
@@ -9869,7 +10493,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "73 是传统告别语，意为'致以最美好的祝愿'，结束联络时互致。59/599 是信号报告，99 无此含义。",
+    "mnemonic": "结束通联道声好，73 告别最常用。"
   },
   {
     "id": "A-314",
@@ -9900,7 +10526,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "UR ADR（ADDR）意为'你的地址'，加问号即询问对方 QSL 卡邮寄地址。MY ADDR 是'我的地址'，其余两项语义颠倒或并非询问地址。",
+    "mnemonic": "要地址问 UR ADDR，问对方'你的'。"
   },
   {
     "id": "A-315",
@@ -9931,7 +10559,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AGN 是 AGAIN 的缩写，意为'再一次'，用于请对方重发上次内容。AGC 是自动增益控制、ABT 是大约、ABV 是以上，都无重发之意。",
+    "mnemonic": "AGN 再来一次，again 的缩写。"
   },
   {
     "id": "A-316",
@@ -9962,7 +10592,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AHR 是 ANOTHER 的缩写，意为'另一个'。天线的缩写是 ANT，'这里'是 HR，地址是 ADDR，不可望文生义。",
+    "mnemonic": "AHR 等于 another，另一个。"
   },
   {
     "id": "A-317",
@@ -9993,7 +10625,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ARDF 是 Amateur Radio Direction Finding（业余无线电测向）的英文缩写，即'猎狐'运动。ATU 是天线调谐器，ADDR 是地址，ANT 是天线。",
+    "mnemonic": "ARDF 猎狐测向，F 是 Finding。"
   },
   {
     "id": "A-318",
@@ -10024,7 +10658,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "邮政信箱英文为 Post Office Box，缩写 BOX 或 P O BOX。BURO 是卡片管理局，QTH 是位置，均不是信箱。",
+    "mnemonic": "信箱装卡片，BOX 就是信箱。"
   },
   {
     "id": "A-319",
@@ -10055,7 +10691,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "QSL 卡片管理局英文为 QSL Bureau，缩写 BURO，负责各国间卡片的集中交换。BOX 只是信箱，与管理局无关。",
+    "mnemonic": "卡片管理局，BURO 即 Bureau。"
   },
   {
     "id": "A-320",
@@ -10086,7 +10724,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CK 是 CHECK 的缩写，意为'检查'，竞赛交换序号时常见。钟表是 CLOCK，报到祝贺都无对应缩写，抄收须按英文缩写联想。",
+    "mnemonic": "CK 等于 check，检查对一遍。"
   },
   {
     "id": "A-321",
@@ -10117,7 +10757,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CQ 谐音 seek you，是通用呼叫，业余电台发起呼叫时使用。CU AGN 是'下次再见'、TU 是'谢谢'，均为结束语而非呼叫。",
+    "mnemonic": "CQ 谐音 seek you，呼叫大家来。"
   },
   {
     "id": "A-322",
@@ -10148,7 +10790,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DX 取自 distance（X 表远方/未知），指远距离电台或远距离通信。DE 意为'我是/来自'，DR 是 dear（亲爱的），都与远地无关。",
+    "mnemonic": "DX 追远方，D 是 distance。"
   },
   {
     "id": "A-323",
@@ -10179,7 +10823,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ES 在电码通联中作 AND 用，意为'和'。这是固定对应关系，需死记；其余选项均为干扰项。",
+    "mnemonic": "ES 就是 and，电码里说'和'。"
   },
   {
     "id": "A-324",
@@ -10210,7 +10856,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FB 是 fine business 的缩写，意为'太棒了、业务精湛'，用于赞美对方操作。与 feedback（反馈）无关，切勿望文生义。",
+    "mnemonic": "FB 夸你业务精，fine business。"
   },
   {
     "id": "A-325",
@@ -10241,7 +10889,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FER 是 for 的缩写，意为'为了、对于'。fine 的缩写是 FNE/FB，二月是 FEB，猎狐是 ARDF，不能混淆。",
+    "mnemonic": "FER 等于 for，为了对于它。"
   },
   {
     "id": "A-326",
@@ -10272,7 +10922,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FREQ 是 frequency（频率）的标准缩写。TUNE 是调谐、FIND 是寻找，均不是频率的缩写。",
+    "mnemonic": "FREQ 即 frequency，频率就它。"
   },
   {
     "id": "A-327",
@@ -10303,7 +10955,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GA = good afternoon（下午好），GE = good evening（晚上好），GM = good morning（早晨好），GN = good night（晚安），按首字母区分时段。",
+    "mnemonic": "GA 下午好，A 是 afternoon。"
   },
   {
     "id": "A-328",
@@ -10334,7 +10988,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GE = good evening（晚上好）。GM 是早晨、GA 是下午、GN 是晚安，记住 E 代表 evening 即可区分。",
+    "mnemonic": "GE 晚上好，E 是 evening。"
   },
   {
     "id": "A-329",
@@ -10365,7 +11021,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GL = good luck（好运），结束联络时祝愿对方好运好成绩。GB 是 goodbye（再见），TU 是谢谢，73 是美好祝愿但不特指好运成绩。",
+    "mnemonic": "GL 祝好运，L 是 luck。"
   },
   {
     "id": "A-330",
@@ -10396,7 +11054,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GLD = glad（高兴）的缩写。好运是 GL，再见是 GB，地线是 GND，注意形近词区分。",
+    "mnemonic": "GLD 等于 glad，心里很高兴。"
   },
   {
     "id": "A-331",
@@ -10427,7 +11087,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GM = good morning（早晨好）。GA 是下午好、GL 是好运、GB 是再见，注意 GM 与 GL 形近但含义完全不同。",
+    "mnemonic": "GM 早晨好，M 是 morning。"
   },
   {
     "id": "A-332",
@@ -10458,7 +11120,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GMT = Greenwich Mean Time（格林尼治时间），是世界时的传统说法，DX 电台仍常用。GPS 时间、国际原子时、罗兰 C 都与 GMT 无关。",
+    "mnemonic": "GMT 格林尼治，世界时间老名字。"
   },
   {
     "id": "A-333",
@@ -10489,7 +11153,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GN = good night（晚安）。GM 是早晨好、GL 是好运、GLD 是高兴，记住 N 代表 night。",
+    "mnemonic": "GN 道晚安，N 是 night。"
   },
   {
     "id": "A-334",
@@ -10520,7 +11186,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GND = ground（地面、接地）的缩写。GMT 是格林尼治时间、GL 是好运、GLD 是高兴，注意 GND 与 GMT 形近。",
+    "mnemonic": "GND 接大地，D 是 ground 尾。"
   },
   {
     "id": "A-335",
@@ -10551,7 +11219,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HNY = happy new year（新年快乐），12 月下旬 CW 通联中的季节性问候。圣诞快乐是 MERRY XMAS / HAPPY HOLIDAYS。",
+    "mnemonic": "HNY 新年好，12 月底常听到。"
   },
   {
     "id": "A-336",
@@ -10582,7 +11252,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HPE = hope（希望）的缩写，意为'希望去做某事'。'抄收'是 CPI/HRD，'这里'是 HR，不可混淆。",
+    "mnemonic": "HPE 等于 hope，希望能办到。"
   },
   {
     "id": "A-337",
@@ -10613,7 +11285,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HPY/HPI = happy（幸福）的缩写。'希望'是 HPE，'抄收'是 CPI/HRD，'这里'是 HR，形近词要分清。",
+    "mnemonic": "HPY 等于 happy，幸福满满的。"
   },
   {
     "id": "A-338",
@@ -10644,7 +11318,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HST = high speed telegraphy（高速收发报），是高速电报竞赛项目。RTTY 是无线电传，CW 是等幅电报，RST 是信号报告。",
+    "mnemonic": "HST 高速电报，S 是 speed。"
   },
   {
     "id": "A-339",
@@ -10675,7 +11351,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "K 意为'发报完毕请讲'，表示守听任意电台呼叫。KN 则专指只守听通联中的对方，PSE 只是'请'，GA 是下午好。",
+    "mnemonic": "K 请讲，开放守听等你来。"
   },
   {
     "id": "A-340",
@@ -10706,7 +11384,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "KN 意为'只请通联中的对方回答'，在有干扰或多人抢叫时用以点名。K 是守听任意电台，PSE 仅表'请'。",
+    "mnemonic": "KN 加 N 只收你，点名专收。"
   },
   {
     "id": "A-341",
@@ -10737,7 +11417,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "MNY TNX / MNI TNX 即 many thanks（非常感谢），是 CW 中表达谢意的固定说法。其余选项或语序别扭，或不是惯用缩语。",
+    "mnemonic": "MNY TNX，many thanks 谢意深。"
   },
   {
     "id": "A-342",
@@ -10768,7 +11450,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "NW = now（现在）的缩写。不工作常用 NIL，新的缩写是 NEW/NW 另有所指，'你和我'是 U AND I，均不对。",
+    "mnemonic": "NW 等于 now，就是现在。"
   },
   {
     "id": "A-343",
@@ -10799,7 +11483,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "OM = old man，是对亲密同好的尊称，意为'老朋友、老伙计'，与年龄无关。OB/OC/OT 均无此含义。",
+    "mnemonic": "OM 老伙计，M 是 man 的亲切。"
   },
   {
     "id": "A-344",
@@ -10830,7 +11516,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "OP = operator（操作员）的缩写。OM 是老朋友，OHM 是欧姆单位，形近但无关。",
+    "mnemonic": "OP 即 operator，操作员简称。"
   },
   {
     "id": "A-345",
@@ -10861,7 +11549,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "PSE（please）/ PLS 都是'请'的缩写，用于礼貌祈使句。PSK 是调制方式，PWR 是功率，PTT 是发射按键，均非'请'。",
+    "mnemonic": "PSE 请你帮个忙，PLS 也一样。"
   },
   {
     "id": "A-346",
@@ -10892,7 +11582,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "R 是 Roger 的缩写，表示'收到、明白'，与 QSL 确认抄收含义相近，可开启新会话。RX 是接收机，RIG 是电台设备。",
+    "mnemonic": "R 等于 Roger，收到明白。"
   },
   {
     "id": "A-347",
@@ -10923,7 +11615,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SAE = self-addressed envelope（写好收信人地址的信封，英式用法），索取 QSL 卡时附上以便对方回邮。SASE 是美式说法，还要求贴好邮票。",
+    "mnemonic": "SAE 写好地址的信封，索卡回邮用。"
   },
   {
     "id": "A-348",
@@ -10954,7 +11648,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SASE = self-addressed stamped envelope（写好收信人地址并贴好邮票的信封），是美式索卡回邮信封。SAE 为英式可不贴票，IRC 才是国际邮资券。",
+    "mnemonic": "SASE 自贴邮票写地址，回邮索卡。"
   },
   {
     "id": "A-349",
@@ -10985,7 +11681,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SRI = sorry（抱歉）的缩写，更正发错内容时先说抱歉再重发。SNR 是信噪比，STN 是电台，SMS 是短信。",
+    "mnemonic": "SRI 说抱歉，发错赶紧改。"
   },
   {
     "id": "A-350",
@@ -11016,7 +11714,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "TEMP = temperature（温度）的缩写。天气的缩写是 WX，TUNE 是调谐，不要张冠李戴。",
+    "mnemonic": "TEMP 是温度，天气用 WX 记。"
   },
   {
     "id": "A-351",
@@ -11047,7 +11747,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "'谢谢'的缩写是 TNX（thanks）/ TKS。SRI 是抱歉，CU 是再见，TVI/RFI 是干扰类术语。",
+    "mnemonic": "TNX 谢谢你，TKS 也致谢。"
   },
   {
     "id": "A-352",
@@ -11078,7 +11780,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "TU = thank you（谢谢你）的缩写。ATU 是天线调谐器，TX 是发射，ATT 是衰减，形近但无关。",
+    "mnemonic": "TU 谢谢你，U 就是 you。"
   },
   {
     "id": "A-353",
@@ -11109,7 +11813,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "UR = your / you're（你的/你是）的缩写。TU 是谢谢，FB 是太棒了，US 是我们，均不对。",
+    "mnemonic": "UR 你的你是，U-R 连读 your。"
   },
   {
     "id": "A-354",
@@ -11140,7 +11846,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "WL = will（将要）的缩写。与物理、滑铁卢无关，缩语须按英文原词联想，不可望文生义。",
+    "mnemonic": "WL 等于 will，将要做某事。"
   },
   {
     "id": "A-355",
@@ -11171,7 +11879,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "XYL 是对'妻子'的戏称（ex-young lady 的谐音梗）。YL 才是女士，晶体是 XTAL，女士与妻子要分清。",
+    "mnemonic": "XYL 是妻子，ex 年轻女士。"
   },
   {
     "id": "A-356",
@@ -11202,7 +11912,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "YL = young lady（女士），竞赛常设 YL 组别。注意 YL 是年轻女士，XYL 才是妻子，两者不同。",
+    "mnemonic": "YL 年轻女士，竞赛有专组。"
   },
   {
     "id": "A-357",
@@ -11233,7 +11945,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "EL / ELE / ELS = element（单元、振子）的缩写，指天线振子。YAGI 是八木天线，ANT 是天线总称，UNIT 不是规范缩写。",
+    "mnemonic": "EL 振子单元，element 缩写。"
   },
   {
     "id": "A-358",
@@ -11264,7 +11978,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DP = dipole（偶极天线）的缩写，偶极子是最基本的天线形式。LW 是长线天线，GP 是垂直接地天线，YAGI 是八木天线。",
+    "mnemonic": "DP 偶极天线，D 是 dipole。"
   },
   {
     "id": "A-359",
@@ -11295,7 +12011,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GP = ground plane（垂直接地天线）的缩写。VER 是垂直天线的总称，GP 是其中加装地网的一种，注意区分。",
+    "mnemonic": "GP 接地平面天线，G 是 ground。"
   },
   {
     "id": "A-360",
@@ -11326,7 +12044,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VER = vertical（垂直天线）的缩写，是垂直类天线的总称。GP（垂直接地）是其下的一种具体形式。",
+    "mnemonic": "VER 垂直天线，vertical 缩写。"
   },
   {
     "id": "A-361",
@@ -11357,7 +12077,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "LW = long wire（长线天线）的缩写。DP 是偶极天线，GP 是垂直接地天线，定向天线是 BEAM/YAGI。",
+    "mnemonic": "LW 长线天线，L-W 长导线。"
   },
   {
     "id": "A-362",
@@ -11388,7 +12110,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "YAGI 即八木天线（Yagi-Uda），由引向器、有源振子、反射器组成的定向天线。BEAM 是定向天线的统称，八木是其中最常见的一种。",
+    "mnemonic": "YAGI 八木天线，引向反射加振子。"
   },
   {
     "id": "A-363",
@@ -11419,7 +12143,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "BEAM 是定向天线（波束天线）的统称，八木天线只是其中最常见的一种。BEAM 表类别，YAGI 表具体类型，不可等同。",
+    "mnemonic": "BEAM 定向波束，八木是其一。"
   },
   {
     "id": "A-364",
@@ -11450,7 +12176,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射类别三符号：首位 A 表调幅（含键控）、次位 1 表单信道数字信号、末位 A 表电报，CW 报即 A1A。J3E 是单边带话，F2B 是调频电传。",
+    "mnemonic": "A1A 电报：A 调幅、1 数字、A 电报。"
   },
   {
     "id": "A-365",
@@ -11481,7 +12209,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "J 表单边带（抑制载波）、3 表单信道模拟信号、E 表电话，单边带话即 J3E。A1A 是 CW 报，F2B 是调频电传。",
+    "mnemonic": "J3E 单边带话：J 单边、3 模拟、E 电话。"
   },
   {
     "id": "A-366",
@@ -11512,7 +12242,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "注意陷阱：SSB 传 SSTV 时载波确是单边带调制，但发射类别按'被发送信息类型'划分，图像属传真类（F），故为 F3F。J3E 是语音电话，F3E 是调频话。",
+    "mnemonic": "SSB 传图像，类别看信息——F3F。"
   },
   {
     "id": "A-367",
@@ -11543,7 +12275,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "F 表调频、3 表单信道模拟、E 表电话，调频话即 F3E。J3E 是单边带话，F2B 是调频电传。",
+    "mnemonic": "F3E 调频话：F 调频、E 电话。"
   },
   {
     "id": "A-368",
@@ -11574,7 +12308,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "调频传输 SSTV 图像：F 表调频、3 表模拟信道、F 表图像传真类信息，即 F3F。F3E 是调频话，F2B 是调频电传。",
+    "mnemonic": "FM 传 SSTV，F3F 图像类。"
   },
   {
     "id": "A-369",
@@ -11605,7 +12341,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "调频 ATV 传送电视图像，信息类型为图像（F），故发射类别为 F3F。F3E 是调频话，J3E 是单边带话。",
+    "mnemonic": "FM 传电视，信息是图像——F3F。"
   },
   {
     "id": "A-370",
@@ -11636,7 +12374,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "带外发射指调制过程产生、刚超出必要带宽的发射，但杂散发射除外。定义关键词是'必要带宽'，占用带宽、参考带宽、固定带宽都不是定义用语。",
+    "mnemonic": "带外发射超'必要'带宽，杂散除外。"
   },
   {
     "id": "A-371",
@@ -11667,7 +12407,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AM = 幅度调制（调幅）、FM = 频率调制（调频）、PM = 相位调制（调相），是三种最基本调制。脉宽调制、脉码调制、电码调制都不在三基本之列。",
+    "mnemonic": "AM 调幅、FM 调频、PM 调相。"
   },
   {
     "id": "A-372",
@@ -11698,7 +12440,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VHF/UHF 本地通联用 FM，因其抗干扰好、操作简单，中继台也采用 FM，这是业余实践中的标准选择。SSB 多用于弱信号远距离。",
+    "mnemonic": "V/U 本地通联，FM 最常用。"
   },
   {
     "id": "A-373",
@@ -11729,7 +12473,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "长距离和弱信号的 VHF/UHF 话音通联用 SSB，因其带宽窄、功率集中、信噪比高。FM 有门限效应，弱信号时反而不如 SSB。",
+    "mnemonic": "长距离弱信号，SSB 更给力。"
   },
   {
     "id": "A-374",
@@ -11760,7 +12506,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HF 话音通联用 SSB，因为频谱资源紧张，SSB 带宽只有 AM 的一半左右且不浪费功率在载波上。FM 带宽太宽不适合 HF。",
+    "mnemonic": "HF 话音用 SSB，省带宽省功率。"
   },
   {
     "id": "A-375",
@@ -11791,7 +12539,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB 只传一个边带且抑制载波，带宽约 2.7kHz，远窄于 FM 的十几 kHz。B 太绝对（同频仍会互扰），C、D 均非事实。",
+    "mnemonic": "SSB 省带宽，窄是最大优点。"
   },
   {
     "id": "A-376",
@@ -11822,7 +12572,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM 有捕获效应，强信号压制弱信号，故同一频率无法同时守听多个信号；SSB 无此效应可多信号并存。B 说反了（FM 抗脉冲干扰其实较强），D 描述的是 AM。",
+    "mnemonic": "FM 捕获效应强，一山不容二虎。"
   },
   {
     "id": "A-377",
@@ -11853,7 +12605,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VHF/UHF 的 SSB 通联统一用上边带（USB），这是国际惯例。只有 HF 才以 10MHz 为界分上下边带。",
+    "mnemonic": "V/U 的 SSB 统一用上边带。"
   },
   {
     "id": "A-378",
@@ -11884,7 +12638,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "14MHz 及以上 HF 频段语音用上边带（USB）。这是沿用至今的国际通联习惯：10MHz 以上用 USB，以下用 LSB。",
+    "mnemonic": "14MHz 以上用上，USB 记心上。"
   },
   {
     "id": "A-379",
@@ -11915,7 +12671,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "7MHz 及以下频段语音用下边带（LSB）。以 10MHz 为界：以下 LSB、以上 USB，这是国际惯例。",
+    "mnemonic": "7MHz 以下用下，LSB 在低频。"
   },
   {
     "id": "A-380",
@@ -11946,7 +12704,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "上下边带的分界纯属历史习惯，并无传播或技术上的必然原因，是早期设备设计沿用下来的国际惯例。B、C、D 都是编造的理由。",
+    "mnemonic": "边带分界是习惯，无技术必然。"
   },
   {
     "id": "A-381",
@@ -11977,7 +12737,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB 话音带宽约 2.7kHz，发起呼叫时与周边电台至少间隔 2-3kHz，避免边带重叠互扰。150-500Hz 远小于一个话音带宽，不够用。",
+    "mnemonic": "SSB 间隔 2-3kHz，一个带宽让一让。"
   },
   {
     "id": "A-382",
@@ -12008,7 +12770,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "单边带调制（SSB）本质是抑制载波的调幅，属于 AM 范畴。线性调频、直序扩频、相移键控都不属于调幅。",
+    "mnemonic": "SSB 是调幅的孩子，抑载波单边带。"
   },
   {
     "id": "A-383",
@@ -12039,7 +12803,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CW = continuous wave（等幅波），指等幅电报（莫尔斯电报）。它不是莫尔斯编码本身，也不是幅度键控/频移键控的规范名称。",
+    "mnemonic": "CW 等幅电报，continuous wave。"
   },
   {
     "id": "A-384",
@@ -12070,7 +12836,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "带宽排序：CW（几十至几百 Hz）< 单边带话（约 2.7kHz）< 调频话（十几 kHz）< ATV（几 MHz），故最窄的是 CW。",
+    "mnemonic": "带宽最窄是 CW，电报一线牵。"
   },
   {
     "id": "A-385",
@@ -12101,7 +12869,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM 话信道带宽（十几 kHz）远超莫尔斯电码的必要带宽（几百 Hz），违反《无线电频率划分规定》'把带宽保持在技术状态和业务性质所允许的最低值上'的要求。不是不能传，而是不合规。",
+    "mnemonic": "FM 传电码太浪费，带宽最低是法规。"
   },
   {
     "id": "A-386",
@@ -12132,7 +12902,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "话筒输入过载 10 倍会导致严重失真，产生大量谐波和互调产物，使发射带宽展宽、通信质量下降。不会延长距离，现代设备有限幅保护也不会直接烧末级。",
+    "mnemonic": "话筒喊太响，失真带宽涨。"
   },
   {
     "id": "A-387",
@@ -12165,7 +12937,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "YSF是八重洲的数字语音加数据融合系统，业余界广为采用，可经中继台转发，射频调制为C4FM四电平频移键控。故A、B、C正确。时分多址TDMA是DMR的特点，不是YSF。",
+    "mnemonic": "YSF用C4FM，时分多址是DMR"
   },
   {
     "id": "A-388",
@@ -12199,7 +12973,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "D-STAR是Icom推行的数字语音与数据方式，可经中继台扩大范围，也可经互联网和热点跨区互联，并支持GPS定位与位置报告。故四项特点都成立。",
+    "mnemonic": "D-STAR能联网，中继热点报位置"
   },
   {
     "id": "A-389",
@@ -12232,7 +13008,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FreeDV用数字声码器把语音压进很窄带宽，适合HF传播，开源特性便于爱好者研究数字语音原理并自制装备。故A、B、C正确。它面向HF SSB信道，不是FM手台的卖点，D错误。",
+    "mnemonic": "FreeDV窄带上HF，开源可研习"
   },
   {
     "id": "A-390",
@@ -12266,7 +13044,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DVB-S2是卫星数字电视标准，支持多种调制：QPSK、8PSK以及16APSK、32APSK，爱好者按链路余量选用。故四项都是DATV经卫星转发时可用的调制方式。",
+    "mnemonic": "DVB-S2调制多，四种都能用"
   },
   {
     "id": "A-391",
@@ -12297,7 +13077,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DSSTV的DRM基带含精细的OFDM结构和纠错信息，SSB能完整线性搬移、保留基带特性，利于衰落信道下纠错解码。FM的门限、限幅会破坏基带幅相结构，故不用FM传DSSTV，与画质伴音的说法无关。",
+    "mnemonic": "DSSTV走SSB，完整保留基带"
   },
   {
     "id": "A-392",
@@ -12328,7 +13110,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "收发信机即收发合一的设备，把接收机与发射机组合在一台机器内，共用部分电路和操作部件。将信号转发的是中继设备，解码纠错转发或数模转换转发都不是收发信机的定义。",
+    "mnemonic": "收发合一，就是收发信机"
   },
   {
     "id": "A-393",
@@ -12360,7 +13144,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "可工作的接收系统在信号通道上至少要有接收天线拾取电波，并有解调器从射频信号中取出所传送的信息，二者缺一不可。电位器只是调节元件，题目所问的最小功能构成按官方答案取天线与解调器两项。",
+    "mnemonic": "接收最少：天线加解调"
   },
   {
     "id": "A-394",
@@ -12393,7 +13179,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射系统至少要有射频振荡器产生载波、调制器把信息加载到载波上、发射天线把射频能量辐射出去，三者构成完整发射链。防雷器是防护附件，不是发射工作的必要部件。",
+    "mnemonic": "发射三件：振荡调制天线"
   },
   {
     "id": "A-395",
@@ -12424,7 +13212,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发信时电流可达十几安培，电源线电阻引起的压降与线长成正比、与线径成反比；线短而粗可减小压降，保证功放获得足够电压、输出不失真。它与射频电流分流、防摔或销售策略无关。",
+    "mnemonic": "电源线短粗，压降才小"
   },
   {
     "id": "A-396",
@@ -12455,7 +13245,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "单工是同一通路两方向交替传输，两台用PTT切换收发的对讲机同一时刻只能一方发、一方收，属典型单工。有线电话和手机可同时说听为双工，中继台与对讲机组合为半双工。",
+    "mnemonic": "PTT轮流说，就是单工"
   },
   {
     "id": "A-397",
@@ -12486,7 +13278,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "双工要求两方向同时传输；卫星通信中接收机在430MHz连续接收、发信机在144MHz同时发射，收发互不等待，属双工。QSK电台、中继台与PTT对讲机、两台PTT对讲机均有一端需交替收发，不算完整双工。",
+    "mnemonic": "异频同时收发，才是双工"
   },
   {
     "id": "A-398",
@@ -12517,7 +13311,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "半双工是一端单工、另一端双工：中继台可同时收发属双工一端，对讲机靠PTT交替收发属单工一端，组合即半双工。两台QSK电台、两台PTT对讲机和两部手机分别对应双工、单工和双工。",
+    "mnemonic": "中继配手台，半双工"
   },
   {
     "id": "A-399",
@@ -12548,7 +13344,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "PTT即Push To Talk，按键发射：按下时控制信号（一般为对地接通）使发射机由等待转为发射，松开回到接收。语音压缩、前置放大和自动天线调谐是PROC、PRE、AT等其他功能。",
+    "mnemonic": "PTT：按下去就发射"
   },
   {
     "id": "A-400",
@@ -12579,7 +13377,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SQL是Squelch静噪控制，用来调整静噪阈值：信号低于阈值时关闭音频输出，高于阈值时打开。语音压缩、前置放大、自动天线调谐分别对应PROC、PRE、AT，与SQL无关。",
+    "mnemonic": "SQL静噪，调阈值"
   },
   {
     "id": "A-401",
@@ -12610,7 +13410,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "静噪的作用是在无信号时自动关闭音频输出，避免扬声器持续播放接收机内部噪声和空中的刺耳嘶声。它并不滤除有用信号中的噪声、不处理发信环境噪声，也不是自动增益控制。",
+    "mnemonic": "静噪：无信号就闭嘴"
   },
   {
     "id": "A-402",
@@ -12641,7 +13443,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "静噪阈值会把低于门限的微弱信号一并挡掉，聆听极弱FM信号时应关闭静噪或把阈值设为0，让音频输出不受限制。调音量不能解除静噪关断，VOX是发信声控，与接收微弱信号无关。",
+    "mnemonic": "听弱信号，静噪关到零"
   },
   {
     "id": "A-403",
@@ -12672,7 +13476,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM静噪电路靠检测鉴频输出中的高频噪声判断信号有无，发射方停发后检测和关断需要短暂时间，噪声便泄漏出来形成短促拖尾。话筒按键跳动、有意结束标志和AGC时间常数都不是这一现象的成因。",
+    "mnemonic": "拖尾噪声：静噪关晚一步"
   },
   {
     "id": "A-404",
@@ -12703,7 +13509,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VOL是Volume音量控制，调节接收机音频输出的响度大小。它只改变听感，不涉及发信语音压缩、接收前置放大或天线自动调谐等射频功能。",
+    "mnemonic": "VOL：管音量大小"
   },
   {
     "id": "A-405",
@@ -12734,7 +13542,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VOX是声控发射，接入后电台检测话筒有无语音输入，自动完成收发转换，无需手按PTT。自动天调、发信ALC和语音压缩是AT、ALC、PROC的功能，与VOX不同。",
+    "mnemonic": "VOX：有声就自动发射"
   },
   {
     "id": "A-406",
@@ -12765,7 +13575,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VOX的价值在于免提：双手忙于记录、操作或其他工作时，说话即可自动发射，方便通联。它不依赖蓝牙耳机，也不对话音做降低带宽或提高辨识度的处理。",
+    "mnemonic": "VOX免提，双手得空"
   },
   {
     "id": "A-407",
@@ -12796,7 +13608,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CTCSS是连续亚音调静噪系统，从67至250.3Hz的38个亚音频率中选一个随话音发送，接收机收到约定亚音才打开静噪。双音多频是DTMF，设备识别码和普通自动静噪都不是CTCSS。",
+    "mnemonic": "CTCSS：亚音选通三十八"
   },
   {
     "id": "A-408",
@@ -12827,7 +13641,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DTMF是双音多频，由8个音调频率中取两个组合编码，共代表16种状态，常用于遥控和简单数字传输。亚音静噪是CTCSS，设备识别码与自动静噪也与DTMF定义不符。",
+    "mnemonic": "DTMF：双音组合十六态"
   },
   {
     "id": "A-409",
@@ -12859,7 +13675,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "亚音静噪对应菜单项CTCSS（模拟亚音），数字亚音静噪对应DCS，二者都是在话音上附加低频选通信号控制静噪。DTMF是双音多频遥控编码，SQL只是静噪阈值调节，均非亚音选通制式。",
+    "mnemonic": "亚音CTCSS，数字DCS"
   },
   {
     "id": "A-410",
@@ -12890,7 +13708,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "NFM为窄带调频，适配25kHz或12.5kHz信道间隔的通信信号；WFM为宽带调频，适配约180kHz带宽的调频广播。二者是带宽制式之分，与数字模拟、灵敏度高低或守候方式无关。",
+    "mnemonic": "NFM窄通信，WFM宽广播"
   },
   {
     "id": "A-411",
@@ -12921,7 +13741,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "全频偏与半频偏指调制频偏大小：25kHz带宽对应最大频偏5kHz，12.5kHz带宽对应2.5kHz，以便与信道间隔匹配、减少邻道干扰。它不是频率漂移、收发异频方式或话音压缩范围之分。",
+    "mnemonic": "全偏五千，半偏二千五"
   },
   {
     "id": "A-412",
@@ -12954,7 +13776,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM信号失真可辨度差常见三因：电源电压不足使功放工作异常、多径衰落造成相位畸变、发射频率不准使信号偏离接收通带中心，均可排查。天线功率承载不足主要涉及耐功率与安全，不是这种失真的典型原因。",
+    "mnemonic": "失真查三样：电源多径频率"
   },
   {
     "id": "A-413",
@@ -12985,7 +13809,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "把常用频率连同模式等参数存为一个频道，以后一键即可调出，是快速切换频率的标准做法。开关静噪不改变频率，扫描功能是搜索有信号的频率而非直达指定频率。",
+    "mnemonic": "常用频率，存成频道"
   },
   {
     "id": "A-414",
@@ -13016,7 +13842,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "车载电台负极应接到电池负极或发动机接地带上，保证低阻抗回流路径、减少压降和噪声窜入。随意接任意金属件、挂架或天线座接触电阻不可控，易引入干扰甚至工作异常。",
+    "mnemonic": "负极接电池或发动机地带"
   },
   {
     "id": "A-415",
@@ -13047,7 +13875,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "随转速变化的啸声频率与发电机交流分量相关，是车载电台常见的发电机纹波干扰，经电源线或辐射进入电台。火花塞产生的是脉冲噪声，油泵和ABS控制器不是这种转速相关啸声的典型来源。",
+    "mnemonic": "啸声随转速，源头发电机"
   },
   {
     "id": "A-416",
@@ -13078,7 +13908,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频偏过大说明调制过强，应切换到频偏较小的NFM档位；若已在NFM，则讲话离话筒远些以减小音频幅度。换电池、加大功率或更大声讲话都不能减小频偏，后者反而更严重。",
+    "mnemonic": "频偏大：换NFM，离话筒远"
   },
   {
     "id": "A-417",
@@ -13109,7 +13941,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "干扰邻频首先应自查本机：频率指示不准会使发射偏入邻道，杂散发射超标会直接污染相邻频率。换模式或通知厂商不能替代检查，增加功率只会让干扰更严重。",
+    "mnemonic": "扰邻频先查：频率和杂散"
   },
   {
     "id": "A-418",
@@ -13140,7 +13974,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "2米波段信号突强突弱多为多径效应：直射与反射波在不同位置相长或相消，移动少许位置即可走出衰落点。亚音静噪、对方静噪设置和电池类型都与传播衰落无关。",
+    "mnemonic": "信号忽弱，挪步避多径"
   },
   {
     "id": "A-419",
@@ -13171,7 +14007,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "耳机把声音直接送入耳道，隔绝环境噪声并提高听感信噪比，是嘈杂环境下抄收SSB或CW的简单有效办法。低通滤波器、显示器和吊杆话筒都不能隔离现场噪声对听抄的影响。",
+    "mnemonic": "环境吵，戴耳机抄收"
   },
   {
     "id": "A-420",
@@ -13202,7 +14040,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "NB是噪声抑制器，专门切除幅度高于平均信号的突发脉冲噪声；SQL是静噪，信噪比低于门限时关闭音频输出。二者作用对象和原理不同，不能混为同一种功能。",
+    "mnemonic": "NB切脉冲，SQL关静音"
   },
   {
     "id": "A-421",
@@ -13233,7 +14073,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "火花塞脉冲干扰幅度大、瞬间抬高电平，会使AGC过早起控压制有用信号；打开NB可在AGC检测前切除这些脉冲，恢复正常听抄。调静噪阈值、调偏频率或调RIT都不能消除脉冲对AGC的影响。",
+    "mnemonic": "脉冲压AGC，开NB切除"
   },
   {
     "id": "A-422",
@@ -13264,7 +14106,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "MODE键用于切换工作方式（调制模式），如FM、LSB、USB、CW等。静噪方式、接收机体制和监听声道方式各有专门设置，不是MODE的含义。",
+    "mnemonic": "MODE：切换工作方式"
   },
   {
     "id": "A-423",
@@ -13295,7 +14139,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ATT是接收输入衰减器，接收大信号时接入若干分贝衰减，防止前级电路过载产生失真和互调。自动天调、发信ALC和音频音量控制分别对应AT、ALC等其他符号。",
+    "mnemonic": "ATT：大信号先衰减"
   },
   {
     "id": "A-424",
@@ -13326,7 +14172,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AGC是接收自动增益控制，检测中频信号电平并反馈调节增益，使强弱信号输出大致恒定并防止电路过载。它作用于接收中频级，与音频音量、天线调谐和发信电平控制不同。",
+    "mnemonic": "AGC：自动稳住接收增益"
   },
   {
     "id": "A-425",
@@ -13357,7 +14205,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AGC只能调节其环路内增益，无法阻止特强带外信号在接收机最前端造成阻塞和非线性互调；把ATT接在前端电路之前降低信号幅度，才能让前级工作在线性区。拓展音量范围、防喇叭损坏或防本台发射损坏接收机都不是其目的。",
+    "mnemonic": "强信号堵前端，ATT挡在前"
   },
   {
     "id": "A-426",
@@ -13389,7 +14239,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接收过载指输入信号过强使机内电路饱和阻塞、产生失真，严重时可损坏前端器件；接入ATT衰减输入可消除或缓解过载。它不是电源供电过载，减小喇叭音量只降输出响度，对前端饱和无济于事。",
+    "mnemonic": "过载是信号太强，ATT来挡"
   },
   {
     "id": "A-427",
@@ -13420,7 +14272,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "微弱有用信号与强干扰并存时，AGC会被强干扰控制而压低增益，把弱信号一并压没，此时应关闭AGC手动控制增益。单纯接收弱信号或强信号时AGC反而有助于稳定输出，不应关闭。",
+    "mnemonic": "弱信号怕强扰：关AGC"
   },
   {
     "id": "A-428",
@@ -13451,7 +14305,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM、FSK、PSK等信号包络恒定，不需要AGC慢慢跟随包络变化，选短时间常数可使增益快速适应电平变化。SSB、AM包络本身起伏大需用长常数，测向比幅度和弱强并存场合也不适用短常数。",
+    "mnemonic": "恒包络信号，AGC用短"
   },
   {
     "id": "A-429",
@@ -13482,7 +14338,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB和AM的包络随话音不断起伏，AGC时间常数应较长，以免增益追随话音起伏造成呼吸效应和失真。恒包络信号宜短常数，测向和弱强并存场合则有其他专门考虑。",
+    "mnemonic": "SSB包络变，AGC用长"
   },
   {
     "id": "A-430",
@@ -13513,7 +14371,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "PRE是接收前置放大器，接收微弱信号时接入以提高灵敏度，代价是动态范围等某些指标可能低于额定值。自动天调、发信ALC、语音压缩分别是AT、ALC、PROC的功能。",
+    "mnemonic": "PRE前放：弱信号接入"
   },
   {
     "id": "A-431",
@@ -13544,7 +14404,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ALC是发信自动电平控制，检测射频输出电平并反馈控制驱动，使输出保持在适当限度内、防止过驱动。音频音量控制、天线调谐和频率控制是其他电路的功能。",
+    "mnemonic": "ALC：稳住发信电平"
   },
   {
     "id": "A-432",
@@ -13575,7 +14437,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB发信机中ALC通过反馈限制驱动电平，主要作用是防止过驱动造成调制失真、互调产物增多，严重时还会引发电路故障。频率稳定靠振荡电路，天线匹配靠调谐网络，话筒灵敏与背景噪声也不是ALC的职责。",
+    "mnemonic": "ALC防过驱动失真"
   },
   {
     "id": "A-433",
@@ -13606,7 +14470,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "话音间隙夹杂背景噪声，说明话筒增益过高或语音压缩过深，把环境噪声也放大并在停顿时凸显出来，应调低话筒增益、必要时减小压缩深度。降功率、调天线匹配或ALC深度都不针对噪声被拾取的源头。",
+    "mnemonic": "间隙有噪声：降话筒增益"
   },
   {
     "id": "A-434",
@@ -13637,7 +14503,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ALC只能限制射频驱动的上限，话筒增益过高会先在音频和调制级产生削波和互调，信号依旧失真。ALC不会因此提升功率、增大频漂或改变天线驻波比。",
+    "mnemonic": "话筒增益过高，ALC救不了失真"
   },
   {
     "id": "A-435",
@@ -13668,7 +14536,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "ALC会随AFSK音频电平起伏不断调整发信增益，使信号包络畸变、产生互调和谐波，从而抬升解码误码率，故发送AFSK时应关闭ALC并控制好音频电平。它不会使功率失控、反转极性或改变音色到无法使用的程度。",
+    "mnemonic": "发AFSK关ALC，防失真误码"
   },
   {
     "id": "A-436",
@@ -13699,7 +14569,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "语音压缩压低强语音幅度、提升弱语音幅度，缩小动态范围、提高平均功率，使较弱的话音在接收端也有较好的信噪比和可懂度。它不是扩大动态范围，也不是压缩频谱带宽或改变高低频均衡。",
+    "mnemonic": "压缩：强压弱提，均值高"
   },
   {
     "id": "A-437",
@@ -13730,7 +14602,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "PROC是发信语音压缩（处理器），检测音频输入电平并反馈控制，使幅度较小的语音获得提升、平均电平提高。前置放大、自动天调和发信ALC分别是PRE、AT、ALC的功能。",
+    "mnemonic": "PROC：发信语音压缩"
   },
   {
     "id": "A-438",
@@ -13761,7 +14635,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "话音压缩过深或调整不当时，音频削波和非线性会产生大量互调成分，展宽频谱并降低对方收信的辨识度。失真并非与对方无关，交流声和话筒损坏也不是压缩不当的典型后果。",
+    "mnemonic": "压缩过头，互调满天飞"
   },
   {
     "id": "A-439",
@@ -13792,7 +14668,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AFSK依靠音频的幅度与频率特征承载数据，语音压缩会扭曲信号包络、破坏基带特征，使解调误码率上升，故应关闭。压缩并不会抹去相位或幅度信息到本质无法解码，也不是峰均比导致功放过热的问题。",
+    "mnemonic": "AFSK怕包络畸变，关压缩"
   },
   {
     "id": "A-440",
@@ -13823,7 +14701,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以发射方式测功率和驻波比会真实辐射信号，必须先把频率设到无人使用的空闲频率并避开常用热点频率，以免干扰他人通联。天线指向、开语音压缩、话筒距离和按键时长都不是防干扰的关键要求。",
+    "mnemonic": "发射测试，先找空闲频率"
   },
   {
     "id": "A-441",
@@ -13854,7 +14734,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB无载波、靠吹哨或喊话产生的信号不平稳，测驻波不可靠；文明做法是用CW方式按键，或用AM、FM方式按PTT不说话，产生平稳连续载波测完再改回SSB。对着话筒吹气发长音既不稳定又污染频率。",
+    "mnemonic": "测驻波用CW或FM空载波"
   },
   {
     "id": "A-442",
@@ -13885,7 +14767,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AT或TUNE是自动天线调谐功能，检测天线电路的电压驻波比并自动补偿，使驻波比维持最小、保护功放。发信音量控制、发信ALC和自动频率控制是其他电路，与天线调谐无关。",
+    "mnemonic": "AT/TUNE：自动调天线"
   },
   {
     "id": "A-443",
@@ -13916,7 +14800,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "增益分配原则是优先保证信噪比：信号特弱时把射频/中频增益开到最大以压低噪声影响，信号特强时把音频增益开到最大、压低射频增益防过载，再调另一增益得到适当音量。固定把某级增益放中间都不符合这一优化原则。",
+    "mnemonic": "弱信号重射频，强信号重音频"
   },
   {
     "id": "A-444",
@@ -13947,7 +14833,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HF频段电波能被电离层反射回地面，实现远距离乃至全球传播，这是与主要靠直射传播的VHF、UHF最大的不同。HF传播受电离层变化影响衰落并不小，天线尺寸也更大，且带宽资源不适合宽带通信。",
+    "mnemonic": "HF靠电离层反射传远"
   },
   {
     "id": "A-445",
@@ -13978,7 +14866,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "音频电缆会像天线一样拾取射频形成共模电流，在电缆外套穿铁氧体磁环可增大共模阻抗、抑制这类感生电流。串联滤波器会改变音频通路特性，加话筒放大器更无抑制作用。",
+    "mnemonic": "音频线抗射频：套磁环"
   },
   {
     "id": "A-446",
@@ -14009,7 +14899,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射天线是将发射机输出的射频电流能量转换为向空间辐射的无线电波的换能器。天线增益是方向性集中的结果，并不能真正“放大”功率；C、D的音频、红外线转换更是概念错误。",
+    "mnemonic": "发射天线：射频变电波"
   },
   {
     "id": "A-447",
@@ -14040,7 +14932,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接收天线是将空间无线电波感应为接收机可处理的射频电信号的换能器。天线不放大信号（增益是相对值）；解调出音频是接收机电路的事，红外线则毫不相关。",
+    "mnemonic": "接收天线：电波变电信号"
   },
   {
     "id": "A-448",
@@ -14072,7 +14966,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "天线增益的定义是被测天线最大辐射方向的功率密度与基准天线对应值的比值（A），也就是相对参考天线在某方向上信号增强的程度（B）。C描述的是辐射效率，D在物理上没有意义。",
+    "mnemonic": "增益是方向性比值，不是效率"
   },
   {
     "id": "A-449",
@@ -14103,7 +14999,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "dBi中的i即isotropic（各向同性），基准是理想点源天线——一种假想的全向辐射体。dBd才以半波偶极子为基准；C、D的基准表述均不用于dBi定义。",
+    "mnemonic": "dBi的i=理想点源isotropic"
   },
   {
     "id": "A-450",
@@ -14134,7 +15032,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "理想点源天线是理论上的假想天线：尺寸为点、各向均匀辐射、转换全部射频能量；实际中用作衡量各种实际天线方向性增益的全向基准。B、C、D把它说成某种专用或专利实物天线，都是错误的。",
+    "mnemonic": "点源假想天线，专做全向基准"
   },
   {
     "id": "A-451",
@@ -14165,7 +15065,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "dBd中的d即dipole，基准是半波长偶极天线（其自身增益定义为0dBd）。与dBi相差2.15dB；B、C、D的基准都不对。",
+    "mnemonic": "dBd的d=dipole半波偶极"
   },
   {
     "id": "A-452",
@@ -14196,7 +15098,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "半波偶极天线相对理想点源天线有2.15dB的方向性增益，这是固定换算关系：dBi=dBd+2.15。6dB、3dB、1.64dB均无依据。",
+    "mnemonic": "0dBd就是2.15dBi，记住2.15"
   },
   {
     "id": "A-453",
@@ -14227,7 +15131,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "分贝是相对单位，不注明基准（dBi/dBd）就无法换算成绝对意义，这种“dB增益”没有参考价值。厂商若只写dB，通常是含糊其辞的营销数字。",
+    "mnemonic": "只写dB不写基准，等于没说"
   },
   {
     "id": "A-454",
@@ -14258,7 +15164,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "垂直接地天线（GP）在水平方位角上辐射均匀、无指向性，故称水平面全向天线；它在垂直面（仰角方向）是有方向图的，并非真正的各向同性球面波。",
+    "mnemonic": "全向指水平面一圈都一样"
   },
   {
     "id": "A-455",
@@ -14289,7 +15197,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1/4波长垂直振子配合镜像地平面，在接近零仰角的水平方向形成主瓣，且输入阻抗约50欧，可直接接同轴电缆。1/2波长时阻抗很高无法直连；1/8太短、3/2波瓣分裂都不合适。",
+    "mnemonic": "垂地四分之一波，同轴直连低仰角"
   },
   {
     "id": "A-456",
@@ -14321,7 +15231,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1/4波长GP的H面（水平面）方向图为正圆即全向（A）；E面（垂直面）有指向性，主瓣仰角略高于地平线（B）。C、D把E面/H面说反了：E面是垂直面、H面是水平面。",
+    "mnemonic": "H面看水平，E面看垂直"
   },
   {
     "id": "A-457",
@@ -14353,7 +15265,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "手台通常竖直持握，橡胶天线近似垂直振子，故垂直极化分量占优（A）；其电气长度不足、效率低于全尺寸天线（B）。螺旋加感只是缩短振子，并不产生圆极化；护套开裂一般不影响内部振子工作。",
+    "mnemonic": "胶鞭短小效率低，竖握垂直极化强"
   },
   {
     "id": "A-458",
@@ -14384,7 +15298,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "汽车是金属封闭体，对车内天线形成法拉第笼式屏蔽，大幅衰减进出信号，这是车内用手台配胶鞭通联困难的主因。B的反射抬SWR、C的散热、D的行车噪声都不是主要矛盾。",
+    "mnemonic": "车壳是屏蔽罩，车里信号差"
   },
   {
     "id": "A-459",
@@ -14415,7 +15331,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "天线架设遇供电线路时，首要风险是风雨中天线部件掉落触碰带电体造成触电/短路，因此必须保证掉落物不落入安全距离内（35千伏及以下至少1米）。B的电源噪声、C的打火间距算法、D的反射单元说法都不是规范要求。",
+    "mnemonic": "防天线掉落碰电线，35kV留1米"
   },
   {
     "id": "A-460",
@@ -14446,7 +15364,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GP天线的1/4波长振子依赖大地（或人工地网）提供镜像，镜像不良则谐振频率与阻抗偏离理论值；有效改善方法是扩大接地导体面积、做好射频接地。加长振子、串加感线圈、加巴伦都不能替代镜像地平面。",
+    "mnemonic": "GP缺镜像，铺大地网来补"
   },
   {
     "id": "A-461",
@@ -14477,7 +15397,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "天线加载专指在电短振子中串联电感线圈，用感抗抵消容抗、延长电气长度，使其谐振于工作频率。B、C、D的弹簧、延长器、张力器都是机械件，与电气加载无关。",
+    "mnemonic": "加载=串电感，电气长度加长"
   },
   {
     "id": "A-462",
@@ -14508,7 +15430,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": "/questions/images/51.jpg"
+    "imageUrl": "/questions/images/51.jpg",
+    "explanation": "加感线圈应放在电流大的位置才能以最小电感量达到谐振、减少线圈损耗；短振子上电流分布是底部大、顶部小，因此顶部加感（C）电流分布最均匀、效率最高，中部（B）次之，底部（A）最差。排序为C＞B＞A。",
+    "mnemonic": "加感位置越高，效率越高"
   },
   {
     "id": "A-463",
@@ -14539,7 +15463,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "先统一基准：1dBd=3.15dBi，乙天线相当于3.15dBi；甲6.15dBi比乙高3dB，功率比为10^(3/10)≈2倍。C、D是把dB差值直接当倍数用的错误。",
+    "mnemonic": "dB差3就是功率翻倍"
   },
   {
     "id": "A-464",
@@ -14570,7 +15496,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "0dBd即与半波偶极天线相当；2dBi换算成dBd是2−2.15=−0.15dBd，略低于甲天线。B的“效果为零”误解了0dB的含义（0dB表示与基准相等，不是零）。",
+    "mnemonic": "0dBd=偶极基准，2dBi还差一线"
   },
   {
     "id": "A-465",
@@ -14601,7 +15529,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "统一为dBi：甲4.5dBd=6.65dBi，乙5.85dBi；甲比乙高0.8dB。注意不是数值直接相减（4.5与5.85单位不同），先换算再比较。",
+    "mnemonic": "先换dBi再相减，甲强0.8"
   },
   {
     "id": "A-466",
@@ -14632,7 +15562,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "统一为dBi：甲2.9dBd=5.05dBi，乙5.85dBi；乙比甲高0.8dB。数值上乙只多2.95但单位不同，不能直接减，必须先换算。",
+    "mnemonic": "单位不同先换算，乙强0.8"
   },
   {
     "id": "A-467",
@@ -14665,7 +15597,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SWR描述负载阻抗与传输线特性阻抗的匹配程度（A）；完美匹配时无反射、SWR为1:1（B）；失配时部分能量反射回始端形成驻波（C）。D错误：驻波是负载失配造成的，调整始端信源阻抗不能消除馈线上的驻波。",
+    "mnemonic": "驻波比说匹配，调源头消不掉"
   },
   {
     "id": "A-468",
@@ -14696,7 +15630,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SWR表接在发射机输出端，4:1说明从该端口看出去的天线系统整体匹配不良。SWR只能给出失配程度，不能反推具体阻抗值（200欧或12.5欧都可能）；更与辐射效率、增益数值无直接换算关系。",
+    "mnemonic": "4:1=匹配差，别硬算阻抗值"
   },
   {
     "id": "A-469",
@@ -14728,7 +15664,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SWR即电压驻波比，3:1表示馈线各处最大与最小峰值电压之比为3:1（A），电流的驻波比同样为3:1（B）。驻波只会增加导体与介质损耗，不会降低损耗，C、D说法相反。",
+    "mnemonic": "驻波比就是电压驻波比"
   },
   {
     "id": "A-470",
@@ -14759,7 +15697,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SWR过高时功放管承受的电压/电流应力剧增，易烧毁末级功率半导体器件，发射机自动降功率是保护电路动作。防止烧保险、限制驻波都不是直接目的；D的“电波带驻波”概念错误。",
+    "mnemonic": "SWR高降功率，保住末级管"
   },
   {
     "id": "A-471",
@@ -14790,7 +15730,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "驻波意味着能量在馈线中来回反射，每次往返都叠加导体与介质损耗；SWR趋近1:1时一次传输的能量最多、损耗最低。B的屏蔽层外层辐射是共模电流问题，C、D的寿命说法均非主因。",
+    "mnemonic": "驻波小，馈线损耗少"
   },
   {
     "id": "A-472",
@@ -14821,7 +15763,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接触不良会使连接点阻抗随机变化，反射系数随之抖动，SWR显示忽高忽低。调制方式、过调制影响的是信号本身而非匹配；馈线温度变化缓慢，不会导致读数不稳定。",
+    "mnemonic": "驻波乱跳，先查接触不良"
   },
   {
     "id": "A-473",
@@ -14852,7 +15796,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB是抑制载波的话音信号，无话音时几乎无功率输出，SWR电桥得不到稳定激励故读数跳动；改用恒包络的CW载波测量才能得到稳定读数。这不是过调制也不是故障。",
+    "mnemonic": "SSB测驻波，改用CW载波"
   },
   {
     "id": "A-474",
@@ -14883,7 +15829,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "驻波是否明显取决于导线长度与波长的比值：50Hz市电波长约6000公里，导线长度可忽略不计，反射波与入射波几乎同相，驻波现象观察不到。馈线与电线遵循同一电磁理论，并无本质不同。",
+    "mnemonic": "市电波长六千公里，线太短看不见驻波"
   },
   {
     "id": "A-475",
@@ -14914,7 +15862,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余无线电设备（收发信机、天线、功放）的射频接口统一按50欧姆设计，馈线用50欧同轴才能全程匹配。75欧是电视/有线系统，93欧、300欧另有专用场合。",
+    "mnemonic": "业余电台馈线一律50欧"
   },
   {
     "id": "A-476",
@@ -14945,7 +15895,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "同轴电缆的外导体屏蔽使电磁场约束在内外导体之间，与周围物体互耦很低，布线随意且不受环境影响，这是业余架设首选它的主因。它的损耗和功率容量并非各类馈线中最好的，也不一定最便宜。",
+    "mnemonic": "同轴屏蔽好，布线不怕扰"
   },
   {
     "id": "A-477",
@@ -14977,7 +15929,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "选馈线关键看两项：特性阻抗（必须与系统50欧匹配）和工作频率下的单位长度损耗（决定有效功率）。芯线截面积/电流、介质耐压温升是次要的工程参数，不是选型首要依据。",
+    "mnemonic": "买馈线看阻抗和损耗"
   },
   {
     "id": "A-478",
@@ -15009,7 +15963,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "馈线损耗是双向的：发射时吃掉一部分输出功率（A），接收时在放大前先衰减信号、直接恶化信噪比（B）。损耗不会改善SWR读数，更不会引起信号失真。",
+    "mnemonic": "馈线损耗：发吃功率，收吃信噪比"
   },
   {
     "id": "A-479",
@@ -15041,7 +15997,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "湿气渗入使介质损耗角增大、损耗上升（A），并导致屏蔽层/芯线氧化锈蚀乃至断路（B）。速度因子恒小于1不会反超；SWR只会变差不会小于1，C、D违背物理常识。",
+    "mnemonic": "电缆受潮=损耗大+锈断路"
   },
   {
     "id": "A-480",
@@ -15072,7 +16030,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "紫外线老化使护套龟裂，雨水湿气随之渗入，造成电缆受潮失效；这才是要求护套耐紫外线的真正原因。B、C的互调混频、D的升温损耗都不是紫外线的作用机理。",
+    "mnemonic": "护套怕晒，晒裂就进水"
   },
   {
     "id": "A-481",
@@ -15103,7 +16063,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "空气介质同轴的内外导体靠绝缘子支撑，空气腔一旦进水损耗剧增，故必须采取充气、密封等防潮措施。它的损耗其实更低、可用频率更高，并无B、C、D的限制。",
+    "mnemonic": "空气介质线，防潮是命门"
   },
   {
     "id": "A-482",
@@ -15134,7 +16096,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频率升高时趋肤效应加剧、介质损耗角损耗增大，同轴电缆的传输损耗随之增加。特性阻抗由结构决定基本不变；反射功率和输入SWR取决于匹配，与频率无必然关系。",
+    "mnemonic": "频率越高，电缆吃得越多"
   },
   {
     "id": "A-483",
@@ -15165,7 +16129,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "空气介质的损耗角远小于实心聚乙烯等有机介质，同等外径下空气介质同轴硬电缆在VHF/UHF损耗最低。双绞线根本不用于射频馈线；软电缆的实心介质损耗更大。",
+    "mnemonic": "VHF/UHF低损耗，首选空气硬电缆"
   },
   {
     "id": "A-484",
@@ -15196,7 +16162,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "M型（UHF/SO-239）连接器在400MHz以上阻抗不连续、损耗剧增；N型连接器为恒阻抗精密结构，适用于400MHz及以上。RS-213是电缆型号，DB-23是多针数据接头，均不对。",
+    "mnemonic": "400M以上换N头，M头到顶了"
   },
   {
     "id": "A-485",
@@ -15227,7 +16195,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "M型（俗称UHF接头，公头PL-259/母座SO-239）结构简单便宜，广泛用于HF和VHF业余电台。它用螺纹锁紧但不防水；卡式快插的是BNC；微波用的是N/SMA等精密接头。",
+    "mnemonic": "M头便宜量大，HF/VHF标配"
   },
   {
     "id": "A-486",
@@ -15259,7 +16229,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "垂直天线辐射垂直极化波，电场矢量垂直于地面（A）；其H面（水平面）方向图为正圆、全向（B）。C说反了（磁场平行地面）；D说反了（E面是垂直面，有方向性）。",
+    "mnemonic": "垂直天线电场竖，H面全向"
   },
   {
     "id": "A-487",
@@ -15291,7 +16263,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "水平偶极子辐射水平极化波，电场平行于地面（A）；其E面即振子所在的水平面，方向图呈8字形（B）。C、D把极化和E/H面都说反了。",
+    "mnemonic": "水平偶极电场横，E面8字"
   },
   {
     "id": "A-488",
@@ -15322,7 +16296,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来双方都是水平极化、匹配良好；一方改垂直后极化正交，理论上产生约20dB以上的极化隔离损耗，通信效果明显变差。",
+    "mnemonic": "极化一正交，信号掉一大截"
   },
   {
     "id": "A-489",
@@ -15353,7 +16329,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来一方水平、一方垂直，极化失配损耗很大；双方都改垂直后极化一致，极化损耗消失，通信效果变好。",
+    "mnemonic": "极化对齐了，效果就上来了"
   },
   {
     "id": "A-490",
@@ -15384,7 +16362,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来一水平一垂直、极化失配；双方都改水平后极化一致，损耗消除，通信效果变好。与上一题同理，只是统一到了水平极化。",
+    "mnemonic": "不管横竖，一致就好"
   },
   {
     "id": "A-491",
@@ -15415,7 +16395,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来左旋对右旋、旋向相反几乎收不到；双方都改左旋后旋向一致，极化完全匹配，通信效果变好。",
+    "mnemonic": "旋向从反变同，效果变好"
   },
   {
     "id": "A-492",
@@ -15446,7 +16428,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来左旋对右旋失配；双方都改右旋后旋向一致，极化匹配，通信效果变好。",
+    "mnemonic": "旋向统一，满血接收"
   },
   {
     "id": "A-493",
@@ -15477,7 +16461,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "圆极化天线接收线极化波恒有3dB极化损耗，与线极化是水平还是垂直无关；乙台由水平改垂直，损耗仍是3dB，故通信效果不变。",
+    "mnemonic": "圆对线极化，横竖都是3dB"
   },
   {
     "id": "A-494",
@@ -15508,7 +16494,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "圆极化对线极化的3dB损耗与圆极化的左/右旋向无关；甲台改旋向后仍是圆对线，损耗不变，通信效果不变。",
+    "mnemonic": "旋向变了，圆对线照旧3dB"
   },
   {
     "id": "A-495",
@@ -15539,7 +16527,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来左旋圆极化对水平线极化，损耗约3dB；乙台改右旋圆极化后变成左旋对右旋、旋向相反，损耗剧增，通信效果变差。",
+    "mnemonic": "旋向一反，信号全丢"
   },
   {
     "id": "A-496",
@@ -15570,7 +16560,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来左旋圆极化对水平线极化有3dB损耗；乙台改左旋圆极化后旋向一致、极化完全匹配，损耗消失，通信效果变好。",
+    "mnemonic": "旋向相同，损耗清零"
   },
   {
     "id": "A-497",
@@ -15601,7 +16593,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原来左旋对右旋、旋向相反，几乎无法通信；双方都改半波水平偶极后极化一致，损耗消除，通信效果变好。",
+    "mnemonic": "从旋向相反到极化一致，变好"
   },
   {
     "id": "A-498",
@@ -15632,7 +16626,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "偶极天线辐射最强的方向是垂直于振子的平面；要让两台站互在对方最强辐射方向上，两副天线都应位于垂直于连线的平面内且极化一致。极化正交或沿连线极化都会带来巨大损耗。",
+    "mnemonic": "天线垂直连线平面，极化同向最强"
   },
   {
     "id": "A-499",
@@ -15663,7 +16659,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "极化旋向按“沿传播方向观察”定义。卫星信号向地面传播（向下），地面观察者是迎着波前看，看到的顺时针相当于顺传播方向看的逆时针，故为左旋。直接按看到的顺时针判右旋会搞反。",
+    "mnemonic": "迎波看顺时针，实为左旋"
   },
   {
     "id": "A-500",
@@ -15694,7 +16692,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "圆极化通信要求收发旋向一致才能完全匹配；发射是左旋圆极化，接收也应使用指向发射点的左旋圆极化天线。右旋会正交失配，线极化则固定损失3dB。",
+    "mnemonic": "圆极化收发，旋向必须相同"
   },
   {
     "id": "A-501",
@@ -15725,7 +16725,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "卫星天线始终指向南极（地心方向），过顶前后地面台相对于卫星的观察方向反转了180°，同一物理旋向在过顶前后看起来相反；为保持匹配，过顶前用右旋、过顶后改左旋。",
+    "mnemonic": "卫星过顶，旋向翻面"
   },
   {
     "id": "A-502",
@@ -15756,7 +16758,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "卫星旋转使线极化方向不断变化，线极化接收会周期性正交中断；圆极化天线对任意线极化方向恒有3dB稳定耦合，是卫星通信的常用对策。垂直/水平极化都会遭遇同样问题。",
+    "mnemonic": "极化乱转，用圆极化来收"
   },
   {
     "id": "A-503",
@@ -15787,7 +16791,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "半波垂直偶极增益2.15dBi，八木8.15dBi，相差6dB；S表每档6dB，故S4升1档变为S5。注意先减去原天线的2.15dBi再换算档位。",
+    "mnemonic": "6dB升一档，S4变S5"
   },
   {
     "id": "A-504",
@@ -15818,7 +16824,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "原天线增益2.15dBi，12dBd=14.15dBi，相差12dB；每6dB一档，S4升2档变为S6。dBd须先换算成dBi再与原天线比较。",
+    "mnemonic": "12dB升两档，S4变S6"
   },
   {
     "id": "A-505",
@@ -15849,7 +16857,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "每方换8.15dBi八木相对2.15dBi偶极各增6dB，收发双方增益都计入链路，总改善12dB；每档6dB，S4升2档变为S6。只算单边会误得S5。",
+    "mnemonic": "双边各6dB，共升两档到S6"
   },
   {
     "id": "A-506",
@@ -15880,7 +16890,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "直射波与地面反射波等多径分量到达接收点时相位不同，相互干涉相长或相消；移动设备改变了各路径的相对相位，信号强度便周期性起伏。多普勒、接地电阻、天线失谐都不是主因。",
+    "mnemonic": "信号忽强忽弱，多径干涉作怪"
   },
   {
     "id": "A-507",
@@ -15911,7 +16923,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "多径干涉的相长/相消取决于各路径的相位差，移动几步或改变几十千赫都会显著改变相位关系，使接收点从相消谷点移出。这是多径衰落的典型特征，与路径损耗、大气扰动、地磁无关。",
+    "mnemonic": "挪几步就好转，典型多径衰落"
   },
   {
     "id": "A-508",
@@ -15942,7 +16956,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "多径造成码间干扰和信号深衰落，直接推高数据通信的误码率。FM有一定的抗幅度衰落能力但并非无影响；多径不改变数据速率，更不会线性增减速率。",
+    "mnemonic": "多径推高误码率"
   },
   {
     "id": "A-509",
@@ -15974,7 +16990,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "不同路径信号到达时间不同，延迟的信号形成重影（A）；若天线VSWR过高，信号在馈线中多次往返反射，同样产生延迟重影（B）。极化错误只会衰减信号，重放干扰是另一回事。",
+    "mnemonic": "图像重影，查多径和馈线反射"
   },
   {
     "id": "A-510",
@@ -16005,7 +17023,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "超短波视距传播的极限距离由地球曲率决定，取决于收发天线相对地面的高度（越高视距越远）。绝对海拔、高度波长比、天线增益都不直接决定几何视距。",
+    "mnemonic": "视距多远，看天线离地多高"
   },
   {
     "id": "A-511",
@@ -16036,7 +17056,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "数百千米的VHF/UHF超视距联络最常见的原因是大气波导把电波约束在逆温层中远距离传播。飞机反射、降雨、植被都不是这种稳定超视距传播的主因。",
+    "mnemonic": "数百公里超视距，想大气波导"
   },
   {
     "id": "A-512",
@@ -16067,7 +17089,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "6米/2米波段上千千米的突发超视距传播是突发E层（Es）反射的典型表现，Es层电子密度高、可反射VHF。流星余迹距离较短且短暂；D层只吸收；灰线是HF现象。",
+    "mnemonic": "千公里VHF突发，突发E层反射"
   },
   {
     "id": "A-513",
@@ -16098,7 +17122,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "高空大气逆温使折射率随高度异常变化，形成能捕获电波的波导层。太阳活动、飓风、雷暴等离子体都不是对流层波导的成因。",
+    "mnemonic": "高空逆温造就大气波导"
   },
   {
     "id": "A-514",
@@ -16129,7 +17155,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "收到上千千米外的VHF信号，最可能的是突发E层反射，这是VHF DX最常见的传播模式。微波接力QSP、雷雨反射、宇宙射线都不是常规解释。",
+    "mnemonic": "VHF千公里DX，首选突发E层"
   },
   {
     "id": "A-515",
@@ -16160,7 +17188,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "约500千米量级的VHF/UHF超视距传播与对流层散射密切相关，散射体将部分能量送到视距之外。D层/F2层反射主要影响HF，法拉第旋转影响极化而非距离。",
+    "mnemonic": "五百公里超视距，对流层散射"
   },
   {
     "id": "A-516",
@@ -16191,7 +17221,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "未取得执照的自制发射设备调测时绝不能辐射到空中，应接假负载把射频功率耗散为热量以便测量。接任何天线都会实际发射，未验执照前不允许。",
+    "mnemonic": "调测未领照，天线口接假负载"
   },
   {
     "id": "A-517",
@@ -16222,7 +17254,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "调制器用原始信号去控制载波的幅度、频率或相位，分别形成调幅、调频、调相。它不负责放大器工作点、天馈匹配或频谱带宽的自动控制。",
+    "mnemonic": "调制控载波，幅频相三参"
   },
   {
     "id": "A-518",
@@ -16256,7 +17290,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接收机优良接收能力需抗干扰强、增益足够、本机噪声低、信号失真小，四者缺一不可：增益不足听不见，噪声大淹没弱信号，失真大难辨认，抗扰差易被阻塞。故全选。",
+    "mnemonic": "抗扰增益低噪低失真，四全才优"
   },
   {
     "id": "A-519",
@@ -16287,7 +17323,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "解调器即检波器，任务是从已调射频或中频信号中还原原始调制信号。宽带放大、选频放大是放大器和滤波器的事，提取载波只是某些同步解调的辅助环节。",
+    "mnemonic": "解调还原原信号，已调变回基带"
   },
   {
     "id": "A-520",
@@ -16318,7 +17356,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "选解调器首要看能否忠实还原原始信号，即失真小、与调制方式匹配。放大能力、提升载频或补偿频偏不是解调器的主要考量。",
+    "mnemonic": "解调器选型，先看还原忠实"
   },
   {
     "id": "A-521",
@@ -16349,7 +17389,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "CTCSS亚音频单音在67.0至250.3Hz范围，低于话音通带而不被听见，用于控制静噪开启。它不是完整音频16Hz至20kHz，也不是超声或把数值错位成220至2503Hz。",
+    "mnemonic": "亚音频六七起，二五零点三止"
   },
   {
     "id": "A-522",
@@ -16380,7 +17422,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "通带矩形系数即形状系数，用不同衰减处带宽之比描述滤波器边沿陡峭程度，越接近1越矩形、选择性越好。与矩形波波形、谐波损失或晶体切割无关。",
+    "mnemonic": "矩形系数看边沿，越小越陡峭"
   },
   {
     "id": "A-523",
@@ -16411,7 +17455,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "矩形系数越小滤波器边沿越陡，邻近频道抑制越强。A为3.8小于B的5，故A邻道抑制更强；这不直接说明镜像抑制或±10kHz外抑制。",
+    "mnemonic": "3.8小于5，A机邻道更强"
   },
   {
     "id": "A-524",
@@ -16442,7 +17488,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "前置放大器放在接收前端以低噪声放大弱信号，降低后级电路噪声对整机噪声系数的影响，提高灵敏度。它不提高最终音频功率，也不是改善保真度或动态范围，前放过强反而可能压缩动态。",
+    "mnemonic": "前放压低本噪，灵敏度提高"
   },
   {
     "id": "A-525",
@@ -16473,7 +17521,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FM经限幅后幅度信息被切除，鉴频输出只取决于频偏大小，与信号幅度无关，故不能凭音量判断信号强弱。AGC压音量、强信号频偏更大等说法都不符合FM原理，FM频偏由调制决定。",
+    "mnemonic": "调频限幅去幅度，音量不报强弱"
   },
   {
     "id": "A-526",
@@ -16504,7 +17554,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "窄带接收机的中频带宽和鉴频线性范围容不下宽带调频的大频偏，信号幅度大或音调高时频偏更大，便冲出线性区产生明显非线性失真。宽带信号并非完全收不到，失真也不同于单纯音量小或高音衰减。",
+    "mnemonic": "宽进窄出必失真"
   },
   {
     "id": "A-527",
@@ -16535,7 +17587,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "窄带调频的频偏远小于宽带鉴频器的线性范围，所以能正常解调，只是鉴频输出正比于频偏，频偏小则声音小。它不会像大信号冲出窄带通道那样产生明显失真。",
+    "mnemonic": "窄进宽出声变小"
   },
   {
     "id": "A-528",
@@ -16566,7 +17620,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "调频机先限幅再鉴频，限幅消除了随机幅度变化，随机相位变化却被鉴频器变成音频噪声，无信号时便成强烈沙沙声。它源于天线QRN与机内噪声，而非幅度变化经放大形成。",
+    "mnemonic": "限幅去幅度，相位成沙沙"
   },
   {
     "id": "A-529",
@@ -16597,7 +17653,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "鉴频器把频率变化转换为幅度变化，正是调频信号的解调器件。限幅器只削平幅度，乘积检波器多用于SSB/AM，混频器只做频率变换。",
+    "mnemonic": "调频解调找鉴频"
   },
   {
     "id": "A-530",
@@ -16628,7 +17686,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "鉴频专指对调频信号进行解调、还原调制信号的过程。判断频率是否越界或漂移属于频率监测，对调幅信号解调则称为检波。",
+    "mnemonic": "鉴频解调FM"
   },
   {
     "id": "A-531",
@@ -16659,7 +17719,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "检波器能提取调幅波的包络，从而解调AM信号。限幅器会削掉承载信息的幅度变化，鉴频器针对FM，反相器只改变相位。",
+    "mnemonic": "AM解调靠检波"
   },
   {
     "id": "A-532",
@@ -16690,7 +17752,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "检波专指对调幅信号进行解调、从包络中还原调制信号的过程。检查幅度或频率是否越限不是解调，对调频信号解调则称为鉴频。",
+    "mnemonic": "检波解调AM"
   },
   {
     "id": "A-533",
@@ -16722,7 +17786,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AGC检测中频信号电平并反馈控制增益，使强信号不致使后级过载。FSK、PSK弱信号解码时关闭AGC可避免增益随噪声起伏，有时能改善解码；AGC不是检测音频、保护扬声器的音量控制。",
+    "mnemonic": "AGC控中频防过载"
   },
   {
     "id": "A-534",
@@ -16753,7 +17819,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "DC式收信机中的DC是Direct-Conversion，即直接变换：射频信号直接变到基带解调，解调前不经中频频率变换。它与直流供电、介质电容或数字变频无关。",
+    "mnemonic": "DC是直接变换"
   },
   {
     "id": "A-535",
@@ -16784,7 +17852,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "混频器把输入信号与本振相乘并取差频或和频，将信号由原始频率搬移到另一频率。收发信机靠它实现变频，它不做音频混合、变频调速或单纯放大。",
+    "mnemonic": "混频就是搬频率"
   },
   {
     "id": "A-536",
@@ -16815,7 +17885,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "上、下变频以中频与输入频率的相对高低划分：中频高于输入为上变频，中频低于输入为下变频。判据不是本振与输入谁高谁低，本振位置取决于具体混频方案。",
+    "mnemonic": "中频更高是上变频"
   },
   {
     "id": "A-537",
@@ -16846,7 +17918,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "中频滤波器带宽决定整机选择性，收窄带宽可滤除紧邻工作频率的信号，故抑制的是邻近频率干扰。镜像干扰靠前端预选滤波，脉冲干扰靠消噪电路处理。",
+    "mnemonic": "中频滤波挡邻频"
   },
   {
     "id": "A-538",
@@ -16877,7 +17951,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜像信号在混频后与有用信号落到同一中频，中频滤波器已无法区分，必须在变频级之前用波段预选滤波器先行抑制。限幅和音频电路都在其后，同样无能为力。",
+    "mnemonic": "镜频须在混频前挡"
   },
   {
     "id": "A-539",
@@ -16908,7 +17984,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜频与有用频率相距两倍中频：145±2×45.05=145±90.10，得235.10MHz或54.90MHz。选项中只加减一个中频的是本振可能频率，不是镜频。",
+    "mnemonic": "镜频等于原频加减两倍中频"
   },
   {
     "id": "A-540",
@@ -16939,7 +18017,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜频相距两倍中频：145±2×47.25=145±94.50，得239.50MHz或50.50MHz。只相差一个中频的频率是本振频率，不会经混频落入同一中频。",
+    "mnemonic": "镜频等于原频加减两倍中频"
   },
   {
     "id": "A-541",
@@ -16970,7 +18050,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜频相距两倍中频：435±2×47.25=435±94.50，得340.50MHz或529.50MHz。47.25与94.50分别是中频及其两倍本身，不是镜频位置。",
+    "mnemonic": "镜频等于原频加减两倍中频"
   },
   {
     "id": "A-542",
@@ -17001,7 +18083,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜频相距两倍中频：435±2×58.525=435±117.05，得317.95MHz或552.05MHz。只相差一个中频的是本振可能频率，不是镜像频率。",
+    "mnemonic": "镜频等于原频加减两倍中频"
   },
   {
     "id": "A-543",
@@ -17032,7 +18116,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "发射机效率定义为输出到天线系统的信号功率除以发射机消耗的电源功率。它不涉及对方天线实际收到的功率，也不只是天线端有用功率占总功率之比。",
+    "mnemonic": "效率等于输出除以耗电"
   },
   {
     "id": "A-544",
@@ -17063,7 +18149,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "效率低于1所损耗的功率主要在功放、电源等器件中转化为热量散发，只有极小部分变成杂散等无用信号。损耗不会大部分辐射出去，也不会返回电源或凭空消失。",
+    "mnemonic": "损耗大半变成热"
   },
   {
     "id": "A-545",
@@ -17094,7 +18182,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "输入功率为N/80%=1.25N瓦，电流I=1.25N/13.8≈0.091N安，故选约0.091×N。未除效率的算法或把电压与功率直接相乘都不符合P=UI。",
+    "mnemonic": "先除效率再除电压"
   },
   {
     "id": "A-546",
@@ -17125,7 +18215,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "输入功率为N/80%=1.25N瓦，电流I=1.25N/220≈0.0057N安。220伏电压高，同功率下电流远小于13.8伏供电的情况。",
+    "mnemonic": "先除效率再除电压"
   },
   {
     "id": "A-547",
@@ -17156,7 +18248,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "10秒耗能为(N/0.8)×10焦耳=12.5N焦耳，换算为12.5N/3.6×10^6≈0.0000035N千瓦小时。关键是把焦耳除以3.6×10^6换算成度。",
+    "mnemonic": "焦耳换度除三百六十万"
   },
   {
     "id": "A-548",
@@ -17187,7 +18281,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "载波功率定义为无调制时，一个射频周期内供给天线馈线的平均功率。平均功率、峰包功率都有各自针对调制状态的定义，无用功率不是此术语。",
+    "mnemonic": "无调制平均即载波功率"
   },
   {
     "id": "A-549",
@@ -17218,7 +18314,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无语音时FM仍以满载波发射，功率最大；AM只剩载波，为峰值功率的一部分；SSB无输入则无输出，功率最小。故排序为FM、AM、SSB。",
+    "mnemonic": "无声时FM满、SSB空"
   },
   {
     "id": "A-550",
@@ -17249,7 +18347,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "抗拒邻近频率干扰靠的是接收机的中频选择性，即中频滤波器对带外邻频信号的衰减。灵敏度描述收弱信号能力，扫描速率与本底噪声都与邻频抑制无关。",
+    "mnemonic": "邻频干扰看中频选择性"
   },
   {
     "id": "A-551",
@@ -17280,7 +18380,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "邻近频率干扰落在信道附近，其抑制能力由信道带宽、信道选择性和滤波器矩形系数共同表征。带内波动描述带内平坦度，镜像抑制和前端带宽针对的是远端特定干扰。",
+    "mnemonic": "邻频看带宽选择矩形"
   },
   {
     "id": "A-552",
@@ -17311,7 +18413,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "SSB话音在通带内的还原是否均匀，取决于带内波动大小和信道带宽是否合适。信道选择性与矩形系数描述带外抑制，镜像抑制、前端带宽与带内平坦无关。",
+    "mnemonic": "带内平坦看波动带宽"
   },
   {
     "id": "A-553",
@@ -17342,7 +18446,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "距工作频率较远的强信号能否进入前端，取决于前端带宽：前端越宽，远端强干扰越容易进来造成阻塞。带内指标和镜像抑制只针对信道内或特定镜频位置。",
+    "mnemonic": "远端强扰看前端带宽"
   },
   {
     "id": "A-554",
@@ -17373,7 +18479,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "镜像干扰恰好距工作频率两倍中频，抗拒它的能力专门用镜像抑制比表示。前端带宽、带内波动等指标都不针对这一特定频率关系。",
+    "mnemonic": "两倍中频看镜像抑制"
   },
   {
     "id": "A-555",
@@ -17404,7 +18512,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "灵敏度是接收机能分辨的最小信号，数值越小说明越微弱的信号也能收，接收弱信号能力越强。它描述的是对有用弱信号的能力，不是对比干扰的响应。",
+    "mnemonic": "灵敏度越小越灵敏"
   },
   {
     "id": "A-556",
@@ -17435,7 +18545,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以功率表示时，灵敏度是输出达到规定质量时所需的最小输入功率电平，常用dBm或dBμW。它不是输入输出之比，那类无量纲比值才用dB表示增益。",
+    "mnemonic": "功率灵敏度单位dBm"
   },
   {
     "id": "A-557",
@@ -17466,7 +18578,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以电压表示时，灵敏度指输出达到规定质量时输入信号的最小电动势，注意是电动势而非端口电压，单位为μV、dBμV或dBmV。选项把电动势说成端口电压或最大值均不准确。",
+    "mnemonic": "电压灵敏度指电动势"
   },
   {
     "id": "A-558",
@@ -17497,7 +18611,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "HF段大气与人为噪声形成的背景噪声远高于VHF/UHF，S表刻度须与实际可感知电平匹配，故HF的S1比V/U段高约20dB。这不是接收机灵敏度差或电台功率大小造成的。",
+    "mnemonic": "HF噪声高刻度抬高20dB"
   },
   {
     "id": "A-559",
@@ -17528,7 +18644,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "灵敏度数值必须在同一输出质量标准（如相同信纳比）下才可比较，题中未给甲乙两机的测量标准，故无法推论优劣。仅凭0.1与0.15的数字大小下结论是不严谨的。",
+    "mnemonic": "标准不明不可比灵敏度"
   },
   {
     "id": "A-560",
@@ -17559,7 +18677,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "灵敏度以电动势表示时，匹配状态下端口电压是电动势的一半，故端口测得1μV对应电动势2μV。直接取1μV混淆了端口电压与源电动势。",
+    "mnemonic": "电动势是端电压两倍"
   },
   {
     "id": "A-561",
@@ -17590,7 +18710,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "端口功率P=(1μV)²/50Ω=2×10^-14瓦，换算为10lg(2×10^-11mW)≈-107dBm。用电动势计算须按E²/(4R)，结果相同。",
+    "mnemonic": "1微伏端压等于负107"
   },
   {
     "id": "A-562",
@@ -17621,7 +18743,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "灵敏度电动势为2μV，以1μV为0dB基准，20lg2≈6dBμV。误用端口电压1μV会得到0dBμV，漏掉了电动势翻倍的6dB。",
+    "mnemonic": "2微伏就是6dB微伏"
   },
   {
     "id": "A-563",
@@ -17652,7 +18776,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "匹配状态下电动势是端口电压的两倍，端口0.5μV对应电动势1μV，故以μV表示的灵敏度为1μV。直接取0.5μV是把端口电压当成了电动势。",
+    "mnemonic": "电动势是端电压两倍"
   },
   {
     "id": "A-564",
@@ -17683,7 +18809,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "端口功率P=(0.5μV)²/50Ω=5×10^-15瓦，换算得10lg(5×10^-12mW)≈-113dBm。电压减半功率降6dB，正对应由-107dBm降到-113dBm。",
+    "mnemonic": "半微伏端压负113"
   },
   {
     "id": "A-565",
@@ -17714,7 +18842,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "灵敏度电动势为1μV，而dBμV以1μV为基准，20lg(1/1)=0dBμV。若误用端口0.5μV则会得到约-6dBμV，并非本题结果。",
+    "mnemonic": "1微伏电动势0dB微伏"
   },
   {
     "id": "A-566",
@@ -17745,7 +18875,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电动势2μV的可用功率为E²/(4×50Ω)=2×10^-14瓦，即-107dBm。这里2μV已是电动势，不能再按端口电压直接平方除以50Ω。",
+    "mnemonic": "2微伏电动势负107"
   },
   {
     "id": "A-567",
@@ -17776,7 +18908,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电动势1μV的可用功率为E²/(4×50Ω)=5×10^-15瓦，即-113dBm。与端口0.5μV的情形等效，因为匹配时电动势恒为端电压两倍。",
+    "mnemonic": "1微伏电动势负113"
   },
   {
     "id": "A-568",
@@ -17807,7 +18941,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "放大增益总可以做得足够高，真正决定弱信号能否从噪声中分辨的是机内噪声，故它制约灵敏度。稳定性与电源噪声是次要因素，不能取代机内噪声这一根本限制。",
+    "mnemonic": "灵敏度受限于机内噪声"
   },
   {
     "id": "A-569",
@@ -17838,7 +18974,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "信噪比SNR定义为有用信号功率与噪声功率之比，比较的是功率而非峰值电压。分母只是噪声功率，不包含信号功率本身。",
+    "mnemonic": "信噪比是功率之比"
   },
   {
     "id": "A-570",
@@ -17869,7 +19007,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "噪声系数Fn定义为输入端信噪比与输出端信噪比之比，Fn越大说明设备使信噪比恶化越多。它不是某个单独的噪声功率电平或其倒数关系。",
+    "mnemonic": "噪声系数是信噪比之比"
   },
   {
     "id": "A-571",
@@ -17900,7 +19040,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "静噪灵敏度是恰能使静噪电路打开、退出静噪状态所需的最小射频输入电平。它不同于关闭静噪后按一般定义测得的普通灵敏度。",
+    "mnemonic": "打开静噪的最小电平"
   },
   {
     "id": "A-572",
@@ -17931,7 +19073,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "实际接收机自身必加噪声，输出信噪比总低于输入，故Fn恒大于1，且越接近1说明附加噪声越小、性能越好。Fn不可能小于1，也不是越大越好。",
+    "mnemonic": "Fn大于1越近1越好"
   },
   {
     "id": "A-573",
@@ -17962,7 +19106,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "噪声指数NF是噪声系数Fn的对数形式，即输入与输出信噪比之比取对数（dB）。它不是某端噪声功率的对数，也不是输入输出噪声功率之比的对数。",
+    "mnemonic": "NF是Fn的对数版"
   },
   {
     "id": "A-574",
@@ -17993,7 +19139,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "NF为Fn的dB形式，理想值0dB，实际设备附加噪声使NF恒大于0，越接近0越好。NF不会小于0，也不以1为上限或以大为好。",
+    "mnemonic": "NF大于0越近0越好"
   },
   {
     "id": "A-575",
@@ -18024,7 +19172,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "等效噪声温度Te把接收机内部噪声折算为天线输入端一个优质匹配电阻产生相同热噪声功率时的绝对温度。它与输出端电阻发热或环境工作温度无关。",
+    "mnemonic": "噪声折算成电阻温度"
   },
   {
     "id": "A-576",
@@ -18055,7 +19205,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "理想设备不附加任何噪声，输入输出信噪比相等，故Fn=1、NF=10lg1=0dB、Te=0K。Fn取0意味着输出无噪声，与定义及物理意义不符。",
+    "mnemonic": "理想机1、0、0"
   },
   {
     "id": "A-577",
@@ -18086,7 +19238,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "标准温度17℃即290K，内部噪声与输入热噪声相等使总噪声翻倍，故Fn=2、NF=10lg2≈3dB、Te=290K。噪声相等不是无噪声，不能取Fn=1或NF=0。",
+    "mnemonic": "噪声翻倍2、3、290"
   },
   {
     "id": "A-578",
@@ -18117,7 +19271,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "AMSAT是美国业余无线电卫星公司这一非营利志愿者组织，致力于实验卫星的设计制造运行与空间教育。它不是所有业余卫星、某系列卫星或某一颗卫星的统称。",
+    "mnemonic": "AMSAT是美国卫星组织"
   },
   {
     "id": "A-579",
@@ -18148,7 +19304,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "OSCAR是Orbiting Satellite Carrying Amateur Radio的缩写，意为搭载业余无线电装置的地球轨道卫星。与人名奥斯卡、电影奖或赞助基金都无关。",
+    "mnemonic": "OSCAR即轨道业余卫星"
   },
   {
     "id": "A-580",
@@ -18179,7 +19337,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "我国第一颗业余卫星是2009年发射的希望一号XW-1，OSCAR编号HO68，转发器模式V/U（J）。年份2008或2010、以及无编号等说法均与史实不符。",
+    "mnemonic": "2009希望一号HO68"
   },
   {
     "id": "A-581",
@@ -18210,7 +19370,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "月面反射路径损耗随距离四次方变化，月亮在近地点时距离最短、损耗最小，最适合EME。满月月相、地面天气和太阳黑子数都不决定月距损耗。",
+    "mnemonic": "EME趁月近地点"
   },
   {
     "id": "A-582",
@@ -18241,7 +19403,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "前置放大器装在天线附近可避免馈线损耗先恶化噪声系数，极弱信号时冷却放大器还能降低热噪声。装在接收机端、加热或用正反馈都只会抬高噪声或降低稳定性。",
+    "mnemonic": "前放靠天线还能冷却"
   },
   {
     "id": "A-583",
@@ -18272,7 +19436,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VHF/UHF背景噪声低，馈线损耗对信噪比影响显著，前放装在馈电端可先放大信号压低后续损耗影响；HF段外部噪声本就很高，前放位置带来的差别被掩盖。故HF爱好者较少如此安装。",
+    "mnemonic": "高段噪声低前放靠天线"
   },
   {
     "id": "A-584",
@@ -18303,7 +19469,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "流星余迹对50MHz附近反射效果与持续时间最佳，6米是流星散射的经典波段。10米余迹利用率低，2米和70厘米余迹更短暂、反射更弱。",
+    "mnemonic": "流星散射首选6米"
   },
   {
     "id": "A-585",
@@ -18334,7 +19502,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "FT4专为快速数字通联设计，短时突发信号也能解码，适合流星余迹和对流层散射的短暂传播窗口。APRS是分组定位系统，QPSK31与MT63速率慢、需要持续稳定的传播路径。",
+    "mnemonic": "短时突发用FT4"
   },
   {
     "id": "A-586",
@@ -18366,7 +19536,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "导体靠大量自由电子或离子导电，银、铜、铝都是优良金属导体。超导是某些材料在临界低温下电阻为零，并非高温呈现；压电效应是石英等晶体的特性，与导体描述无关。",
+    "mnemonic": "自由电荷多即导体"
   },
   {
     "id": "A-587",
@@ -18399,7 +19571,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电离气体能导电，酸碱盐水溶液靠离子导电，石墨有自由电子也是导体，三项都正确。云母恰是常用绝缘体，不能算导体。",
+    "mnemonic": "气液石墨都导电云母不"
   },
   {
     "id": "A-588",
@@ -18433,7 +19607,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "四项均为绝缘体特性：自由电荷极少而电阻大，可作电容器介质，强电场下会击穿，温度升高绝缘性能下降。选材和使用绝缘体时都须考虑耐压与温度。",
+    "mnemonic": "绝缘四性全都对"
   },
   {
     "id": "A-589",
@@ -18466,7 +19642,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "工程塑料、酚醛树脂和二氧化硅（石英玻璃类）都是常用绝缘材料。二氧化锡是导电氧化物，常作透明导电膜，不能用作绝缘材料。",
+    "mnemonic": "二氧化锡导电不绝缘"
   },
   {
     "id": "A-590",
@@ -18499,7 +19677,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电容超耐压、电容极板间打弧、氖灯中气体电离发光，都是介质或气体被击穿后导电的现象。卤钨灯发光靠灯丝受热辐射，属于热发光而非击穿。",
+    "mnemonic": "击穿导电卤钨是热发光"
   },
   {
     "id": "A-591",
@@ -18530,7 +19710,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "绝缘体在交变电场中因极化滞后而发热损耗能量，称为介质损耗；积灰受潮改变了绝缘材料的介电常数与损耗角正切，即使不击穿、不漏电也会增大介质损耗。涡流损耗与磁滞损耗发生在导磁材料中，与绝缘体无关。",
+    "mnemonic": "灰潮改介质，损耗悄悄增"
   },
   {
     "id": "A-592",
@@ -18564,7 +19746,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "半导体导电性介于导体与绝缘体之间，且易受温度、光照、电场和掺杂控制。掺杂得到P型与N型，二者交界形成PN结，具有内建电势和单向导电性；硅、锗是制作晶体管和集成电路的基础材料，四项均正确。",
+    "mnemonic": "半导体可控，掺杂分PN"
   },
   {
     "id": "A-593",
@@ -18597,7 +19781,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "双极型三极管、氮化镓三极管和LDMOS三极管都是以半导体材料为基础的器件。电真空三极管靠真空中的电子发射工作，属于电真空器件，不含半导体。",
+    "mnemonic": "真空管无半导体，其余三个都有"
   },
   {
     "id": "A-594",
@@ -18630,7 +19816,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "风摩擦可使斜拉天线积聚静电荷而形成直流高压；雷云是静电积蓄能量的释放；接收中的QRN主要来自大气静电干扰（如雷电）。发话时馈往天线的是射频交变能量，与静电无关。",
+    "mnemonic": "风摩天线、雷云、QRN皆静电"
   },
   {
     "id": "A-595",
@@ -18662,7 +19850,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "导体在静电场中达到静电平衡后，内部场强为零、整个导体是等势体，电荷只分布在外表面；表面曲率半径越小处电荷面密度越大，尖端附近场强过高会形成尖端放电。导体内部无净电荷，不存在内外电荷极性相反之说，说曲率半径大处电荷聚集则正好说反。",
+    "mnemonic": "等势零内场，尖端易放电"
   },
   {
     "id": "A-596",
@@ -18694,7 +19884,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "直流电方向不变，电源输出有正负极之分，电池正是最常见的直流电源。13.8伏虽低，但短路时电流可达数十安，能熔化导线引发火灾，并非无害；脉动直流是直流与交流纹波的叠加，含有交流成分。",
+    "mnemonic": "直流分正负，短路低压也危险"
   },
   {
     "id": "A-597",
@@ -18725,7 +19917,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "交流电极性周期性交替，输出端不固定正负极。市电火线与零线作用不同，绝不可混用；交流波形不限于纯正弦；接收到的无线电信号电流方向同样交替变化，属于交流电。",
+    "mnemonic": "交流无固定正负，火零不可混"
   },
   {
     "id": "A-598",
@@ -18756,7 +19950,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "交流电压每秒完成周期性变化的次数即频率，单位赫兹，它同时决定了极性翻转的快慢。速率、波长、脉率都不是描述这一概念的术语。",
+    "mnemonic": "每秒变几次，就叫频率"
   },
   {
     "id": "A-599",
@@ -18787,7 +19983,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电磁波波长λ等于光速c除以频率f，即λ=c/f，二者成反比：频率越高波长越短，频率越低波长越长。波长与频率之间不存在1/4或4倍的固定数值关系。",
+    "mnemonic": "波长等于光速除以频率"
   },
   {
     "id": "A-600",
@@ -18818,7 +20016,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电动势是电源把其他形式能量（化学能、机械能等）转化为电能的本领，等于非静电力移动单位电荷所做的功。驱动电子流动的力量大小是电压的描述；单位时间流过的电荷量是电流。",
+    "mnemonic": "电动势：能量变电能的本领"
   },
   {
     "id": "A-601",
@@ -18849,7 +20049,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电压是两点间的电位差，表现为驱动电荷（电子）定向流动的力量大小，单位伏特。把其他能量转化为电能的能力是电动势；单位时间流过的电子数量是电流。",
+    "mnemonic": "电压推电子，电动势造电能"
   },
   {
     "id": "A-602",
@@ -18880,7 +20082,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "正弦量的峰值（幅值）就是从零点算起的最大值。平均值乘以根号2是有效值与半周平均值之间的关系，不是峰值的定义；负半周与正半周幅度的平均、差值二次方等说法均无依据。",
+    "mnemonic": "峰值就是从零起的最大值"
   },
   {
     "id": "A-603",
@@ -18911,7 +20115,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "峰-峰值是正峰值与负峰值之间的差值，对正弦波等于2倍峰值，如峰值100伏时峰-峰值为200伏。从零点算起的最大值是峰值（幅值），不是峰-峰值。",
+    "mnemonic": "峰到峰，谷到顶量全程"
   },
   {
     "id": "A-604",
@@ -18942,7 +20148,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "有效值的定义是等效发热：在同一电阻上能转换出与该交流电压相同热量的直流电压，即为该交流电压的有效值。平均值乘根号2或峰值除以根号2只对正弦波成立，不能作为任意波形的定义。",
+    "mnemonic": "有效值看发热，等效直流定"
   },
   {
     "id": "A-605",
@@ -18973,7 +20181,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电流是单位时间内通过导体横截面的电荷量，I=Q/t，单位安培。它描述的是电荷流量的大小，而不是电子的运动速度，也不是电源能供应的电子总量。",
+    "mnemonic": "电流就是单位时间过多少电荷"
   },
   {
     "id": "A-606",
@@ -19004,7 +20214,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电阻描述导体对电流的阻碍能力，R=U/I，单位欧姆。它不是克服阻力所需的能量，也不是阻碍所消耗的能量，更不是时间概念。",
+    "mnemonic": "电阻拦电流，欧姆来度量"
   },
   {
     "id": "A-607",
@@ -19035,7 +20247,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "功率是单位时间内电流所做的功，即能量转换的速率，P=UI，单位瓦特。总能量是功而非功率；电子获得的能量、电源供应的电子数量都不是功率的定义。",
+    "mnemonic": "功率是做功的快慢"
   },
   {
     "id": "A-608",
@@ -19067,7 +20281,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "欧姆定律I=U/R表明：电流与电压成正比、与电阻成反比；变形得U=IR，电压与电流、电阻均成正比。把电流说成与电阻成正比、把电压说成与电阻成反比都是错误的。",
+    "mnemonic": "I等于U除R，U等于I乘R"
   },
   {
     "id": "A-609",
@@ -19098,7 +20314,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "任何实际电流通过电路时都会遇到电阻，导线和器件都有电阻，不存在完全不受电阻阻碍的电流。射频、音频、直流电流概莫能外。",
+    "mnemonic": "电流过路必遇阻，无一例外"
   },
   {
     "id": "A-610",
@@ -19129,7 +20347,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "阻抗是电阻与电抗的统称，描述电路对交流电流的总体阻碍作用，单位欧姆。它不是对直流或交流的选择性阻断能力，更不限于特定频率。",
+    "mnemonic": "阻抗是交流阻碍的统称"
   },
   {
     "id": "A-611",
@@ -19160,7 +20380,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电动势与电压量纲相同，单位都是伏特，因为电动势本质上也是一种电位差。安培是电流单位，瓦特是功率单位，欧姆是电阻单位。",
+    "mnemonic": "电动势电压，同用伏特"
   },
   {
     "id": "A-612",
@@ -19191,7 +20413,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电压（电位差）的单位是伏特，符号V。安培量电流，瓦特量功率，欧姆量电阻，均不是电压的单位。",
+    "mnemonic": "电压单位伏，电流单位安"
   },
   {
     "id": "A-613",
@@ -19222,7 +20446,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电流的单位是安培，符号A，与单位时间流过的电荷量相对应。伏特是电压单位，瓦特是功率单位，欧姆是电阻单位。",
+    "mnemonic": "电流安培，数电荷流量"
   },
   {
     "id": "A-614",
@@ -19253,7 +20479,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电阻的单位是欧姆，符号Ω，由欧姆定律R=U/I导出，1欧姆等于1伏特除以1安培。安培、伏特、瓦特分别是电流、电压、功率的单位。",
+    "mnemonic": "电阻欧姆，伏除以安"
   },
   {
     "id": "A-615",
@@ -19284,7 +20512,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "阻抗是电阻与电抗的综合量，量纲与电阻相同，单位同为欧姆。安培、伏特、瓦特分别对应电流、电压、功率，不能用于阻抗。",
+    "mnemonic": "阻抗电阻同单位，都是欧姆"
   },
   {
     "id": "A-616",
@@ -19315,7 +20545,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "功率的单位是瓦特，符号W，1瓦等于1焦耳每秒，也等于1伏特乘1安培。安培、伏特、欧姆分别是电流、电压、电阻的单位。",
+    "mnemonic": "功率瓦特，伏乘安培"
   },
   {
     "id": "A-617",
@@ -19346,7 +20578,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频率的单位是赫兹，符号Hz，表示每秒的周期数。亨利是电感单位，法拉是电容单位，库伦是电荷量单位。",
+    "mnemonic": "频率赫兹，电感亨利电容法拉"
   },
   {
     "id": "A-618",
@@ -19377,7 +20611,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头k（千）表示10的3次方，如1kHz等于1000Hz。10的负3次方是毫m，10的6次方是兆M，10的负6次方是微μ，要注意大小写区分。",
+    "mnemonic": "小k是千，10的3次方"
   },
   {
     "id": "A-619",
@@ -19408,7 +20644,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头m（毫）表示10的负3次方，如1mA等于0.001A。千k为10的3次方，兆M为10的6次方，微μ为10的负6次方，不要与大写M混淆。",
+    "mnemonic": "小m是毫，千分之一"
   },
   {
     "id": "A-620",
@@ -19439,7 +20677,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头M（兆）表示10的6次方，如1MHz等于1000000Hz。微μ为10的负6次方，千k为10的3次方，毫m为10的负3次方，大写M与小写m含义截然不同。",
+    "mnemonic": "大M是兆，百万倍"
   },
   {
     "id": "A-621",
@@ -19470,7 +20710,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头μ（微）表示10的负6次方，如1μF等于百万分之一法拉。兆M为10的6次方，毫m为10的负3次方，千k为10的3次方。",
+    "mnemonic": "μ是微，百万分之一"
   },
   {
     "id": "A-622",
@@ -19501,7 +20743,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头G（吉）表示10的9次方，如2.43GHz。兆M为10的6次方，太T为10的12次方，皮p为10的负12次方。",
+    "mnemonic": "G是吉，10的9次方"
   },
   {
     "id": "A-623",
@@ -19532,7 +20776,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头n（纳）表示10的负9次方，常用于纳亨、纳法等小量。吉G为10的9次方，太T为10的12次方，皮p为10的负12次方。",
+    "mnemonic": "n是纳，十亿分之一"
   },
   {
     "id": "A-624",
@@ -19563,7 +20809,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头T（太）表示10的12次方。皮p为10的负12次方，吉G为10的9次方，纳n为10的负9次方，T与p仅大小写之差，数值却差24个数量级。",
+    "mnemonic": "大T是太，万亿倍"
   },
   {
     "id": "A-625",
@@ -19594,7 +20842,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "词头p（皮）表示10的负12次方，皮法是常见的小电容单位。太T为10的12次方，纳n为10的负9次方，吉G为10的9次方。",
+    "mnemonic": "小p是皮，万亿分之一"
   },
   {
     "id": "A-626",
@@ -19625,7 +20875,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "RF是Radio Frequency（射频）的缩写，泛指无线电用途的频率。HF专指短波高频段，AF是音频，MF是中频段，都是具体频段或信号类型，不能泛指射频。",
+    "mnemonic": "射频就是RF，无线电频率"
   },
   {
     "id": "A-627",
@@ -19656,7 +20908,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "人耳可听范围大致为16Hz到20kHz，这就是音频范围。音频是声频信号本身，不按VLF至MF的无线电频带划分，更不在VHF频带内；16kHz到20kHz只是听觉上限附近的一小段。",
+    "mnemonic": "音频16到20k，人耳听得见"
   },
   {
     "id": "A-628",
@@ -19687,7 +20941,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "无线电通信及测试设备标称阻抗为50欧，电视与视频传输系统为75欧，传统音频传输线路为600欧，这是三类设备的惯例标准。其他选项把数值张冠李戴。",
+    "mnemonic": "无线电50，电视75，音频600"
   },
   {
     "id": "A-629",
@@ -19718,7 +20974,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "换算时除以10的6次方：1805000Hz等于1.805MHz。若写成kHz应为1805kHz，写成GHz应为0.001805GHz，mHz则小了9个数量级。",
+    "mnemonic": "赫兹变兆赫，除以一百万"
   },
   {
     "id": "A-630",
@@ -19749,7 +21007,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "1000MHz等于1GHz，故2430MHz等于2.43GHz。243GHz大了100倍，24.3kHz小了10的5次方倍，nHz的写法更不成立。",
+    "mnemonic": "兆赫变吉赫，除以一千"
   },
   {
     "id": "A-631",
@@ -19780,7 +21040,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "由P=U²/R得13.8²÷1≈190瓦。13.8安是流过电阻的电流值，13.8伏是电压本身，伏安不是这里的功率答案，只有190瓦正确。",
+    "mnemonic": "功率等于电压平方除电阻"
   },
   {
     "id": "A-632",
@@ -19811,7 +21073,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以1mW为参考，dBm=10lg(P/1mW)，5W等于5000mW，10lg5000≈37dBm。5W换算为dBW约为7dBW；17dBm仅约50mW；以微瓦为参考的dBμ数值也不符合。",
+    "mnemonic": "5瓦37dBm，记牢常用值"
   },
   {
     "id": "A-633",
@@ -19842,7 +21106,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "以1μW为参考，dBμ=10lg(P/1μW)，0.25W等于250000μW，10lg250000≈54dBμ。0.25W换算为dBW是负6dBW，换算为dBm约为24dBm，均与干扰项不符。",
+    "mnemonic": "0.25瓦，54dBμ"
   },
   {
     "id": "A-634",
@@ -19873,7 +21139,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "0.4kW等于400W，即4×10的8次方μW，dBμ=10lg(4×10^8)≈86dBμ。其dBm值应为10lg(400000)≈56dBm，400dBm、6000dBm都远超实际。",
+    "mnemonic": "400瓦86dBμ，微瓦作参考"
   },
   {
     "id": "A-635",
@@ -19907,7 +21175,9 @@
       "D"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电源的本质是把其他形式能量转化为电能：电池把化学能变电能，属化学电源；直流电源可把输入的交直流变换为所需的直流；变压器能变换交流电压和电流，可用来制作交流电源。四项均符合对电源的理解。",
+    "mnemonic": "电源就是能量变电能"
   },
   {
     "id": "A-636",
@@ -19938,7 +21208,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电动势的方向规定为在电源内部由负极指向正极，即非静电力把正电荷从低电位搬向高电位的方向。由正极到负极是外电路电压降的方向，与电动势方向相反。",
+    "mnemonic": "电动势内走，负极到正极"
   },
   {
     "id": "A-637",
@@ -19969,7 +21241,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电源两端电压的方向是由正极指向负极，即沿外电路电位降落的方向。它与电源内部电动势的方向（负极到正极）恰好相反，二者不可混同。",
+    "mnemonic": "电压向外降，正极到负极"
   },
   {
     "id": "A-638",
@@ -20002,7 +21276,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台常用外置电源包括开关电源（体积小、效率高）、线性电源（纹波低）和蓄电池（可移动、停电可用）。标准电池是计量用的电压基准，输出电流极小，不能为电台供电。",
+    "mnemonic": "开关线性蓄电池，标准电池只计量"
   },
   {
     "id": "A-639",
@@ -20035,7 +21311,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "锂离子电池、钠离子电池和铅酸电池都是二次电池，可以反复充电。普通碱性干电池是一次电池，设计上不可充电，强行充电有漏液和爆裂风险。",
+    "mnemonic": "锂钠铅酸可充，碱性干电池不行"
   },
   {
     "id": "A-640",
@@ -20066,7 +21344,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "停电时可将待充的12伏铅酸电池与汽车蓄电池并联，借助汽车发电机充电，这是应急可行办法。加酸、冷冻都不能充电；把电池经灯泡直接接220伏市电会损坏电池并危及人身安全。",
+    "mnemonic": "停电借车充，并联发动车辆"
   },
   {
     "id": "A-641",
@@ -20097,7 +21377,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电池容量以安时计，供电时长约等于标称安时数除以设备平均工作电流，例如20Ah电池以2A平均电流工作约10小时。瓦时除以发射功率忽略了收发占空比，电压除以电流量纲也不对。",
+    "mnemonic": "时长等于安时除以电流"
   },
   {
     "id": "A-642",
@@ -20128,7 +21410,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电源内阻与负载串联，输出电流在内阻上产生压降，使端电压U=E−Ir低于电动势。内阻不改变电动势本身，只会增加电源自身损耗、减少可用输出功率。",
+    "mnemonic": "内阻分压，端压降低"
   },
   {
     "id": "A-643",
@@ -20159,7 +21443,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "该保护利用PN结的单向导电性：极性正确时二极管反偏不导通；一旦接反，二极管正向导通形成近似短路，大电流瞬间烧断串联熔丝从而切断供电。它不是靠击穿稳压，也与热失控无关。",
+    "mnemonic": "接反二极管短路，烧熔丝保电台"
   },
   {
     "id": "A-644",
@@ -20191,7 +21477,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "插座旁标数字的复位按钮实为可复位断路器，数字是其额定电流值，当设备过流或电源极性接反引起大电流时跳闸断电，按下即可复位。它不按温度或电压动作，故后两项错误。",
+    "mnemonic": "复位按钮是断路器，数字指电流"
   },
   {
     "id": "A-645",
@@ -20222,7 +21510,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "万用表直流电压档测的是平均值（零频分量）。正负对称方波正半周与负半周面积相等、均值相抵，读数为零。B、C 错误：直流档不响应峰值；D 无依据。",
+    "mnemonic": "直流档看均值，正负对称两相抵，读数归零"
   },
   {
     "id": "A-646",
@@ -20253,7 +21543,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "磁电式交流档实为整流平均值表，按正弦波有效值=1.11×平均值刻度。方波平均值等于峰值，表按 1.11 倍刻度显示，故读数大于峰值（约为 1.11 倍峰值）。它既不是峰值也不是峰-峰值。",
+    "mnemonic": "整流表按正弦刻度，方波读数虚高一成"
   },
   {
     "id": "A-647",
@@ -20284,7 +21576,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "指针式直流档读平均值：最小值为 0、占空比 1:1 的方波，平均值=峰值×1/2。而方波有效值恰等于峰值（恒幅），故读数既是峰值的一半也是有效值。B、C、D 均不符合平均值定义。",
+    "mnemonic": "单极性方波占空一半，均值即半峰值，也等于有效值"
   },
   {
     "id": "A-648",
@@ -20315,7 +21609,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "万用表电阻档靠内部电池供电测量，表笔接上瞬间给被测电路两端的大电容充电，充电电流大故初示值小；随电容充满电流衰减，示值渐增至电路真实电阻。这是电容充电的典型现象，与表故障、交流电压无关；大电感则表现为初值大后减小。",
+    "mnemonic": "阻值越测越大，必有大电容在充电"
   },
   {
     "id": "A-649",
@@ -20347,7 +21643,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "判断电解电容好坏可用指针表电阻档看充放电摆针，也可用数字表电容档直接读容量。电流档内阻极小、易烧表且测不出容量；用充电器短路放电既危险又无法定量判断。",
+    "mnemonic": "测电容：指针看摆针，数字读法拉"
   },
   {
     "id": "A-650",
@@ -20378,7 +21676,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "表针挥动后回零是电容充电过程；断开重测不再摆动，说明电容已充满电、仍能存电，是完好的电解电容。若电阻损坏通常示值无穷大或固定值；表电池不足表现为全程示值偏小而非单次摆针。",
+    "mnemonic": "一摆即回零、再测不动弹——电容已充满"
   },
   {
     "id": "A-651",
@@ -20409,7 +21709,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "“每伏欧姆”即电压档内阻（量程×Ω/V），内阻越大，从被测电路分流越少，对电路工作状态影响越小。它与过载耐受能力无关。",
+    "mnemonic": "欧姆每伏越大，内阻越高，测量越不扰民"
   },
   {
     "id": "A-652",
@@ -20440,7 +21742,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "纯交流音频信号的平均值为零，直流档应读零；现读数非零且换表笔极性反转，说明存在不随表笔改变的直流分量叠加在音频上。谐波、频率响应、分布电容都不会产生极性随表笔反转的直流读数。",
+    "mnemonic": "换笔极性跟着翻，必有直流叠里边"
   },
   {
     "id": "A-653",
@@ -20471,7 +21775,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "《业余无线电台管理办法》要求发射设备频率容限和杂散域发射功率符合国家规定，这是发射设备的两大硬指标。B 的调制频偏、C 的带外发射、D 的指配频段都不是该条款的规范对象。",
+    "mnemonic": "发射设备两大件：频率容限加杂散"
   },
   {
     "id": "A-654",
@@ -20502,7 +21808,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "业余电台发射设备的主要技术指标是频率容限合格、杂散发射不超过最大允许功率电平。B、C 把“不低于”用反（杂散是上限要求）；D 的宽频率、大带宽不是强制指标。",
+    "mnemonic": "容限要合规，杂散不能超上限"
   },
   {
     "id": "A-655",
@@ -20534,7 +21842,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频率容限指发射频率偏离规定值的最大允许偏差，既可表述为所占频段中心频率偏离指配频率，也可表述为特征频率偏离参考频率。C、D 的“最高频率”“必要频率”不是规范术语。",
+    "mnemonic": "容限即允许偏多少，指配参考两表述"
   },
   {
     "id": "A-656",
@@ -20566,7 +21876,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "频率容限是极小的相对偏差，习惯用百万分之几（ppm）表示，绝对值则用赫兹。百分之几、兆赫数量级太大，不适用。",
+    "mnemonic": "容限小得可怜，ppm加赫兹"
   },
   {
     "id": "A-657",
@@ -20599,7 +21911,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "杂散发射功率可用绝对功率 dBm、相对载波的 dBc、相对 PEP 的 dB 三种方式表示；D 的瓦虽也是绝对功率单位，但规范与题库采用前三种表述，D 不在正确组合内。",
+    "mnemonic": "杂散三单位：dBm、dBc、相对PEP的dB"
   },
   {
     "id": "A-658",
@@ -20632,7 +21946,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "杂散发射指必要带宽之外、可降低而不影响信息传输的发射，包括谐波、寄生发射、互调产物和变频产物。D 错误：带外发射紧邻必要带宽、属带外域，不归入杂散域。",
+    "mnemonic": "杂散在带宽外，谐波寄生互调变频；带外不算杂散"
   },
   {
     "id": "A-659",
@@ -20663,7 +21979,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "专用发射设备须频率容限与杂散辐射都不超限值，且发射频率不得超出国家规定的业余业务和卫星业余业务频段。B 把容限说成“不低于”方向反了；C 漏了“不超出”的限定；D 的功率下限、工业阻抗无此要求。",
+    "mnemonic": "容限杂散双不超，频率不出业余段"
   },
   {
     "id": "A-660",
@@ -20694,7 +22012,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "减幅波是阻尼振荡的断续辐射，电路触点打火产生宽频带阻尼振荡，是典型来源。对讲机按键、电视本振、医用高频设备产生的是连续波或泄漏，不是减幅波。",
+    "mnemonic": "触点打火冒火花，减幅波辐射就是它"
   },
   {
     "id": "A-661",
@@ -20726,7 +22046,9 @@
       "B"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GB8702-2014 规定 0.1-3MHz 等效辐射功率小于 300W、3MHz-300GHz 小于 100W 的无线电设施可免于管理。C、D 错误：并非所有业余电台都豁免，须看频率与功率是否落入上述范围。",
+    "mnemonic": "0.1-3M三百瓦，三M以上一百瓦，超了就得管"
   },
   {
     "id": "A-662",
@@ -20757,7 +22079,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "公众曝露指公众所受的全部电场、磁场、电磁场照射的总和。B 职业照射、C 医疗照射是另行管理的照射类别，D 也属医疗范畴，都不属于公众曝露定义。",
+    "mnemonic": "公众曝露：公众受到的全部场照射"
   },
   {
     "id": "A-663",
@@ -20788,7 +22112,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "人体在某些波长（与人体尺寸相当的 VHF/UHF 段）产生谐振吸收，吸收率显著升高，故限值随频率变化。B 错误（低频同样能穿透）；D 错误（光子能量随频率升高而增大，但限值差异主因是吸收特性）。",
+    "mnemonic": "人体尺寸谐振吸收强，限值随频变"
   },
   {
     "id": "A-664",
@@ -20821,7 +22147,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "自制、改装、拼装设备须符合 GB/T 32658-2016《业余无线电设备射频技术要求及测试方法》，短波单边带设备还须符合 GB/T 16946-2017；无线电管理机构可免费开展技术检测。D 错误：自制设备同样受监督管理。",
+    "mnemonic": "自制也要合国标，32658加16946，检测还免费"
   },
   {
     "id": "A-665",
@@ -20852,7 +22180,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "VHF/UHF 光子能量远低于电离阈值，不能使原子电离，属非电离辐射。电离辐射指 X、γ 射线等；阿尔法、伽玛是核辐射粒子/射线，与日常无线电无关。",
+    "mnemonic": "VHF/UHF能量低，电离不了属非电离"
   },
   {
     "id": "A-666",
@@ -20883,7 +22213,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "传统防雷三件套：接闪器（避雷针）接闪、引下线引流、接地体泄流，缺一不可。B 的断路器、C 的氖灯保险丝、D 的过压保护器都不是传统防雷的基本组成。",
+    "mnemonic": "防雷三件套：接闪引下加接地"
   },
   {
     "id": "A-667",
@@ -20914,7 +22246,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "防雷接地的唯一作用是把接闪器引入的雷击电流以最低阻抗泄入大地。B、C、D 把接地说成阻断、烧断或启动保护，都是反的——接地是泄放通道不是开关。",
+    "mnemonic": "接地为泄流，不是为阻断"
   },
   {
     "id": "A-668",
@@ -20945,7 +22279,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接地基本要求：独立接地体、接地电阻尽量小、引下线短而粗以减小雷电流通道阻抗。水管、零线不能替代专用接地体；0.5mm 细线扛不住数十千安培的雷电流。",
+    "mnemonic": "接地体要独立，电阻小、引线短而粗"
   },
   {
     "id": "A-669",
@@ -20976,7 +22312,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "按滚球法，单支避雷针的保护范围是以 60 米为半径的滚球在针尖与地面之间滚动所切出的空间。B、C 的“任何情况”、D 的半球体都不符合滚球法计算。",
+    "mnemonic": "单针保护看滚球，六十米半径滚一圈"
   },
   {
     "id": "A-670",
@@ -21007,7 +22345,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "接地连接要求低阻抗、低电感且耐弯折，镀银软铜丝编织扁带截面大、集肤效应小、柔软易施工，最适宜。铜包钢单股电感大，双绞线、同轴电缆根本不是接地材料。",
+    "mnemonic": "接地连线用扁带，低感柔软银铜编"
   },
   {
     "id": "A-671",
@@ -21038,7 +22378,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "避雷器地线须接到同一金属条带再统一引至室外接地，保证等电位，避免地电位差反击。发信时断开地线、单独引线再并接都会制造电位差；氖灯自制避雷器不可靠。",
+    "mnemonic": "避雷器地线先共条带，再一起入地保等电位"
   },
   {
     "id": "A-672",
@@ -21069,7 +22411,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "雷电流是高频大电流，弯折会产生感抗与反击电压，故接地连接务必短而直。做漂亮直角弯反而增大电感；远离塔打接地体增加引线长度，适得其反。",
+    "mnemonic": "接地线走短直，忌弯折防反击"
   },
   {
     "id": "A-673",
@@ -21100,7 +22444,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "GB/T 3805-2008 规定潮湿条件下特低电压限值为交流 16V 有效值、直流 33V（干燥条件更宽松）。B 的 24/36 是误记，C 把交直流值对调，D 的 6.3/13.8 无依据。",
+    "mnemonic": "潮湿限值记住：交流十六直流三三"
   },
   {
     "id": "A-674",
@@ -21131,7 +22477,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "射频电流趋肤效应集中在体表，高频下神经肌肉刺激阈值提高，致死（室颤）风险下降，但集中在浅表的能量极易灼伤皮肤及皮下组织。B 说反了致死风险；C、D 否认射频危害也是错的。",
+    "mnemonic": "射频不易电死人，却易烧伤皮和肉"
   },
   {
     "id": "A-675",
@@ -21162,7 +22510,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "对人体威胁主要看能否引起室颤：工频 50Hz 最易引发室颤，威胁最大；频率升高刺激效应减弱，故 HF 小于工频、UHF 更小于 HF。",
+    "mnemonic": "频率越高越安全：工频＞HF＞UHF"
   },
   {
     "id": "A-676",
@@ -21193,7 +22543,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "带电检修保命三原则：双脚对地绝缘切断回路、单手操作避免双手间电流穿过心脏、另一手远离一切接地金属。B 让另一手摸地试探极危险；C、D 的“接地或绝缘就无风险”是麻痹大意。",
+    "mnemonic": "带电检修：绝缘站立单手干，另一手绝不碰地"
   },
   {
     "id": "A-677",
@@ -21226,7 +22578,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "防机壳带电：金属机箱接可靠公共地、供电回路装漏电保护器、三线插头的保护地必须确认有效，三者缺一不可。D 错误：自来水管可能含塑料管段、电阻大且不可靠，不能替代专用地线。",
+    "mnemonic": "机壳带电三防：接地、漏保、验地线；水管不能当地线"
   },
   {
     "id": "A-678",
@@ -21257,7 +22611,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "拔掉电源线后，高压滤波电容仍储存足以致命的电荷，检修前必须放电验电。地磁感应、保险丝烧断、静电损坏接地系统都不是拔电后的主要风险。",
+    "mnemonic": "拔了电源别大意，电容存电仍咬人"
   },
   {
     "id": "A-679",
@@ -21288,7 +22644,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "220V 市电设备须在火线入口串联保险丝，短路过载时熔断保安全，这是最低要求。并联电压表、电感、电容都不提供过流保护。",
+    "mnemonic": "市电入口火线串保险，短路过载它先断"
   },
   {
     "id": "A-680",
@@ -21321,7 +22679,9 @@
       "C"
     ],
     "type": "multiple",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "自制设备用电安全三招：三芯线加金属机箱可靠接地、高压滤波电容并联泄放电阻、功放机箱装断电联动开关。D 错误：电气火灾用水喷淋会导电扩大事故，应用二氧化碳或干粉灭火器。",
+    "mnemonic": "接地泄放联动断，电气失火忌用水"
   },
   {
     "id": "A-681",
@@ -21352,7 +22712,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "铅酸电池充电析出氢气，通风不良时聚集到爆炸极限，遇火花即爆。12V 不存在触电风险；臭氧、自燃都不是其主要风险。",
+    "mnemonic": "铅酸充电冒氢气，不通风会爆炸"
   },
   {
     "id": "A-682",
@@ -21383,7 +22745,9 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "过快充放电使电池内阻发热、温度失控，并加速析氢，爆炸风险陡增。“反极”、记忆效应（镍镉电池的）、触电都不是铅酸快充放的主风险。",
+    "mnemonic": "快充快放发热快，氢气一冒爆炸来"
   },
   {
     "id": "A-683",
@@ -21414,6 +22778,8 @@
       "A"
     ],
     "type": "single",
-    "imageUrl": null
+    "imageUrl": null,
+    "explanation": "电气火灾先切断一切供电，再用二氧化碳或干粉灭火器（不导电、不留残渣）。泡沫、用水都会导电或损坏设备；只逃不救则火势蔓延。",
+    "mnemonic": "电气失火先断电，二氧化碳干粉灭"
   }
 ]

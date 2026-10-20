@@ -11,7 +11,8 @@ type Props = {
 
 export function ExplanationCard({ question, title }: Props) {
   const text = question?.explanation?.trim();
-  if (!text) return null;
+  const mnemonic = question?.mnemonic?.trim();
+  if (!text && !mnemonic) return null;
 
   return (
     <Card>
@@ -19,7 +20,15 @@ export function ExplanationCard({ question, title }: Props) {
         <CardTitle>{title || "答案解析"}</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="whitespace-pre-line text-sm leading-6">{text}</div>
+        {text ? (
+          <div className="whitespace-pre-line text-sm leading-6">{text}</div>
+        ) : null}
+        {mnemonic ? (
+          <div className="mt-3 rounded-md border border-dashed px-3 py-2 text-sm leading-6">
+            <span className="font-medium">💡 助记：</span>
+            <span className="whitespace-pre-line">{mnemonic}</span>
+          </div>
+        ) : null}
       </CardContent>
     </Card>
   );
